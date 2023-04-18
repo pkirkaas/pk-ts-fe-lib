@@ -5,7 +5,6 @@
   "license": "UNLICENSED",
   "description": "TS/JS Front End (React & SASS) Utilities",
   "private": true,
-  "version": "0.0.1",
   "type": "module",
   "module":"./dist/esm/index.js",
   "main": "./dist/cjs/index.js",
@@ -24,7 +23,7 @@
     "clean":"rm -rf ./dist ./package-lock.json ./node_modules",
     "dev": "vite",
     "build": "tsc && vite build",
-    "build-lib": "tsc -p ./tsconfig.esm.json && tst -p ./tsconfig.cjs.json",
+    "build-lib": "tsc -p ./tsconfig.esm.json && tsc -p ./tsconfig.cjs.json",
     "preview": "vite preview"
   },
   "dependencies": {

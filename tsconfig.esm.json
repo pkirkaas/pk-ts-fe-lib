@@ -3,6 +3,7 @@
     "compilerOptions": {
     "target":"es6",
     "baseUrl": "./",
+    "jsx": "react-jsx",
     "outDir": "./dist/esm",
     "module": "ESNext"
   },
