@@ -1,0 +1,15 @@
+{
+  "extends":"pk-ts-common-lib/tsconfig.esm.json",
+    "compilerOptions": {
+    "target":"es6",
+    "baseUrl": "./",
+    "outDir": "./dist/esm",
+    "module": "ESNext"
+  },
+  "ts-node": {
+    "require": [
+      "tsconfig-paths/register"
+    ],
+    "esm": true
+  },
+}
