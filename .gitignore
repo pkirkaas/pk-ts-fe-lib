@@ -8,7 +8,7 @@ pnpm-debug.log*
 lerna-debug.log*
 
 node_modules
-dist
+# persist dist for libs: dist
 dist-ssr
 *.local
 
@@ -23,7 +23,6 @@ dist-ssr
 *.sln
 *.sw?
 node_modules/
-dist/
 # Node artifact files
 node_modules/
 # Persisist to allow regular JS app to use dist/
@@ -85,7 +84,6 @@ TEST*.xml
 
 # Node artifact files
 node_modules/
-dist/
 
 tmp/
 
