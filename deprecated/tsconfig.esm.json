@@ -1,7 +1,7 @@
 {
-  "extends":"pk-ts-common-lib/tsconfig.esm.json",
-    "compilerOptions": {
-    "target":"es6",
+  "extends": "pk-ts-common-lib/tsconfig.json",
+  "compilerOptions": {
+    "target": "es6",
     "baseUrl": "./",
     "jsx": "react-jsx",
     "outDir": "./dist/esm",
