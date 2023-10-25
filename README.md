@@ -5,6 +5,8 @@
 
 ## Basics
 
+This is supposed to be a library to contribute components and useful browser utilities - trick is to both act as library, and test/render in a browser..
+
 A very experimental fe library using React & Vite to build the front end, and the Pk-Ts-Common library
 
 Not sure Vite is the way to go, and things change fast, so all has to be double-checked & updated.
