@@ -1,5 +1,10 @@
 {
+  "extends": "pk-ts-common-lib/tsconfig.json",
   "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./dist/esm",
+    "jsx": "react-jsx"
+    /*
     "target": "ESNext",
     "useDefineForClassFields": true,
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
@@ -7,15 +12,13 @@
     "skipLibCheck": true,
     "esModuleInterop": false,
     "allowSyntheticDefaultImports": true,
-    "strict": true,
     "forceConsistentCasingInFileNames": true,
     "module": "ESNext",
     "moduleResolution": "Node",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    */
   },
   "include": ["src"],
-  "references": [{ "path": "./tsconfig.node.json" }]
 }

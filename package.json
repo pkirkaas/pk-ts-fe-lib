@@ -21,7 +21,8 @@
   "scripts": {
     "clean":"rm -rf ./dist ./package-lock.json ./node_modules && npm i",
     "dev": "vite",
-    "build": "tsc && vite build",
+    "buildx": "tsc && vite build",
+    "build": "npm run build-lib && vite build",
     "build-lib": "tsc -p ./tsconfig.json && tsc -p ./tsconfig.cjs.json",
     "preview": "vite preview"
   },
@@ -31,9 +32,7 @@
     "sass": "*",
     "styled-components": "*", 
     "react-dom": "*",
-    "ts-node": "*",
     "pk-ts-common-lib": "git+https://github.com/pkirkaas/pk-ts-common-lib.git#working",
-    "typescript": "*",
     "@emotion/react": "*",
     "@emotion/styled": "*",
     "@mui/material": "*",
