@@ -1,12 +1,12 @@
 {
   "name": "pk-ts-fe-lib",
-   "version": "l.0.1",
+  "version": "l.0.1",
   "author": "Paul Kirkaas",
   "license": "UNLICENSED",
   "description": "TS/JS Front End (React & SASS) Utilities",
   "private": true,
   "type": "module",
-  "module":"./dist/esm/index.js",
+  "module": "./dist/esm/index.js",
   "main": "./dist/cjs/index.js",
   "exports": {
     ".": {
@@ -19,7 +19,7 @@
     "./tsconfig.cjs.json": "./tsconfig.cjs.json"
   },
   "scripts": {
-    "clean":"rm -rf ./dist ./package-lock.json ./node_modules && npm i",
+    "clean": "rm -rf ./dist ./package-lock.json ./node_modules && npm i",
     "dev": "vite",
     "buildx": "tsc && vite build",
     "build": "npm run build-lib && vite build",
@@ -27,22 +27,24 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "react": "*",
-    "reactjs-popup": "*",
-    "sass": "*",
-    "styled-components": "*", 
-    "react-dom": "*",
-    "pk-ts-common-lib": "git+https://github.com/pkirkaas/pk-ts-common-lib.git#working",
     "@emotion/react": "*",
     "@emotion/styled": "*",
     "@mui/material": "*",
     "@popperjs/core": "*",
+    "@preact/signals-react": "^1.3.6",
     "bootstrap": "*",
     "classnames": "*",
     "formik": "*",
-    "yup": "*",
+    "pk-ts-common-lib": "git+https://github.com/pkirkaas/pk-ts-common-lib.git#working",
+    "react": "*",
     "react-bootstrap": "*",
-    "react-resizable-panels": "*"
+    "react-dom": "*",
+    "react-resizable-panels": "*",
+    "react-select": "^5.7.7",
+    "reactjs-popup": "*",
+    "sass": "*",
+    "styled-components": "*",
+    "yup": "*"
   },
   "devDependencies": {
     "@types/react": "*",

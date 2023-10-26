@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { startAvailableChecks, getLoadedCss, getCssHrefs, getJsHrefs } from './libs/browserTweaks.js'
+import { TstSelect } from './components/formComponents.jsx';
 //import reactLogo from './assets/react.svg'
 //import viteLogo from '/vite.svg'
 import './App.css'
@@ -25,6 +26,7 @@ function App() {
           <img src={reactLogo} className="logo react" alt="React logo" />
   */ }
         </a>
+        <TstSelect    />
       </div>
       <h1>Vite + React</h1>
       <div className="card">
