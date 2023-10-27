@@ -17,12 +17,11 @@
       "types": "./dist/esm/index.d.ts",
       "default": "./dist/esm/index.js",
       "import": "./dist/esm/index.js",
-      "reset.css": "./src/Reset-Css-2023.css",
       "require": "./dist/cjs/index.js"
     },
-    "./reset.css": "./src/Reset-Css-2023.css",
     "./tsconfig.json": "./tsconfig.json",
-    "./tsconfig.cjs.json": "./tsconfig.cjs.json"
+    "./tsconfig.cjs.json": "./tsconfig.cjs.json",
+    "./reset.css": "./src/Reset-Css-2023.css"
   },
   "scripts": {
     "clean": "rm -rf ./dist ./package-lock.json ./node_modules && npm i",
