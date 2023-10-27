@@ -16,11 +16,7 @@
       "require": "./dist/cjs/index.js"
     },
     "./tsconfig.json": "./tsconfig.json",
-    "./tsconfig.cjs.json": "./tsconfig.cjs.json",
-    "./reset.css": {
-      "require" :"./src/Reset-Css-2023.css",
-      "import" :"./src/Reset-Css-2023.css"
-    }
+    "./tsconfig.cjs.json": "./tsconfig.cjs.json"
   },
   "scripts": {
     "clean": "rm -rf ./dist ./package-lock.json ./node_modules && npm i",
