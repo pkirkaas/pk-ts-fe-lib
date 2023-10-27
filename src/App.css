@@ -40,3 +40,18 @@
 .read-the-docs {
   color: #888;
 }
+
+.brdr {
+  border: solid blue 1px;
+  padding:1em;
+  margin: 1em;
+  min-height: 20em;
+  min-width: 20em;
+}
+
+.rhndl {
+  border: solid green 1px;
+}
+.brnm {
+  border: solid red 1px;
+}

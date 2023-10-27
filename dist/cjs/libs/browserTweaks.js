@@ -70,18 +70,18 @@ export async function unavailableHrefs() {
     let jsRefs = getJsHrefs();
     let cssRefs = getCssHrefs();
     let allRefs = jsRefs.concat(cssRefs);
-    console.log(`In Unavalable hrefs, allrefs:`, allRefs);
+    //	console.log(`In Unavalable hrefs, allrefs:`, allRefs);
     for (let ref of allRefs) {
         let res = await isUrlReachable(ref);
         if (!res) {
-            console.error(`In unavaliable refs - miss on [${ref}]; all refs:`, allRefs);
+            //			console.error(`In unavaliable refs - miss on [${ref}]; all refs:`, allRefs);
             return true;
         }
     }
     return false;
 }
 export async function reloadIfUnavailable() {
-    console.log("In the interval check reload function...");
+    //	console.log("In the interval check reload function...");
     let noAvail = await unavailableHrefs();
     if (noAvail) {
         console.error(`Missing hrefs; trying to reload...`);
