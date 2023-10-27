@@ -3,7 +3,7 @@ import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
  * Utility Components for PkLib
  */
 import { useState, Fragment } from 'react';
-import { addProps, replaceProps, } from '../libs/reactUtils.js';
+import { addProps, replaceProps, } from '../libs/reactUtils';
 import Select from 'react-select';
 import { PanelGroup, PanelResizeHandle, } from "react-resizable-panels";
 /**

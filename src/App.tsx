@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import { startAvailableChecks, getLoadedCss, getCssHrefs, getJsHrefs } from './libs/browserTweaks.js'
-import { PanelSeparator, TstSelect,  VPanelGroup, HPanelGroup, } from './components/formComponents.jsx';
+import { startAvailableChecks, getLoadedCss, getCssHrefs, getJsHrefs } from './libs/browserTweaks'
+import { PanelSeparator, TstSelect,  VPanelGroup, HPanelGroup, } from './components/formComponents';
 import { Panel, PanelGroup, PanelResizeHandle, PanelGroupProps,  } from "react-resizable-panels";
 //import reactLogo from './assets/react.svg'
 //import viteLogo from '/vite.svg'

@@ -1,7 +1,7 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { useState } from 'react';
-import { startAvailableChecks, getCssHrefs, getJsHrefs } from './libs/browserTweaks.js';
-import { PanelSeparator, VPanelGroup, } from './components/formComponents.jsx';
+import { startAvailableChecks, getCssHrefs, getJsHrefs } from './libs/browserTweaks';
+import { PanelSeparator, VPanelGroup, } from './components/formComponents';
 import { Panel, } from "react-resizable-panels";
 //import reactLogo from './assets/react.svg'
 //import viteLogo from '/vite.svg'
