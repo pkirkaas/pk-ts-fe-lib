@@ -34,7 +34,7 @@ function App() {
 
       <div className="brdr">
         <p> Testing components</p>
-        <HPanelGroup direction="vertical">
+        <VPanelGroup>
           <Panel className="brnm" minSize={25}>
             <h1>First Panel</h1>
           </Panel>
@@ -43,7 +43,7 @@ function App() {
             <h1>Second Panel</h1>
             </Panel>
 
-        </HPanelGroup>
+        </VPanelGroup>
         
       </div>
 

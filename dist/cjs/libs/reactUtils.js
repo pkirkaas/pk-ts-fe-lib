@@ -1,5 +1,23 @@
 /** Not components, but tweaks to support react */
 import { isEmpty, isObject } from 'pk-ts-common-lib';
+import axios from 'axios';
+export const origin = window.location.origin;
+export const apiUrl = `${origin}/api`;
+export let compCount = { cnt: 0 };
+export function getCnt() {
+    compCount.cnt++;
+    //console.log(`NewCnt: [${compCount.cnt}]`);
+    return compCount.cnt;
+}
+axios.defaults.baseURL = apiUrl;
+export function getPage() {
+    let path = window.location.pathname;
+    return path;
+}
+export const page = getPage();
+export function mkUrl(rel) {
+    return `${apiUrl}/${rel}`;
+}
 /**
  *  For functional components to modify props to pass subcomponent
  */
@@ -34,6 +52,12 @@ export function addProps(props, mods) {
     }
     return rProps;
 }
+/**
+ * Replaces any key-values in props with values from mods.
+ * So, can override values passed in from props, BUT:
+ * INTERESTINGLY! Can be used with arguments reversed to use defaults!
+ * Like calling: replaceProps(defaults, props);
+ */
 export function replaceProps(props, mods) {
     let rProps = { ...props };
     if (!isEmpty(mods)) {

@@ -1,6 +1,37 @@
 /** Not components, but tweaks to support react */
 import { isEmpty, isObject, GenObj, typeOf } from 'pk-ts-common-lib';
 
+import axios from 'axios';
+
+export const origin = window.location.origin;
+export const apiUrl = `${origin}/api`;
+
+
+export let compCount = { cnt: 0};
+export function getCnt() {
+	compCount.cnt++;
+	//console.log(`NewCnt: [${compCount.cnt}]`);
+	return compCount.cnt;
+}
+
+
+
+axios.defaults.baseURL = apiUrl;
+
+export function getPage() {
+	let path = window.location.pathname;
+	return path;
+}
+
+export const page = getPage();
+
+
+export function mkUrl(rel) {
+	return `${apiUrl}/${rel}`;
+}
+
+
+
 /**
  *  For functional components to modify props to pass subcomponent
  */
@@ -10,7 +41,7 @@ import { isEmpty, isObject, GenObj, typeOf } from 'pk-ts-common-lib';
  * string properties - if mods[key] is object, merges them,
  * if mods[key] is string, concatenates w. space (like for className)
  */
-export function addProps(props: object, mods?: object): object {
+export function addProps(props: object, mods?: object): GenObj {
 	let rProps = { ...props };
 	if (!isEmpty(mods)) {
 		if (!isObject(mods)) {
@@ -36,7 +67,13 @@ export function addProps(props: object, mods?: object): object {
 	return rProps;
 }
 
-export function replaceProps(props: object, mods?: any): object {
+/**
+ * Replaces any key-values in props with values from mods.
+ * So, can override values passed in from props, BUT:
+ * INTERESTINGLY! Can be used with arguments reversed to use defaults!
+ * Like calling: replaceProps(defaults, props);
+ */
+export function replaceProps(props: object, mods?: any): GenObj {
 	let rProps = { ...props };
 	if (!isEmpty(mods)) {
 		if (!isObject(mods)) {
