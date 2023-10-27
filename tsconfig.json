@@ -4,6 +4,16 @@
     "baseUrl": "./",
     "outDir": "./dist/esm",
     "jsx": "react-jsx",
+//EXPERIMENTS!
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "resolvePackageJsonImports": false
+
+
+
+
+
     /*
     "target": "ESNext",
     "useDefineForClassFields": true,
