@@ -8,7 +8,6 @@
   "type": "module",
   "module": "./dist/esm/index.js",
   "main": "./dist/cjs/index.js",
-  "style": "./src/Reset-Css-2023.css",
   "exports": {
     ".": {
       "types": "./dist/esm/index.d.ts",
@@ -18,14 +17,19 @@
     },
     "./tsconfig.json": "./tsconfig.json",
     "./tsconfig.cjs.json": "./tsconfig.cjs.json",
-    "./reset.css": "./src/Reset-Css-2023.css"
+    "./reset.css": {
+      "require" :"./src/Reset-Css-2023.css",
+      "import" :"./src/Reset-Css-2023.css"
+    }
   },
   "scripts": {
     "clean": "rm -rf ./dist ./package-lock.json ./node_modules && npm i",
+    "reset": "npm run clean && npm run build",
     "dev": "vite",
     "buildx": "tsc && vite build",
     "build": "npm run build-lib && vite build",
-    "build-lib": "tsc -p ./tsconfig.json && tsc -p ./tsconfig.cjs.json",
+    "build-lib": "tsc",
+    "xbuild-lib": "tsc -p ./tsconfig.json && tsc -p ./tsconfig.cjs.json",
     "preview": "vite preview"
   },
   "dependencies": {

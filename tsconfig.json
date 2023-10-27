@@ -31,5 +31,9 @@
     "noEmit": true,
     */
   },
-  "include": ["src"],
+ 
+  "include":["./src/**/*"],
+  "exclude": [
+        "./dist/esm"
+    ]
 }

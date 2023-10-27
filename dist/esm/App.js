@@ -7,6 +7,8 @@ import { Panel, } from "react-resizable-panels";
 //import viteLogo from '/vite.svg'
 import './Reset-Css-2023.css';
 import './App.css';
+//export { default as appCss } from  './App.css';
+//export { default as resetCss } from './Reset-Css-2023.css'
 function App() {
     const [count, setCount] = useState(0);
     let csshRef = getCssHrefs();
