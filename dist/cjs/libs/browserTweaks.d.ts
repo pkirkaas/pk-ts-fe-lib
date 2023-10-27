@@ -14,11 +14,12 @@
  *
  * Just import and run startAvailableChecks anywhere in the code, and page will reload after new build.
  */
+/// <reference types="node" resolution-mode="require"/>
 /**
  * Run every 10 seconds to check availability, or reload.
  *
  */
-export declare function startAvailableChecks(seconds?: number): number;
+export declare function startAvailableChecks(seconds?: number): NodeJS.Timeout;
 /**
  * Gets the css files loaded in the dom, for comparison. Should be more flexible, but for now
  * assumes vite build with only a single css & single js load
