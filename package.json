@@ -24,8 +24,8 @@
     "dev": "vite",
     "buildx": "tsc && vite build",
     "build": "npm run build-lib && vite build",
-    "build-lib": "tsc",
-    "xbuild-lib": "tsc -p ./tsconfig.json && tsc -p ./tsconfig.cjs.json",
+    "pbuild-lib": "tsc",
+    "build-lib": "tsc -p ./tsconfig.json && tsc -p ./tsconfig.cjs.json",
     "preview": "vite preview"
   },
   "dependencies": {
