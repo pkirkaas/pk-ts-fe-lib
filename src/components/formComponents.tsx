@@ -3,7 +3,7 @@
  */
 import React, { useState, useEffect, Fragment  } from 'react';
 import { isEmpty, typeOf, GenObj, insertBetween,} from 'pk-ts-common-lib';
-import { addProps, replaceProps, getCnt, } from '../libs/reactUtils';
+import { addProps, replaceProps, getCnt, } from '../libs/reactUtils.js';
 import { signal } from "@preact/signals-react";
 import Select from 'react-select'
 import { Panel, PanelGroup, PanelResizeHandle, PanelGroupProps,  } from "react-resizable-panels";
