@@ -6,6 +6,7 @@ import { Panel, PanelGroup, PanelResizeHandle, PanelGroupProps,  } from "react-r
 //import viteLogo from '/vite.svg'
 import './Reset-Css-2023.css'
 import './App.css';
+import './tst.scss';
 
 //export { default as appCss } from  './App.css';
 //export { default as resetCss } from './Reset-Css-2023.css'
@@ -17,7 +18,7 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Vite + React</h1>
+      <h1 className="gb">Vite + React</h1>
       <div>Testing Func Params</div>
 
       <div className="brdr">

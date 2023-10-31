@@ -59,6 +59,11 @@ export function addProps(props, mods) {
  * Like calling: replaceProps(defaults, props);
  */
 export function replaceProps(props, mods) {
+    if (!isObject(mods) || isEmpty(mods)) {
+        return { ...props };
+    }
+    return { ...props, ...mods };
+    /*
     let rProps = { ...props };
     if (!isEmpty(mods)) {
         if (!isObject(mods)) {
@@ -70,5 +75,6 @@ export function replaceProps(props, mods) {
         }
     }
     return rProps;
+    */
 }
 //# sourceMappingURL=reactUtils.js.map

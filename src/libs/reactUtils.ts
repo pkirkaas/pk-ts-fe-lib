@@ -74,6 +74,11 @@ export function addProps(props: object, mods?: object): GenObj {
  * Like calling: replaceProps(defaults, props);
  */
 export function replaceProps(props: object, mods?: any): GenObj {
+	if (!isObject(mods) || isEmpty(mods)) {
+		return { ...props };
+	}
+	return { ...props, ...mods };
+	/*
 	let rProps = { ...props };
 	if (!isEmpty(mods)) {
 		if (!isObject(mods)) {
@@ -85,6 +90,7 @@ export function replaceProps(props: object, mods?: any): GenObj {
 		}
 	}
 	return rProps;
+	*/
 }
 
 
