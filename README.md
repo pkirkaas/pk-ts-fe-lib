@@ -30,3 +30,9 @@ Run:
  npm run preview
  ```
 
+ ## Libraries/Components
+
+ ### Styling CSSinJS
+
+ I have both styled-components & @emotion/react - I think I like @emotion/react better, because don't have to create new components, can just create styles with the imported css function, and use them in components. DO have to do extra set up with vite, babel, etc.
+

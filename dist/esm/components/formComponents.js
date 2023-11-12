@@ -5,7 +5,14 @@ import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { useState, Fragment } from 'react';
 import { addProps, replaceProps, } from '../libs/reactUtils.js';
 import Select from 'react-select';
+import { styled } from 'styled-components';
 import { PanelGroup, PanelResizeHandle, } from "react-resizable-panels";
+//////////// Testing styled components
+//export const SDiv = styled.div`border: solid red 2px; `
+export const SDiv = styled.div({ border: 'solid blue 2px' });
+export function mkStyled(cmp, styles) {
+    return styled(cmp)(styles);
+}
 /**
  * This section helps react-resizable-panels
  */
