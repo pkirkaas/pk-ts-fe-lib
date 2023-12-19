@@ -3,6 +3,12 @@
   2023
  */
 
+ /** TRY BODY DISPLAY FLEX COLUMN */
+ body {
+  display: flex;
+  flex-direction: column;
+ }
+
  /** JUST A TEST TO SEE IF IMPORT WORKS - REMOVE!!! */
 
  body {

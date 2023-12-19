@@ -88,4 +88,5 @@ export async function reloadIfUnavailable() {
         location.reload();
     }
 }
+/////// localStorage enhancements
 //# sourceMappingURL=browserTweaks.js.map

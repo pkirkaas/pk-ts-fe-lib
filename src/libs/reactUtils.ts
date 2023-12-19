@@ -1,6 +1,11 @@
 /** Not components, but tweaks to support react */
 import { isEmpty, isObject, GenObj, typeOf } from 'pk-ts-common-lib';
 
+//window.localStorage.setItem('JWTToken', 'MyTestToken');
+let jwtToken = window.localStorage.getItem('JWTToken',);
+
+console.log({ jwtToken });
+
 import axios from 'axios';
 
 export const origin = window.location.origin;

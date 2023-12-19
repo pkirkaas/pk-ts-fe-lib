@@ -21,7 +21,6 @@ export declare const SDiv: import("styled-components").IStyledComponent<"web", {
     id?: string;
     lang?: string;
     nonce?: string;
-    placeholder?: string;
     slot?: string;
     spellCheck?: boolean | "false" | "true";
     style?: React.CSSProperties;

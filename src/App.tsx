@@ -31,17 +31,51 @@ let FromStyled = mkStyled('div', {
   fontWeight: "bold",
   fontSize: "xx-large",
   color: 'blue',
+  fontFamily:"courier"
 });
 
 //@ts-ignore
 //let ModStyled = FromStyled().css({ color: "green", background: "orange" });
 //let ModStyled = styled(FromStyled).css({ color: "green", background: "orange" });
-let ModStyled = styled(FromStyled).attrs({ aborder:"solid black 5px", theWidth:"450px", style: { color: "green", background: "orange", padding: "20px" } })
-  `font-weight: bold; color: red; font-style: italic; width: ${props => props.theWidth};  border: ${props => props['aborder']} `;
-  //({ fontWeight: "bold", color: "red", fontStyle: "italic", width: (props) => props.theWidth,  border: (props) => props['aborder'] });
-  //({ fontWeight: "bold", color: "red", fontStyle: "italic", width: (props => props.theWidth) ,  border: (props => props['aborder']) });
+//let ModStyled = styled(FromStyled).attrs(props => ({ aborder: "solid black 5px", $thewidth: "450px", } ))
+//  `font-weight: bold; color: red; font-style: italic; width: ${props => props.$thewidth};  border: ${props => props.aborder}; `;
+  //`font-weight: bold; color: red; font-style: italic; width: ${props => props.thewidth};  border: ${props => props['aborder']} `;
+  //({ fontWeight: "bold", color: "red", fontStyle: "italic", width: (props) => props.thewidth,  border: (props) => props['aborder'] });
+  //({ fontWeight: "bold", color: "red", fontStyle: "italic", width: (props => props.thewidth) ,  border: (props => props['aborder']) });
   //({ fontWeight: "bold", color: "red", fontStyle: "italic", border: props['aborder'] });
   
+//let ModStyled = styled.div.attrs<{ $background?: string, $fontsize?:string, }>
+//let ModStyled = styled.div.attrs<GenObj>(props => ({
+  /*
+let ModStyled = styled(FromStyled).attrs<GenObj>(props => ({
+    $background: props.$background || "yellow",
+    $fontsize: props.$fontsize || "xx-large",
+    $color: props.$color || "green",
+  })) `
+    border: solid red 5px;
+    background-color:${props => props.$background};
+    font-size:${props => props.$fontsize};
+    color: ${props => props.$color};
+    font-weight: bold;
+    `
+    */
+
+//let ModStyled = styled(FromStyled).attrs<GenObj>(props => ({
+
+let ModStyled2 = styled(FromStyled).attrs<GenObj>(props => ({
+  $background: props.$background || "yellow",
+  $fontsize: props.$fontsize || "xx-large",
+  $color: props.$color || "green",
+  //@ts-ignore
+}))({
+  border: "solid green 5px",
+  backgroundColor: props => props.$background,
+  fontSize: props => props.$fontsize,
+  color: props => props.$color,
+  fontWeight: "bold",
+});
+
+
   
  // `font-weight:bold; color:red; font-style:italic;`;
 
@@ -60,7 +94,7 @@ function App() {
       <SDiv>Who Knows</SDiv>
 <FromStyled>I Know</FromStyled>
 <OromStyled>Abstracted</OromStyled>
-<ModStyled>Super Abstracted</ModStyled>
+      <ModStyled2 $background="#aaf" $color="orange" style={{ width: 400 }}>Super Abstracted</ModStyled2>
       <h1 className="gb">Vite + React</h1>
       <div>Testing Func Params</div>
 
