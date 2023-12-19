@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { startAvailableChecks, getLoadedCss, getCssHrefs, getJsHrefs } from './libs/browserTweaks.js'
-import styled  from 'styled-components';
+//import styled  from 'styled-components';
+import { styled }  from 'styled-components';
 import { PanelSeparator, TstSelect,  VPanelGroup, HPanelGroup, } from './components/formComponents.js';
 import {
   SDiv,
@@ -13,7 +14,7 @@ import './Reset-Css-2023.css'
 import './App.css';
 import './tst.scss';
 import {
-  typeOf,
+  typeOf, GenObj,
 } from 'pk-ts-common-lib';
 
 let OromStyled = mkStyled(SDiv, {
