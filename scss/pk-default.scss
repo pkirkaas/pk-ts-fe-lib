@@ -1,0 +1,11 @@
+.tst-cls {
+  border: solid red 3px;
+}
+
+body {
+  text-align: left;
+  place-items: start;
+}
+div[display="flex"] {
+  align-items: flex-start;
+}
