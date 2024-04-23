@@ -18,7 +18,7 @@
     },
     "./react-utils": {
       "types": "./dist/esm/react-utils/index.d.ts",
-      "default": "./dist/cjs/react-utils/index.js",
+      "default": "./dist/esm/react-utils/index.js",
       "import": "./dist/esm/react-utils/index.js",
       "require": "./dist/cjs/react-utils/index.js"
     },

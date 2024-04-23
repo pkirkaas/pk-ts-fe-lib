@@ -1,3 +1,4 @@
+import { Component } from 'react';
 /**
  * NavVals: type to build NavBars, links & page navigation
  * BuildRoutes: Creates the routes from NavVals
@@ -9,7 +10,7 @@ export type NavVals = {
     [key: string]: // The Route key 
     {
         path?: string;
-        label?: string;
+        label?: string | Component;
         component?: any;
         customClass?: any;
     } | any;

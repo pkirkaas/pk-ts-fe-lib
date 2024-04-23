@@ -6,6 +6,7 @@
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import {Component} from 'react';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 
 import { BrowserRouter, Route, Link, NavLink, Routes } from 'react-router-dom';
@@ -23,7 +24,7 @@ import {GenObj} from 'pk-ts-common-lib';
 export type NavVals = {
 	[key:string]: // The Route key 
     {path?: string, // The Path/URL for the page
-    label?: string, // the label for the menu item
+    label?: string|Component, // the label for the menu item
     component?:any, // The componen to render in the page 
     customClass?:any}  // A custom CSS class for the 
     | any
