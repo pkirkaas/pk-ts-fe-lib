@@ -1,9 +1,4 @@
 /**
- * Build nav components & routes
- *
- * TODO: Re-implement for react-bootstrap NavBar, etc
- */
-/**
  * NavVals: type to build NavBars, links & page navigation
  * BuildRoutes: Creates the routes from NavVals
  *
@@ -63,6 +58,13 @@ function App() {
 export default App
  *
  */
+/**
+ * ABSURD - now react-bootstrap nav links no longer indicate the active state?
+ * @param path - relative path for react route
+ * @param activeClass  - default "active"
+ * @return string|false - the active class, or null/false
+ */
+export declare function isActive(path: string, activeClass?: string): any;
 export declare function BuildRoutes(navVals: NavVals): import("react/jsx-runtime").JSX.Element;
 /**
  * Makes a responsive menu

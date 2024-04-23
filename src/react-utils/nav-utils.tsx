@@ -3,6 +3,10 @@
  * 
  * TODO: Re-implement for react-bootstrap NavBar, etc
  */
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import NavDropdown from 'react-bootstrap/NavDropdown';
 
 import { BrowserRouter, Route, Link, NavLink, Routes } from 'react-router-dom';
 import {GenObj} from 'pk-ts-common-lib';
@@ -18,9 +22,9 @@ import {GenObj} from 'pk-ts-common-lib';
  */
 export type NavVals = {
 	[key:string]: // The Route key 
-    {path?: string, // The path
+    {path?: string, // The Path/URL for the page
     label?: string, // the label for the menu item
-    component?:any, // The componen to render
+    component?:any, // The componen to render in the page 
     customClass?:any}  // A custom CSS class for the 
     | any
 };
@@ -69,6 +73,21 @@ function App() {
 export default App
  * 
  */
+
+/**
+ * ABSURD - now react-bootstrap nav links no longer indicate the active state?
+ * @param path - relative path for react route
+ * @param activeClass  - default "active"
+ * @return string|false - the active class, or null/false
+ */
+export function isActive(path:string, activeClass="active") : any {
+  let pathname = window.location.pathname;
+  if (pathname === path) {
+    return activeClass;
+  }
+  return false;
+
+} 
 
 export function BuildRoutes(navVals:NavVals) {
 //export function BuildRoutes({navVals:NavVals}) {

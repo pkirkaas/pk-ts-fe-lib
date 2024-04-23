@@ -1,9 +1,4 @@
 import { jsx as _jsx } from "react/jsx-runtime";
-/**
- * Build nav components & routes
- *
- * TODO: Re-implement for react-bootstrap NavBar, etc
- */
 import { Route, NavLink, Routes } from 'react-router-dom';
 /**
  * Example NavValues obj:
@@ -49,6 +44,19 @@ function App() {
 export default App
  *
  */
+/**
+ * ABSURD - now react-bootstrap nav links no longer indicate the active state?
+ * @param path - relative path for react route
+ * @param activeClass  - default "active"
+ * @return string|false - the active class, or null/false
+ */
+export function isActive(path, activeClass = "active") {
+    let pathname = window.location.pathname;
+    if (pathname === path) {
+        return activeClass;
+    }
+    return false;
+}
 export function BuildRoutes(navVals) {
     //export function BuildRoutes({navVals:NavVals}) {
     return (_jsx(Routes, { children: Object.entries(navVals).map(([key, val]) => (_jsx(Route, { path: val.path, Component: val.component }, key))) }));
