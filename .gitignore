@@ -7,7 +7,7 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
+/node_modules/
 # persist dist for libs: dist
 dist-ssr
 *.local
@@ -22,9 +22,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-node_modules/
 # Node artifact files
-node_modules/
 # Persisist to allow regular JS app to use dist/
 
 build/
@@ -82,7 +80,6 @@ TEST*.xml
 
 
 # Node artifact files
-node_modules/
 
 tmp/
 
