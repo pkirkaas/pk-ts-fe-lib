@@ -5,6 +5,7 @@ import React from 'react';
 import { GenObj } from 'pk-ts-common-lib';
 export declare const SDiv: import("styled-components").IStyledComponent<"web", import("styled-components/dist/types.js").FastOmit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, never>>;
 export declare function mkStyled(cmp: any, styles: any): import("styled-components").IStyledComponent<"web", import("styled-components/dist/types.js").FastOmit<any, never>> | (import("styled-components").IStyledComponent<"web", import("styled-components/dist/types.js").FastOmit<any, never>> & Omit<any, keyof React.Component<any, {}, any>>);
+export declare function SelectUser(props: any): any;
 /**
  * This section helps react-resizable-panels
  */

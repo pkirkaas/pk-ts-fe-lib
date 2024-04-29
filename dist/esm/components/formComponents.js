@@ -3,7 +3,9 @@ import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
  * Utility Components for PkLib
  */
 import { useState, Fragment } from 'react';
+import { typeOf, } from 'pk-ts-common-lib';
 import { addProps, replaceProps, } from '../libs/reactUtils.js';
+import { useGetUsers } from '../libs/apiUtils.js';
 import Select from 'react-select';
 import { styled } from 'styled-components';
 import { PanelGroup, PanelResizeHandle, } from "react-resizable-panels";
@@ -12,6 +14,15 @@ import { PanelGroup, PanelResizeHandle, } from "react-resizable-panels";
 export const SDiv = styled.div({ border: 'solid blue 2px' });
 export function mkStyled(cmp, styles) {
     return styled(cmp)(styles);
+}
+export function SelectUser(props) {
+    let { users, isError, isLoading } = useGetUsers();
+    if (isLoading) {
+        return (_jsx("h1", { children: "Loading..." }));
+    }
+    console.log({ users });
+    let toUsers = typeOf(users);
+    return ();
 }
 /**
  * This section helps react-resizable-panels
