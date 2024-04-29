@@ -4,7 +4,6 @@
 import React, { useState, useEffect, Fragment  } from 'react';
 import { isEmpty, typeOf, GenObj, insertBetween,} from 'pk-ts-common-lib';
 import { addProps, replaceProps, getCnt, } from '../libs/reactUtils.js';
-import {useGetUsers} from '../libs/apiUtils.js';
 import { signal } from "@preact/signals-react";
 import Select from 'react-select'
 import { styled }  from 'styled-components';
@@ -19,19 +18,6 @@ export const SDiv = styled.div({ border: 'solid blue 2px' });
 
 export function mkStyled(cmp, styles) {
   return styled(cmp)(styles);
-}
-
-export function SelectUser(props) {
-  let {users, isError, isLoading} = useGetUsers();
-  if (isLoading) {
-    return (<h1>Loading...</h1>);
-  }
-
-  console.log({users});
-  let toUsers = typeOf(users);
-  return (
-
-  );
 }
 
 
