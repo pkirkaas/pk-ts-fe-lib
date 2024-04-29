@@ -1,3 +1,32 @@
+@use 'sass:math';
+
+@mixin mk-spacing {
+  @for $i from 0 through 90 {
+    $offset: calc($i/10) * 1em;
+    $em:  $i * 1em;
+    .mv#{$i} { margin-top: $offset; margin-bottom: $offset; }
+    .mh#{$i} { margin-left: $offset; margin-right: $offset }
+    .pv#{$i} { padding-top: $offset; padding-bottom: $offset; }
+    .ph#{$i} { padding-left: $offset; padding-right: $offset }
+    .br#{$i} {border-radius: $foffset !important}
+    .minw#{$i} {min-width: $em; }
+    .maxw#{$i} {max-width: $em; }
+  }
+}
+
+@include mk-spacing;
+
+.tac {
+  text-align: center;
+}
+.tal {
+  text-align: left;
+}
+.tar {
+  text-align: right;
+}
+
+
 .tst-cls {
   border: solid red 3px;
 }
@@ -8,4 +37,12 @@ body {
 }
 div[display="flex"] {
   align-items: flex-start;
+}
+
+.hfc {
+  height: fit-content;
+}
+
+.wfc {
+  width: fit-content;
 }
