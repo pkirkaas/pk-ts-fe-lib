@@ -47,8 +47,8 @@
     "bootstrap": "*",
     "classnames": "*",
     "formik": "*",
-    "pk-ts-common-lib": "git+https://github.com/pkirkaas/pk-ts-common-lib.git#working",
     "react": "*",
+    "pk-ts-common-lib": "github:pkirkaas/pk-ts-common-lib#working",
     "react-bootstrap": "*",
     "react-dom": "*",
     "react-resizable-panels": "*",
@@ -66,5 +66,14 @@
     "@vitejs/plugin-react": "*",
     "typescript": "*",
     "vite": "*"
-  }
+  },
+    "alt-lib-gits" : [ {
+    "pk-ts-common-lib": "git+https://github.com/pkirkaas/pk-ts-common-lib.git#working",
+  "no":"nothing"},{
+    "pk-ts-common-lib": "github:pkirkaas/pk-ts-common-lib#working",
+  "no":"nothing"},{
+    "pk-ts-common-lib": "git+https://github.com/pkirkaas/pk-ts-common-lib.git#working",
+  "no":"nothing"},{
+  "no":"nothing"},{
+  "no":"nothing"}]
 }
