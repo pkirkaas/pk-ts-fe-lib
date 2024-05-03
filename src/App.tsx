@@ -3,7 +3,7 @@ import { startAvailableChecks, getLoadedCss, getCssHrefs, getJsHrefs } from './l
 //import styled  from 'styled-components';
 import { styled }  from 'styled-components';
 import { PanelSeparator, TstSelect,  VPanelGroup, HPanelGroup, } from './components/formComponents.js';
-//import { SDiv, mkStyled, } from './components/formComponents.js';
+import { SDiv, mkStyled, } from './components/formComponents.js';
 import { Panel, PanelGroup, PanelResizeHandle, PanelGroupProps,  } from "react-resizable-panels";
 //import reactLogo from './assets/react.svg'
 //import viteLogo from '/vite.svg'
@@ -14,7 +14,6 @@ import {
   typeOf, GenObj,
 } from 'pk-ts-common-lib';
 
-/*
 let OromStyled = mkStyled(SDiv, {
   border: "solid black 3px",
   fontWeight: "bold",
@@ -33,6 +32,7 @@ let FromStyled = mkStyled('div', {
   fontFamily:"courier"
 });
 
+/*
 */
 //@ts-ignore
 //let ModStyled = FromStyled().css({ color: "green", background: "orange" });
@@ -62,7 +62,6 @@ let ModStyled = styled(FromStyled).attrs<GenObj>(props => ({
 
 //let ModStyled = styled(FromStyled).attrs<GenObj>(props => ({
 
-/*
 let ModStyled2 = styled(FromStyled).attrs<GenObj>(props => ({
   $background: props.$background || "yellow",
   $fontsize: props.$fontsize || "xx-large",
@@ -75,6 +74,7 @@ let ModStyled2 = styled(FromStyled).attrs<GenObj>(props => ({
   color: props => props.$color,
   fontWeight: "bold",
 });
+/*
 */
 
 
@@ -90,9 +90,10 @@ function App() {
     let csshRef = getCssHrefs();
   let jsshRef = getJsHrefs();
   let intId = startAvailableChecks();
-  return (<div>Empty App</div>);
-
   /*
+  return (<div>Empty App</div>);
+  */
+
   return (
     <div className="App">
       <SDiv>Who Knows</SDiv>
@@ -126,7 +127,6 @@ function App() {
       </div>
     </div>
   )
-  */
 }
 
 export default App

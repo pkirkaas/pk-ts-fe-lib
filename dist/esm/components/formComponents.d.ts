@@ -1,4 +1,6 @@
 import { GenObj } from 'pk-ts-common-lib';
+export declare const SDiv: any;
+export declare function mkStyled(cmp: any, styles: any): any;
 /**
  * This section helps react-resizable-panels
  */
