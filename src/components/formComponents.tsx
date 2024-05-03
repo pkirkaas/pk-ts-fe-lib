@@ -14,11 +14,14 @@ import { Panel, PanelGroup, PanelResizeHandle, PanelGroupProps,  } from "react-r
 //////////// Testing styled components
 
 //export const SDiv = styled.div`border: solid red 2px; `
+// THIS STOPPED WORKING - something with interfaces, whatever...
+/*
 export const SDiv = styled.div({ border: 'solid blue 2px' }); 
 
 export function mkStyled(cmp, styles) {
   return styled(cmp)(styles);
 }
+*/
 
 
 /**

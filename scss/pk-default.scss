@@ -10,7 +10,11 @@
     .ph#{$i} { padding-left: $offset; padding-right: $offset }
     .br#{$i} {border-radius: $offset !important}
     .minw#{$i} {min-width: $em; }
+    .maxh#{$i} {max-height: $em; }
+    .minh#{$i} {min-height: $em; }
     .maxw#{$i} {max-width: $em; }
+    .w#{$i} {width: $em; }
+    .h#{$i} {height: $em; }
   }
 }
 
