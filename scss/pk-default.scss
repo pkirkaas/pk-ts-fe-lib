@@ -1,5 +1,5 @@
 @use 'sass:math';
-
+// Paul's default SCSS
 @mixin mk-spacing {
   @for $i from 0 through 90 {
     $offset: calc($i/10) * 1em;
