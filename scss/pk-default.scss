@@ -50,3 +50,21 @@ div[display="flex"] {
 .wfc {
   width: fit-content;
 }
+
+.flex-cont-start  {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: flex-start;
+	justify-content: flex-start;
+
+}
+
+.flex-cont-col-start  {
+	@extend .flex-cont-start;
+	flex-direction: column;
+}
+
+
+
+
+
