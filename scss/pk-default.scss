@@ -8,6 +8,8 @@
     .mh#{$i} { margin-left: $offset; margin-right: $offset }
     .pv#{$i} { padding-top: $offset; padding-bottom: $offset; }
     .ph#{$i} { padding-left: $offset; padding-right: $offset }
+    .p#{$i} { padding: $offset; }
+    .m#{$i} { margin: $offset; }
     .br#{$i} {border-radius: $offset !important}
     .minw#{$i} {min-width: $em; }
     .maxh#{$i} {max-height: $em; }
@@ -28,6 +30,19 @@
 }
 .tar {
   text-align: right;
+}
+
+.fullh {
+  height: 100%;
+}
+
+.fullw {
+  width: 100%;
+}
+
+.full {
+  height: 100%;
+  width: 100%;
 }
 
 
@@ -51,7 +66,7 @@ div[display="flex"] {
   width: fit-content;
 }
 
-.flex-cont-start  {
+.flex-start-start  {
 	display: flex;
 	flex-wrap: wrap;
 	align-items: flex-start;
@@ -59,8 +74,32 @@ div[display="flex"] {
 
 }
 
-.flex-cont-col-start  {
-	@extend .flex-cont-start;
+.flex-start-stretch  {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: stretch;
+	justify-content: flex-start;
+
+}
+.flex-start-center  {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: flex-start;
+
+}
+
+.flex-start-start-col  {
+	@extend .flex-start-start;
+	flex-direction: column;
+}
+
+.flex-start-center-col  {
+	@extend .flex-start-center;
+	flex-direction: column;
+}
+.flex-start-stretch-col  {
+	@extend .flex-start-stretch;
 	flex-direction: column;
 }
 
