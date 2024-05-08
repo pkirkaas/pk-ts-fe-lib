@@ -31,7 +31,7 @@
     "cleani": "npmm run clean && npm i",
     "reset": "npm run clean && npm run build",
     "monitor": "nodemon --exec \"npm run build-lib\" --ext js,jsx,ts,tsx,sass,css,scss --delay 5 --watch ./src",
-    "devlink": "npm link pk-ts-common-lib && npm link",
+    "devlink": "npm link && npm link pk-ts-common-lib",
     "dev": "vite --open",
     "build": "npm run build-lib && vite build",
     "build-lib": "tsc -p ./tsconfig.json && tsc -p ./tsconfig.cjs.json",
