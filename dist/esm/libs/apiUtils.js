@@ -25,13 +25,22 @@ export function useAxiosBase(url, method, data) {
     }
     url = urlBase(url);
     let [apiData, setApiData] = useState(null);
+    let [error, setError] = useState(null);
+    let [loading, setLoading] = useState(true);
     useEffect(() => {
-        if (!apiData) {
+        if (loading) {
             axios[method](url, data)
                 .then((res => {
                 console.log(`In Then for refs`);
                 setApiData(res.data);
-            }));
+                setLoading(false);
+            }))
+                .catch((error) => {
+                let errorJSON = error.toJSON();
+                console.error(`Error in useAxiosBase:`, { url, method, error, errorJSON, });
+                setError(error.toJSON());
+                setLoading(false);
+            });
         }
     });
     return apiData;
