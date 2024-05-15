@@ -1,2 +1,2 @@
-import './index.css';
+export {};
 //# sourceMappingURL=main.d.ts.map

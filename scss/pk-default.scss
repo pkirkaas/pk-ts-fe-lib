@@ -1,109 +1,172 @@
+/* START OF PK-DEFAULT-SCSS */
 @use 'sass:math';
-// Paul's default SCSS
+#root {
+  width: 100%;
+}
+//@import "bootstrap/scss/bootstrap";
+
+$grid-breakpoints: (xs: 0, sm: 544px, md: 768px, lg: 992px, xl: 1200px) !default;
+$inner-border-color: #888 !default;
+$inner-border-spread: 1px !default;
+
+//Makes a border INSIDE the block - so takes no space
+@mixin inner-border($spread:$inner-border-spread, $color:$inner-border-color) {
+  box-shadow: inset 0px 0px 0px $spread $color;
+}
+
+.inner-border {
+  @include inner-border;
+}
+
+@mixin mk-weights {
+  @for $i from 1 through 9 {
+    $weight: 100 * $i;
+    .fw-#{$i} { font-weight: $weight !important; }
+  }
+}
+
+@include mk-weights;
+
+@mixin mk-colors {
+  $hl: 0 2 4 6 8 a c e f;
+  @each $c1 in $hl {
+    @each $c2 in $hl {
+      @each $c3 in $hl {
+        .bg-#{$c1}#{$c2}#{$c3} { background-color: unquote('#')+$c1+$c2+$c3 !important; }
+        .c-#{$c1}#{$c2}#{$c3} { color: unquote('#')+$c1+$c2+$c3 !important; }
+        .bc-#{$c1}#{$c2}#{$c3} { border: solid 1px  unquote('#')+$c1+$c2+$c3 !important;
+        }
+      }
+    }
+  }
+}
+
+@include mk-colors;
+//Just a function to translate different size units
+//to a standard
+@function breakpoint($sz) {
+  @if type-of($sz) == string {
+    $sz: map-get($grid-breakpoints, $sz)
+  }
+  @if type-of($sz) != 'number' {
+    @debug ('Result of sz:', $sz);
+    @error 'Bad parameter sz:';
+  }
+  @return $sz;
+}
+
+// Can take a BS 'sz' ('xs', 'sm', etc)
+@mixin above-bp($sz) {
+  $breakpoint: breakpoint($sz);
+  @media (min-width: $breakpoint) {
+    @content
+  }
+}
+@mixin below-bp($sz) {
+  $breakpoint: breakpoint($sz);
+  @media (max-width: $breakpoint - 1px) {
+    @content
+  }
+}
+
+@mixin between-bps($min, $max) {
+  $min-breakpoint: breakpoint($min);
+  $max-breakpoint:  breakpoint($max);
+  @media ( min-width: $min-breakpoint ) and (max-width: $max-breakpoint - 1px) {
+    @content
+  }
+}
+
 @mixin mk-spacing {
   @for $i from 0 through 90 {
     $offset: calc($i/10) * 1em;
-    $em:  $i * 1em;
+    $em: $i * 1em;
     .mv#{$i} { margin-top: $offset; margin-bottom: $offset; }
     .mh#{$i} { margin-left: $offset; margin-right: $offset }
     .pv#{$i} { padding-top: $offset; padding-bottom: $offset; }
     .ph#{$i} { padding-left: $offset; padding-right: $offset }
     .p#{$i} { padding: $offset; }
     .m#{$i} { margin: $offset; }
-    .br#{$i} {border-radius: $offset !important}
-    .minw#{$i} {min-width: $em; }
-    .maxh#{$i} {max-height: $em; }
-    .minh#{$i} {min-height: $em; }
-    .maxw#{$i} {max-width: $em; }
-    .w#{$i} {width: $em; }
-    .h#{$i} {height: $em; }
+    .minw#{$i} { min-width: $em; }
+    .maxh#{$i} { max-height: $em; }
+    .minh#{$i} { min-height: $em; }
+    .maxw#{$i} { max-width: $em; }
+    .w#{$i} { width: $em; }
+    .h#{$i} { height: $em; }
+    @if $i < 20 {
+      .br#{$i} { border-radius: $offset !important }
+    }
   }
 }
 
 @include mk-spacing;
 
-.tac {
-  text-align: center;
-}
-.tal {
-  text-align: left;
-}
-.tar {
-  text-align: right;
-}
+/**
+ * Flex container classes for alignment & justify, row & column:
+  * Map keys - c:center, s:start, g:stretch
+  * EX: .fr-s-g - flex row, align start, justify center 
+  * ALSO - align self for flex items: .as-c - align self center
+ */
+@mixin mk-flex-containers {
+  $flex-align-map : ("c" : "center", "s" : "start", "g": "stretch", "e":"end");
+  @each $ikey, $ialign in $flex-align-map {
+    .as-#{$ikey} {align-self: #{$ialign} };
+  //@each $ialign in $flex-alignments {
+    @each $ckey, $calign in $flex-align-map {
+      .fr-#{$ckey}-#{$ikey},
+      .flex-#{$calign}-#{$ialign} {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: #{$ialign};
+        justify-content: #{$calign};
+      }
 
-.fullh {
-  height: 100%;
-}
-
-.fullw {
-  width: 100%;
-}
-
-.full {
-  height: 100%;
-  width: 100%;
-}
-
-
-.tst-cls {
-  border: solid red 3px;
-}
-
-body {
-  text-align: left;
-  place-items: start;
-}
-div[display="flex"] {
-  align-items: flex-start;
+      .fc-#{$ckey}-#{$ikey},
+      .flex-#{$calign}-#{$ialign}-col {
+        @extend .flex-#{$calign}-#{$ialign};
+        flex-direction: column;
+      }
+    }
+  }
 }
 
-.hfc {
-  height: fit-content;
+@include mk-flex-containers;
+
+$font-size-map: ("xxs": "xx-small", "xs": "x-small", "s": "small", "m": "medium", "l": "large",
+"xl": "x-large", "xxl": "xx-large", "xxxl": "xxx-large", "smaller": "smaller", "larger": "larger");
+@mixin mk-font-sizes {
+  @each $fskey, $fsval in $font-size-map {
+    .fs-#{$fskey} { font-size:  #{$fsval}; }
+  }
 }
-
-.wfc {
-  width: fit-content;
-}
-
-.flex-start-start  {
-	display: flex;
-	flex-wrap: wrap;
-	align-items: flex-start;
-	justify-content: flex-start;
-
-}
-
-.flex-start-stretch  {
-	display: flex;
-	flex-wrap: wrap;
-	align-items: stretch;
-	justify-content: flex-start;
-
-}
-.flex-start-center  {
-	display: flex;
-	flex-wrap: wrap;
-	align-items: center;
-	justify-content: flex-start;
-
-}
-
-.flex-start-start-col  {
-	@extend .flex-start-start;
-	flex-direction: column;
-}
-
-.flex-start-center-col  {
-	@extend .flex-start-center;
-	flex-direction: column;
-}
-.flex-start-stretch-col  {
-	@extend .flex-start-stretch;
-	flex-direction: column;
-}
+@include mk-font-sizes;
 
 
 
+.tac { text-align: center; }
+.tal { text-align: left; }
+.tar { text-align: right; }
+
+.fullh { height: 100%; }
+.fullw { width: 100%; }
+
+.full { height: 100%; width: 100%; }
+
+body { text-align: left; place-items: start; }
+
+div[display="flex"] { align-items: flex-start; }
+
+.hfc { height: fit-content; }
+.wfc { width: fit-content; }
 
 
+.oswald { font-family: 'Oswald', verdana; }
+.lato { font-family: 'Lato', arial; }
+.roboto { font-family: 'Roboto', verdana; }
+.open-sans { font-family: 'Open Sans', verdana; }
+.montserrat { font-family: 'Montserrat', verdana; }
+.raleway { font-family: 'Raleway', verdana; }
+.droid-sans { font-family: 'Droid Sans', verdana; }
+.s-sans-pro {font-family: 'Source Sans Pro', sans-serif;}
+
+/* END OF PK-DEFAULT-SCSS */

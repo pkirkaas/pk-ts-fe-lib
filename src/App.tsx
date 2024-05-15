@@ -8,8 +8,9 @@ import { Panel, PanelGroup, PanelResizeHandle, PanelGroupProps,  } from "react-r
 //import reactLogo from './assets/react.svg'
 //import viteLogo from '/vite.svg'
 import './Reset-Css-2023.css'
-import './App.css';
-import './tst.scss';
+//import './App.css';
+//import './tst.scss';
+import '../scss/pk-default.scss';
 import {
   typeOf, GenObj,
 } from 'pk-ts-common-lib';
@@ -95,7 +96,7 @@ function App() {
   */
 
   return (
-    <div className="App">
+    <div className="App fullw">
       <SDiv>Who Knows</SDiv>
 <FromStyled>I Know</FromStyled>
 <OromStyled>Abstracted</OromStyled>

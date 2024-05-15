@@ -1,13 +1,73 @@
 /**
  * Utility Components for PkLib 
  */
-import React, { useState, useEffect, Fragment  } from 'react';
-import { isEmpty, typeOf, GenObj, insertBetween,} from 'pk-ts-common-lib';
+import React, { useState, useEffect, Fragment } from 'react';
+import { isEmpty, typeOfEach, getProps, typeOf, GenObj, insertBetween, } from 'pk-ts-common-lib';
 import { addProps, replaceProps, getCnt, } from '../libs/reactUtils.js';
 import { signal } from "@preact/signals-react";
 import Select from 'react-select'
-import { styled }  from 'styled-components';
-import { Panel, PanelGroup, PanelResizeHandle, PanelGroupProps,  } from "react-resizable-panels";
+import { styled } from 'styled-components';
+import { flattenStyles, } from '../react-utils/styling.js';
+
+
+/*
+import * as stdef from 'styled-components';
+import {
+    ServerStyleSheet,
+  StyleSheetConsumer,
+  StyleSheetContext,
+  StyleSheetManager,
+  ThemeConsumer,
+  ThemeContext,
+  ThemeProvider,
+  css,
+} from  'styled-components';
+*/
+
+//import {StyleSheet} from  'styled-components/sheet';
+
+
+export function analyzeSS() {
+  let tstStyles = [
+    {
+      color: "red",
+      "font-weight": "bold",
+      "background-color": "blue",
+    },
+    {
+      border: "solid black 1px",
+      fontFamily: "arial",
+    },
+  ];
+  let ccStyles = flattenStyles(tstStyles, true);
+  let snStyles =  flattenStyles(tstStyles, false);
+  console.log(`tsting styles merges:`,{ccStyles, snStyles});
+  /*
+  let bd = {
+    styled,
+    css,
+    stdef, 
+//    StyleSheet,
+  //  ServerStyleSheet, 
+    StyleSheetConsumer, StyleSheetContext,
+  StyleSheetManager,
+   ThemeConsumer,
+};
+let toe = typeOfEach(bd);
+console.log(`TOE:`, toe);
+
+  let kesprops = {};
+  for (let key in bd) {
+    let comp = bd[key];
+    kesprops[key] =  getProps(comp, true);
+    //let eProps = getProps(comp);
+  }
+  console.log(`kesprops`, kesprops);
+  */
+}
+
+
+import { Panel, PanelGroup, PanelResizeHandle, PanelGroupProps, } from "react-resizable-panels";
 
 
 
@@ -15,9 +75,10 @@ import { Panel, PanelGroup, PanelResizeHandle, PanelGroupProps,  } from "react-r
 
 //export const SDiv = styled.div`border: solid red 2px; `
 // THIS STOPPED WORKING - something with interfaces, whatever...
-export const SDiv:any = styled.div({ border: 'solid blue 2px' }); 
+export const SDiv: any = styled.div({ border: 'solid blue 2px' });
 
-export function mkStyled(cmp, styles):any {
+export function mkStyled(cmp, styles): any {
+  analyzeSS();
   return styled(cmp)(styles);
 }
 
@@ -30,7 +91,7 @@ export function mkStyled(cmp, styles):any {
  * Simplify & give default style to PanelGroup
  * children ARE ONLY ARRAY OF PANELS - no need to include PanelSeparator between each 
  */
-export function MetaPanelGroup(props:GenObj) {
+export function MetaPanelGroup(props: GenObj) {
   let mods = { className: 'brdr', style: { flexGrow: 1, width: "100%", height: "100%" } };
   let cprops = addProps(props, mods);
   /*
@@ -41,21 +102,21 @@ export function MetaPanelGroup(props:GenObj) {
   console.log("In MetaPanelGroup; props:", { tok, cprops, kidTypes});
   */
   return (
-     /* @ts-ignore */ 
+    /* @ts-ignore */
     <PanelGroup  {...cprops} />
   );
 }
-export function VPanelGroup(props:GenObj) {
-  let cprops = replaceProps(props,{direction:'vertical'});
+export function VPanelGroup(props: GenObj) {
+  let cprops = replaceProps(props, { direction: 'vertical' });
   return MetaPanelGroup(cprops);
 }
 export function HPanelGroup(props) {
-  let cprops = replaceProps(props,{direction:'vertical'});
+  let cprops = replaceProps(props, { direction: 'vertical' });
   return MetaPanelGroup(cprops);
 }
 
 export function PanelSeparator(props) {
-  let style =  { minHeight: "2px", minWidth: "2px", border: "blue" };
+  let style = { minHeight: "2px", minWidth: "2px", border: "blue" };
   let cprops = addProps(props, { style });
   return (
     <PanelResizeHandle {...cprops} />
@@ -127,12 +188,12 @@ export function RenderArr(props) {
 
 
 export function TstSelect() {
- const [selectedOption, setSelectedOption] = useState(null);
+  const [selectedOption, setSelectedOption] = useState(null);
   const options = [
-  { value: 'chocolate', label: 'Chocolate' },
-  { value: 'strawberry', label: 'Strawberry' },
-  { value: 'vanilla', label: 'Vanilla' },
-];
+    { value: 'chocolate', label: 'Chocolate' },
+    { value: 'strawberry', label: 'Strawberry' },
+    { value: 'vanilla', label: 'Vanilla' },
+  ];
   return (
     <div className="App">
       <Select

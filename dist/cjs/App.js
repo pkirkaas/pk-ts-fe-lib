@@ -9,8 +9,9 @@ import { Panel, } from "react-resizable-panels";
 //import reactLogo from './assets/react.svg'
 //import viteLogo from '/vite.svg'
 import './Reset-Css-2023.css';
-import './App.css';
-import './tst.scss';
+//import './App.css';
+//import './tst.scss';
+import '../scss/pk-default.scss';
 let OromStyled = mkStyled(SDiv, {
     border: "solid black 3px",
     fontWeight: "bold",
@@ -78,7 +79,7 @@ function App() {
     /*
     return (<div>Empty App</div>);
     */
-    return (_jsxs("div", { className: "App", children: [_jsx(SDiv, { children: "Who Knows" }), _jsx(FromStyled, { children: "I Know" }), _jsx(OromStyled, { children: "Abstracted" }), _jsx(ModStyled2, { "$background": "#aaf", "$color": "orange", style: { width: 400 }, children: "Super Abstracted" }), _jsx("h1", { className: "gb", children: "Vite + React" }), _jsx("div", { children: "Testing Func Params" }), _jsxs("div", { className: "brdr", children: [_jsx("p", { children: " Testing components" }), _jsxs(VPanelGroup, { children: [_jsx(Panel, { className: "brnm", minSize: 25, children: _jsx("h1", { children: "First Panel" }) }), _jsx(PanelSeparator, {}), _jsx(Panel, { className: "brnm", minSize: 25, children: _jsx("h1", { children: "Second Panel" }) })] })] }), _jsx("div", { children: "END Testing Func Params" }), _jsx("div", { className: "card", children: _jsxs("button", { onClick: () => setCount((count) => count + 1), children: ["count is ", count] }) })] }));
+    return (_jsxs("div", { className: "App fullw", children: [_jsx(SDiv, { children: "Who Knows" }), _jsx(FromStyled, { children: "I Know" }), _jsx(OromStyled, { children: "Abstracted" }), _jsx(ModStyled2, { "$background": "#aaf", "$color": "orange", style: { width: 400 }, children: "Super Abstracted" }), _jsx("h1", { className: "gb", children: "Vite + React" }), _jsx("div", { children: "Testing Func Params" }), _jsxs("div", { className: "brdr", children: [_jsx("p", { children: " Testing components" }), _jsxs(VPanelGroup, { children: [_jsx(Panel, { className: "brnm", minSize: 25, children: _jsx("h1", { children: "First Panel" }) }), _jsx(PanelSeparator, {}), _jsx(Panel, { className: "brnm", minSize: 25, children: _jsx("h1", { children: "Second Panel" }) })] })] }), _jsx("div", { children: "END Testing Func Params" }), _jsx("div", { className: "card", children: _jsxs("button", { onClick: () => setCount((count) => count + 1), children: ["count is ", count] }) })] }));
 }
 export default App;
 //# sourceMappingURL=App.js.map

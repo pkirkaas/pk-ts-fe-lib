@@ -1,5 +1,8 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import path from 'path';
+import sass from 'sass';
+
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -15,6 +18,8 @@ export default defineConfig({
     include: /\.(css|js|jsx|ts|tsx)$/,
 } */)],
   build: {
+    mode:"development",
+    minify:false,
     outDir: 'build',
     sourcemap: true,
   }
