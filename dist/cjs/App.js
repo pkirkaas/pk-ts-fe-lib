@@ -8,7 +8,7 @@ import { SDiv, mkStyled, } from './components/formComponents.js';
 import { Panel, } from "react-resizable-panels";
 //import reactLogo from './assets/react.svg'
 //import viteLogo from '/vite.svg'
-import './Reset-Css-2023.css';
+//import './Reset-Css-2023.css'
 //import './App.css';
 //import './tst.scss';
 import '../scss/pk-default.scss';

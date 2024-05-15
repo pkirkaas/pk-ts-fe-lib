@@ -1,4 +1,3 @@
-import './Reset-Css-2023.css';
 import '../scss/pk-default.scss';
 declare function App(): import("react/jsx-runtime").JSX.Element;
 export default App;

@@ -4,20 +4,12 @@
  */
 
  /** TRY BODY DISPLAY FLEX COLUMN */
+ /* 
  body {
   display: flex;
   flex-direction: column;
  }
-
- /** JUST A TEST TO SEE IF IMPORT WORKS - REMOVE!!! */
-
- body {
-  background: #fda;
- }
-
- div {
-  background: #fbf;
- }
+ */
 
 /* Box sizing rules */
 *,
