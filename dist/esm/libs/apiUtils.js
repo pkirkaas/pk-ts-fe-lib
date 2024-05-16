@@ -42,7 +42,8 @@ export function useAxiosBase(url, method, data) {
                 setLoading(false);
             });
         }
-    });
+    }, [loading, apiData, error]);
+    //}); //Orig w/o dependencies
     return apiData;
 }
 export function useAxiosGet(url) {

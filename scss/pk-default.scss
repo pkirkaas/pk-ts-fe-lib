@@ -108,7 +108,7 @@ $inner-border-spread: 1px !default;
   * ALSO - align self for flex items: .as-c - align self center
  */
 @mixin mk-flex-containers {
-  $flex-align-map : ("c" : "center", "s" : "start", "g": "stretch", "e":"end");
+  $flex-align-map : ("c" : "center", "s" : "start", "g": "stretch", "e":"end","se":"space-evenly", "sa": "space-around", "sb": "space-between");
   @each $ikey, $ialign in $flex-align-map {
     .as-#{$ikey} {align-self: #{$ialign} };
   //@each $ialign in $flex-alignments {

@@ -49,7 +49,9 @@ export function useAxiosBase(url: string, method: string, data?: GenObj) {
           setLoading(false);
         }) ;
     }
-  });
+
+  },[loading, apiData, error]);
+  //}); //Orig w/o dependencies
 
   return apiData;
 
