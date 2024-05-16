@@ -12,7 +12,7 @@ export const origin = window.location.origin;
 export const apiUrl = `${origin}/api`;
 
 
-export let compCount = { cnt: 0};
+export let compCount = { cnt: 0 };
 export function getCnt() {
 	compCount.cnt++;
 	//console.log(`NewCnt: [${compCount.cnt}]`);
@@ -48,26 +48,34 @@ export function mkUrl(rel) {
  */
 export function addProps(props: object, mods?: object): GenObj {
 	let rProps = { ...props };
-	if (!isEmpty(mods)) {
-		if (!isObject(mods)) {
-			throw new Error(`Invalid arg for mods in addProps - must be object`);
+	if (isEmpty(mods)) {
+		return rProps;
+	}
+	if (!isObject(mods)) {
+		throw new Error(`Invalid arg for mods in addProps - must be object`);
+	}
+
+
+	for (let key in mods) {
+		let prop = rProps[key];
+		let mod = mods[key];
+		if (!prop) {
+			rProps[key] = mod;
+			continue;
 		}
-		for (let key in mods) {
-			let prop = rProps[key];
-			let mod = mods[key];
-			if (!prop) {
-				rProps[key] = mod;
-				continue;
-			}
-			if (!mod) {
-				continue;
-			}
-			if (isObject(mod) && isObject(prop)) {
-				rProps[key] = { ...prop, ...mod };
-			} else if ((typeof mod === 'string') && (typeof prop === 'string')) {
-				rProps[key] = `${prop} ${mod}`;
-			}
+		if (!mod) {
+			continue;
 		}
+		if ((Array.isArray(prop) && Array.isArray(mod)) ||
+			(isObject(mod) && isObject(prop))) {
+			rProps[key] = { ...prop, ...mod };
+			continue;
+		}
+		if ((typeof mod === 'string') && (typeof prop === 'string')) {
+			rProps[key] = `${prop} ${mod}`;
+			continue;
+		}
+		console.error(`In addProps - what to do with prop & mod:`, { prop, mod });
 	}
 	return rProps;
 }
