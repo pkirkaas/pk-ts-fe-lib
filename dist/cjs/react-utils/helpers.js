@@ -1,8 +1,7 @@
-import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 /**
  * Needs work - but play w. RenderArray - it has potential...
  */
-import { Fragment } from 'react';
+export {};
 /*
 export function Client(props) {
   let out = <div className="dlabel">...Waiting'</div>;
@@ -39,35 +38,42 @@ export function Project(props) {
   );
 }
 */
+//?? How did this NOT Break? Already exporting from formComponents...
+/*
 export function RenderArr(props) {
-    let label = props.label;
-    let Comp = props.Comp;
-    let arr = props.arr;
-    //let labelClass = props.labelClass ?? "clabel";
-    let labelClass = props.labelClass ?? "RenderArrLabel";
-    let wrapClass = props.wrapClass ?? "bpm";
-    let arrClass = props.arrClass ?? "bpm2";
-    let compClass = props.compClass ?? "crow";
-    //console.log("In RA, TOC:", toComp);
-    if (!arr || !Array.isArray(arr) || !arr.length) {
-        return _jsx(Fragment, {});
+  let label = props.label;
+  let Comp = props.Comp;
+  let arr: any[] = props.arr;
+  //let labelClass = props.labelClass ?? "clabel";
+  let labelClass = props.labelClass ?? "RenderArrLabel";
+  let wrapClass = props.wrapClass ?? "bpm";
+  let arrClass = props.arrClass ?? "bpm2";
+  let compClass = props.compClass ?? "crow";
+  //console.log("In RA, TOC:", toComp);
+  if (!arr || !Array.isArray(arr) || !arr.length) {
+    return <Fragment />;
+  }
+  let arrOut = <Fragment />;
+  try {
+    if (Array.isArray(arr)) {
+      let myArr: any[] = arr;
+      //@ts-ignore
+      arrOut = myArr.map((el, idx) => {
+        return <Fragment key={idx}>{Comp({ key: idx, ...el, className: compClass })}</Fragment>;
+      });
     }
-    let arrOut = _jsx(Fragment, {});
-    try {
-        if (Array.isArray(arr)) {
-            let myArr = arr;
-            //@ts-ignore
-            arrOut = myArr.map((el, idx) => {
-                return _jsx(Fragment, { children: Comp({ key: idx, ...el, className: compClass }) }, idx);
-            });
-        }
-    }
-    catch (e) {
-        let stack = e.stack;
-        let stackArr = stack.split("\n");
-        let msg = e.message;
-        console.error("Caught the error here:", { msg, stackArr });
-    }
-    return (_jsxs("div", { className: wrapClass, children: [_jsx("div", { className: labelClass, children: label }), _jsx("div", { className: arrClass, children: arrOut })] }));
+  } catch (e) {
+    let stack = e.stack;
+    let stackArr = stack.split("\n");
+    let msg = e.message;
+    console.error("Caught the error here:", { msg, stackArr });
+  }
+  return (
+    <div className={wrapClass}>
+      <div className={labelClass}>{label}</div>
+      <div className={arrClass}>{arrOut}</div>
+    </div>
+  );
 }
+*/
 //# sourceMappingURL=helpers.js.map

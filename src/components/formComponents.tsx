@@ -27,6 +27,7 @@ import {
 //import {StyleSheet} from  'styled-components/sheet';
 
 
+/*
 export function analyzeSS() {
   let tstStyles = [
     {
@@ -42,29 +43,8 @@ export function analyzeSS() {
   let ccStyles = flattenStyles(tstStyles, true);
   let snStyles =  flattenStyles(tstStyles, false);
   console.log(`tsting styles merges:`,{ccStyles, snStyles});
-  /*
-  let bd = {
-    styled,
-    css,
-    stdef, 
-//    StyleSheet,
-  //  ServerStyleSheet, 
-    StyleSheetConsumer, StyleSheetContext,
-  StyleSheetManager,
-   ThemeConsumer,
-};
-let toe = typeOfEach(bd);
-console.log(`TOE:`, toe);
-
-  let kesprops = {};
-  for (let key in bd) {
-    let comp = bd[key];
-    kesprops[key] =  getProps(comp, true);
-    //let eProps = getProps(comp);
-  }
-  console.log(`kesprops`, kesprops);
-  */
 }
+*/
 
 
 import { Panel, PanelGroup, PanelResizeHandle, PanelGroupProps, } from "react-resizable-panels";
@@ -77,8 +57,9 @@ import { Panel, PanelGroup, PanelResizeHandle, PanelGroupProps, } from "react-re
 // THIS STOPPED WORKING - something with interfaces, whatever...
 export const SDiv: any = styled.div({ border: 'solid blue 2px' });
 
+/** TODO: Can styles be a template literal? How?  */
 export function mkStyled(cmp, styles): any {
-  analyzeSS();
+//  analyzeSS();
   return styled(cmp)(styles);
 }
 

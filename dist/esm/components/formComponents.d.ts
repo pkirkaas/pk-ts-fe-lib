@@ -1,6 +1,6 @@
 import { GenObj } from 'pk-ts-common-lib';
-export declare function analyzeSS(): void;
 export declare const SDiv: any;
+/** TODO: Can styles be a template literal? How?  */
 export declare function mkStyled(cmp: any, styles: any): any;
 /**
  * This section helps react-resizable-panels

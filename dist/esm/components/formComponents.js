@@ -6,7 +6,6 @@ import { useState, Fragment } from 'react';
 import { addProps, replaceProps, } from '../libs/reactUtils.js';
 import Select from 'react-select';
 import { styled } from 'styled-components';
-import { flattenStyles, } from '../react-utils/styling.js';
 /*
 import * as stdef from 'styled-components';
 import {
@@ -21,51 +20,32 @@ import {
 } from  'styled-components';
 */
 //import {StyleSheet} from  'styled-components/sheet';
+/*
 export function analyzeSS() {
-    let tstStyles = [
-        {
-            color: "red",
-            "font-weight": "bold",
-            "background-color": "blue",
-        },
-        {
-            border: "solid black 1px",
-            fontFamily: "arial",
-        },
-    ];
-    let ccStyles = flattenStyles(tstStyles, true);
-    let snStyles = flattenStyles(tstStyles, false);
-    console.log(`tsting styles merges:`, { ccStyles, snStyles });
-    /*
-    let bd = {
-      styled,
-      css,
-      stdef,
-  //    StyleSheet,
-    //  ServerStyleSheet,
-      StyleSheetConsumer, StyleSheetContext,
-    StyleSheetManager,
-     ThemeConsumer,
-  };
-  let toe = typeOfEach(bd);
-  console.log(`TOE:`, toe);
-  
-    let kesprops = {};
-    for (let key in bd) {
-      let comp = bd[key];
-      kesprops[key] =  getProps(comp, true);
-      //let eProps = getProps(comp);
-    }
-    console.log(`kesprops`, kesprops);
-    */
+  let tstStyles = [
+    {
+      color: "red",
+      "font-weight": "bold",
+      "background-color": "blue",
+    },
+    {
+      border: "solid black 1px",
+      fontFamily: "arial",
+    },
+  ];
+  let ccStyles = flattenStyles(tstStyles, true);
+  let snStyles =  flattenStyles(tstStyles, false);
+  console.log(`tsting styles merges:`,{ccStyles, snStyles});
 }
+*/
 import { PanelGroup, PanelResizeHandle, } from "react-resizable-panels";
 //////////// Testing styled components
 //export const SDiv = styled.div`border: solid red 2px; `
 // THIS STOPPED WORKING - something with interfaces, whatever...
 export const SDiv = styled.div({ border: 'solid blue 2px' });
+/** TODO: Can styles be a template literal? How?  */
 export function mkStyled(cmp, styles) {
-    analyzeSS();
+    //  analyzeSS();
     return styled(cmp)(styles);
 }
 /**
