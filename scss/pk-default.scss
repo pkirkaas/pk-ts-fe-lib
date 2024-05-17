@@ -101,6 +101,7 @@ $inner-border-spread: 1px !default;
   }
 }
 
+.fb0 {flex-basis: 0}
 .fg0 { flex-grow: 0 }
 .fs0 { flex-shrink: 0 }
 @include mk-spacing;
