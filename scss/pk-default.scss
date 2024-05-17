@@ -95,10 +95,14 @@ $inner-border-spread: 1px !default;
     .h#{$i} { height: $em; }
     @if $i < 20 {
       .br#{$i} { border-radius: $offset !important }
+      .fg#{$i} { flex-grow: $i }
+      .fs#{$i} { flex-shrink: $i }
     }
   }
 }
 
+.fg0 { flex-grow: 0 }
+.fs0 { flex-shrink: 0 }
 @include mk-spacing;
 
 /**
@@ -131,6 +135,9 @@ $inner-border-spread: 1px !default;
 }
 
 @include mk-flex-containers;
+
+.nowrap {flex-wrap: nowrap !important}
+
 
 $font-size-map: ("xxs": "xx-small", "xs": "x-small", "s": "small", "m": "medium", "l": "large",
 "xl": "x-large", "xxl": "xx-large", "xxxl": "xxx-large", "smaller": "smaller", "larger": "larger");
