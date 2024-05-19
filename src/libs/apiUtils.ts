@@ -65,6 +65,34 @@ export function useAxiosPost(url: string, data?: GenObj) {
   return useAxiosBase(url, 'post', data);
 }
 
+//Untested - based on suggestion from Claude, but improved...
+// General use of async functions in Components....
+// TOTALLY UNSURE OF THIS!!
+
+/**
+ * Like useAxios... above, but genaralized for any async function
+ * @param anAsyncFnc - an asynchronous function call
+ * @param args[] - arbitrary arbs to the function
+ */
+export function useAsync(anAsyncFnc,...args) {
+  let [apiData, setApiData] = useState(null);
+  let [error, setError] = useState(null);
+  let [loading, setLoading] = useState(true);
+  useEffect( () => {
+    async function runAsync() { 
+    if (loading) {
+      let res = await anAsyncFnc(...args);
+      setApiData(res);
+      setLoading(false);
+    }
+  }
+  runAsync();
+  }
+  ,[loading, anAsyncFnc, ...args ]);
+
+  return apiData;
+}
+
 
 
 
