@@ -13,17 +13,25 @@ export async function mkSelect({ register, name, selectedOption, options, all, o
  */
 export function normOnSelFncs(onSelFncs) {
     if (isEmpty(onSelFncs)) {
-        onSelFncs = [];
+        console.log(`normOnSelFncs: onSelFncs was empty?`, onSelFncs);
+        return [];
+        //onSelFncs = [];
     }
-    else if (typeof onSelFncs === 'function') {
-        onSelFncs = [onSelFncs];
+    if (typeof onSelFncs === 'function') {
+        console.log(`normOnSelFncs: onSelFncs was a function?`, onSelFncs);
+        //@ts-ignore
+        return [onSelFncs];
     }
     if (!Array.isArray(onSelFncs)) { //Miscalculated somewhere
         let toOSF = typeOf(onSelFncs);
         console.error(`In normOnSelFncs, unexpected opt arg for onSelFncs`, { onSelFncs, toOSF });
-        throw new Error("Bad call");
+        return [];
+        //throw new Error("Bad call");
     }
     ;
+    let toOSF = typeOf(onSelFncs);
+    console.log(`normOnSelFncs: Undisturbed onSelFncs of type::`, { onSelFncs, toOSF });
+    //@ts-ignore
     return onSelFncs;
 }
 export default { mkSelect, normOnSelFncs };

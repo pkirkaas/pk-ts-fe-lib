@@ -20,17 +20,26 @@ export async function mkSelect({register, name, selectedOption, options, all,onS
  * Can be empty, or a single function, or array of functions - 
  * Returns an array even if empty, so implementors don't have to check
  */
-export function normOnSelFncs(onSelFncs) {
+export function normOnSelFncs(onSelFncs):[] {
    if (isEmpty(onSelFncs)) {
-      onSelFncs = [];
-   } else if (typeof onSelFncs === 'function') {
-      onSelFncs = [onSelFncs];
+      console.log(`normOnSelFncs: onSelFncs was empty?`, onSelFncs);
+      return [];
+      //onSelFncs = [];
+   }
+  if (typeof onSelFncs === 'function') {
+      console.log(`normOnSelFncs: onSelFncs was a function?`, onSelFncs);
+      //@ts-ignore
+      return [onSelFncs];
    }
    if (!Array.isArray(onSelFncs)) { //Miscalculated somewhere
       let toOSF = typeOf(onSelFncs);
       console.error(`In normOnSelFncs, unexpected opt arg for onSelFncs`, { onSelFncs, toOSF });
-      throw new Error("Bad call");
+      return [];
+      //throw new Error("Bad call");
    };
+   let toOSF = typeOf(onSelFncs);
+   console.log(`normOnSelFncs: Undisturbed onSelFncs of type::`,{onSelFncs, toOSF});
+   //@ts-ignore
    return onSelFncs;
 }
 

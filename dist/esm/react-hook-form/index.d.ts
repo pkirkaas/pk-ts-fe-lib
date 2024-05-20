@@ -18,7 +18,7 @@ export declare function mkSelect({ register, name, selectedOption, options, all,
  * Can be empty, or a single function, or array of functions -
  * Returns an array even if empty, so implementors don't have to check
  */
-export declare function normOnSelFncs(onSelFncs: any): any[];
+export declare function normOnSelFncs(onSelFncs: any): [];
 declare const _default: {
     mkSelect: typeof mkSelect;
     normOnSelFncs: typeof normOnSelFncs;
