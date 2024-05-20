@@ -15,6 +15,12 @@
       "import": "./dist/esm/index.js",
       "require": "./dist/cjs/index.js"
     },
+    "./react-hook-form": {
+      "types": "./dist/esm/react-hook-form/index.d.ts",
+      "default": "./dist/esm/react-hook-form/index.js",
+      "import": "./dist/esm/react-hook-form/index.js",
+      "require": "./dist/cjs/react-hook-form/index.js"
+    },
     "./react-utils": {
       "types": "./dist/esm/react-utils/index.d.ts",
       "default": "./dist/esm/react-utils/index.js",
@@ -48,10 +54,11 @@
     "bootstrap": "*",
     "classnames": "*",
     "formik": "*",
-    "react": "*",
     "pk-ts-common-lib": "github:pkirkaas/pk-ts-common-lib#working",
+    "react": "*",
     "react-bootstrap": "*",
     "react-dom": "*",
+    "react-hook-form": "^7.51.4",
     "react-resizable-panels": "*",
     "react-router-dom": "*",
     "react-select": "*",
@@ -68,13 +75,24 @@
     "typescript": "*",
     "vite": "*"
   },
-    "alt-lib-gits" : [ {
-    "pk-ts-common-lib": "git+https://github.com/pkirkaas/pk-ts-common-lib.git#working",
-  "no":"nothing"},{
-    "pk-ts-common-lib": "github:pkirkaas/pk-ts-common-lib#working",
-  "no":"nothing"},{
-    "pk-ts-common-lib": "git+https://github.com/pkirkaas/pk-ts-common-lib.git#working",
-  "no":"nothing"},{
-  "no":"nothing"},{
-  "no":"nothing"}]
+  "alt-lib-gits": [
+    {
+      "pk-ts-common-lib": "git+https://github.com/pkirkaas/pk-ts-common-lib.git#working",
+      "no": "nothing"
+    },
+    {
+      "pk-ts-common-lib": "github:pkirkaas/pk-ts-common-lib#working",
+      "no": "nothing"
+    },
+    {
+      "pk-ts-common-lib": "git+https://github.com/pkirkaas/pk-ts-common-lib.git#working",
+      "no": "nothing"
+    },
+    {
+      "no": "nothing"
+    },
+    {
+      "no": "nothing"
+    }
+  ]
 }

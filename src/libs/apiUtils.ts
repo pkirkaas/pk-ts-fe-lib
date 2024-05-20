@@ -69,6 +69,38 @@ export function useAxiosPost(url: string, data?: GenObj) {
 // General use of async functions in Components....
 // TOTALLY UNSURE OF THIS!!
 
+//Look into react useCallback...
+/*
+import { useState, useEffect, useCallback } from 'react';
+
+const useFetchData = (asyncFunction, dependencies = []) => {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  const fetchData = useCallback(async (...args) => {
+    setLoading(true);
+    setError(null);
+
+    try {
+      const result = await asyncFunction(...args);
+      setData(result);
+    } catch (error) {
+      setError(error);
+    } finally {
+      setLoading(false);
+    }
+  }, [asyncFunction, ...dependencies]);
+
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
+
+  return { data, loading, error, fetchData };
+};
+
+*/
+
 /**
  * Like useAxios... above, but genaralized for any async function
  * @param anAsyncFnc - an asynchronous function call
