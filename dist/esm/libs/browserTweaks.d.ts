@@ -16,6 +16,11 @@
  */
 /// <reference types="node" />
 /**
+ * Converts a JS Date to an HTML date string in format YYYY-MM-dd
+ * @param dt - the date to convert, else null for now
+ * @return string - HTML formatted date
+ */
+/**
  * Run every 10 seconds to check availability, or reload.
  *
  */

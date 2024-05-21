@@ -15,6 +15,18 @@
  * Just import and run startAvailableChecks anywhere in the code, and page will reload after new build.
  */
 /**
+ * Converts a JS Date to an HTML date string in format YYYY-MM-dd
+ * @param dt - the date to convert, else null for now
+ * @return string - HTML formatted date
+ */
+/*
+export function toHtmlDate(dt=null):string {
+    let date=pkToDate(dt);
+    let str = format(dt, "yyyy-MM-dd");
+    return str;
+}
+*/
+/**
  * Run every 10 seconds to check availability, or reload.
  *
  */
