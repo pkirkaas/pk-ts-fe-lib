@@ -13,12 +13,12 @@ export async function mkSelect({ register, name, selectedOption, options, all, o
  */
 export function normOnSelFncs(onSelFncs) {
     if (isEmpty(onSelFncs)) {
-        console.log(`normOnSelFncs: onSelFncs was empty?`, onSelFncs);
+        //console.log(`normOnSelFncs: onSelFncs was empty?`, onSelFncs);
         return [];
         //onSelFncs = [];
     }
     if (typeof onSelFncs === 'function') {
-        console.log(`normOnSelFncs: onSelFncs was a function?`, onSelFncs);
+        //console.log(`normOnSelFncs: onSelFncs was a function?`, onSelFncs);
         //@ts-ignore
         return [onSelFncs];
     }
@@ -30,7 +30,7 @@ export function normOnSelFncs(onSelFncs) {
     }
     ;
     let toOSF = typeOf(onSelFncs);
-    console.log(`normOnSelFncs: Undisturbed onSelFncs of type::`, { onSelFncs, toOSF });
+    //   console.log(`normOnSelFncs: Undisturbed onSelFncs of type::`,{onSelFncs, toOSF});
     //@ts-ignore
     return onSelFncs;
 }
