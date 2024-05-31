@@ -10,27 +10,33 @@
 // Don't need EVERY color - make some defaults, then fg/bg pairs
 
 
-$light-colors: (
-  "wh": "#fff",
-  "bl": "#aaf",
-  "rd":"#faa",
-  "gr":"#aaa") !default;
+$light-colors: ( "wh": #fff, "bl": #aaf, "rd":#faa, "gr":#aaa) !default;
+$dark-colors: ( "bk": #000, "bl": #008, "rd": #800, "gr": #444) !default;
 
+/* Example - generates 16 classes:
 
-$dark-colors: (
-  "bk": #000,
-  "bl": #008,
-  "rd": #800,
-  "gr": #444) !default;
+.lt-gr-bk-pr, .lt-13-pr {
+  color: #aaa;
+  background-color: #000;
+}
 
+.dk-bk-gr-pr, .dk-13-pr {
+  color: #000;
+  background-color: #aaa;
+}
+
+*/
 @mixin mk-fg-bg-pairs {
+  $i:0;
   @each $lkey, $lclr in $light-colors {
     @each $dkey, $dclr in $dark-colors {
-      .lt-#{$lkey}-#{$dkey}-pr {
+      $i:$i+1;
+      .lt-#{$lkey}-#{$dkey}-pr, .lt-#{$i}-pr {
         color: $lclr;
         background-color: $dclr;
       }
-       .dk-#{$dkey}-#{$lkey}-pr {color: $dclr; background-color: $lclr;}
+       .dk-#{$dkey}-#{$lkey}-pr, .dk-#{$i}-pr
+       {color: $dclr; background-color: $lclr;}
 
     }
   }
@@ -72,7 +78,10 @@ $inner-border-spread: 1px !default;
 @include mk-weights;
 
 @mixin mk-colors {
-  $hl: 0 2 4 6 8 a c e f;
+  //$hl: 0 2 4 6 8 a c e f;
+  // Don't need all those color classes...
+  //$hl: 0 4 8 a d f;
+  $hl: 0 4 8 a f;
 
   @each $c1 in $hl {
     @each $c2 in $hl {
@@ -139,8 +148,13 @@ $inner-border-spread: 1px !default;
   }
 }
 
+// @for $i from 0 through 90 {
+/*
+Reduce spacing increment to factors of 5?
+ */
 @mixin mk-spacing {
-  @for $i from 0 through 90 {
+  @for $j from 0 through 20 {
+    $i: $j * 5;
     $offset: calc($i/10) * 1em;
     $em: $i * 1em;
 
