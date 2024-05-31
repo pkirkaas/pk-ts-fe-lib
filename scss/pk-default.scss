@@ -1,16 +1,57 @@
 /* START OF PK-DEFAULT-SCSS */
 @use 'sass:math';
+
 #root {
   width: 100%;
 }
+
 //@import "bootstrap/scss/bootstrap";
 
-$grid-breakpoints: (xs: 0, sm: 544px, md: 768px, lg: 992px, xl: 1200px) !default;
+// Don't need EVERY color - make some defaults, then fg/bg pairs
+
+
+$light-colors: (
+  "wh": "#fff",
+  "bl": "#aaf",
+  "rd":"#faa",
+  "gr":"#aaa") !default;
+
+
+$dark-colors: (
+  "bk": #000,
+  "bl": #008,
+  "rd": #800,
+  "gr": #444) !default;
+
+@mixin mk-fg-bg-pairs {
+  @each $lkey, $lclr in $light-colors {
+    @each $dkey, $dclr in $dark-colors {
+      .lt-#{$lkey}-#{$dkey}-pr {
+        color: $lclr;
+        background-color: $dclr;
+      }
+       .dk-#{$dkey}-#{$lkey}-pr {color: $dclr; background-color: $lclr;}
+
+    }
+  }
+}
+
+@include mk-fg-bg-pairs;
+
+
+
+
+$grid-breakpoints: (
+  xs: 0,
+  sm: 544px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px) !default;
 $inner-border-color: #888 !default;
 $inner-border-spread: 1px !default;
 
 //Makes a border INSIDE the block - so takes no space
-@mixin inner-border($spread:$inner-border-spread, $color:$inner-border-color) {
+@mixin inner-border($spread: $inner-border-spread, $color: $inner-border-color) {
   box-shadow: inset 0px 0px 0px $spread $color;
 }
 
@@ -21,7 +62,10 @@ $inner-border-spread: 1px !default;
 @mixin mk-weights {
   @for $i from 1 through 9 {
     $weight: 100 * $i;
-    .fw-#{$i} { font-weight: $weight !important; }
+
+    .fw-#{$i} {
+      font-weight: $weight !important;
+    }
   }
 }
 
@@ -29,12 +73,20 @@ $inner-border-spread: 1px !default;
 
 @mixin mk-colors {
   $hl: 0 2 4 6 8 a c e f;
+
   @each $c1 in $hl {
     @each $c2 in $hl {
       @each $c3 in $hl {
-        .bg-#{$c1}#{$c2}#{$c3} { background-color: unquote('#')+$c1+$c2+$c3 !important; }
-        .c-#{$c1}#{$c2}#{$c3} { color: unquote('#')+$c1+$c2+$c3 !important; }
-        .bc-#{$c1}#{$c2}#{$c3} { border: solid 1px  unquote('#')+$c1+$c2+$c3 !important;
+        .bg-#{$c1}#{$c2}#{$c3} {
+          background-color: unquote('#')+$c1+$c2+$c3 !important;
+        }
+
+        .c-#{$c1}#{$c2}#{$c3} {
+          color: unquote('#')+$c1+$c2+$c3 !important;
+        }
+
+        .bc-#{$c1}#{$c2}#{$c3} {
+          border: solid 1px unquote('#')+$c1+$c2+$c3 !important;
         }
       }
     }
@@ -42,28 +94,37 @@ $inner-border-spread: 1px !default;
 }
 
 @include mk-colors;
+
+
+
 //Just a function to translate different size units
 //to a standard
 @function breakpoint($sz) {
-  @if type-of($sz) == string {
+  @if type-of($sz)==string {
     $sz: map-get($grid-breakpoints, $sz)
   }
-  @if type-of($sz) != 'number' {
-    @debug ('Result of sz:', $sz);
-    @error 'Bad parameter sz:';
-  }
-  @return $sz;
+
+  @if type-of($sz) !='number' {
+    @debug ('Result of sz:', $sz
+  );
+  @error 'Bad parameter sz:';
+}
+
+@return $sz;
 }
 
 // Can take a BS 'sz' ('xs', 'sm', etc)
 @mixin above-bp($sz) {
   $breakpoint: breakpoint($sz);
+
   @media (min-width: $breakpoint) {
     @content
   }
 }
+
 @mixin below-bp($sz) {
   $breakpoint: breakpoint($sz);
+
   @media (max-width: $breakpoint - 1px) {
     @content
   }
@@ -71,8 +132,9 @@ $inner-border-spread: 1px !default;
 
 @mixin between-bps($min, $max) {
   $min-breakpoint: breakpoint($min);
-  $max-breakpoint:  breakpoint($max);
-  @media ( min-width: $min-breakpoint ) and (max-width: $max-breakpoint - 1px) {
+  $max-breakpoint: breakpoint($max);
+
+  @media (min-width: $min-breakpoint ) and (max-width: $max-breakpoint - 1px) {
     @content
   }
 }
@@ -81,29 +143,87 @@ $inner-border-spread: 1px !default;
   @for $i from 0 through 90 {
     $offset: calc($i/10) * 1em;
     $em: $i * 1em;
-    .mv#{$i} { margin-top: $offset; margin-bottom: $offset; }
-    .mh#{$i} { margin-left: $offset; margin-right: $offset }
-    .pv#{$i} { padding-top: $offset; padding-bottom: $offset; }
-    .ph#{$i} { padding-left: $offset; padding-right: $offset }
-    .p#{$i} { padding: $offset; }
-    .m#{$i} { margin: $offset; }
-    .minw#{$i} { min-width: $em; }
-    .maxh#{$i} { max-height: $em; }
-    .minh#{$i} { min-height: $em; }
-    .maxw#{$i} { max-width: $em; }
-    .w#{$i} { width: $em; }
-    .h#{$i} { height: $em; }
+
+    .mv#{$i} {
+      margin-top: $offset;
+      margin-bottom: $offset;
+    }
+
+    .mh#{$i} {
+      margin-left: $offset;
+      margin-right: $offset
+    }
+
+    .pv#{$i} {
+      padding-top: $offset;
+      padding-bottom: $offset;
+    }
+
+    .ph#{$i} {
+      padding-left: $offset;
+      padding-right: $offset
+    }
+
+    .p#{$i} {
+      padding: $offset;
+    }
+
+    .m#{$i} {
+      margin: $offset;
+    }
+
+    .minw#{$i} {
+      min-width: $em;
+    }
+
+    .maxh#{$i} {
+      max-height: $em;
+    }
+
+    .minh#{$i} {
+      min-height: $em;
+    }
+
+    .maxw#{$i} {
+      max-width: $em;
+    }
+
+    .w#{$i} {
+      width: $em;
+    }
+
+    .h#{$i} {
+      height: $em;
+    }
+
     @if $i < 20 {
-      .br#{$i} { border-radius: $offset !important }
-      .fg#{$i} { flex-grow: $i }
-      .fs#{$i} { flex-shrink: $i }
+      .br#{$i} {
+        border-radius: $offset !important
+      }
+
+      .fg#{$i} {
+        flex-grow: $i
+      }
+
+      .fs#{$i} {
+        flex-shrink: $i
+      }
     }
   }
 }
 
-.fb0 {flex-basis: 0}
-.fg0 { flex-grow: 0 }
-.fs0 { flex-shrink: 0 }
+.fb0 {
+  flex-basis: 0
+}
+
+.fg0 {
+  flex-grow: 0
+}
+
+.fs0 {
+  flex-shrink: 0
+}
+
 @include mk-spacing;
 
 /**
@@ -113,11 +233,18 @@ $inner-border-spread: 1px !default;
   * ALSO - align self for flex items: .as-c - align self center
  */
 @mixin mk-flex-containers {
-  $flex-align-map : ("c" : "center", "s" : "start", "g": "stretch", "e":"end","se":"space-evenly", "sa": "space-around", "sb": "space-between");
+  $flex-align-map : ("c" : "center", "s" : "start", "g": "stretch", "e":"end", "se":"space-evenly", "sa": "space-around", "sb": "space-between");
+
   @each $ikey, $ialign in $flex-align-map {
-    .as-#{$ikey} {align-self: #{$ialign} };
-  //@each $ialign in $flex-alignments {
+    .as-#{$ikey} {
+      align-self: #{$ialign}
+    }
+
+    ;
+
+    //@each $ialign in $flex-alignments {
     @each $ckey, $calign in $flex-align-map {
+
       .fr-#{$ckey}-#{$ikey},
       .flex-#{$calign}-#{$ialign} {
         display: flex;
@@ -137,44 +264,109 @@ $inner-border-spread: 1px !default;
 
 @include mk-flex-containers;
 
-.nowrap {flex-wrap: nowrap !important}
+.nowrap {
+  flex-wrap: nowrap !important
+}
 
 
-$font-size-map: ("xxs": "xx-small", "xs": "x-small", "s": "small", "m": "medium", "l": "large",
-"xl": "x-large", "xxl": "xx-large", "xxxl": "xxx-large", "smaller": "smaller", "larger": "larger");
+$font-size-map: (
+  "xxs": "xx-small",
+  "xs": "x-small",
+  "s": "small",
+  "m": "medium",
+  "l": "large",
+  "xl": "x-large",
+  "xxl": "xx-large",
+  "xxxl": "xxx-large",
+  "smaller": "smaller",
+  "larger": "larger"
+);
+
 @mixin mk-font-sizes {
   @each $fskey, $fsval in $font-size-map {
-    .fs-#{$fskey} { font-size:  #{$fsval}; }
+    .fs-#{$fskey} {
+      font-size: #{$fsval};
+    }
   }
 }
+
 @include mk-font-sizes;
 
 
 
-.tac { text-align: center; }
-.tal { text-align: left; }
-.tar { text-align: right; }
+.tac {
+  text-align: center;
+}
 
-.fullh { height: 100%; }
-.fullw { width: 100%; }
+.tal {
+  text-align: left;
+}
 
-.full { height: 100%; width: 100%; }
+.tar {
+  text-align: right;
+}
 
-body { text-align: left; place-items: start; }
+.fullh {
+  height: 100%;
+}
 
-div[display="flex"] { align-items: flex-start; }
+.fullw {
+  width: 100%;
+}
 
-.hfc { height: fit-content; }
-.wfc { width: fit-content; }
+.full {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  text-align: left;
+  place-items: start;
+}
+
+div[display="flex"] {
+  align-items: flex-start;
+}
+
+.hfc {
+  height: fit-content;
+}
+
+.wfc {
+  width: fit-content;
+}
 
 
-.oswald { font-family: 'Oswald', verdana; }
-.lato { font-family: 'Lato', arial; }
-.roboto { font-family: 'Roboto', verdana; }
-.open-sans { font-family: 'Open Sans', verdana; }
-.montserrat { font-family: 'Montserrat', verdana; }
-.raleway { font-family: 'Raleway', verdana; }
-.droid-sans { font-family: 'Droid Sans', verdana; }
-.s-sans-pro {font-family: 'Source Sans Pro', sans-serif;}
+.oswald {
+  font-family: 'Oswald', verdana;
+}
+
+.lato {
+  font-family: 'Lato', arial;
+}
+
+.roboto {
+  font-family: 'Roboto', verdana;
+}
+
+.open-sans {
+  font-family: 'Open Sans', verdana;
+}
+
+.montserrat {
+  font-family: 'Montserrat', verdana;
+}
+
+.raleway {
+  font-family: 'Raleway', verdana;
+}
+
+.droid-sans {
+  font-family: 'Droid Sans', verdana;
+}
+
+.s-sans-pro {
+  font-family: 'Source Sans Pro', sans-serif;
+}
 
 /* END OF PK-DEFAULT-SCSS */
