@@ -148,13 +148,18 @@ $inner-border-spread: 1px !default;
   }
 }
 
-// @for $i from 0 through 90 {
 /*
+// @for $i from 0 through 90 {
 Reduce spacing increment to factors of 5?
+
  */
+
 @mixin mk-spacing {
-  @for $j from 0 through 20 {
-    $i: $j * 5;
+  @for $j from 0 through 25 {
+    $i: $j;
+    @if $j > 5 {
+      $i:  ( $j - 5 )  * 5;
+    }
     $offset: calc($i/10) * 1em;
     $em: $i * 1em;
 
