@@ -10,8 +10,16 @@
 // Don't need EVERY color - make some defaults, then fg/bg pairs
 
 
-$light-colors: ( "wh": #fff, "bl": #aaf, "rd":#faa, "gr":#aaa) !default;
-$dark-colors: ( "bk": #000, "bl": #008, "rd": #800, "gr": #444) !default;
+$light-colors: (
+  "wh": #fff,
+  "bl": #aaf,
+  "rd":#faa,
+  "gr":#aaa) !default;
+$dark-colors: (
+  "bk": #000,
+  "bl": #008,
+  "rd": #800,
+  "gr": #444) !default;
 
 /* Example - generates 16 classes:
 
@@ -27,16 +35,23 @@ $dark-colors: ( "bk": #000, "bl": #008, "rd": #800, "gr": #444) !default;
 
 */
 @mixin mk-fg-bg-pairs {
-  $i:0;
+  $i: 0;
+
   @each $lkey, $lclr in $light-colors {
     @each $dkey, $dclr in $dark-colors {
-      $i:$i+1;
-      .lt-#{$lkey}-#{$dkey}-pr, .lt-#{$i}-pr {
+      $i: $i+1;
+
+      .lt-#{$lkey}-#{$dkey}-pr,
+      .lt-#{$i}-pr {
         color: $lclr;
         background-color: $dclr;
       }
-       .dk-#{$dkey}-#{$lkey}-pr, .dk-#{$i}-pr
-       {color: $dclr; background-color: $lclr;}
+
+      .dk-#{$dkey}-#{$lkey}-pr,
+      .dk-#{$i}-pr {
+        color: $dclr;
+        background-color: $lclr;
+      }
 
     }
   }
@@ -149,7 +164,7 @@ $inner-border-spread: 1px !default;
 }
 
 /*
-// @for $i from 0 through 90 {
+@for $i from 0 through 90 {
 Reduce spacing increment to factors of 5?
 
  */
@@ -157,9 +172,12 @@ Reduce spacing increment to factors of 5?
 @mixin mk-spacing {
   @for $j from 0 through 25 {
     $i: $j;
-    @if $j > 5 {
-      $i:  ( $j - 5 )  * 5;
+
+    @if $j >5 {
+      $i: (
+        $j - 5) * 5;
     }
+
     $offset: calc($i/10) * 1em;
     $em: $i * 1em;
 
@@ -252,33 +270,34 @@ Reduce spacing increment to factors of 5?
   * ALSO - align self for flex items: .as-c - align self center
  */
 @mixin mk-flex-containers {
-  $flex-align-map : ("c" : "center", "s" : "start", "g": "stretch", "e":"end", "se":"space-evenly", "sa": "space-around", "sb": "space-between");
+  $flex-align-map : ("c" : "center", "s" : "start", "g": "stretch", "e":"end", "se":"space-evenly", "sa": "space-around", "sb": "space-between"
+  );
 
-  @each $ikey, $ialign in $flex-align-map {
-    .as-#{$ikey} {
-      align-self: #{$ialign}
+@each $ikey, $ialign in $flex-align-map {
+  .as-#{$ikey} {
+    align-self: #{$ialign}
+  }
+
+  ;
+
+  //@each $ialign in $flex-alignments {
+  @each $ckey, $calign in $flex-align-map {
+
+    .fr-#{$ckey}-#{$ikey},
+    .flex-#{$calign}-#{$ialign} {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: #{$ialign};
+      justify-content: #{$calign};
     }
 
-    ;
-
-    //@each $ialign in $flex-alignments {
-    @each $ckey, $calign in $flex-align-map {
-
-      .fr-#{$ckey}-#{$ikey},
-      .flex-#{$calign}-#{$ialign} {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: #{$ialign};
-        justify-content: #{$calign};
-      }
-
-      .fc-#{$ckey}-#{$ikey},
-      .flex-#{$calign}-#{$ialign}-col {
-        @extend .flex-#{$calign}-#{$ialign};
-        flex-direction: column;
-      }
+    .fc-#{$ckey}-#{$ikey},
+    .flex-#{$calign}-#{$ialign}-col {
+      @extend .flex-#{$calign}-#{$ialign};
+      flex-direction: column;
     }
   }
+}
 }
 
 @include mk-flex-containers;
