@@ -73,6 +73,7 @@
     "@types/react": "*",
     "@types/react-dom": "*",
     "@vitejs/plugin-react": "*",
+    "pk-ts-node-lib": "github:pkirkaas/pk-ts-node-lib#working",
     "typescript": "*",
     "vite": "*"
   },
