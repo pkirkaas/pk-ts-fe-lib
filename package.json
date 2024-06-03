@@ -34,7 +34,7 @@
   },
   "scripts": {
     "clean": "rm -rf ./dist ./package-lock.json ./node_modules",
-    "cleani": "npmm run clean && npm i",
+    "cleani": "npm run clean && npm i",
     "reset": "npm run clean && npm run build",
     "build:sass": "sass --load-path=./node_modules --embed-sources ./scss/pk-default.scss  ./build/assets/cli.css",
     "monitor": "nodemon --exec \"npm run build-lib\" --ext js,jsx,ts,tsx,sass,css,scss --delay 5 --watch ./src",
@@ -51,7 +51,6 @@
     "@mui/material": "*",
     "@popperjs/core": "*",
     "@preact/signals-react": "*",
-    "@types/node": "^20.8.9",
     "bootstrap": "*",
     "classnames": "*",
     "formik": "*",
@@ -66,16 +65,20 @@
     "reactjs-popup": "*",
     "sass": "*",
     "styled-components": "*",
-    "swr": "^2.2.5",
-    "yup": "*"
+    "swr": "^2.2.5"
   },
   "devDependencies": {
+    "@types/node": "^20.8.9",
     "@types/react": "*",
     "@types/react-dom": "*",
     "@vitejs/plugin-react": "*",
     "pk-ts-node-lib": "github:pkirkaas/pk-ts-node-lib#working",
     "typescript": "*",
     "vite": "*"
+  },
+  "deprecatedDeps":{
+    "yup": "*",
+    "no":"none"
   },
   "alt-lib-gits": [
     {
