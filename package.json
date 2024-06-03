@@ -65,6 +65,7 @@
     "reactjs-popup": "*",
     "sass": "*",
     "styled-components": "*",
+    "yup": "*",
     "swr": "^2.2.5"
   },
   "devDependencies": {
@@ -77,7 +78,6 @@
     "vite": "*"
   },
   "deprecatedDeps":{
-    "yup": "*",
     "no":"none"
   },
   "alt-lib-gits": [
