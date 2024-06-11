@@ -21,7 +21,9 @@ export let tstFncs = {
     let sb = StyleBuilder.builder;
     //let fl = sb.flex({wr:'nw'});
     let fl = sb.flex();
-    console.log("sb:", {fl});
+    let style = fl.style;
+    let camel = fl.camelled;
+    console.log("sb:", {style,camel});
   },
 };
 

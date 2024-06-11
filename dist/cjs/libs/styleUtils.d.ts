@@ -10,7 +10,9 @@
  */
 import { GenObj } from 'pk-ts-common-lib';
 /**
- * Class to build React/Emotion style objects
+ * Base Class to build React/Emotion style objects
+ * Extend to add more presets/options
+ *
  * @constructor - optional array of style objects -
  *   either general objs, or instances of this, which are merged
  *
@@ -20,6 +22,7 @@ import { GenObj } from 'pk-ts-common-lib';
  *
  */
 export declare class StyleBuilder {
+    thisClass: any;
     static displays: {
         block: {
             display: string;
@@ -123,6 +126,7 @@ export declare class StyleBuilder {
      * Convenience method for flex displays
      */
     flex(flexOpts?: GenObj): this;
+    get camelled(): GenObj;
     static ltDrkColorPairs: {
         1: {
             dark: string;
@@ -180,7 +184,7 @@ export declare class StyleBuilder {
     constructor(...sos: any[]);
     get style(): GenObj;
     get className(): string;
-    get clone(): StyleBuilder;
+    get clone(): any;
     merge(...objs: any[]): this;
     add(key: any, value: any): this;
     nest(key: any, value: any): this;

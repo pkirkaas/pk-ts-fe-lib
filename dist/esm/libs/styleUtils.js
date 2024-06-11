@@ -9,12 +9,14 @@
  * Absolutely can't rely on CSS to be invariant - for now, localize dependencies
  */
 /* @jsxImportSource @emotion/react */
-import { isNumeric, isSimpleObject, } from 'pk-ts-common-lib';
+import { isNumeric, isSimpleObject, camelKeys, } from 'pk-ts-common-lib';
 import _ from 'lodash';
 import { cx, css as cssCss, } from '@emotion/css';
 //** Build up CSS style property objects  */
 /**
- * Class to build React/Emotion style objects
+ * Base Class to build React/Emotion style objects
+ * Extend to add more presets/options
+ *
  * @constructor - optional array of style objects -
  *   either general objs, or instances of this, which are merged
  *
@@ -24,6 +26,8 @@ import { cx, css as cssCss, } from '@emotion/css';
  *
  */
 export class StyleBuilder {
+    thisClass; //Untyped hack
+    // Sadly, this doesn't work? thisClass:InstanceType<typeof this.constructor>;
     static displays = {
         //f: { display: "flex" },
         block: { display: "block" },
@@ -43,22 +47,23 @@ export class StyleBuilder {
     };
     static flexDisplays = {
         fd: {
-            r: StyleBuilder.displays.fr,
-            c: StyleBuilder.displays.fc,
+            //r: StyleBuilder.displays.fr,
+            r: this.displays.fr,
+            c: this.displays.fc,
         },
         wr: {
-            w: StyleBuilder.displays.w,
-            nw: StyleBuilder.displays.nw,
+            w: this.displays.w,
+            nw: this.displays.nw,
         },
         ai: {
-            s: StyleBuilder.displays.ais,
-            c: StyleBuilder.displays.aic,
-            g: StyleBuilder.displays.aig,
+            s: this.displays.ais,
+            c: this.displays.aic,
+            g: this.displays.aig,
         },
         jc: {
-            s: StyleBuilder.displays.jcs,
-            c: StyleBuilder.displays.jcc,
-            g: StyleBuilder.displays.jcg,
+            s: this.displays.jcs,
+            c: this.displays.jcc,
+            g: this.displays.jcg,
         },
     };
     /** SO BAD! */
@@ -71,30 +76,13 @@ export class StyleBuilder {
         let dispStyle = {};
         for (let key in rFlexOpts) {
             let val = rFlexOpts[key];
-            _.merge(dispStyle, StyleBuilder.flexDisplays[key][val]);
+            _.merge(dispStyle, this.thisClass.flexDisplays[key][val]);
         }
         return this.merge(dispStyle);
         //let camelled = camelKeys(dispStyle);
-        //console.log(`in SB flex - rFlexOpts:`, {rFlexOpts, dispStyle, camelled,});
-        //return this;
-        /*
-        for (let dispArg of dispArgs) {
-          let toDA = typeof dispArg;
-          if (toDA === "string") {
-            if (dispArg in StyleBuilder.displays) {
-              _.merge(dispStyle, StyleBuilder.displays[dispArg]);
-            } else {
-              console.error(`String dispArg [${dispArg}] not in disp keys`);
-            }
-          } else if (toDA === "object") { // Merge object
-              _.merge(dispStyle, dispArg);
-          } else {
-              console.error(`Unhandled dispArg:`, {dispArg});
-          }
-        }
-        console.log(`About to create display:`,{dispStyle});
-        return this.merge(dispStyle);
-        */
+    }
+    get camelled() {
+        return camelKeys(this.style);
     }
     // Color pairs for fg/bg
     static ltDrkColorPairs = {
@@ -162,10 +150,11 @@ export class StyleBuilder {
         }
         return ret;
     }
-    static get builder() { return new StyleBuilder(); }
+    static get builder() { return new this(); }
     styleObj; // A regular JS obj of the built style
     //style:GenObj;
     constructor(...sos) {
+        this.thisClass = this.constructor;
         this.styleObj = {};
         for (let so of sos) {
             if (so instanceof StyleBuilder) {
@@ -184,7 +173,7 @@ export class StyleBuilder {
         return cssCss(this.style);
     }
     get clone() {
-        return new StyleBuilder(this);
+        return new this.thisClass(this);
     }
     /*
     // Pre-configured styles
@@ -241,7 +230,7 @@ export class StyleBuilder {
             key = -key;
             invert = true;
         }
-        let clrPr = StyleBuilder.ltDrkColorPairs[key];
+        let clrPr = this.thisClass.ltDrkColorPairs[key];
         if (invert) {
             this.c(clrPr.light);
             this.bg(clrPr.dark);
@@ -253,8 +242,8 @@ export class StyleBuilder {
         return this;
     }
     fs(sz) {
-        if (sz in StyleBuilder.fontSizeMap) {
-            sz = StyleBuilder.fontSizeMap[sz];
+        if (sz in this.thisClass.fontSizeMap) {
+            sz = this.thisClass.fontSizeMap[sz];
         }
         this.styleObj.fontSize = sz;
         return this;
@@ -269,14 +258,14 @@ export class StyleBuilder {
     m(arg, which) {
         if (!arg)
             return this;
-        let mg = StyleBuilder.mkMPBWhereProps('m', arg, which);
+        let mg = this.thisClass.mkMPBWhereProps('m', arg, which);
         _.merge(this.styleObj, mg);
         return this;
     }
     p(arg, which) {
         if (!arg)
             return this;
-        let mg = StyleBuilder.mkMPBWhereProps('p', arg, which);
+        let mg = this.thisClass.mkMPBWhereProps('p', arg, which);
         _.merge(this.styleObj, mg);
         return this;
     }
@@ -322,8 +311,8 @@ export class StyleBuilder {
         for (let dispArg of dispArgs) {
             let toDA = typeof dispArg;
             if (toDA === "string") {
-                if (dispArg in StyleBuilder.displays) {
-                    _.merge(dispStyle, StyleBuilder.displays[dispArg]);
+                if (dispArg in this.thisClass.displays) {
+                    _.merge(dispStyle, this.thisClass.displays[dispArg]);
                 }
                 else {
                     console.error(`String dispArg [${dispArg}] not in disp keys`);
