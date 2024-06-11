@@ -45,7 +45,9 @@
     "preview": "vite preview --open"
   },
   "dependencies": {
-    "@emotion/babel-plugin": "^11.11.0",
+    "@emotion/css": "*",
+    "@mui/icons-material": "*",
+    "@mui/system": "*",
     "@emotion/react": "*",
     "@emotion/styled": "*",
     "@mui/material": "*",
@@ -69,6 +71,7 @@
     "swr": "^2.2.5"
   },
   "devDependencies": {
+    "@emotion/babel-plugin": "*",
     "@types/node": "^20.8.9",
     "@types/react": "*",
     "@types/react-dom": "*",

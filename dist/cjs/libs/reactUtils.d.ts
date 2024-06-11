@@ -16,6 +16,7 @@ export declare function mkUrl(rel: any): string;
  * Combine original and additional props - only for object or
  * string properties - if mods[key] is object, merges them,
  * if mods[key] is string, concatenates w. space (like for className)
+ * @deprecated - Not really - just verify this is useful and behaves as desired
  */
 export declare function addProps(props: object, mods?: object): GenObj;
 /**
@@ -23,6 +24,7 @@ export declare function addProps(props: object, mods?: object): GenObj;
  * So, can override values passed in from props, BUT:
  * INTERESTINGLY! Can be used with arguments reversed to use defaults!
  * Like calling: replaceProps(defaults, props);
+ * @deprecated - Not really - just verify this is useful and behaves as desired
  */
 export declare function replaceProps(props: object, mods?: any): GenObj;
 //# sourceMappingURL=reactUtils.d.ts.map

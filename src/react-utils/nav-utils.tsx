@@ -17,9 +17,6 @@ import {GenObj} from 'pk-ts-common-lib';
 /**
  * NavVals: type to build NavBars, links & page navigation
  * BuildRoutes: Creates the routes from NavVals
- * 
- * 
- * 
  */
 export type NavVals = {
 	[key:string]: // The Route key 
@@ -87,7 +84,6 @@ export function isActive(path:string, activeClass="active") : any {
     return activeClass;
   }
   return false;
-
 } 
 
 export function BuildRoutes(navVals:NavVals) {

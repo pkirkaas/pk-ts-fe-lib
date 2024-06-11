@@ -24,10 +24,12 @@ export function mkUrl(rel) {
 /**
  *  For functional components to modify props to pass subcomponent
  */
+//TODO: Are these useful? Do they work as intended?
 /**
  * Combine original and additional props - only for object or
  * string properties - if mods[key] is object, merges them,
  * if mods[key] is string, concatenates w. space (like for className)
+ * @deprecated - Not really - just verify this is useful and behaves as desired
  */
 export function addProps(props, mods) {
     let rProps = { ...props };
@@ -65,24 +67,12 @@ export function addProps(props, mods) {
  * So, can override values passed in from props, BUT:
  * INTERESTINGLY! Can be used with arguments reversed to use defaults!
  * Like calling: replaceProps(defaults, props);
+ * @deprecated - Not really - just verify this is useful and behaves as desired
  */
 export function replaceProps(props, mods) {
     if (!isObject(mods) || isEmpty(mods)) {
         return { ...props };
     }
     return { ...props, ...mods };
-    /*
-    let rProps = { ...props };
-    if (!isEmpty(mods)) {
-        if (!isObject(mods)) {
-            throw new Error(`Invalid arg for mods in addProps - must be object`);
-        }
-        for (let key in mods) {
-            let mod = mods[key];
-            rProps[key] = mod;
-        }
-    }
-    return rProps;
-    */
 }
 //# sourceMappingURL=reactUtils.js.map
