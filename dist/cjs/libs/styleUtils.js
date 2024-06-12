@@ -151,7 +151,6 @@ export class StyleBuilder {
     }
     static get builder() { return new this(); }
     styleObj; // A regular JS obj of the built style
-    //style:GenObj;
     constructor(...sos) {
         this.thisClass = this.constructor;
         this.styleObj = {};
@@ -174,18 +173,6 @@ export class StyleBuilder {
     get clone() {
         return new this.thisClass(this);
     }
-    /*
-    // Pre-configured styles
-    get frss() { // Flex Row start/start
-      return this.d("ais","jcs");
-    }
-    get frsg() { // Flex Row start/grow(stretch)
-      return this.d("ais","jcg");
-    }
-    get frsc() { // Flex Row start/center
-      return this.d("ais","jcc");
-    }
-      */
     merge(...objs) {
         for (let obj of objs) {
             if (obj instanceof StyleBuilder) {
@@ -238,6 +225,13 @@ export class StyleBuilder {
             this.c(clrPr.dark);
             this.bg(clrPr.light);
         }
+        return this;
+    }
+    /**
+     * Inner Border
+     */
+    ib(color = "#888", spread = 1) {
+        this.styleObj.boxShadow = `inset 0px 0px 0px ${spread} ${color}`;
         return this;
     }
     fs(sz) {

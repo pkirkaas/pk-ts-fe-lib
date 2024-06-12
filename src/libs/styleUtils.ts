@@ -178,11 +178,9 @@ static mkMPBWhereProps(propBase, val, key) {
   return ret;
 }
 
-
-
   static get builder() { return new this(); }
   styleObj: GenObj; // A regular JS obj of the built style
-  //style:GenObj;
+
   constructor(...sos) {
     this.thisClass = this.constructor;
     this.styleObj = {};
@@ -207,19 +205,6 @@ static mkMPBWhereProps(propBase, val, key) {
   get clone() { //New SB instance as clone
     return new this.thisClass(this);
   }
-
-  /*
-  // Pre-configured styles
-  get frss() { // Flex Row start/start
-    return this.d("ais","jcs");
-  }
-  get frsg() { // Flex Row start/grow(stretch)
-    return this.d("ais","jcg");
-  }
-  get frsc() { // Flex Row start/center
-    return this.d("ais","jcc");
-  }
-    */
 
 
   merge(...objs) { //A fallback to merge other styles in
@@ -279,6 +264,14 @@ static mkMPBWhereProps(propBase, val, key) {
       this.c(clrPr.dark);
       this.bg(clrPr.light);
     }
+    return this;
+  }
+
+  /**
+   * Inner Border
+   */
+  ib(color="#888", spread=1) {
+    this.styleObj.boxShadow = `inset 0px 0px 0px ${spread} ${color}`;
     return this;
   }
 

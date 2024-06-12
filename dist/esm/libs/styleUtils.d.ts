@@ -196,6 +196,10 @@ export declare class StyleBuilder {
      *
      */
     fgbg(key: any, invert?: boolean): this;
+    /**
+     * Inner Border
+     */
+    ib(color?: string, spread?: number): this;
     fs(sz: any): this;
     m(arg: any, which?: string): this;
     p(arg: any, which?: string): this;
