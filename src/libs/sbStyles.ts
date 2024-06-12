@@ -24,29 +24,36 @@ import {
 
 import { serializeStyles, } from '@emotion/serialize';
 
-import {StyleBuilder, cxsb, } from './styleUtils.js';
+import { StyleBuilder, cxsb, } from './styleUtils.js';
 
-export let sbStyles:GenObj = {};
+export let sbStyles: GenObj = {};
 
 /**
  * So much better way to do this, but for now...
  */
-export function buildFlexStyles(sObj:GenObj = sbStyles) { // Build combinations of flex display styles
-  let displays = StyleBuilder.displays;
-  let flexDisps:GenObj = {}; 
-  for (let key in displays) {
-    let val = displays[key];
-    if (isSimpleObject(val) && (val.display === 'flex')) {
-      flexDisps[key] = val;
-    }
-  } // We have an obj w. all flex displays
-  let fKeys = Object.keys(flexDisps);
-  
+export function buildFlexStyles(sObj: GenObj = sbStyles) { // Build combinations of flex display styles
+  //NO CIGAR!
+  let flexStyles: GenObj = {};
+  let flexDisplays = StyleBuilder.flexDisplays;
+  //let fsNameArr = [];
+  for (let fdKey in flexDisplays) {
+    let fsNameArr = [];
+    let tmpStyle: GenObj = {};
+    let fdVal = flexDisplays[fdKey];
+    for (let fvKey in fdVal) {
+      //      let fsNameArr = [];
+      //      let tmpStyle:GenObj = {};
+      let fvVal = fdVal[fvKey];
+      fsNameArr.push(`${fdKey}${fvKey}`);
+      _.merge(tmpStyle, fvVal);
 
-  let alignItems = { s:'ais', c:'aic', g:'aig'};
-  let justCont =  { s:'jcs', c:'jcc', g:'jcg'};
-  let dir = {r:'r', c:'c'};
-  let wraps = {w:'w', nw:'nw',}
+      //console.log(`buildFlexStyles:`,{fdKey, fdVal, fvKey, fvVal});
+      //console.log(`buildFlexStyles:`,{fdKey, fdVal, fvKey, });
+      //      console.log(`bfs:`,`${fdKey}-${fvKey}`);
+    }
+    let tmpKey = fsNameArr.join('-');
+    console.log(tmpKey, tmpStyle);
+  }
 
 
 
@@ -54,7 +61,7 @@ export function buildFlexStyles(sObj:GenObj = sbStyles) { // Build combinations 
 
 
 
-sbStyles.frss = StyleBuilder.builder.d('ais','jcs').clone; 
+sbStyles.frss = StyleBuilder.builder.d('ais', 'jcs').clone;
 sbStyles.fcss = sbStyles.frss.d('c').clone;
 
 

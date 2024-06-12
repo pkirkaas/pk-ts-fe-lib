@@ -5,6 +5,7 @@
 //import {styleUtils} from '../index.js';
 //import {styleUtils} from '../libs/styleUtils.js';
 import { StyleBuilder, }  from '../libs/styleUtils.js';
+import {buildFlexStyles,}  from '../libs/sbStyles.js';
 
 //let {StyleBuilder,} = styleUtils;
 
@@ -24,6 +25,9 @@ export let tstFncs = {
     let style = fl.style;
     let camel = fl.camelled;
     console.log("sb:", {style,camel});
+  },
+  tstBS() {
+    buildFlexStyles();
   },
 };
 

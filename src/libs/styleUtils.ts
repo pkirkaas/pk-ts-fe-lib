@@ -67,13 +67,12 @@ export class StyleBuilder {
 
   static flexDisplays = {
     fd: { // Flex direction
-      //r: StyleBuilder.displays.fr,
       r: this.displays.fr,
       c: this.displays.fc,
     },
     wr: { // Wrap
       w:this.displays.w, 
-      nw:this.displays.nw, 
+      n:this.displays.nw, 
     },
     ai: { //align-items
       s:this.displays.ais, 

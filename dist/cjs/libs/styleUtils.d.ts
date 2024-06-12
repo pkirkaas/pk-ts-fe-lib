@@ -87,7 +87,7 @@ export declare class StyleBuilder {
                 display: string;
                 "flex-wrap": string;
             };
-            nw: {
+            n: {
                 display: string;
                 "flex-wrap": string;
             };

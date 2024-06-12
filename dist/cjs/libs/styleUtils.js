@@ -47,13 +47,12 @@ export class StyleBuilder {
     };
     static flexDisplays = {
         fd: {
-            //r: StyleBuilder.displays.fr,
             r: this.displays.fr,
             c: this.displays.fc,
         },
         wr: {
             w: this.displays.w,
-            nw: this.displays.nw,
+            n: this.displays.nw,
         },
         ai: {
             s: this.displays.ais,
