@@ -12,5 +12,6 @@ export declare let sbStyles: GenObj;
 /**
  * So much better way to do this, but for now...
  */
+export declare function buildFlexStylesOld(sObj?: GenObj): void;
 export declare function buildFlexStyles(sObj?: GenObj): void;
 //# sourceMappingURL=sbStyles.d.ts.map

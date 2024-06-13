@@ -31,13 +31,12 @@ export let sbStyles: GenObj = {};
 /**
  * So much better way to do this, but for now...
  */
-export function buildFlexStyles(sObj: GenObj = sbStyles) { // Build combinations of flex display styles
+export function buildFlexStylesOld(sObj: GenObj = sbStyles) { // Build combinations of flex display styles
   //NO CIGAR!
   let flexStyles: GenObj = {};
   let flexDisplays = StyleBuilder.flexDisplays;
-  //let fsNameArr = [];
+  let fsNameArr = [];
   for (let fdKey in flexDisplays) {
-    let fsNameArr = [];
     let tmpStyle: GenObj = {};
     let fdVal = flexDisplays[fdKey];
     for (let fvKey in fdVal) {
@@ -45,7 +44,10 @@ export function buildFlexStyles(sObj: GenObj = sbStyles) { // Build combinations
       //      let tmpStyle:GenObj = {};
       let fvVal = fdVal[fvKey];
       fsNameArr.push(`${fdKey}${fvKey}`);
-      _.merge(tmpStyle, fvVal);
+      //_.merge(tmpStyle, fvVal);
+      console.log(`Inner Loop:`, {fdKey, fvKey, fvVal, fsNameArr,
+     //   tmpStyle,
+      });
 
       //console.log(`buildFlexStyles:`,{fdKey, fdVal, fvKey, fvVal});
       //console.log(`buildFlexStyles:`,{fdKey, fdVal, fvKey, });
@@ -54,9 +56,35 @@ export function buildFlexStyles(sObj: GenObj = sbStyles) { // Build combinations
     let tmpKey = fsNameArr.join('-');
     console.log(tmpKey, tmpStyle);
   }
+}
 
+export function buildFlexStyles(sObj: GenObj = sbStyles) { // Build combinations of flex display styles
+  //NO CIGAR!
+  let flexStyles: GenObj = {};
+  let flexDisplays = StyleBuilder.flexDisplays;
+  let fsNameArr = [];
+ // let recurse = function(keyArr,
+  for (let fdKey in flexDisplays) {
+    let tmpStyle: GenObj = {};
+    let fdVal = flexDisplays[fdKey];
+    for (let fvKey in fdVal) {
+      //      let fsNameArr = [];
+      //      let tmpStyle:GenObj = {};
+      let fvVal = fdVal[fvKey];
+      let keyStr = `${fdKey}${fvKey}`;
+      fsNameArr.push(`${fdKey}${fvKey}`);
+      //_.merge(tmpStyle, fvVal);
+      console.log(`Inner Loop:`, {fdKey, fvKey, fvVal, fsNameArr,
+     //   tmpStyle,
+      });
 
-
+      //console.log(`buildFlexStyles:`,{fdKey, fdVal, fvKey, fvVal});
+      //console.log(`buildFlexStyles:`,{fdKey, fdVal, fvKey, });
+      //      console.log(`bfs:`,`${fdKey}-${fvKey}`);
+    }
+    let tmpKey = fsNameArr.join('-');
+    console.log(tmpKey, tmpStyle);
+  }
 }
 
 
