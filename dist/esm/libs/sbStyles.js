@@ -1,100 +1,54 @@
 /**
  * Uses my StyleBuilder to create some preconfigured, composable style instances
  * Built on @emotion/css utils
- *
+ * TODO: Is this useful?
  * Not react-specific, so no components & no .tsx
  *
  * 24-Jun-11 18:15
  *
  */
-import { dotPathVal, toCamel, camelKeys, } from 'pk-ts-common-lib';
+import { dotPathVal, toCamel, camelKeys, cartesianProduct, } from 'pk-ts-common-lib';
 import _ from 'lodash';
 import { StyleBuilder, } from './styleUtils.js';
 export let sbStyles = {};
 /**
  * So much better way to do this, but for now...
+ * Builds flex styles for col, row, wrap, align-itmes, justify-content, w. 36 keys:
+fdrWrwAisJcs fdrWrwAisJcc fdrWrwAisJcg fdrWrwAicJcs fdrWrwAicJcc fdrWrwAicJcg fdrWrwAigJcs
+fdrWrwAigJcc fdrWrwAigJcg fdrWrnAisJcs fdrWrnAisJcc fdrWrnAisJcg fdrWrnAicJcs fdrWrnAicJcc
+fdrWrnAicJcg fdrWrnAigJcs fdrWrnAigJcc fdrWrnAigJcg fdcWrwAisJcs fdcWrwAisJcc fdcWrwAisJcg
+fdcWrwAicJcs fdcWrwAicJcc fdcWrwAicJcg fdcWrwAigJcs fdcWrwAigJcc fdcWrwAigJcg fdcWrnAisJcs
+fdcWrnAisJcc fdcWrnAisJcg fdcWrnAicJcs fdcWrnAicJcc fdcWrnAicJcg fdcWrnAigJcs fdcWrnAigJcc fdcWrnAigJcg
  */
-export function buildFlexStylesOld(sObj = sbStyles) {
-    //NO CIGAR!
+export function mkFlexStyles() {
     let flexStyles = {};
     let flexDisplays = StyleBuilder.flexDisplays;
     let fsNameArr = [];
-    for (let fdKey in flexDisplays) {
-        let tmpStyle = {};
-        let fdVal = flexDisplays[fdKey];
-        for (let fvKey in fdVal) {
-            //      let fsNameArr = [];
-            //      let tmpStyle:GenObj = {};
-            let fvVal = fdVal[fvKey];
-            fsNameArr.push(`${fdKey}${fvKey}`);
-            //_.merge(tmpStyle, fvVal);
-            console.log(`Inner Loop:`, {
-                fdKey, fvKey, fvVal, fsNameArr,
-                //   tmpStyle,
-            });
-            //console.log(`buildFlexStyles:`,{fdKey, fdVal, fvKey, fvVal});
-            //console.log(`buildFlexStyles:`,{fdKey, fdVal, fvKey, });
-            //      console.log(`bfs:`,`${fdKey}-${fvKey}`);
-        }
-        let tmpKey = fsNameArr.join('-');
-        console.log(tmpKey, tmpStyle);
-    }
-}
-//function cartesianProduct(arrays) {
-function cartesianProduct(...arrays) {
-    // Initialize with an empty array within an array
-    return arrays.reduce((acc, array) => {
-        // If array is empty, just return the accumulated results so far
-        if (array.length === 0)
-            return acc;
-        // Accumulate combinations of current result and new array
-        return acc.flatMap(accElem => array.map(elem => [...accElem, elem]));
-    }, [[]]);
-}
-export function buildFlexStyles(sObj = sbStyles) {
-    //NO CIGAR!
-    let flexStyles = {};
-    let flexDisplays = StyleBuilder.flexDisplays;
-    let fsNameArr = [];
-    // let recurse = function(keyArr,
     for (let fdKey in flexDisplays) {
         let tmpArr = [];
-        //let tmpStyle: GenObj = {};
         let fdVal = flexDisplays[fdKey];
         for (let fvKey in fdVal) {
-            //  let tmpArr = [];
-            //  let tmpArr2 = [];
-            //      let fsNameArr = [];
-            //      let tmpStyle:GenObj = {};
-            let fvVal = fdVal[fvKey];
+            //let fvVal = fdVal[fvKey];
             let keyStr = `${fdKey}.${fvKey}`;
             tmpArr.push(keyStr);
         }
         fsNameArr = cartesianProduct(fsNameArr, tmpArr);
     }
-    let flatArr = [];
-    for (let fsNA of fsNameArr) {
-        flatArr.push(fsNA.flat(Infinity));
-    }
-    let fstyleObj = {};
+    let flatArr = fsNameArr.map((el) => el.flat(Infinity));
     for (let row of flatArr) {
-        //let fsSKey = toCamel(row.join('-').replaceAll('.'));
         let tmpStyle = {};
-        let fsSKey = toCamel(row.join('-').replaceAll('\.', ''));
-        let retArr = [];
         for (let el of row) {
             let dispS = dotPathVal(flexDisplays, el);
             tmpStyle = _.merge(tmpStyle, dispS);
-            retArr.push(dispS);
         }
-        //fstyleObj[fsSKey] = "TmpVal"; 
-        //fstyleObj[fsSKey] = retArr;
-        fstyleObj[fsSKey] = tmpStyle;
+        let fsSKey = toCamel(row.join('-').replaceAll('\.', ''));
+        //flexStyles[fsSKey] = StyleBuilder.build(tmpStyle).style;
+        flexStyles[fsSKey] = StyleBuilder.build(tmpStyle);
     }
-    fstyleObj = camelKeys(fstyleObj);
-    //console.log(`bsf`, {fsNameArr});
-    console.log(`bsf`, { fstyleObj });
+    flexStyles = camelKeys(flexStyles);
+    //console.log(`bsf`, { flexStyles});
+    return flexStyles;
 }
-sbStyles.frss = StyleBuilder.builder.d('ais', 'jcs').clone;
-sbStyles.fcss = sbStyles.frss.d('c').clone;
+export function mkFs() {
+}
 //# sourceMappingURL=sbStyles.js.map

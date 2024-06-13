@@ -9,9 +9,18 @@
  * Absolutely can't rely on CSS to be invariant - for now, localize dependencies
  */
 /* @jsxImportSource @emotion/react */
-import { isNumeric, isSimpleObject, camelKeys, } from 'pk-ts-common-lib';
+import { PkError, isNumeric, isSimpleObject, camelKeys, isPrimitive, isObject, } from 'pk-ts-common-lib';
 import _ from 'lodash';
 import { cx, css as cssCss, } from '@emotion/css';
+/** Utility - if val a key of obj, return the value
+ * else return val itself
+*/
+export function valFromObj(val, obj) {
+    if (isPrimitive(val) && (val in obj)) {
+        return obj[val];
+    }
+    return val;
+}
 //** Build up CSS style property objects  */
 /**
  * Base Class to build React/Emotion style objects
@@ -80,14 +89,38 @@ export class StyleBuilder {
         return this.merge(dispStyle);
         //let camelled = camelKeys(dispStyle);
     }
+    /**
+     * flex align-items -
+     * @param align:string - one of s,c,g or full css align value
+     */
+    flexa(val = 's') {
+        val = valFromObj(val, this.thisClass.flexDisplays.ai);
+        return this.merge({ display: 'flex', alignItems: val });
+    }
+    // flex justify content
+    flexj(val = 's') {
+        val = valFromObj(val, this.thisClass.flexDisplays.jc);
+        return this.merge({ display: 'flex', justifyContent: val });
+    }
+    //flex direction
+    flexd(val = 'r') {
+        val = valFromObj(val, this.thisClass.flexDisplays.fd);
+        return this.merge({ display: 'flex', flexDirection: val });
+    }
+    flexw(val = 'w') {
+        val = valFromObj(val, this.thisClass.flexDisplays.wr);
+        return this.merge({ display: 'flex', flexWrap: val });
+    }
     get camelled() {
         return camelKeys(this.style);
     }
-    // Color pairs for fg/bg
-    static ltDrkColorPairs = {
-        1: { dark: "#000", light: "#fff" },
-        2: { dark: "#004", light: "#eff" },
-        3: { dark: "#400", light: "#ffe" },
+    // Color pairs for fg/bg - fg dark, bg light, but can invert
+    static fgBgPairs = {
+        1: { fg: "#000", bg: "#fff" },
+        2: { fg: "#004", bg: "#eff" },
+        3: { fg: "#400", bg: "#ffe" },
+        blwh: { fg: "#004", bg: "#fff" },
+        rdwh: { fg: "#400", bg: "#fff" },
     };
     static fontSizeMap = {
         xxs: "xx-small",
@@ -124,7 +157,7 @@ export class StyleBuilder {
      * Makes a style object for margin/padding/border
      * @propBase - m,b,p
      * @val - the value
-     * @key opt - one of the keys for whereKeys
+     * @key opt - one of the keys for whereKeys 't','b','x','y', etc
      * @return - basic object w. css style props/vals
      */
     static mkMPBWhereProps(propBase, val, key) {
@@ -149,7 +182,11 @@ export class StyleBuilder {
         }
         return ret;
     }
+    /**
+     * static builder & build(args) - to avoid `(new StyleBuilder(...args)).chain1(1)...etc`
+     */
     static get builder() { return new this(); }
+    static build(...args) { return new this(...args); }
     styleObj; // A regular JS obj of the built style
     constructor(...sos) {
         this.thisClass = this.constructor;
@@ -207,23 +244,41 @@ export class StyleBuilder {
     // Start style builder methods
     /**
      * Make forground/background color pairs from the list
-     * @param key - key of ltDrkColorPairs. If numeric & negative, invert true
+     * @param pair - primitive - key to ltDrkColorPairs obj,
+     *       (If numeric & negative, invert true)
+     *      OR array (of CSS Colors)
+     *     OR JSObject {fg,bg | lt,dk | light, dark}
+     *
      * @param invert boolean - invert the light/dark?
      *
      */
-    fgbg(key, invert = false) {
-        if (isNumeric(key) && (key < 0)) {
-            key = -key;
-            invert = true;
+    fgbg(pair, invert = false) {
+        let objPair = {};
+        if (isPrimitive(pair)) {
+            if (isNumeric(pair) && (pair < 0)) {
+                pair = -pair;
+                invert = true;
+            }
+            objPair = this.thisClass.fgBgPairs[pair];
         }
-        let clrPr = this.thisClass.ltDrkColorPairs[key];
+        else if (Array.isArray(pair)) {
+            objPair.fg = pair[0];
+            objPair.bg = pair[1];
+        }
+        else if (isObject(pair)) {
+            objPair.fg = pair.fg;
+            objPair.bg = pair.bg;
+        }
+        if (!isObject(objPair) || !objPair.fg || !objPair.bg) {
+            throw new PkError(`Invalid arg to SB.fgbg:`, { pair, invert });
+        }
         if (invert) {
-            this.c(clrPr.light);
-            this.bg(clrPr.dark);
+            this.c(objPair.fg);
+            this.bg(objPair.bg);
         }
         else {
-            this.c(clrPr.dark);
-            this.bg(clrPr.light);
+            this.c(objPair.bg);
+            this.bg(objPair.fg);
         }
         return this;
     }
@@ -241,6 +296,13 @@ export class StyleBuilder {
         this.styleObj.fontSize = sz;
         return this;
     }
+    // Dimensions - w, maxw, minw, h, maxh, minh
+    w(val) { return this.merge({ width: val }); }
+    maxw(val) { return this.merge({ maxWidth: val }); }
+    minw(val) { return this.merge({ minWidth: val }); }
+    h(val) { return this.merge({ height: val }); }
+    maxh(val) { return this.merge({ maxHeight: val }); }
+    minh(val) { return this.merge({ minHeight: val }); }
     /*
   
    * make a margin prop
@@ -277,10 +339,8 @@ export class StyleBuilder {
         return this;
     }
     fw(weight) {
-        if (isNumeric(weight)) {
-            if (weight < 10) {
-                weight = weight * 100;
-            }
+        if (isNumeric(weight) && (weight < 10)) {
+            weight = weight * 100;
         }
         _.merge(this.styleObj, { fontWeight: weight });
         return this;
@@ -318,7 +378,7 @@ export class StyleBuilder {
                 console.error(`Unhandled dispArg:`, { dispArg });
             }
         }
-        console.log(`About to create display:`, { dispStyle });
+        //console.log(`About to create display:`, { dispStyle });
         return this.merge(dispStyle);
     }
 }

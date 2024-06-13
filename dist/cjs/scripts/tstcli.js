@@ -4,7 +4,7 @@
 //import {styleUtils} from '../index.js';
 //import {styleUtils} from '../libs/styleUtils.js';
 import { StyleBuilder, } from '../libs/styleUtils.js';
-import { buildFlexStyles, } from '../libs/sbStyles.js';
+//import {buildFlexStyles,}  from '../libs/sbStyles.js';
 //let {StyleBuilder,} = styleUtils;
 import { runCli } from 'pk-ts-node-lib';
 export let tstFncs = {
@@ -22,9 +22,11 @@ export let tstFncs = {
         let camel = fl.camelled;
         console.log("sb:", { style, camel });
     },
+    /*
     tstBS() {
-        buildFlexStyles();
+      buildFlexStyles();
     },
+    */
 };
 runCli(tstFncs);
 //# sourceMappingURL=tstcli.js.map

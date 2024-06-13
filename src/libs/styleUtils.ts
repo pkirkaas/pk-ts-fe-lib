@@ -11,8 +11,8 @@
  */
 /* @jsxImportSource @emotion/react */
 import {
-  getProps, getObjDets, subObj, typeOf, allProps, allPropsP, objInfo,
-  GenObj, isNumeric, isSimpleObject, camelKeys,
+  getProps, getObjDets, subObj, typeOf, allProps, allPropsP, objInfo, PkError,
+  GenObj, isNumeric, isSimpleObject, camelKeys, isPrimitive, isObject,
 
 } from 'pk-ts-common-lib';
 
@@ -25,6 +25,15 @@ import {
 
 import { serializeStyles, } from '@emotion/serialize';
 
+  /** Utility - if val a key of obj, return the value
+   * else return val itself
+  */
+  export function valFromObj(val:any, obj:GenObj):any {
+    if (isPrimitive(val) && (val in obj)) {
+      return obj[val];
+    }
+    return val;
+  }
 
 //** Build up CSS style property objects  */
 
@@ -41,7 +50,7 @@ import { serializeStyles, } from '@emotion/serialize';
  * 
  */
 export class StyleBuilder {
-  thisClass:any; //Untyped hack
+  thisClass: any; //Untyped hack
   // Sadly, this doesn't work? thisClass:InstanceType<typeof this.constructor>;
 
   static displays = {
@@ -71,114 +80,150 @@ export class StyleBuilder {
       c: this.displays.fc,
     },
     wr: { // Wrap
-      w:this.displays.w, 
-      n:this.displays.nw, 
+      w: this.displays.w,
+      n: this.displays.nw,
     },
     ai: { //align-items
-      s:this.displays.ais, 
-      c:this.displays.aic, 
-      g:this.displays.aig, 
+      s: this.displays.ais,
+      c: this.displays.aic,
+      g: this.displays.aig,
     },
     jc: { //justify-content
-      s:this.displays.jcs, 
-      c:this.displays.jcc, 
-      g:this.displays.jcg, 
+      s: this.displays.jcs,
+      c: this.displays.jcc,
+      g: this.displays.jcg,
     },
   };
+
 
   /** SO BAD! */
   /**
    * Convenience method for flex displays
    */
 
-  flex(flexOpts:GenObj = {}) {
-    let defaults:GenObj = {fd:'r', wr:'w', ai:'s', jc:'s'};
-    let rFlexOpts:GenObj = {...defaults, ...flexOpts};
+  flex(flexOpts: GenObj = {}) {
+    let defaults: GenObj = { fd: 'r', wr: 'w', ai: 's', jc: 's' };
+    let rFlexOpts: GenObj = { ...defaults, ...flexOpts };
     let dispStyle: GenObj = {};
     for (let key in rFlexOpts) {
       let val = rFlexOpts[key];
-      _.merge(dispStyle,this.thisClass.flexDisplays[key][val]);
+      _.merge(dispStyle, this.thisClass.flexDisplays[key][val]);
     }
     return this.merge(dispStyle);
     //let camelled = camelKeys(dispStyle);
+  }
+
+  /**
+   * flex align-items - 
+   * @param align:string - one of s,c,g or full css align value
+   */
+  flexa(val='s') {
+    val = valFromObj(val,this.thisClass.flexDisplays.ai);
+    return this.merge({display:'flex', alignItems:val});
+  }
+
+  // flex justify content
+  flexj(val='s') {
+    val = valFromObj(val,this.thisClass.flexDisplays.jc);
+    return this.merge({display:'flex', justifyContent:val});
+  }
+
+  //flex direction
+  flexd(val='r') {
+    val = valFromObj(val,this.thisClass.flexDisplays.fd);
+    return this.merge({display:'flex', flexDirection:val});
+  }
+
+  flexw(val = 'w') {
+    val = valFromObj(val,this.thisClass.flexDisplays.wr);
+    return this.merge({display:'flex', flexWrap:val});
   }
 
   get camelled() {
     return camelKeys(this.style);
   }
 
-// Color pairs for fg/bg
-static  ltDrkColorPairs = {
-  1: { dark: "#000", light: "#fff" },
-  2: { dark: "#004", light: "#eff" },
-  3: { dark: "#400", light: "#ffe" },
-};
+  // Color pairs for fg/bg - fg dark, bg light, but can invert
+  static fgBgPairs = {
+    1: { fg: "#000", bg: "#fff" },
+    2: { fg: "#004", bg: "#eff" },
+    3: { fg: "#400", bg: "#ffe" },
+    blwh: { fg: "#004", bg: "#fff" },
+    rdwh: { fg: "#400", bg: "#fff" },
 
-static fontSizeMap = {
-  xxs: "xx-small",
-  xs: "x-small",
-  s: "small",
-  sm: "small",
-  m: "medium",
-  md: "medium",
-  l: "large",
-  lg: "large",
-  xl: "x-large",
-  xxl: "xx-large",
-  xxxl: "xxx-large",
-  smaller: "smaller",
-  larger: "larger"
-};
+  };
 
-// For margin/padding/border locations
-static whereKeys = {
-  t: "Top",
-  b: "Bottom",
-  l: "Left",
-  r: "Right",
-  v: ["Top", "Bottom"],
-  y: ["Top", "Bottom"],
-  h: ["Left", "Right"],
-  x: ["Left", "Right"],
-};
+  static fontSizeMap = {
+    xxs: "xx-small",
+    xs: "x-small",
+    s: "small",
+    sm: "small",
+    m: "medium",
+    md: "medium",
+    l: "large",
+    lg: "large",
+    xl: "x-large",
+    xxl: "xx-large",
+    xxxl: "xxx-large",
+    smaller: "smaller",
+    larger: "larger"
+  };
 
-static bpmKeys = {
-  m: 'margin',
-  p: 'padding',
-  b: 'border',
-};
+  // For margin/padding/border locations
+  static whereKeys = {
+    t: "Top",
+    b: "Bottom",
+    l: "Left",
+    r: "Right",
+    v: ["Top", "Bottom"],
+    y: ["Top", "Bottom"],
+    h: ["Left", "Right"],
+    x: ["Left", "Right"],
+  };
 
-/**
- * Makes a style object for margin/padding/border
- * @propBase - m,b,p
- * @val - the value
- * @key opt - one of the keys for whereKeys
- * @return - basic object w. css style props/vals
- */
-static mkMPBWhereProps(propBase, val, key) {
-  let propType = this.bpmKeys[propBase];
-  if (!propType) {
-    throw new Error(`invalid prop type [${propBase}]`);
-  }
-  let ret: GenObj = {};
-  if (!key) {
-    ret[propType] = val;
+  static bpmKeys = {
+    m: 'margin',
+    p: 'padding',
+    b: 'border',
+  };
+
+  /**
+   * Makes a style object for margin/padding/border
+   * @propBase - m,b,p
+   * @val - the value
+   * @key opt - one of the keys for whereKeys 't','b','x','y', etc
+   * @return - basic object w. css style props/vals
+   */
+  static mkMPBWhereProps(propBase, val, key) {
+    let propType = this.bpmKeys[propBase];
+    if (!propType) {
+      throw new Error(`invalid prop type [${propBase}]`);
+    }
+    let ret: GenObj = {};
+    if (!key) {
+      ret[propType] = val;
+      return ret;
+    }
+    let sTypes = this.whereKeys[key];
+    if (!sTypes) {
+      throw new Error(`invalid sType type [${key}]`);
+    }
+    if (!Array.isArray(sTypes)) {
+      sTypes = [sTypes];
+    }
+    for (let sType of sTypes) {
+      ret[`${propType}${sType}`] = val;
+    }
     return ret;
   }
-  let sTypes = this.whereKeys[key];
-  if (!sTypes) {
-    throw new Error(`invalid sType type [${key}]`);
-  }
-  if (!Array.isArray(sTypes)) {
-    sTypes = [sTypes];
-  }
-  for (let sType of sTypes) {
-    ret[`${propType}${sType}`] = val;
-  }
-  return ret;
-}
 
+  /**
+   * static builder & build(args) - to avoid `(new StyleBuilder(...args)).chain1(1)...etc`
+   */
   static get builder() { return new this(); }
+
+  static build(...args) { return new this(...args); }
+
   styleObj: GenObj; // A regular JS obj of the built style
 
   constructor(...sos) {
@@ -247,22 +292,38 @@ static mkMPBWhereProps(propBase, val, key) {
 
   /**
    * Make forground/background color pairs from the list
-   * @param key - key of ltDrkColorPairs. If numeric & negative, invert true
+   * @param pair - primitive - key to ltDrkColorPairs obj,
+   *       (If numeric & negative, invert true)
+   *      OR array (of CSS Colors)
+   *     OR JSObject {fg,bg | lt,dk | light, dark}
+   *     
    * @param invert boolean - invert the light/dark?
    * 
    */
-  fgbg(key, invert = false) {
-    if (isNumeric(key) && (key < 0)) {
-      key = -key;
-      invert = true;
+  fgbg(pair: any, invert = false) {
+    let objPair:GenObj = {};
+    if (isPrimitive(pair)) {
+      if (isNumeric(pair) && (pair < 0)) {
+        pair = -pair;
+        invert = true;
+      }
+      objPair = this.thisClass.fgBgPairs[pair];
+    } else if (Array.isArray(pair)) {
+      objPair.fg = pair[0];
+      objPair.bg = pair[1];
+    } else if (isObject(pair)) {
+      objPair.fg = pair.fg;
+      objPair.bg = pair.bg;
+    } 
+    if (!isObject(objPair) || !objPair.fg || !objPair.bg) {
+      throw new PkError(`Invalid arg to SB.fgbg:`,{pair,invert});
     }
-    let clrPr = this.thisClass.ltDrkColorPairs[key];
     if (invert) {
-      this.c(clrPr.light);
-      this.bg(clrPr.dark);
+      this.c(objPair.fg);
+      this.bg(objPair.bg);
     } else {
-      this.c(clrPr.dark);
-      this.bg(clrPr.light);
+      this.c(objPair.bg);
+      this.bg(objPair.fg);
     }
     return this;
   }
@@ -270,7 +331,7 @@ static mkMPBWhereProps(propBase, val, key) {
   /**
    * Inner Border
    */
-  ib(color="#888", spread=1) {
+  ib(color = "#888", spread = 1) {
     this.styleObj.boxShadow = `inset 0px 0px 0px ${spread} ${color}`;
     return this;
   }
@@ -284,6 +345,15 @@ static mkMPBWhereProps(propBase, val, key) {
     this.styleObj.fontSize = sz;
     return this;
   }
+
+  // Dimensions - w, maxw, minw, h, maxh, minh
+  w(val) { return this.merge({width:val}); }
+  maxw(val) { return this.merge({maxWidth:val}); }
+  minw(val) { return this.merge({minWidth:val}); }
+
+  h(val) { return this.merge({height:val}); }
+  maxh(val) { return this.merge({maxHeight:val}); }
+  minh(val) { return this.merge({minHeight:val}); }
 
 
   /*
@@ -321,11 +391,11 @@ static mkMPBWhereProps(propBase, val, key) {
     return this;
   }
 
+
+
   fw(weight) {
-    if (isNumeric(weight)) {
-      if (weight < 10) {
-        weight = weight * 100;
-      }
+    if (isNumeric(weight) && (weight < 10)) {
+      weight = weight * 100;
     }
     _.merge(this.styleObj, { fontWeight: weight });
     return this;
@@ -355,12 +425,12 @@ static mkMPBWhereProps(propBase, val, key) {
           console.error(`String dispArg [${dispArg}] not in disp keys`);
         }
       } else if (toDA === "object") { // Merge object
-          _.merge(dispStyle, dispArg);
+        _.merge(dispStyle, dispArg);
       } else {
-          console.error(`Unhandled dispArg:`, {dispArg});
+        console.error(`Unhandled dispArg:`, { dispArg });
       }
     }
-    console.log(`About to create display:`,{dispStyle});
+    //console.log(`About to create display:`, { dispStyle });
     return this.merge(dispStyle);
   }
 }

@@ -5,4 +5,5 @@
 export * from './nav-utils.js';
 export * from './styling.js';
 export * from './helpers.js';
+export * as muiUtils from './muiUtils.js';
 //# sourceMappingURL=index.d.ts.map

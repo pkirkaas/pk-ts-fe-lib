@@ -9,6 +9,10 @@
  * Absolutely can't rely on CSS to be invariant - for now, localize dependencies
  */
 import { GenObj } from 'pk-ts-common-lib';
+/** Utility - if val a key of obj, return the value
+ * else return val itself
+*/
+export declare function valFromObj(val: any, obj: GenObj): any;
 /**
  * Base Class to build React/Emotion style objects
  * Extend to add more presets/options
@@ -126,19 +130,35 @@ export declare class StyleBuilder {
      * Convenience method for flex displays
      */
     flex(flexOpts?: GenObj): this;
+    /**
+     * flex align-items -
+     * @param align:string - one of s,c,g or full css align value
+     */
+    flexa(val?: string): this;
+    flexj(val?: string): this;
+    flexd(val?: string): this;
+    flexw(val?: string): this;
     get camelled(): GenObj;
-    static ltDrkColorPairs: {
+    static fgBgPairs: {
         1: {
-            dark: string;
-            light: string;
+            fg: string;
+            bg: string;
         };
         2: {
-            dark: string;
-            light: string;
+            fg: string;
+            bg: string;
         };
         3: {
-            dark: string;
-            light: string;
+            fg: string;
+            bg: string;
+        };
+        blwh: {
+            fg: string;
+            bg: string;
+        };
+        rdwh: {
+            fg: string;
+            bg: string;
         };
     };
     static fontSizeMap: {
@@ -175,11 +195,15 @@ export declare class StyleBuilder {
      * Makes a style object for margin/padding/border
      * @propBase - m,b,p
      * @val - the value
-     * @key opt - one of the keys for whereKeys
+     * @key opt - one of the keys for whereKeys 't','b','x','y', etc
      * @return - basic object w. css style props/vals
      */
     static mkMPBWhereProps(propBase: any, val: any, key: any): GenObj;
+    /**
+     * static builder & build(args) - to avoid `(new StyleBuilder(...args)).chain1(1)...etc`
+     */
     static get builder(): StyleBuilder;
+    static build(...args: any[]): StyleBuilder;
     styleObj: GenObj;
     constructor(...sos: any[]);
     get style(): GenObj;
@@ -191,16 +215,26 @@ export declare class StyleBuilder {
     ta(align: any): this;
     /**
      * Make forground/background color pairs from the list
-     * @param key - key of ltDrkColorPairs. If numeric & negative, invert true
+     * @param pair - primitive - key to ltDrkColorPairs obj,
+     *       (If numeric & negative, invert true)
+     *      OR array (of CSS Colors)
+     *     OR JSObject {fg,bg | lt,dk | light, dark}
+     *
      * @param invert boolean - invert the light/dark?
      *
      */
-    fgbg(key: any, invert?: boolean): this;
+    fgbg(pair: any, invert?: boolean): this;
     /**
      * Inner Border
      */
     ib(color?: string, spread?: number): this;
     fs(sz: any): this;
+    w(val: any): this;
+    maxw(val: any): this;
+    minw(val: any): this;
+    h(val: any): this;
+    maxh(val: any): this;
+    minh(val: any): this;
     m(arg: any, which?: string): this;
     p(arg: any, which?: string): this;
     br(color?: string, radius?: any): this;
