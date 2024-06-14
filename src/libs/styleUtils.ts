@@ -58,20 +58,20 @@ export class StyleBuilder {
     block: { display: "block" },
     inline: { display: "inline-block" },
     //c: { display: "flex", "flex-direction": "column" },
-    fc: { display: "flex", "flex-direction": "column" },
+    fc: { display: "flex", "flexDirection": "column" },
     //r: { display: "flex", "flex-direction": "row" },
-    fr: { display: "flex", "flex-direction": "row" },
-    w: { display: "flex", "flex-wrap": "wrap" },
-    nw: { display: "flex", "flex-wrap": "no-wrap" },
+    fr: { display: "flex", "flexDirection": "row" },
+    w: { display: "flex", "flexWrap": "wrap" },
+    nw: { display: "flex", "flexWrap": "no-wrap" },
 
-    ais: { display: "flex", "align-items": "flex-start" },
-    aic: { display: "flex", "align-items": "flex-center" },
-    aig: { display: "flex", "align-items": "flex-stretch" },
+    ais: { display: "flex", "alignItems": "flex-start" },
+    aic: { display: "flex", "alignItems": "flex-center" },
+    aig: { display: "flex", "alignItems": "flex-stretch" },
 
 
-    jcs: { display: "flex", "justify-content": "flex-start" },
-    jcc: { display: "flex", "justify-content": "flex-center" },
-    jcg: { display: "flex", "justify-content": "flex-stretch" },
+    jcs: { display: "flex", "justifyContent": "flex-start" },
+    jcc: { display: "flex", "justifyContent": "flex-center" },
+    jcg: { display: "flex", "justifyContent": "flex-stretch" },
   };
 
   static flexDisplays = {
@@ -241,7 +241,7 @@ export class StyleBuilder {
     }
   }
   get style() { // Returns a dup of the GeneralStyle Object
-    return structuredClone(this.styleObj);
+    return camelKeys(structuredClone(this.styleObj));
   }
 
   get className() { // Returns the generated className
@@ -424,12 +424,12 @@ export class StyleBuilder {
       let toDA = typeof dispArg;
       if (toDA === "string") {
         if (dispArg in this.thisClass.displays) {
-          _.merge(dispStyle, this.thisClass.displays[dispArg]);
+          _.merge(dispStyle, camelKeys(this.thisClass.displays[dispArg]));
         } else {
           console.error(`String dispArg [${dispArg}] not in disp keys`);
         }
       } else if (toDA === "object") { // Merge object
-        _.merge(dispStyle, dispArg);
+        _.merge(dispStyle, camelKeys(dispArg));
       } else {
         console.error(`Unhandled dispArg:`, { dispArg });
       }

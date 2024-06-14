@@ -36,92 +36,92 @@ export declare class StyleBuilder {
         };
         fc: {
             display: string;
-            "flex-direction": string;
+            flexDirection: string;
         };
         fr: {
             display: string;
-            "flex-direction": string;
+            flexDirection: string;
         };
         w: {
             display: string;
-            "flex-wrap": string;
+            flexWrap: string;
         };
         nw: {
             display: string;
-            "flex-wrap": string;
+            flexWrap: string;
         };
         ais: {
             display: string;
-            "align-items": string;
+            alignItems: string;
         };
         aic: {
             display: string;
-            "align-items": string;
+            alignItems: string;
         };
         aig: {
             display: string;
-            "align-items": string;
+            alignItems: string;
         };
         jcs: {
             display: string;
-            "justify-content": string;
+            justifyContent: string;
         };
         jcc: {
             display: string;
-            "justify-content": string;
+            justifyContent: string;
         };
         jcg: {
             display: string;
-            "justify-content": string;
+            justifyContent: string;
         };
     };
     static flexDisplays: {
         fd: {
             r: {
                 display: string;
-                "flex-direction": string;
+                flexDirection: string;
             };
             c: {
                 display: string;
-                "flex-direction": string;
+                flexDirection: string;
             };
         };
         wr: {
             w: {
                 display: string;
-                "flex-wrap": string;
+                flexWrap: string;
             };
             n: {
                 display: string;
-                "flex-wrap": string;
+                flexWrap: string;
             };
         };
         ai: {
             s: {
                 display: string;
-                "align-items": string;
+                alignItems: string;
             };
             c: {
                 display: string;
-                "align-items": string;
+                alignItems: string;
             };
             g: {
                 display: string;
-                "align-items": string;
+                alignItems: string;
             };
         };
         jc: {
             s: {
                 display: string;
-                "justify-content": string;
+                justifyContent: string;
             };
             c: {
                 display: string;
-                "justify-content": string;
+                justifyContent: string;
             };
             g: {
                 display: string;
-                "justify-content": string;
+                justifyContent: string;
             };
         };
     };
