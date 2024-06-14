@@ -198,6 +198,7 @@ export class StyleBuilder {
             if (!isSimpleObject(so)) {
                 throw new Error(`Invalid so param:`);
             }
+            so = camelKeys(so);
             _.merge(this.styleObj, so);
         }
     }
@@ -214,10 +215,12 @@ export class StyleBuilder {
         for (let obj of objs) {
             if (obj instanceof StyleBuilder) {
                 obj = obj.style;
+                //obj = obj.camelled;
             }
             if (!isSimpleObject(obj)) {
                 throw new Error(`Invalid so param:`);
             }
+            obj = camelKeys(obj);
             _.merge(this.styleObj, obj);
         }
         return this;
