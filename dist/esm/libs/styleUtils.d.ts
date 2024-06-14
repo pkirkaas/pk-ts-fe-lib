@@ -77,59 +77,28 @@ export declare class StyleBuilder {
     };
     static flexDisplays: {
         fd: {
-            r: {
-                display: string;
-                flexDirection: string;
-            };
-            c: {
-                display: string;
-                flexDirection: string;
-            };
+            r: string;
+            c: string;
         };
         wr: {
-            w: {
-                display: string;
-                flexWrap: string;
-            };
-            n: {
-                display: string;
-                flexWrap: string;
-            };
+            w: string;
+            n: string;
         };
         ai: {
-            s: {
-                display: string;
-                alignItems: string;
-            };
-            c: {
-                display: string;
-                alignItems: string;
-            };
-            g: {
-                display: string;
-                alignItems: string;
-            };
+            s: string;
+            c: string;
+            g: string;
         };
         jc: {
-            s: {
-                display: string;
-                justifyContent: string;
-            };
-            c: {
-                display: string;
-                justifyContent: string;
-            };
-            g: {
-                display: string;
-                justifyContent: string;
-            };
+            s: string;
+            c: string;
+            g: string;
         };
     };
     /** SO BAD! */
     /**
      * Convenience method for flex displays
      */
-    flex(flexOpts?: GenObj): this;
     /**
      * flex align-items -
      * @param align:string - one of s,c,g or full css align value

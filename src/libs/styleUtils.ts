@@ -29,7 +29,11 @@ import { serializeStyles, } from '@emotion/serialize';
    * else return val itself
   */
   export function valFromObj(val:any, obj:GenObj):any {
+    //console.log(`valFromObj`, {val, obj});
     if (isPrimitive(val) && (val in obj)) {
+      //let ret = obj[val];
+      //console.log(`returning:`,{ret});
+
       return obj[val];
     }
     return val;
@@ -76,22 +80,22 @@ export class StyleBuilder {
 
   static flexDisplays = {
     fd: { // Flex direction
-      r: this.displays.fr,
-      c: this.displays.fc,
+      r: this.displays.fr.flexDirection,
+      c: this.displays.fc.flexDirection,
     },
     wr: { // Wrap
-      w: this.displays.w,
-      n: this.displays.nw,
+      w: this.displays.w.flexWrap,
+      n: this.displays.nw.flexWrap,
     },
     ai: { //align-items
-      s: this.displays.ais,
-      c: this.displays.aic,
-      g: this.displays.aig,
+      s: this.displays.ais.alignItems,
+      c: this.displays.aic.alignItems,
+      g: this.displays.aig.alignItems,
     },
     jc: { //justify-content
-      s: this.displays.jcs,
-      c: this.displays.jcc,
-      g: this.displays.jcg,
+      s: this.displays.jcs.justifyContent,
+      c: this.displays.jcc.justifyContent,
+      g: this.displays.jcg.justifyContent,
     },
   };
 
@@ -101,6 +105,7 @@ export class StyleBuilder {
    * Convenience method for flex displays
    */
 
+  /*
   flex(flexOpts: GenObj = {}) {
     let defaults: GenObj = { fd: 'r', wr: 'w', ai: 's', jc: 's' };
     let rFlexOpts: GenObj = { ...defaults, ...flexOpts };
@@ -112,6 +117,7 @@ export class StyleBuilder {
     return this.merge(dispStyle);
     //let camelled = camelKeys(dispStyle);
   }
+    */
 
   /**
    * flex align-items - 
@@ -229,6 +235,8 @@ export class StyleBuilder {
   constructor(...sos) {
     this.thisClass = this.constructor;
     this.styleObj = {};
+    this.merge(...sos);
+    /*
     for (let so of sos) {
       if (so instanceof StyleBuilder) {
         so = so.style;
@@ -239,6 +247,7 @@ export class StyleBuilder {
       so = camelKeys(so);
       _.merge(this.styleObj, so);
     }
+      */
   }
   get style() { // Returns a dup of the GeneralStyle Object
     return camelKeys(structuredClone(this.styleObj));

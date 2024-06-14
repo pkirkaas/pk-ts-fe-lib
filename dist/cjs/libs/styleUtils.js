@@ -16,7 +16,10 @@ import { cx, css as cssCss, } from '@emotion/css';
  * else return val itself
 */
 export function valFromObj(val, obj) {
+    //console.log(`valFromObj`, {val, obj});
     if (isPrimitive(val) && (val in obj)) {
+        //let ret = obj[val];
+        //console.log(`returning:`,{ret});
         return obj[val];
     }
     return val;
@@ -56,39 +59,41 @@ export class StyleBuilder {
     };
     static flexDisplays = {
         fd: {
-            r: this.displays.fr,
-            c: this.displays.fc,
+            r: this.displays.fr.flexDirection,
+            c: this.displays.fc.flexDirection,
         },
         wr: {
-            w: this.displays.w,
-            n: this.displays.nw,
+            w: this.displays.w.flexWrap,
+            n: this.displays.nw.flexWrap,
         },
         ai: {
-            s: this.displays.ais,
-            c: this.displays.aic,
-            g: this.displays.aig,
+            s: this.displays.ais.alignItems,
+            c: this.displays.aic.alignItems,
+            g: this.displays.aig.alignItems,
         },
         jc: {
-            s: this.displays.jcs,
-            c: this.displays.jcc,
-            g: this.displays.jcg,
+            s: this.displays.jcs.justifyContent,
+            c: this.displays.jcc.justifyContent,
+            g: this.displays.jcg.justifyContent,
         },
     };
     /** SO BAD! */
     /**
      * Convenience method for flex displays
      */
-    flex(flexOpts = {}) {
-        let defaults = { fd: 'r', wr: 'w', ai: 's', jc: 's' };
-        let rFlexOpts = { ...defaults, ...flexOpts };
-        let dispStyle = {};
-        for (let key in rFlexOpts) {
-            let val = rFlexOpts[key];
-            _.merge(dispStyle, this.thisClass.flexDisplays[key][val]);
-        }
-        return this.merge(dispStyle);
-        //let camelled = camelKeys(dispStyle);
+    /*
+    flex(flexOpts: GenObj = {}) {
+      let defaults: GenObj = { fd: 'r', wr: 'w', ai: 's', jc: 's' };
+      let rFlexOpts: GenObj = { ...defaults, ...flexOpts };
+      let dispStyle: GenObj = {};
+      for (let key in rFlexOpts) {
+        let val = rFlexOpts[key];
+        _.merge(dispStyle, this.thisClass.flexDisplays[key][val]);
+      }
+      return this.merge(dispStyle);
+      //let camelled = camelKeys(dispStyle);
     }
+      */
     /**
      * flex align-items -
      * @param align:string - one of s,c,g or full css align value
@@ -191,16 +196,19 @@ export class StyleBuilder {
     constructor(...sos) {
         this.thisClass = this.constructor;
         this.styleObj = {};
+        this.merge(...sos);
+        /*
         for (let so of sos) {
-            if (so instanceof StyleBuilder) {
-                so = so.style;
-            }
-            if (!isSimpleObject(so)) {
-                throw new Error(`Invalid so param:`);
-            }
-            so = camelKeys(so);
-            _.merge(this.styleObj, so);
+          if (so instanceof StyleBuilder) {
+            so = so.style;
+          }
+          if (!isSimpleObject(so)) {
+            throw new Error(`Invalid so param:`);
+          }
+          so = camelKeys(so);
+          _.merge(this.styleObj, so);
         }
+          */
     }
     get style() {
         return camelKeys(structuredClone(this.styleObj));
