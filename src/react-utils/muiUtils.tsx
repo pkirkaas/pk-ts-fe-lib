@@ -29,19 +29,19 @@ import {Box as SBox,} from '@mui/system';
  * Experiment w. HOC component builder - but don't think can build one atop another - 
  * css is overwritten? 
  */
-export const withStyled = (styles, Base='div') => (props) => {
+export const withStyled = (styles, Base:any='div') => (props) => {
   let sb = new StyleBuilder(styles);
   let sbStyle = sb.style;
   return (<Base css={css(sbStyle)} {...props} />);
 }
 
-export const withSBox = (styles, Base=SBox) => (props) => {
+export const withSBox = (styles, Base:any=SBox) => (props) => {
   let sb = new StyleBuilder(styles);
   let sbStyle = sb.style;
   return (<Base css={css(sbStyle)} {...props} />);
 }
 
-export const withMBox = (styles, Base=MBox) => (props) => {
+export const withMBox = (styles, Base:any=MBox) => (props) => {
   let sb = new StyleBuilder(styles);
   let sbStyle = sb.style;
   return (<Base css={css(sbStyle)} {...props} />);
