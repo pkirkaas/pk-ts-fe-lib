@@ -218,6 +218,10 @@ export declare class StyleBuilder {
     d(...dispArgs: any[]): this;
 }
 /**
+ * Laziness again - SB is just a new StyleBuilder instance
+ */
+export declare const SB: StyleBuilder;
+/**
  * Enhances Emotion CX by accepting StyleBuilder args
  * and created classNames from them to add.
  * TODO: Make more nested, and accept generic JS style objects

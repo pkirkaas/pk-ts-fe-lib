@@ -449,6 +449,11 @@ export class StyleBuilder {
 }
 
 /**
+ * Laziness again - SB is just a new StyleBuilder instance
+ */
+export const SB=StyleBuilder.builder; 
+
+/**
  * Enhances Emotion CX by accepting StyleBuilder args
  * and created classNames from them to add.
  * TODO: Make more nested, and accept generic JS style objects
