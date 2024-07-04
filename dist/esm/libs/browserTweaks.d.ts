@@ -14,7 +14,6 @@
  *
  * Just import and run startAvailableChecks anywhere in the code, and page will reload after new build.
  */
-/// <reference types="node" />
 /**
  * Converts a JS Date to an HTML date string in format YYYY-MM-dd
  * @param dt - the date to convert, else null for now
