@@ -69,6 +69,7 @@
     "sass": "*",
     "styled-components": "*",
     "swr": "^2.2.5",
+    "use-immer": "^0.10.0",
     "yup": "*"
   },
   "devDependencies": {
