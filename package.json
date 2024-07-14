@@ -57,6 +57,8 @@
     "classnames": "*",
     "formik": "*",
     "immer": "^10.1.1",
+    "jotai": "^2.9.0",
+    "jotai-immer": "^0.4.1",
     "pk-ts-common-lib": "github:pkirkaas/pk-ts-common-lib#working",
     "react": "*",
     "react-bootstrap": "*",
