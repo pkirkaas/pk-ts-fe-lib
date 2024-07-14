@@ -46,16 +46,17 @@
   },
   "dependencies": {
     "@emotion/css": "*",
-    "@mui/icons-material": "*",
-    "@mui/system": "*",
     "@emotion/react": "*",
     "@emotion/styled": "*",
+    "@mui/icons-material": "*",
     "@mui/material": "*",
+    "@mui/system": "*",
     "@popperjs/core": "*",
     "@preact/signals-react": "*",
     "bootstrap": "*",
     "classnames": "*",
     "formik": "*",
+    "immer": "^10.1.1",
     "pk-ts-common-lib": "github:pkirkaas/pk-ts-common-lib#working",
     "react": "*",
     "react-bootstrap": "*",
@@ -67,8 +68,8 @@
     "reactjs-popup": "*",
     "sass": "*",
     "styled-components": "*",
-    "yup": "*",
-    "swr": "^2.2.5"
+    "swr": "^2.2.5",
+    "yup": "*"
   },
   "devDependencies": {
     "@emotion/babel-plugin": "*",
@@ -80,8 +81,8 @@
     "typescript": "*",
     "vite": "*"
   },
-  "deprecatedDeps":{
-    "no":"none"
+  "deprecatedDeps": {
+    "no": "none"
   },
   "alt-lib-gits": [
     {
