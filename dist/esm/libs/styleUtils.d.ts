@@ -22,7 +22,10 @@
  */
 import { GenObj } from 'pk-ts-common-lib';
 /** Utility - if val a key of obj, return the value
- * else return val itself
+ * for the key, else return val itself.
+ * Purpose: To allow some shortcut keys for CSS values, like
+ * {ai:'s'} for "alignItems:'flex-start'" - but also allow setting CSS values NOT
+ * using the shortcut keys.
 */
 export declare function valFromObj(val: any, obj: GenObj): any;
 /**
@@ -133,8 +136,10 @@ export declare class StyleBuilder {
             prop: string;
             vals: {
                 s: string;
+                e: string;
                 c: string;
                 g: string;
+                b: string;
             };
         };
         jc: {
@@ -142,13 +147,17 @@ export declare class StyleBuilder {
             vals: {
                 s: string;
                 c: string;
-                g: string;
+                e: string;
+                b: string;
+                a: string;
             };
         };
     };
-    /** SO BAD! */
     /**
      * Convenience method for flex displays
+     * @param flexOpts? GenObj - object w. flex opt keys and values
+     * opt keys: fd (flex-direction), wr (wrap), ai (alignItems), jc (justifyContent)
+     * opt key vals - shortcut key into vals, or string value
      */
     flex(flexOpts?: GenObj): this;
     /**

@@ -38,7 +38,10 @@ import {
 import { serializeStyles, } from '@emotion/serialize';
 
   /** Utility - if val a key of obj, return the value
-   * else return val itself
+   * for the key, else return val itself.
+   * Purpose: To allow some shortcut keys for CSS values, like
+   * {ai:'s'} for "alignItems:'flex-start'" - but also allow setting CSS values NOT
+   * using the shortcut keys.
   */
   export function valFromObj(val:any, obj:GenObj):any {
     //console.log(`valFromObj`, {val, obj});
@@ -137,24 +140,30 @@ export class StyleBuilder {
       prop: 'alignItems',
       vals: {
         s: 'flex-start',
-        c: 'flex-center',
-        g: 'flex-stretch',
+        e: 'flex-end',
+        c: 'center',
+        g: 'stretch',
+        b: 'baseliine',
       }
     },
     jc: { //justify-content
       prop: 'justifyContent',
       vals: {
         s: 'flex-start',
-        c: 'flex-center',
-        g: 'flex-stretch',
+        c: 'center',
+        e: 'flex-end',
+        b: 'space-between',
+        a: 'space-around',
       }
     },
   };
 
 
-  /** SO BAD! */
   /**
    * Convenience method for flex displays
+   * @param flexOpts? GenObj - object w. flex opt keys and values
+   * opt keys: fd (flex-direction), wr (wrap), ai (alignItems), jc (justifyContent)
+   * opt key vals - shortcut key into vals, or string value
    */
 
   flex(flexOpts: GenObj = {}) {
@@ -167,7 +176,8 @@ export class StyleBuilder {
     for (let propkey in rFlexOpts) {
       let prop = fDisps[propkey].prop;
       let valkey = rFlexOpts[propkey];
-      let val = fDisps[propkey].vals[valkey];
+      //let val = fDisps[propkey].vals[valkey];
+      let val = valFromObj(valkey, fDisps[propkey].vals);
 
       _.merge(dispStyle, {[prop]:val});
     }
@@ -189,6 +199,7 @@ export class StyleBuilder {
   }
 
   // flex justify content
+  //@deprecated
   flexj(val='s') {
     val = valFromObj(val,this.thisClass.flexDisplays.jc);
     return this.merge({display:'flex', justifyContent:val});

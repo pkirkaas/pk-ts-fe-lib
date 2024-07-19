@@ -13,7 +13,8 @@ export let tstFncs = {
         console.log("In tstb");
     },
     tstFlex() {
-        let fOpts = { fd: 'c', wr: 'n', ai: 'c', jc: 'g', };
+        //let fOpts = {fd:'c', wr:'n', ai:'c', jc:'g',};
+        let fOpts = { fd: 'c', wr: 'n', ai: 'c', jc: 'just-weird', };
         let fs1 = StyleBuilder.builder.flex(fOpts);
         fs1.fs('lg').c('blue').m(9).p(5).br('red', 7);
         let style = fs1.style;
