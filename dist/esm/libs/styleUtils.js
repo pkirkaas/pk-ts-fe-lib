@@ -24,6 +24,7 @@
 import { PkError, isNumeric, isSimpleObject, camelKeys, isPrimitive, isObject, } from 'pk-ts-common-lib';
 import _ from 'lodash';
 import { cx, css as cssCss, } from '@emotion/css';
+import { serializeStyles, } from '@emotion/serialize';
 /** Utility - if val a key of obj, return the value
  * for the key, else return val itself.
  * Purpose: To allow some shortcut keys for CSS values, like
@@ -465,7 +466,7 @@ export class StyleBuilder {
 /**
  * Laziness again - SB is just a new StyleBuilder instance
  */
-export const SB = StyleBuilder.builder;
+//export const SB=StyleBuilder.builder; 
 /**
  * Enhances Emotion CX by accepting StyleBuilder args
  * and created classNames from them to add.
@@ -484,10 +485,26 @@ export function cxsb(...args) {
     }
     return cx(...ret);
 }
-export function mkStyle(args) {
-    console.log("Making Styles");
-    return "Trying to make styles";
+/**
+ * Try to emulate the @emotion/react/css function, which accepts styles, but extend to use
+ * SB instances, like cxsb above
+ */
+export function csssb(...args) {
+    let ret = [];
+    for (let arg of args) {
+        if (arg instanceof StyleBuilder) {
+            arg = arg.style;
+        }
+        ret.push(arg);
+    }
+    return serializeStyles(ret);
 }
+/*
+export function mkStyle(args) {
+  console.log("Making Styles");
+  return "Trying to make styles";
+}
+  */
 /*
 export const withStyled = (styles, base='div') => (props) => {
   let Base = base;

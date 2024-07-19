@@ -522,7 +522,7 @@ export class StyleBuilder {
 /**
  * Laziness again - SB is just a new StyleBuilder instance
  */
-export const SB=StyleBuilder.builder; 
+//export const SB=StyleBuilder.builder; 
 
 /**
  * Enhances Emotion CX by accepting StyleBuilder args
@@ -543,10 +543,27 @@ export function cxsb(...args) {
   return cx(...ret);
 }
 
+/**
+ * Try to emulate the @emotion/react/css function, which accepts styles, but extend to use
+ * SB instances, like cxsb above
+ */
+
+export function csssb(...args) {
+  let ret = [];
+  for (let arg of args) {
+    if (arg instanceof StyleBuilder) {
+      arg = arg.style;
+    }
+    ret.push(arg);
+  }
+  return serializeStyles(ret);
+}
+/*
 export function mkStyle(args) {
   console.log("Making Styles");
   return "Trying to make styles";
 }
+  */
 
 
 /*

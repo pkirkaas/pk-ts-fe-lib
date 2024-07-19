@@ -281,7 +281,6 @@ export declare class StyleBuilder {
 /**
  * Laziness again - SB is just a new StyleBuilder instance
  */
-export declare const SB: StyleBuilder;
 /**
  * Enhances Emotion CX by accepting StyleBuilder args
  * and created classNames from them to add.
@@ -291,5 +290,9 @@ export declare const SB: StyleBuilder;
  * @param ...args -
  */
 export declare function cxsb(...args: any[]): string;
-export declare function mkStyle(args: any): string;
+/**
+ * Try to emulate the @emotion/react/css function, which accepts styles, but extend to use
+ * SB instances, like cxsb above
+ */
+export declare function csssb(...args: any[]): import("@emotion/serialize").SerializedStyles;
 //# sourceMappingURL=styleUtils.d.ts.map
