@@ -26,8 +26,18 @@ import {Box as SBox,} from '@mui/system';
 
 
 /**
- * Experiment w. HOC component builder - but don't think can build one atop another - 
- * css is overwritten? 
+ * HOC component builder - build styled components on top of other styled components
+ * DEPENDS ON @emotion/react & the @emotion/react pragmas!
+ * 
+ * @param styles - object or object[], of regular style objects or StyleBuilder instances
+ * @param Base? - an html element/string or a react component
+ * @return a styled react component based on the Base component
+ * 
+ * ACTUALLY WORKS!
+let bs1 = StyleBuilder.builder.br('red', 5).ta('c').c('blue').fw('bold').fs('lg');
+let bsMod = StyleBuilder.builder.m(10).p(10).fs('xxl').c('green');;
+let Bs1 = withStyled(bs1);
+let BsMod = withStyled(bsMod, Bs1);
  */
 export const withStyled = (styles, Base:any='div') => (props) => {
   let sb = new StyleBuilder(styles);

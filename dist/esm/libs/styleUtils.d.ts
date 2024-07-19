@@ -4,6 +4,18 @@
  *
  * React Component utils based on @emotion/react in componentUtils.tsx
  * 24-Jun-11 17:14
+ *
+ * Usage:
+ * Main export is the StyleBuilder class. It creates a chainable `styleBuilder` instance
+ * that can be used to create css styles/classes.
+ *
+ * On the `StyleBuilder` class, use the `builder` static getter method to get a new instance.
+ *
+ * On an instance, us the `className` property to get the
+ * generated class name, or the `style` property to get the generated style object.
+ * Use the `clone` instance getter to get a new instance of the same style.
+ *
+ * let sb = StyleBuilder.builder.p(5).m(10).
  */
 /**
  * Absolutely can't rely on CSS to be invariant - for now, localize dependencies
@@ -75,6 +87,13 @@ export declare class StyleBuilder {
             justifyContent: string;
         };
     };
+    /**
+     * Shortcuts for flex displays - 4 keys:
+     * fd - flex direction - r(row) or c (column)
+     * wr - flex wrap - w(wrap) or nw (nowrap)
+     * ai - align items - s(start), c(center), g(stretch)
+     * jc - justify content - s(start), c(center), g(stretch)
+     */
     static flexDisplays: {
         fd: {
             r: string;
@@ -95,10 +114,43 @@ export declare class StyleBuilder {
             g: string;
         };
     };
+    static flexDisplayOpts: {
+        fd: {
+            prop: string;
+            vals: {
+                r: string;
+                c: string;
+            };
+        };
+        wr: {
+            prop: string;
+            vals: {
+                w: string;
+                n: string;
+            };
+        };
+        ai: {
+            prop: string;
+            vals: {
+                s: string;
+                c: string;
+                g: string;
+            };
+        };
+        jc: {
+            prop: string;
+            vals: {
+                s: string;
+                c: string;
+                g: string;
+            };
+        };
+    };
     /** SO BAD! */
     /**
      * Convenience method for flex displays
      */
+    flex(flexOpts?: GenObj): this;
     /**
      * flex align-items -
      * @param align:string - one of s,c,g or full css align value
@@ -181,7 +233,7 @@ export declare class StyleBuilder {
     merge(...objs: any[]): this;
     add(key: any, value: any): this;
     nest(key: any, value: any): this;
-    ta(align: any): this;
+    ta(align?: string): this;
     /**
      * Make forground/background color pairs from the list
      * @param pair - primitive - key to ltDrkColorPairs obj,
@@ -227,6 +279,7 @@ export declare const SB: StyleBuilder;
  * TODO: Make more nested, and accept generic JS style objects
  *  - for now, just works for
  * top level args of type StyleBuilder
+ * @param ...args -
  */
 export declare function cxsb(...args: any[]): string;
 export declare function mkStyle(args: any): string;

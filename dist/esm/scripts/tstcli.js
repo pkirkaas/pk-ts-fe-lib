@@ -12,6 +12,13 @@ export let tstFncs = {
     tstb() {
         console.log("In tstb");
     },
+    tstFlex() {
+        let fOpts = { fd: 'c', wr: 'n', ai: 'c', jc: 'g', };
+        let fs1 = StyleBuilder.builder.flex(fOpts);
+        fs1.fs('lg').c('blue').m(9).p(5).br('red', 7);
+        let style = fs1.style;
+        console.log(`style:`, { style });
+    },
     tstSB() {
         let rowSgStyle = StyleBuilder.builder.flexa('s').flexj('g').m(3).p(3).bg('#222').flexd('r').fgbg(2);
         let colSgStyle = StyleBuilder.builder.flexa('s').flexj('g').m(3).p(3).bg('#222').flexd('c').fgbg(1);

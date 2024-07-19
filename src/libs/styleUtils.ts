@@ -4,6 +4,18 @@
  * 
  * React Component utils based on @emotion/react in componentUtils.tsx
  * 24-Jun-11 17:14
+ * 
+ * Usage: 
+ * Main export is the StyleBuilder class. It creates a chainable `styleBuilder` instance 
+ * that can be used to create css styles/classes.
+ * 
+ * On the `StyleBuilder` class, use the `builder` static getter method to get a new instance.
+ * 
+ * On an instance, us the `className` property to get the 
+ * generated class name, or the `style` property to get the generated style object.
+ * Use the `clone` instance getter to get a new instance of the same style.
+ * 
+ * let sb = StyleBuilder.builder.p(5).m(10).
  */
 
 /**
@@ -78,6 +90,13 @@ export class StyleBuilder {
     jcg: { display: "flex", "justifyContent": "flex-stretch" },
   };
 
+  /**
+   * Shortcuts for flex displays - 4 keys: 
+   * fd - flex direction - r(row) or c (column)
+   * wr - flex wrap - w(wrap) or nw (nowrap)
+   * ai - align items - s(start), c(center), g(stretch)
+   * jc - justify content - s(start), c(center), g(stretch)
+   */
   static flexDisplays = {
     fd: { // Flex direction
       r: this.displays.fr.flexDirection,
@@ -99,24 +118,65 @@ export class StyleBuilder {
     },
   };
 
+  static flexDisplayOpts = {
+    fd: { // Flex direction
+      prop: 'flexDirection',
+      vals: {
+        r:'row',
+        c:'column',
+      },
+    },
+    wr: { // Wrap
+      prop: 'wrap',
+      vals: {
+        w: 'wrap',
+        n: 'no-wrap',
+      },
+    },
+    ai: { //align-items
+      prop: 'alignItems',
+      vals: {
+        s: 'flex-start',
+        c: 'flex-center',
+        g: 'flex-stretch',
+      }
+    },
+    jc: { //justify-content
+      prop: 'justifyContent',
+      vals: {
+        s: 'flex-start',
+        c: 'flex-center',
+        g: 'flex-stretch',
+      }
+    },
+  };
+
 
   /** SO BAD! */
   /**
    * Convenience method for flex displays
    */
 
-  /*
   flex(flexOpts: GenObj = {}) {
     let defaults: GenObj = { fd: 'r', wr: 'w', ai: 's', jc: 's' };
     let rFlexOpts: GenObj = { ...defaults, ...flexOpts };
-    let dispStyle: GenObj = {};
-    for (let key in rFlexOpts) {
-      let val = rFlexOpts[key];
-      _.merge(dispStyle, this.thisClass.flexDisplays[key][val]);
+    let dispStyle: GenObj = {
+      display: 'flex',
+    };
+    let fDisps = this.thisClass.flexDisplayOpts;
+    for (let propkey in rFlexOpts) {
+      let prop = fDisps[propkey].prop;
+      let valkey = rFlexOpts[propkey];
+      let val = fDisps[propkey].vals[valkey];
+
+      _.merge(dispStyle, {[prop]:val});
     }
     return this.merge(dispStyle);
+    //console.log(`in StyleBuilder flex method - `, {flexOpts, dispStyle, fDisps, rFlexOpts});
+    //return this;
     //let camelled = camelKeys(dispStyle);
   }
+  /*
     */
 
   /**
@@ -287,7 +347,7 @@ export class StyleBuilder {
     return this.add(`& ${key}`, value);
   }
 
-  ta(align) {
+  ta(align:string = 'c') {
     let aligns = {
       c: "center",
       l: "left",
@@ -459,6 +519,7 @@ export const SB=StyleBuilder.builder;
  * TODO: Make more nested, and accept generic JS style objects
  *  - for now, just works for
  * top level args of type StyleBuilder
+ * @param ...args - 
  */
 export function cxsb(...args) {
   let ret = [];
