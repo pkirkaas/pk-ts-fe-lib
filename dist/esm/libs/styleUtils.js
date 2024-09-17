@@ -488,6 +488,7 @@ export function cxsb(...args) {
 /**
  * Try to emulate the @emotion/react/css function, which accepts styles, but extend to use
  * SB instances, like cxsb above
+ * Use in custom components with the css prop - css={csssb(styles)}
  */
 export function csssb(...args) {
     let ret = [];

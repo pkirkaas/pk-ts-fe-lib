@@ -293,6 +293,7 @@ export declare function cxsb(...args: any[]): string;
 /**
  * Try to emulate the @emotion/react/css function, which accepts styles, but extend to use
  * SB instances, like cxsb above
+ * Use in custom components with the css prop - css={csssb(styles)}
  */
-export declare function csssb(...args: any[]): import("@emotion/utils").SerializedStyles;
+export declare function csssb(...args: any[]): import("@emotion/serialize").SerializedStyles;
 //# sourceMappingURL=styleUtils.d.ts.map
