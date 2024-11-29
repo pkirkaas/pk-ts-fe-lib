@@ -2,7 +2,7 @@
   "name": "pk-ts-fe-lib",
   "author": "Paul Kirkaas",
   "license": "UNLICENSED",
-  "description": "TS/JS Front End (React & SASS) Utilities",
+  "description": "TS/JS Front End (React & SASS) Utilities - MAYBE DANGEROUS FORCE TO REACT 19 BETA!",
   "private": true,
   "type": "module",
   "module": "./dist/esm/index.js",
