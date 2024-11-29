@@ -53,6 +53,8 @@
     "@mui/system": "*",
     "@popperjs/core": "*",
     "@preact/signals-react": "*",
+    "@types/react": "npm:types-react@rc",
+    "@types/react-dom": "npm:types-react-dom@rc",
     "bootstrap": "*",
     "classnames": "*",
     "formik": "*",
@@ -60,9 +62,9 @@
     "jotai": "^2.9.0",
     "jotai-immer": "^0.4.1",
     "pk-ts-common-lib": "github:pkirkaas/pk-ts-common-lib#working",
-    "react": "*",
+    "react": "19.0.0-rc.1",
     "react-bootstrap": "*",
-    "react-dom": "*",
+    "react-dom": "19.0.0-rc.1",
     "react-hook-form": "^7.51.4",
     "react-resizable-panels": "*",
     "react-router-dom": "*",
@@ -86,25 +88,5 @@
   },
   "deprecatedDeps": {
     "no": "none"
-  },
-  "alt-lib-gits": [
-    {
-      "pk-ts-common-lib": "git+https://github.com/pkirkaas/pk-ts-common-lib.git#working",
-      "no": "nothing"
-    },
-    {
-      "pk-ts-common-lib": "github:pkirkaas/pk-ts-common-lib#working",
-      "no": "nothing"
-    },
-    {
-      "pk-ts-common-lib": "git+https://github.com/pkirkaas/pk-ts-common-lib.git#working",
-      "no": "nothing"
-    },
-    {
-      "no": "nothing"
-    },
-    {
-      "no": "nothing"
-    }
-  ]
+  }
 }
