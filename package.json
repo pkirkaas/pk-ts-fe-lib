@@ -37,6 +37,7 @@
     "cleani": "npm run clean && npm i",
     "reset": "npm run clean && npm run build",
     "build:sass": "sass --load-path=./node_modules --embed-sources ./scss/pk-default.scss  ./build/assets/cli.css",
+    "build:sasstst": "sass --load-path=./node_modules --embed-sources ./scss/tst.scss  ./build/assets/clitst.css",
     "monitor": "nodemon --exec \"npm run build-lib\" --ext js,jsx,ts,tsx,sass,css,scss --delay 5 --watch ./src",
     "devlink": "npm link && npm link pk-ts-common-lib",
     "dev": "vite --open",

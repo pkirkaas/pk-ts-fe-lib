@@ -1,15 +1,27 @@
 /* START OF PK-DEFAULT-SCSS */
 @use 'sass:math';
+@use 'sass:map';
+@use 'sass:color';
+@use 'sass:string';
 
 #root {
   width: 100%;
 }
+// If want to generate ALL the classes:
+/*
+@include mk-fg-bg-pairs;
+@include mk-fg-bg-pairs;
+@include mk-weights;
+@include mk-colors;
+@include mk-spacing;
+@include mk-flex-containers;
+*/
 
 //@import "bootstrap/scss/bootstrap";
 
 // Don't need EVERY color - make some defaults, then fg/bg pairs
 
-
+// Map values for properties
 $light-colors: (
   "wh": #fff,
   "bl": #aaf,
@@ -21,19 +33,124 @@ $dark-colors: (
   "rd": #800,
   "gr": #444) !default;
 
-/* Example - generates 16 classes:
+$test-colors: (
+  "black":black,
+  "blue": blue,
+  "dk-blue": #008,
+  "dk-dk-blue": #004,
+  "lt-blue": #88f,
+  "lt-lt-blue": #aaf,
+  "red": red,
+  "dk-red": #800,
+  "lt-red": #f88,
+  "yellow": yellow,
+  "grey": grey,
 
-.lt-gr-bk-pr, .lt-13-pr {
-  color: #aaa;
-  background-color: #000;
+  ) !default;
+
+$font-size-map: (
+  "xxs": "xx-small",
+  "xs": "x-small",
+  "s": "small",
+  "m": "medium",
+  "l": "large",
+  "xl": "x-large",
+  "xxl": "xx-large",
+  "xxxl": "xxx-large",
+  "smaller": "smaller",
+  "larger": "larger"
+);
+
+$fg: black !default; // foreground color
+$ifg: white !default; // inverse foreground color
+$bg: white !default; // background color
+$ibg: black !default; // inverse background color
+
+$grid-breakpoints: (
+  xs: 0,
+  sm: 544px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px) !default;
+
+// Takes a map and a key, returns the map-value for that key, or else the key itself
+// Use to allow abbreviations for properties
+
+@function val-or-key($map, $key) {
+  @if map-has-key($map, $key) {
+    @return map-get($map, $key)
+  }
+  @return $key
 }
 
-.dk-bk-gr-pr, .dk-13-pr {
-  color: #000;
-  background-color: #aaa;
+// Takes a color, returns a map with color, inverse color, and converted color
+@function inv-comp-color($color) {
+  @return (color:$color, inv:color.invert($color), comp:color.complement($color));
 }
 
-*/
+
+@mixin mk-tst-colors {
+  @each $ckey, $cval in $test-colors {
+    $cset: inv-comp-color($cval);
+    .#{$ckey} {
+      width: 100%;
+      height: 5em;
+      border: solid 1px black;
+      margin: 0.25em;
+      padding: 0.25em;
+      .color {
+        background-color: map.get($cset,color);
+        border: solid 1px blue;
+        margin: 0.25em;
+        padding: 0.25em;
+        width: 30%;
+        height: 3em;
+      }
+      .inv {
+        background-color: map.get($cset,inv);
+        border: solid 1px red;
+        margin: 0.25em;
+        padding: 0.25em;
+        width: 30%;
+        height: 3em;
+      }
+      .comp {
+        background-color: map.get($cset,comp);
+        border: solid 1px green;
+        margin: 0.25em;
+        padding: 0.25em;
+        width: 30%;
+        height: 3em;
+      }
+
+    }
+  }
+}
+
+@include mk-tst-colors;
+@mixin mk-font($ff:verdana, $fw:normal, $style:normal, $fsz:m) {
+  font-family: $ff, verdana;
+  font-weight: $fw;
+  font-style: $style;
+  font-size: val-or-key($font-size-map, $fsz);
+}
+
+.mc {
+
+}
+
+// Example - generates 16 classes:
+
+// .lt-gr-bk-pr, .lt-13-pr {
+//   color: #aaa;
+//   background-color: #000;
+// }
+
+// .dk-bk-gr-pr, .dk-13-pr {
+//   color: #000;
+//   background-color: #aaa;
+// }
+
 @mixin mk-fg-bg-pairs {
   $i: 0;
 
@@ -57,17 +174,10 @@ $dark-colors: (
   }
 }
 
-@include mk-fg-bg-pairs;
 
 
 
 
-$grid-breakpoints: (
-  xs: 0,
-  sm: 544px,
-  md: 768px,
-  lg: 992px,
-  xl: 1200px) !default;
 $inner-border-color: #888 !default;
 $inner-border-spread: 1px !default;
 
@@ -90,7 +200,10 @@ $inner-border-spread: 1px !default;
   }
 }
 
-@include mk-weights;
+
+@mixin mk-font-sz($sz:m) {
+  font-size: map-get($font-size-map, $sz);
+}
 
 @mixin mk-colors {
   //$hl: 0 2 4 6 8 a c e f;
@@ -102,22 +215,22 @@ $inner-border-spread: 1px !default;
     @each $c2 in $hl {
       @each $c3 in $hl {
         .bg-#{$c1}#{$c2}#{$c3} {
-          background-color: unquote('#')+$c1+$c2+$c3 !important;
+          background-color: string.unquote('#')+$c1+$c2+$c3 !important;
         }
 
         .c-#{$c1}#{$c2}#{$c3} {
-          color: unquote('#')+$c1+$c2+$c3 !important;
+          color: string.unquote('#')+$c1+$c2+$c3 !important;
         }
 
         .bc-#{$c1}#{$c2}#{$c3} {
-          border: solid 1px unquote('#')+$c1+$c2+$c3 !important;
+          border: solid 1px string.unquote('#')+$c1+$c2+$c3 !important;
         }
       }
     }
   }
 }
 
-@include mk-colors;
+// @include mk-colors;
 
 
 
@@ -154,6 +267,22 @@ $inner-border-spread: 1px !default;
   }
 }
 
+$pm-map: (l:(left),r:(right),t:(top),b:(bottom), h:(left,right),v:(top,bottom));
+@mixin mk-pm($dim:1em, $pm:p, $where:null) {
+  $pm: val-or-key((p:padding,m:margin), $pm);
+  $type:val-or-key($pm-map, $where);
+  @if not($where) {
+    #{$pm}: $dim;
+  } @else {
+    $tlist:map.get($pm-map,$type);
+    @each $t in $tlist {
+      #{$pm}-#{$t}: $dim;
+    }
+  }
+}
+
+
+//$pad-map: (p:padding,pl:padding-left,pr:padding-right,pt:padding-top,pb:padding-bottom,)
 @mixin between-bps($min, $max) {
   $min-breakpoint: breakpoint($min);
   $max-breakpoint: breakpoint($max);
@@ -163,11 +292,9 @@ $inner-border-spread: 1px !default;
   }
 }
 
-/*
-@for $i from 0 through 90 {
-Reduce spacing increment to factors of 5?
+// for $i from 0 through 90
+// Reduce spacing increment to factors of 5?
 
- */
 
 @mixin mk-spacing {
   @for $j from 0 through 25 {
@@ -261,7 +388,7 @@ Reduce spacing increment to factors of 5?
   flex-shrink: 0
 }
 
-@include mk-spacing;
+// @include mk-spacing;
 
 /**
  * Flex container classes for alignment & justify, row & column:
@@ -300,25 +427,13 @@ Reduce spacing increment to factors of 5?
 }
 }
 
-@include mk-flex-containers;
+//@include mk-flex-containers;
 
 .nowrap {
   flex-wrap: nowrap !important
 }
 
 
-$font-size-map: (
-  "xxs": "xx-small",
-  "xs": "x-small",
-  "s": "small",
-  "m": "medium",
-  "l": "large",
-  "xl": "x-large",
-  "xxl": "xx-large",
-  "xxxl": "xxx-large",
-  "smaller": "smaller",
-  "larger": "larger"
-);
 
 @mixin mk-font-sizes {
   @each $fskey, $fsval in $font-size-map {
@@ -328,7 +443,7 @@ $font-size-map: (
   }
 }
 
-@include mk-font-sizes;
+// @include mk-font-sizes;
 
 
 
@@ -375,6 +490,10 @@ div[display="flex"] {
 }
 
 
+.verdana {
+  font-family: verdana;
+}
+
 .oswald {
   font-family: 'Oswald', verdana;
 }
@@ -408,3 +527,12 @@ div[display="flex"] {
 }
 
 /* END OF PK-DEFAULT-SCSS */
+// If want to generate ALL the classes:
+/*
+@include mk-fg-bg-pairs;
+@include mk-fg-bg-pairs;
+@include mk-weights;
+@include mk-colors;
+@include mk-spacing;
+@include mk-flex-containers;
+*/
