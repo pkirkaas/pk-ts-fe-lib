@@ -9,6 +9,30 @@
  * Main export is the StyleBuilder class. It creates a chainable `styleBuilder` instance
  * that can be used to create css styles/classes.
  *
+ * StyleBuilder:
+ *   static methods:
+ *     build(...args) - returns a new instance of the class
+ *   static properties:
+ *     builder: static getter - returns a new instance of the class
+ *   instance methods:
+ *     flex(opts:StyleBuilderFlexArgs) - Creates  flex display options
+ *     m(sz="1em",where?:WhereKeyType) - creates margin - all or 't'|'r'|'b'|'l'|'x'|'y'|'a'
+ *     p(sz="1em",where?:WhereKeyType) - creates padding - all or 't'|'r'|'b'|'l'|'x'|'y'|'a'
+ *     fs(sz) - font size
+ *     fw(weight) - font weight
+ *     c(color) - font color
+ *     bg(color) - background color
+ *     ta(align) - text align - 'c' 's' 'e'
+ *     fw(weight) - font weight
+ *     br(borderParams:BorderParams) - border - color, style, width, radius, which - all optional
+ *     add(key, val) - add a style property/value pair
+ *     w/minw/maxw/h/minh/maxh(sz) - width/height - all or 'min'|'max'
+ *     ib(color?,spread?) - inner border
+ *   instance properties:
+ *     className: getter string - the generated class name
+ *     style: getter object - the generated style object
+ *
+ *
  * On the `StyleBuilder` class, use the `builder` static getter method to get a new instance.
  *
  * On an instance, us the `className` property to get the
@@ -21,6 +45,16 @@
  * Absolutely can't rely on CSS to be invariant - for now, localize dependencies
  */
 import { GenObj } from 'pk-ts-common-lib';
+export interface StyleBuilderFlexArgs {
+    fd?: 'r' | 'c';
+    wr?: 'w' | 'n';
+    ai?: 's' | 'e' | 'c' | 'g' | 'b';
+    jc?: 's' | 'c' | 'e' | 'b' | 'a';
+}
+export type BmpKeys = 'm' | 'p' | 'b';
+export type BorderParams = Partial<typeof StyleBuilder.borderParamDefaults>;
+export type WhereKeyType = keyof typeof StyleBuilder.whereKeys;
+export type AlignType = keyof typeof StyleBuilder.aligns;
 /** Utility - if val a key of obj, return the value
  * for the key, else return val itself.
  * Purpose: To allow some shortcut keys for CSS values, like
@@ -41,7 +75,7 @@ export declare function valFromObj(val: any, obj: GenObj): any;
  *
  */
 export declare class StyleBuilder {
-    thisClass: any;
+    get Class(): any;
     static displays: {
         block: {
             display: string;
@@ -97,26 +131,6 @@ export declare class StyleBuilder {
      * ai - align items - s(start), c(center), g(stretch)
      * jc - justify content - s(start), c(center), g(stretch)
      */
-    static flexDisplays: {
-        fd: {
-            r: string;
-            c: string;
-        };
-        wr: {
-            w: string;
-            n: string;
-        };
-        ai: {
-            s: string;
-            c: string;
-            g: string;
-        };
-        jc: {
-            s: string;
-            c: string;
-            g: string;
-        };
-    };
     static flexDisplayOpts: {
         fd: {
             prop: string;
@@ -159,15 +173,11 @@ export declare class StyleBuilder {
      * opt keys: fd (flex-direction), wr (wrap), ai (alignItems), jc (justifyContent)
      * opt key vals - shortcut key into vals, or string value
      */
-    flex(flexOpts?: GenObj): this;
+    flex(flexOpts?: StyleBuilderFlexArgs): this;
     /**
      * flex align-items -
      * @param align:string - one of s,c,g or full css align value
      */
-    flexa(val?: string): this;
-    flexj(val?: string): this;
-    flexd(val?: string): this;
-    flexw(val?: string): this;
     get camelled(): GenObj;
     static fgBgPairs: {
         1: {
@@ -228,7 +238,7 @@ export declare class StyleBuilder {
      * @key opt - one of the keys for whereKeys 't','b','x','y', etc
      * @return - basic object w. css style props/vals
      */
-    static mkMPBWhereProps(propBase: any, val: any, key: any): GenObj;
+    static mkMPBWhereProps(propBase: BmpKeys, val?: string, key?: WhereKeyType): GenObj;
     /**
      * static builder & build(args) - to avoid `(new StyleBuilder(...args)).chain1(1)...etc`
      */
@@ -242,7 +252,12 @@ export declare class StyleBuilder {
     merge(...objs: any[]): this;
     add(key: any, value: any): this;
     nest(key: any, value: any): this;
-    ta(align?: string): this;
+    static aligns: {
+        c: string;
+        l: string;
+        r: string;
+    };
+    ta(align?: AlignType): this;
     /**
      * Make forground/background color pairs from the list
      * @param pair - primitive - key to ltDrkColorPairs obj,
@@ -265,9 +280,16 @@ export declare class StyleBuilder {
     h(val: any): this;
     maxh(val: any): this;
     minh(val: any): this;
-    m(arg: any, which?: string): this;
-    p(arg: any, which?: string): this;
-    br(color?: string, radius?: any): this;
+    m(arg?: any, which?: WhereKeyType): this;
+    p(arg?: any, which?: WhereKeyType): this;
+    static borderParamDefaults: {
+        color: string;
+        style: string;
+        width: string | number;
+        radius: string | number;
+        which: null | WhereKeyType;
+    };
+    br(borderParams?: BorderParams): this;
     fw(weight: any): this;
     c(color: any): this;
     bg(color: any): this;
@@ -287,7 +309,7 @@ export declare class StyleBuilder {
  * TODO: Make more nested, and accept generic JS style objects
  *  - for now, just works for
  * top level args of type StyleBuilder
- * @param ...args -
+ * @param ...args - one or more StyleBuilder instances or style objects
  */
 export declare function cxsb(...args: any[]): string;
 /**

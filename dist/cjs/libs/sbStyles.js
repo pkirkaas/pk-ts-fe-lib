@@ -7,9 +7,6 @@
  * 24-Jun-11 18:15
  *
  */
-import { dotPathVal, toCamel, camelKeys, cartesianProduct, } from 'pk-ts-common-lib';
-import _ from 'lodash';
-import { StyleBuilder, } from './styleUtils.js';
 export let sbStyles = {};
 /**
  * So much better way to do this, but for now...
@@ -20,35 +17,38 @@ fdrWrnAicJcg fdrWrnAigJcs fdrWrnAigJcc fdrWrnAigJcg fdcWrwAisJcs fdcWrwAisJcc fd
 fdcWrwAicJcs fdcWrwAicJcc fdcWrwAicJcg fdcWrwAigJcs fdcWrwAigJcc fdcWrwAigJcg fdcWrnAisJcs
 fdcWrnAisJcc fdcWrnAisJcg fdcWrnAicJcs fdcWrnAicJcc fdcWrnAicJcg fdcWrnAigJcs fdcWrnAigJcc fdcWrnAigJcg
  */
-export function mkFlexStyles() {
-    let flexStyles = {};
-    let flexDisplays = StyleBuilder.flexDisplays;
-    let fsNameArr = [];
-    for (let fdKey in flexDisplays) {
-        let tmpArr = [];
-        let fdVal = flexDisplays[fdKey];
-        for (let fvKey in fdVal) {
-            //let fvVal = fdVal[fvKey];
-            let keyStr = `${fdKey}.${fvKey}`;
-            tmpArr.push(keyStr);
-        }
-        fsNameArr = cartesianProduct(fsNameArr, tmpArr);
+/*
+export function mkFlexStyles() { // Build combinations of flex display styles
+  let flexStyles: GenObj = {};
+  let flexDisplays = StyleBuilder.flexDisplays;
+  let fsNameArr = [];
+  for (let fdKey in flexDisplays) {
+    let tmpArr = [];
+    let fdVal = flexDisplays[fdKey];
+    for (let fvKey in fdVal) {
+      //let fvVal = fdVal[fvKey];
+      let keyStr = `${fdKey}.${fvKey}`;
+      tmpArr.push(keyStr);
     }
-    let flatArr = fsNameArr.map((el) => el.flat(Infinity));
-    for (let row of flatArr) {
-        let tmpStyle = {};
-        for (let el of row) {
-            let dispS = dotPathVal(flexDisplays, el);
-            tmpStyle = _.merge(tmpStyle, dispS);
-        }
-        let fsSKey = toCamel(row.join('-').replaceAll('\.', ''));
-        //flexStyles[fsSKey] = StyleBuilder.build(tmpStyle).style;
-        flexStyles[fsSKey] = StyleBuilder.build(tmpStyle);
+    fsNameArr = cartesianProduct(fsNameArr, tmpArr);
+  }
+  let flatArr = fsNameArr.map((el) => el.flat(Infinity));
+  for (let row of flatArr) {
+    let tmpStyle:GenObj = {};
+    for (let el of row) {
+      let dispS = dotPathVal(flexDisplays, el);
+      tmpStyle = _.merge(tmpStyle, dispS);
     }
-    flexStyles = camelKeys(flexStyles);
-    //console.log(`bsf`, { flexStyles});
-    return flexStyles;
+    let fsSKey = toCamel(row.join('-').replaceAll('\.',''));
+    //flexStyles[fsSKey] = StyleBuilder.build(tmpStyle).style;
+    flexStyles[fsSKey] = StyleBuilder.build(tmpStyle);
+  }
+  flexStyles = camelKeys(flexStyles);
+  //console.log(`bsf`, { flexStyles});
+  return flexStyles;
 }
+
 export function mkFs() {
 }
+*/
 //# sourceMappingURL=sbStyles.js.map

@@ -13,37 +13,42 @@ export let tstFncs = {
         console.log("In tstb");
     },
     tstFlex() {
-        //let fOpts = {fd:'c', wr:'n', ai:'c', jc:'g',};
-        let fOpts = { fd: 'c', wr: 'n', ai: 'c', jc: 'just-weird', };
+        let fOpts = { fd: 'c', wr: 'n', ai: 'c', jc: 'b', };
+        //let fOpts = {fd:'c', wr:'n', ai:'c', jc:'just-weird',};
         let fs1 = StyleBuilder.builder.flex(fOpts);
-        fs1.fs('lg').c('blue').m(9).p(5).br('red', 7);
+        fs1.fs('lg').c('blue').m(9).p(5).br({ color: 'red', radius: 5, width: 10, which: "v" });
         let style = fs1.style;
         console.log(`style:`, { style });
     },
-    tstSB() {
-        let rowSgStyle = StyleBuilder.builder.flexa('s').flexj('g').m(3).p(3).bg('#222').flexd('r').fgbg(2);
-        let colSgStyle = StyleBuilder.builder.flexa('s').flexj('g').m(3).p(3).bg('#222').flexd('c').fgbg(1);
-        let rcStyles = {
-            rowSg: rowSgStyle,
-            rowCc: rowSgStyle.clone.flexa('c').flexj('c'),
-            rowGg: rowSgStyle.clone.flexa('g').flexj('g'),
-            rowCg: rowSgStyle.clone.flexa('c').flexj('g'),
-            rowGc: rowSgStyle.clone.flexa('g').flexj('c'),
-            rowSs: rowSgStyle.clone.flexa('s').flexj('s'),
-            colSg: colSgStyle.clone,
-            colCc: colSgStyle.clone.flexa('c').flexj('c'),
-            colSs: colSgStyle.clone.flexa('s').flexj('s'),
-            colSc: colSgStyle.clone.flexa('s').flexj('c'),
-        };
-        let rSgCml = rowSgStyle.style;
-        let cSgCml = colSgStyle.style;
-        let jsStyles = {};
-        for (let key in rcStyles) {
-            jsStyles[key] = rcStyles[key].style;
-        }
-        console.log({ jsStyles });
-        //console.log({ rSgCml, cSgCml, });
-    },
+    /*
+  tstSB() {
+    let rowSgStyle = StyleBuilder.builder.flexa('s').flexj('g').m(3).p(3).bg('#222').flexd('r').fgbg(2);
+    let colSgStyle = StyleBuilder.builder.flexa('s').flexj('g').m(3).p(3).bg('#222').flexd('c').fgbg(1);
+    let rcStyles: GenObj = {
+      rowSg: rowSgStyle,
+      rowCc: rowSgStyle.clone.flexa('c').flexj('c'),
+      rowGg: rowSgStyle.clone.flexa('g').flexj('g'),
+      rowCg: rowSgStyle.clone.flexa('c').flexj('g'),
+      rowGc: rowSgStyle.clone.flexa('g').flexj('c'),
+      rowSs: rowSgStyle.clone.flexa('s').flexj('s'),
+      colSg: colSgStyle.clone,
+      colCc: colSgStyle.clone.flexa('c').flexj('c'),
+      colSs: colSgStyle.clone.flexa('s').flexj('s'),
+      colSc: colSgStyle.clone.flexa('s').flexj('c'),
+    };
+    let rSgCml = rowSgStyle.style;
+    let cSgCml = colSgStyle.style;
+
+    let jsStyles: GenObj = {};
+    for (let key in rcStyles) {
+      jsStyles[key] = rcStyles[key].style;
+    }
+
+    console.log({ jsStyles });
+    //console.log({ rSgCml, cSgCml, });
+
+  },
+    */
     /*
     tstSB() {
       let sb = StyleBuilder.builder;

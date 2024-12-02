@@ -26,8 +26,6 @@ let FromStyled = mkStyled('div', {
     color: 'blue',
     fontFamily: "courier"
 });
-/*
-*/
 //@ts-ignore
 //let ModStyled = FromStyled().css({ color: "green", background: "orange" });
 //let ModStyled = styled(FromStyled).css({ color: "green", background: "orange" });
@@ -39,19 +37,6 @@ let FromStyled = mkStyled('div', {
 //({ fontWeight: "bold", color: "red", fontStyle: "italic", border: props['aborder'] });
 //let ModStyled = styled.div.attrs<{ $background?: string, $fontsize?:string, }>
 //let ModStyled = styled.div.attrs<GenObj>(props => ({
-/*
-let ModStyled = styled(FromStyled).attrs<GenObj>(props => ({
-  $background: props.$background || "yellow",
-  $fontsize: props.$fontsize || "xx-large",
-  $color: props.$color || "green",
-})) `
-  border: solid red 5px;
-  background-color:${props => props.$background};
-  font-size:${props => props.$fontsize};
-  color: ${props => props.$color};
-  font-weight: bold;
-  `
-  */
 //let ModStyled = styled(FromStyled).attrs<GenObj>(props => ({
 let ModStyled2 = styled(FromStyled).attrs(props => ({
     $background: props.$background || "yellow",
@@ -65,8 +50,6 @@ let ModStyled2 = styled(FromStyled).attrs(props => ({
     color: props => props.$color,
     fontWeight: "bold",
 });
-/*
-*/
 // `font-weight:bold; color:red; font-style:italic;`;
 //let ModStyled = styled.div.attrs({ color: "green", background: "orange" })`font-weight:bold;`;
 //export { default as appCss } from  './App.css';

@@ -18,6 +18,4 @@ fdrWrnAicJcg fdrWrnAigJcs fdrWrnAigJcc fdrWrnAigJcg fdcWrwAisJcs fdcWrwAisJcc fd
 fdcWrwAicJcs fdcWrwAicJcc fdcWrwAicJcg fdcWrwAigJcs fdcWrwAigJcc fdcWrwAigJcg fdcWrnAisJcs
 fdcWrnAisJcc fdcWrnAisJcg fdcWrnAicJcs fdcWrnAicJcc fdcWrnAicJcg fdcWrnAigJcs fdcWrnAigJcc fdcWrnAigJcg
  */
-export declare function mkFlexStyles(): GenObj;
-export declare function mkFs(): void;
 //# sourceMappingURL=sbStyles.d.ts.map

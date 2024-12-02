@@ -20,13 +20,14 @@ export let tstFncs = {
     console.log("In tstb");
   },
   tstFlex() {
-    //let fOpts = {fd:'c', wr:'n', ai:'c', jc:'g',};
-    let fOpts = {fd:'c', wr:'n', ai:'c', jc:'just-weird',};
+    let fOpts = {fd:'c', wr:'n', ai:'c', jc:'b',} as const;
+    //let fOpts = {fd:'c', wr:'n', ai:'c', jc:'just-weird',};
     let fs1 = StyleBuilder.builder.flex(fOpts);
-    fs1.fs('lg').c('blue').m(9).p(5).br('red', 7);
+    fs1.fs('lg').c('blue').m(9).p(5).br({color:'red', radius:5, width:10, which:"v"});
     let style = fs1.style;
     console.log(`style:`, { style });
   },
+    /*
   tstSB() {
     let rowSgStyle = StyleBuilder.builder.flexa('s').flexj('g').m(3).p(3).bg('#222').flexd('r').fgbg(2);
     let colSgStyle = StyleBuilder.builder.flexa('s').flexj('g').m(3).p(3).bg('#222').flexd('c').fgbg(1);
@@ -54,6 +55,7 @@ export let tstFncs = {
     //console.log({ rSgCml, cSgCml, });
 
   },
+    */
   /*
   tstSB() {
     let sb = StyleBuilder.builder;

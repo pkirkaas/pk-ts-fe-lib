@@ -9,6 +9,30 @@
  * Main export is the StyleBuilder class. It creates a chainable `styleBuilder` instance 
  * that can be used to create css styles/classes.
  * 
+ * StyleBuilder:
+ *   static methods:
+ *     build(...args) - returns a new instance of the class
+ *   static properties:
+ *     builder: static getter - returns a new instance of the class
+ *   instance methods:
+ *     flex(opts:StyleBuilderFlexArgs) - Creates  flex display options
+ *     m(sz="1em",where?:WhereKeyType) - creates margin - all or 't'|'r'|'b'|'l'|'x'|'y'|'a'
+ *     p(sz="1em",where?:WhereKeyType) - creates padding - all or 't'|'r'|'b'|'l'|'x'|'y'|'a'
+ *     fs(sz) - font size
+ *     fw(weight) - font weight
+ *     c(color) - font color
+ *     bg(color) - background color
+ *     ta(align) - text align - 'c' 's' 'e'
+ *     fw(weight) - font weight
+ *     br(borderParams:BorderParams) - border - color, style, width, radius, which - all optional
+ *     add(key, val) - add a style property/value pair
+ *     w/minw/maxw/h/minh/maxh(sz) - width/height - all or 'min'|'max'
+ *     ib(color?,spread?) - inner border
+ *   instance properties:
+ *     className: getter string - the generated class name
+ *     style: getter object - the generated style object
+ * 
+ * 
  * On the `StyleBuilder` class, use the `builder` static getter method to get a new instance.
  * 
  * On an instance, us the `className` property to get the 
@@ -37,6 +61,30 @@ import {
 
 import { serializeStyles, } from '@emotion/serialize';
 
+// Interface & Types for StyleBuilder methods
+export interface StyleBuilderFlexArgs { // For building flex display styles
+  fd?: 'r' | 'c',
+  wr?: 'w' | 'n',
+  ai?: 's' | 'e' | 'c' | 'g' | 'b',
+  jc?: 's' | 'c' | 'e' | 'b' | 'a',
+}
+export type BmpKeys = 'm'|'p'|'b'; // Base Margin/Padding/Border keys
+  //br(color?: string, style?:string, radius?: string|number, which?: WhereKeyType) {
+  /*
+export interface BorderParams {
+  color?: string,
+  style?: string,
+  radius?: string | number,
+  width?: string | number,
+  which?: WhereKeyType, 
+};
+*/
+
+export type BorderParams = Partial<typeof StyleBuilder.borderParamDefaults>;
+  //static borderParamDefaults:BorderParams = {color:"#888", style:"solid", width:"1px", radius:0};
+export type WhereKeyType = keyof typeof StyleBuilder.whereKeys;
+export type AlignType = keyof typeof StyleBuilder.aligns;
+
   /** Utility - if val a key of obj, return the value
    * for the key, else return val itself.
    * Purpose: To allow some shortcut keys for CSS values, like
@@ -44,11 +92,7 @@ import { serializeStyles, } from '@emotion/serialize';
    * using the shortcut keys.
   */
   export function valFromObj(val:any, obj:GenObj):any {
-    //console.log(`valFromObj`, {val, obj});
     if (isPrimitive(val) && (val in obj)) {
-      //let ret = obj[val];
-      //console.log(`returning:`,{ret});
-
       return obj[val];
     }
     return val;
@@ -69,7 +113,12 @@ import { serializeStyles, } from '@emotion/serialize';
  * 
  */
 export class StyleBuilder {
-  thisClass: any; //Untyped hack
+  //thisClass: any; //Untyped hack
+  //get Class():StyleBuilder {
+  get Class():any {
+    //return this.constructor as StyleBuilder;
+    return this.constructor as any;
+   } 
   // Sadly, this doesn't work? thisClass:InstanceType<typeof this.constructor>;
 
   static displays = {
@@ -100,6 +149,7 @@ export class StyleBuilder {
    * ai - align items - s(start), c(center), g(stretch)
    * jc - justify content - s(start), c(center), g(stretch)
    */
+  /*
   static flexDisplays = {
     fd: { // Flex direction
       r: this.displays.fr.flexDirection,
@@ -120,6 +170,7 @@ export class StyleBuilder {
       g: this.displays.jcg.justifyContent,
     },
   };
+  */
 
   static flexDisplayOpts = {
     fd: { // Flex direction
@@ -166,13 +217,14 @@ export class StyleBuilder {
    * opt key vals - shortcut key into vals, or string value
    */
 
-  flex(flexOpts: GenObj = {}) {
-    let defaults: GenObj = { fd: 'r', wr: 'w', ai: 's', jc: 's' };
-    let rFlexOpts: GenObj = { ...defaults, ...flexOpts };
+  flex(flexOpts: StyleBuilderFlexArgs = {}) {
+    let defaults: StyleBuilderFlexArgs = { fd: 'r', wr: 'w', ai: 's', jc: 's' };
+    let rFlexOpts: StyleBuilderFlexArgs = { ...defaults, ...flexOpts };
     let dispStyle: GenObj = {
       display: 'flex',
     };
-    let fDisps = this.thisClass.flexDisplayOpts;
+    //let fDisps = this.thisClass.flexDisplayOpts;
+    let fDisps = this.Class.flexDisplayOpts;
     for (let propkey in rFlexOpts) {
       let prop = fDisps[propkey].prop;
       let valkey = rFlexOpts[propkey];
@@ -193,6 +245,7 @@ export class StyleBuilder {
    * flex align-items - 
    * @param align:string - one of s,c,g or full css align value
    */
+  /*
   flexa(val='s') {
     val = valFromObj(val,this.thisClass.flexDisplays.ai);
     return this.merge({display:'flex', alignItems:val});
@@ -215,6 +268,7 @@ export class StyleBuilder {
     val = valFromObj(val,this.thisClass.flexDisplays.wr);
     return this.merge({display:'flex', flexWrap:val});
   }
+    */
 
   get camelled() {
     return camelKeys(this.style);
@@ -263,7 +317,6 @@ export class StyleBuilder {
     p: 'padding',
     b: 'border',
   };
-
   /**
    * Makes a style object for margin/padding/border
    * @propBase - m,b,p
@@ -271,7 +324,7 @@ export class StyleBuilder {
    * @key opt - one of the keys for whereKeys 't','b','x','y', etc
    * @return - basic object w. css style props/vals
    */
-  static mkMPBWhereProps(propBase, val, key) {
+  static mkMPBWhereProps(propBase:BmpKeys, val="1em", key?:WhereKeyType) {
     let propType = this.bpmKeys[propBase];
     if (!propType) {
       throw new Error(`invalid prop type [${propBase}]`);
@@ -304,7 +357,7 @@ export class StyleBuilder {
   styleObj: GenObj; // A regular JS obj of the built style
 
   constructor(...sos) {
-    this.thisClass = this.constructor;
+    //this.thisClass = this.constructor;
     this.styleObj = {};
     this.merge(...sos);
     /*
@@ -329,7 +382,8 @@ export class StyleBuilder {
   }
 
   get clone() { //New SB instance as clone
-    return new this.thisClass(this);
+    //return new this.thisClass(this);
+    return new this.Class(this);
   }
 
 
@@ -348,9 +402,8 @@ export class StyleBuilder {
     return this;
   }
 
-  // Merges value to key
+  // Add any css property/value pair
   add(key, value) {
-
     return this.merge({ [key]: value });
   }
 
@@ -358,12 +411,21 @@ export class StyleBuilder {
     return this.add(`& ${key}`, value);
   }
 
-  ta(align:string = 'c') {
+  static aligns = {
+    c: "center",
+    l: "left",
+    r: "right",
+  }
+  ta(align:AlignType = 'c') {
+    /*
     let aligns = {
       c: "center",
       l: "left",
       r: "right",
     };
+    */
+   //let aligns = this.thisClass.aligns;
+   let aligns = this.Class.aligns;
     if (align in aligns) {
       align = aligns[align];
     }
@@ -391,7 +453,8 @@ export class StyleBuilder {
         pair = -pair;
         invert = true;
       }
-      objPair = this.thisClass.fgBgPairs[pair];
+      //objPair = this.thisClass.fgBgPairs[pair];
+      objPair = this.Class.fgBgPairs[pair];
     } else if (Array.isArray(pair)) {
       objPair.fg = pair[0];
       objPair.bg = pair[1];
@@ -423,8 +486,8 @@ export class StyleBuilder {
 
 
   fs(sz) { //font size
-    if (sz in this.thisClass.fontSizeMap) {
-      sz = this.thisClass.fontSizeMap[sz];
+    if (sz in this.Class.fontSizeMap) {
+      sz = this.Class.fontSizeMap[sz];
     }
     this.styleObj.fontSize = sz;
     return this;
@@ -447,27 +510,51 @@ export class StyleBuilder {
  * @param which string|empty - if empty, all margins, if string, one of t|b|l|r|v|h|x|y
  * 
   */
-  m(arg, which?: string) {
-    if (!arg) return this;
-    let mg = this.thisClass.mkMPBWhereProps('m', arg, which);
+  m(arg?:any, which?: WhereKeyType) {
+    if (!arg) {
+      arg = "1em";
+    }
+    let mg = this.Class.mkMPBWhereProps('m', arg, which);
     _.merge(this.styleObj, mg);
     return this;
   }
-  p(arg, which?: string) {
-    if (!arg) return this;
-    let mg = this.thisClass.mkMPBWhereProps('p', arg, which);
+  p(arg?:any, which?: WhereKeyType) {
+    if (!arg) {
+      arg = "1em";
+    }
+    let mg = this.Class.mkMPBWhereProps('p', arg, which);
     _.merge(this.styleObj, mg);
     return this;
   }
 
   // Border - make this better
-  br(color?: string, radius?: any) {
-    if (!color) {
-      color = "#888";
+  //br(color?: string, radius?: string|number, which?: WhereKeyType) {
+  //br(color?: string, style?:string, radius?: string|number, which?: WhereKeyType) {
+  static borderParamDefaults = {color:"#888", style:"solid", width:"1px" as string|number, radius:0 as string|number, which:null as null | WhereKeyType };
+  br(borderParams:BorderParams = {}) {
+  //  let defaults:BorderParams = {color:"#888", style:"solid", width:"1px", radius:0};
+    let {color, style, radius, width, which} = {...(this.Class.borderParamDefaults), ...borderParams};
+    let bpd = this.Class.borderParamDefaults;
+    let tClass = this.Class;
+    let toTC = typeOf(tClass);
+    console.log("In BR:",{color, style, radius, width, which, bpd, tClass, toTC,});
+    let settings = `${style} ${width} ${color}`;
+    
+    let ret: GenObj = {};
+    if (which) {
+      let sTypes = this.Class.whereKeys[which];
+      if (!sTypes) {
+        throw new Error(`invalid sType type [${which}]`);
+      }
+      if (!Array.isArray(sTypes)) {
+        sTypes = [sTypes];
+      }
+      for (let sType of sTypes) {
+        ret[`border${sType}`] = settings;
+      }
+    } else {
+      ret.border = settings;
     }
-    let ret: GenObj = {
-      border: `solid ${color} 1px`,
-    };
     if (radius) {
       ret.borderRadius = radius;
     }
@@ -503,8 +590,8 @@ export class StyleBuilder {
     for (let dispArg of dispArgs) {
       let toDA = typeof dispArg;
       if (toDA === "string") {
-        if (dispArg in this.thisClass.displays) {
-          _.merge(dispStyle, camelKeys(this.thisClass.displays[dispArg]));
+        if (dispArg in this.Class.displays) {
+          _.merge(dispStyle, camelKeys(this.Class.displays[dispArg]));
         } else {
           console.error(`String dispArg [${dispArg}] not in disp keys`);
         }
@@ -530,7 +617,7 @@ export class StyleBuilder {
  * TODO: Make more nested, and accept generic JS style objects
  *  - for now, just works for
  * top level args of type StyleBuilder
- * @param ...args - 
+ * @param ...args - one or more StyleBuilder instances or style objects
  */
 export function cxsb(...args) {
   let ret = [];

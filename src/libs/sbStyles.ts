@@ -38,6 +38,7 @@ fdcWrwAicJcs fdcWrwAicJcc fdcWrwAicJcg fdcWrwAigJcs fdcWrwAigJcc fdcWrwAigJcg fd
 fdcWrnAisJcc fdcWrnAisJcg fdcWrnAicJcs fdcWrnAicJcc fdcWrnAicJcg fdcWrnAigJcs fdcWrnAigJcc fdcWrnAigJcg
  */
 
+/*
 export function mkFlexStyles() { // Build combinations of flex display styles
   let flexStyles: GenObj = {};
   let flexDisplays = StyleBuilder.flexDisplays;
@@ -70,5 +71,6 @@ export function mkFlexStyles() { // Build combinations of flex display styles
 
 export function mkFs() {
 }
+*/
 
 
