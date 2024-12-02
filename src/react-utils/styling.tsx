@@ -16,6 +16,7 @@ import * as _ from 'lodash';
  * @param styles:GenObj | GenObj[] - style objects to flatten
  * @param toCamel?: boolean = default true - else, snake 
  */
+/*
 export function flattenStyles(styles:GenObj|GenObj[], toCamel=true):GenObj {
   if (!Array.isArray(styles)) {
     styles = [styles];
@@ -25,26 +26,6 @@ export function flattenStyles(styles:GenObj|GenObj[], toCamel=true):GenObj {
   let cased = camelKeys(flatStyles);
   return cased;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  */
 
 

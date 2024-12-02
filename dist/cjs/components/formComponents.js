@@ -6,38 +6,6 @@ import { useState, Fragment } from 'react';
 import { addProps, replaceProps, } from '../libs/reactUtils.js';
 import Select from 'react-select';
 import { styled } from 'styled-components';
-/*
-import * as stdef from 'styled-components';
-import {
-    ServerStyleSheet,
-  StyleSheetConsumer,
-  StyleSheetContext,
-  StyleSheetManager,
-  ThemeConsumer,
-  ThemeContext,
-  ThemeProvider,
-  css,
-} from  'styled-components';
-*/
-//import {StyleSheet} from  'styled-components/sheet';
-/*
-export function analyzeSS() {
-  let tstStyles = [
-    {
-      color: "red",
-      "font-weight": "bold",
-      "background-color": "blue",
-    },
-    {
-      border: "solid black 1px",
-      fontFamily: "arial",
-    },
-  ];
-  let ccStyles = flattenStyles(tstStyles, true);
-  let snStyles =  flattenStyles(tstStyles, false);
-  console.log(`tsting styles merges:`,{ccStyles, snStyles});
-}
-*/
 import { PanelGroup, PanelResizeHandle, } from "react-resizable-panels";
 //////////// Testing styled components
 //export const SDiv = styled.div`border: solid red 2px; `

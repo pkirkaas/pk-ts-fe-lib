@@ -7,45 +7,6 @@ import { addProps, replaceProps, getCnt, } from '../libs/reactUtils.js';
 import { signal } from "@preact/signals-react";
 import Select from 'react-select'
 import { styled } from 'styled-components';
-import { flattenStyles, } from '../react-utils/styling.js';
-
-
-/*
-import * as stdef from 'styled-components';
-import {
-    ServerStyleSheet,
-  StyleSheetConsumer,
-  StyleSheetContext,
-  StyleSheetManager,
-  ThemeConsumer,
-  ThemeContext,
-  ThemeProvider,
-  css,
-} from  'styled-components';
-*/
-
-//import {StyleSheet} from  'styled-components/sheet';
-
-
-/*
-export function analyzeSS() {
-  let tstStyles = [
-    {
-      color: "red",
-      "font-weight": "bold",
-      "background-color": "blue",
-    },
-    {
-      border: "solid black 1px",
-      fontFamily: "arial",
-    },
-  ];
-  let ccStyles = flattenStyles(tstStyles, true);
-  let snStyles =  flattenStyles(tstStyles, false);
-  console.log(`tsting styles merges:`,{ccStyles, snStyles});
-}
-*/
-
 
 import { Panel, PanelGroup, PanelResizeHandle, PanelGroupProps, } from "react-resizable-panels";
 
