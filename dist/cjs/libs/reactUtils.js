@@ -12,6 +12,8 @@ export function getCnt() {
     //console.log(`NewCnt: [${compCount.cnt}]`);
     return compCount.cnt;
 }
+export * from './styleUtils.js';
+export * from './styleUtils.js';
 axios.defaults.baseURL = apiUrl;
 export function getPage() {
     let path = window.location.pathname;
