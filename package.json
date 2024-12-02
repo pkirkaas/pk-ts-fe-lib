@@ -34,7 +34,7 @@
   },
   "scripts": {
     "clean": "rm -rf ./dist ./package-lock.json ./node_modules",
-    "cleani": "npm run clean && npm i",
+    "cleani": "npm run clean && npm i --force",
     "reset": "npm run clean && npm run build",
     "build:sass": "sass --load-path=./node_modules --embed-sources ./scss/pk-default.scss  ./build/assets/cli.css",
     "build:sasstst": "sass --load-path=./node_modules --embed-sources ./scss/tst.scss  ./build/assets/clitst.css",

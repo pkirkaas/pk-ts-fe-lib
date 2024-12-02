@@ -24,6 +24,7 @@
  *     bg(color) - background color
  *     ta(align) - text align - 'c' 's' 'e'
  *     fw(weight) - font weight
+ *     d(arg:string|StyleBuilderFlexArgs) - set display - 'i' | 'inline' | 'b' | 'block' | StyleBuilderFlexArgs
  *     br(borderParams:BorderParams) - border - color, style, width, radius, which - all optional
  *     add(key, val) - add a style property/value pair
  *     w/minw/maxw/h/minh/maxh(sz) - width/height - all or 'min'|'max'
@@ -40,9 +41,6 @@
  * Use the `clone` instance getter to get a new instance of the same style.
  *
  * let sb = StyleBuilder.builder.p(5).m(10).
- */
-/**
- * Absolutely can't rely on CSS to be invariant - for now, localize dependencies
  */
 import { GenObj } from 'pk-ts-common-lib';
 export interface StyleBuilderFlexArgs {
@@ -76,61 +74,6 @@ export declare function valFromObj(val: any, obj: GenObj): any;
  */
 export declare class StyleBuilder {
     get Class(): any;
-    static displays: {
-        block: {
-            display: string;
-        };
-        inline: {
-            display: string;
-        };
-        fc: {
-            display: string;
-            flexDirection: string;
-        };
-        fr: {
-            display: string;
-            flexDirection: string;
-        };
-        w: {
-            display: string;
-            flexWrap: string;
-        };
-        nw: {
-            display: string;
-            flexWrap: string;
-        };
-        ais: {
-            display: string;
-            alignItems: string;
-        };
-        aic: {
-            display: string;
-            alignItems: string;
-        };
-        aig: {
-            display: string;
-            alignItems: string;
-        };
-        jcs: {
-            display: string;
-            justifyContent: string;
-        };
-        jcc: {
-            display: string;
-            justifyContent: string;
-        };
-        jcg: {
-            display: string;
-            justifyContent: string;
-        };
-    };
-    /**
-     * Shortcuts for flex displays - 4 keys:
-     * fd - flex direction - r(row) or c (column)
-     * wr - flex wrap - w(wrap) or nw (nowrap)
-     * ai - align items - s(start), c(center), g(stretch)
-     * jc - justify content - s(start), c(center), g(stretch)
-     */
     static flexDisplayOpts: {
         fd: {
             prop: string;
@@ -174,10 +117,6 @@ export declare class StyleBuilder {
      * opt key vals - shortcut key into vals, or string value
      */
     flex(flexOpts?: StyleBuilderFlexArgs): this;
-    /**
-     * flex align-items -
-     * @param align:string - one of s,c,g or full css align value
-     */
     get camelled(): GenObj;
     static fgBgPairs: {
         1: {
@@ -189,6 +128,14 @@ export declare class StyleBuilder {
             bg: string;
         };
         3: {
+            fg: string;
+            bg: string;
+        };
+        4: {
+            fg: string;
+            bg: string;
+        };
+        5: {
             fg: string;
             bg: string;
         };
@@ -268,7 +215,7 @@ export declare class StyleBuilder {
      * @param invert boolean - invert the light/dark?
      *
      */
-    fgbg(pair: any, invert?: boolean): this;
+    fgbg(pair: string | string[] | number | GenObj, invert?: boolean): this;
     /**
      * Inner Border
      */
@@ -294,11 +241,11 @@ export declare class StyleBuilder {
     c(color: any): this;
     bg(color: any): this;
     /**
-     * Set the display
-     * @param ...dispArgs - array of strings - keys to static:displays, or valid CSS display values
-     * Merged together sequentially
+     * Set display
+     * @param arg - string or StyleBuilderFlexArgs - see StyleBuilderFlexArgs
+     * if string, 'i' | 'inline' | 'b' | 'block', else flex
      */
-    d(...dispArgs: any[]): this;
+    d(arg: string | StyleBuilderFlexArgs): this;
 }
 /**
  * Laziness again - SB is just a new StyleBuilder instance

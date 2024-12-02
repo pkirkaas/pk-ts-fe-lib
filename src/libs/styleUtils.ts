@@ -24,6 +24,7 @@
  *     bg(color) - background color
  *     ta(align) - text align - 'c' 's' 'e'
  *     fw(weight) - font weight
+ *     d(arg:string|StyleBuilderFlexArgs) - set display - 'i' | 'inline' | 'b' | 'block' | StyleBuilderFlexArgs
  *     br(borderParams:BorderParams) - border - color, style, width, radius, which - all optional
  *     add(key, val) - add a style property/value pair
  *     w/minw/maxw/h/minh/maxh(sz) - width/height - all or 'min'|'max'
@@ -46,11 +47,8 @@
  * Absolutely can't rely on CSS to be invariant - for now, localize dependencies
  */
 /* @jsxImportSource @emotion/react */
-import {
-  getProps, getObjDets, subObj, typeOf, allProps, allPropsP, objInfo, PkError,
-  GenObj, isNumeric, isSimpleObject, camelKeys, isPrimitive, isObject,
 
-} from 'pk-ts-common-lib';
+// import npm packages
 
 import _ from 'lodash';
 import {
@@ -61,6 +59,15 @@ import {
 
 import { serializeStyles, } from '@emotion/serialize';
 
+// import pklib packages
+import {
+  getProps, getObjDets, subObj, typeOf, allProps, allPropsP, objInfo, PkError,
+  GenObj, isNumeric, isSimpleObject, camelKeys, isPrimitive, isObject, Scalar, Scalars, mkScalarArr,
+
+} from 'pk-ts-common-lib';
+// import local packages
+
+
 // Interface & Types for StyleBuilder methods
 export interface StyleBuilderFlexArgs { // For building flex display styles
   fd?: 'r' | 'c',
@@ -69,21 +76,10 @@ export interface StyleBuilderFlexArgs { // For building flex display styles
   jc?: 's' | 'c' | 'e' | 'b' | 'a',
 }
 export type BmpKeys = 'm'|'p'|'b'; // Base Margin/Padding/Border keys
-  //br(color?: string, style?:string, radius?: string|number, which?: WhereKeyType) {
-  /*
-export interface BorderParams {
-  color?: string,
-  style?: string,
-  radius?: string | number,
-  width?: string | number,
-  which?: WhereKeyType, 
-};
-*/
-
 export type BorderParams = Partial<typeof StyleBuilder.borderParamDefaults>;
-  //static borderParamDefaults:BorderParams = {color:"#888", style:"solid", width:"1px", radius:0};
 export type WhereKeyType = keyof typeof StyleBuilder.whereKeys;
 export type AlignType = keyof typeof StyleBuilder.aligns;
+//export type Scalar = string | number;
 
   /** Utility - if val a key of obj, return the value
    * for the key, else return val itself.
@@ -113,64 +109,9 @@ export type AlignType = keyof typeof StyleBuilder.aligns;
  * 
  */
 export class StyleBuilder {
-  //thisClass: any; //Untyped hack
-  //get Class():StyleBuilder {
-  get Class():any {
-    //return this.constructor as StyleBuilder;
+  get Class():any { // The class of the instance, to access static props/methods from instance
     return this.constructor as any;
    } 
-  // Sadly, this doesn't work? thisClass:InstanceType<typeof this.constructor>;
-
-  static displays = {
-    //f: { display: "flex" },
-    block: { display: "block" },
-    inline: { display: "inline-block" },
-    //c: { display: "flex", "flex-direction": "column" },
-    fc: { display: "flex", "flexDirection": "column" },
-    //r: { display: "flex", "flex-direction": "row" },
-    fr: { display: "flex", "flexDirection": "row" },
-    w: { display: "flex", "flexWrap": "wrap" },
-    nw: { display: "flex", "flexWrap": "no-wrap" },
-
-    ais: { display: "flex", "alignItems": "flex-start" },
-    aic: { display: "flex", "alignItems": "flex-center" },
-    aig: { display: "flex", "alignItems": "flex-stretch" },
-
-
-    jcs: { display: "flex", "justifyContent": "flex-start" },
-    jcc: { display: "flex", "justifyContent": "flex-center" },
-    jcg: { display: "flex", "justifyContent": "flex-stretch" },
-  };
-
-  /**
-   * Shortcuts for flex displays - 4 keys: 
-   * fd - flex direction - r(row) or c (column)
-   * wr - flex wrap - w(wrap) or nw (nowrap)
-   * ai - align items - s(start), c(center), g(stretch)
-   * jc - justify content - s(start), c(center), g(stretch)
-   */
-  /*
-  static flexDisplays = {
-    fd: { // Flex direction
-      r: this.displays.fr.flexDirection,
-      c: this.displays.fc.flexDirection,
-    },
-    wr: { // Wrap
-      w: this.displays.w.flexWrap,
-      n: this.displays.nw.flexWrap,
-    },
-    ai: { //align-items
-      s: this.displays.ais.alignItems,
-      c: this.displays.aic.alignItems,
-      g: this.displays.aig.alignItems,
-    },
-    jc: { //justify-content
-      s: this.displays.jcs.justifyContent,
-      c: this.displays.jcc.justifyContent,
-      g: this.displays.jcg.justifyContent,
-    },
-  };
-  */
 
   static flexDisplayOpts = {
     fd: { // Flex direction
@@ -228,48 +169,11 @@ export class StyleBuilder {
     for (let propkey in rFlexOpts) {
       let prop = fDisps[propkey].prop;
       let valkey = rFlexOpts[propkey];
-      //let val = fDisps[propkey].vals[valkey];
       let val = valFromObj(valkey, fDisps[propkey].vals);
-
       _.merge(dispStyle, {[prop]:val});
     }
     return this.merge(dispStyle);
-    //console.log(`in StyleBuilder flex method - `, {flexOpts, dispStyle, fDisps, rFlexOpts});
-    //return this;
-    //let camelled = camelKeys(dispStyle);
   }
-  /*
-    */
-
-  /**
-   * flex align-items - 
-   * @param align:string - one of s,c,g or full css align value
-   */
-  /*
-  flexa(val='s') {
-    val = valFromObj(val,this.thisClass.flexDisplays.ai);
-    return this.merge({display:'flex', alignItems:val});
-  }
-
-  // flex justify content
-  //@deprecated
-  flexj(val='s') {
-    val = valFromObj(val,this.thisClass.flexDisplays.jc);
-    return this.merge({display:'flex', justifyContent:val});
-  }
-
-  //flex direction
-  flexd(val='r') {
-    val = valFromObj(val,this.thisClass.flexDisplays.fd);
-    return this.merge({display:'flex', flexDirection:val});
-  }
-
-  flexw(val = 'w') {
-    val = valFromObj(val,this.thisClass.flexDisplays.wr);
-    return this.merge({display:'flex', flexWrap:val});
-  }
-    */
-
   get camelled() {
     return camelKeys(this.style);
   }
@@ -279,6 +183,8 @@ export class StyleBuilder {
     1: { fg: "#000", bg: "#fff" },
     2: { fg: "#004", bg: "#eff" },
     3: { fg: "#400", bg: "#ffe" },
+    4: { fg: "#040", bg: "#fef" },
+    5: { fg: "#404", bg: "#efe" },
     blwh: { fg: "#004", bg: "#fff" },
     rdwh: { fg: "#400", bg: "#fff" },
 
@@ -357,21 +263,8 @@ export class StyleBuilder {
   styleObj: GenObj; // A regular JS obj of the built style
 
   constructor(...sos) {
-    //this.thisClass = this.constructor;
     this.styleObj = {};
     this.merge(...sos);
-    /*
-    for (let so of sos) {
-      if (so instanceof StyleBuilder) {
-        so = so.style;
-      }
-      if (!isSimpleObject(so)) {
-        throw new Error(`Invalid so param:`);
-      }
-      so = camelKeys(so);
-      _.merge(this.styleObj, so);
-    }
-      */
   }
   get style() { // Returns a dup of the GeneralStyle Object
     return camelKeys(structuredClone(this.styleObj));
@@ -382,7 +275,6 @@ export class StyleBuilder {
   }
 
   get clone() { //New SB instance as clone
-    //return new this.thisClass(this);
     return new this.Class(this);
   }
 
@@ -391,7 +283,6 @@ export class StyleBuilder {
     for (let obj of objs) {
       if (obj instanceof StyleBuilder) {
         obj = obj.style;
-        //obj = obj.camelled;
       }
       if (!isSimpleObject(obj)) {
         throw new Error(`Invalid so param:`);
@@ -417,13 +308,6 @@ export class StyleBuilder {
     r: "right",
   }
   ta(align:AlignType = 'c') {
-    /*
-    let aligns = {
-      c: "center",
-      l: "left",
-      r: "right",
-    };
-    */
    //let aligns = this.thisClass.aligns;
    let aligns = this.Class.aligns;
     if (align in aligns) {
@@ -446,41 +330,48 @@ export class StyleBuilder {
    * @param invert boolean - invert the light/dark?
    * 
    */
-  fgbg(pair: any, invert = false) {
+  fgbg(pair: string|string[] | number | GenObj, invert = false) {
     let objPair:GenObj = {};
-    if (isPrimitive(pair)) {
-      if (isNumeric(pair) && (pair < 0)) {
+    if (isPrimitive(pair)) { // Should be key to fgBgPairs
+      if (isNumeric(pair) && ((pair as number) < 0)) { // if negative, invert
         pair = -pair;
         invert = true;
       }
-      //objPair = this.thisClass.fgBgPairs[pair];
-      objPair = this.Class.fgBgPairs[pair];
-    } else if (Array.isArray(pair)) {
+      if (pair as Scalar in this.Class.fgBgPairs) {
+        objPair = this.Class.fgBgPairs[pair as Scalar];
+      } else { // TODO: Allow a CSS Color string, and invert/complement it for fg/bg
+        throw new PkError(`Invalid fgbg arg:`,{pair,invert});
+      }
+    } else if (Array.isArray(pair)) { // Array of 2 CSS Colors
       objPair.fg = pair[0];
       objPair.bg = pair[1];
     } else if (isObject(pair)) {
-      objPair.fg = pair.fg;
-      objPair.bg = pair.bg;
+      objPair.fg = (pair as GenObj).fg;
+      objPair.bg = (pair as GenObj).bg;
     } 
     if (!isObject(objPair) || !objPair.fg || !objPair.bg) {
       throw new PkError(`Invalid arg to SB.fgbg:`,{pair,invert});
     }
+    let ret:GenObj = {};
     if (invert) {
-      this.c(objPair.fg);
-      this.bg(objPair.bg);
+      ret.color=(objPair.fg);
+      ret.background=(objPair.bg);
     } else {
-      this.c(objPair.bg);
-      this.bg(objPair.fg);
+      ret.color=(objPair.bg);
+      ret.background=(objPair.fg);
     }
-    return this;
+    return this.merge(ret);
   }
 
   /**
    * Inner Border
    */
   ib(color = "#888", spread = 1) {
+    /*
     this.styleObj.boxShadow = `inset 0px 0px 0px ${spread} ${color}`;
     return this;
+    */
+   return this.merge({boxShadow: `inset 0px 0px 0px ${spread} ${color}`});
   }
 
 
@@ -489,8 +380,11 @@ export class StyleBuilder {
     if (sz in this.Class.fontSizeMap) {
       sz = this.Class.fontSizeMap[sz];
     }
+    return this.merge({fontSize:sz});
+    /*
     this.styleObj.fontSize = sz;
     return this;
+    */
   }
 
   // Dimensions - w, maxw, minw, h, maxh, minh
@@ -523,23 +417,18 @@ export class StyleBuilder {
       arg = "1em";
     }
     let mg = this.Class.mkMPBWhereProps('p', arg, which);
+    /*
     _.merge(this.styleObj, mg);
     return this;
+    */
+   return this.merge(mg);
   }
 
-  // Border - make this better
-  //br(color?: string, radius?: string|number, which?: WhereKeyType) {
-  //br(color?: string, style?:string, radius?: string|number, which?: WhereKeyType) {
+  // Border
   static borderParamDefaults = {color:"#888", style:"solid", width:"1px" as string|number, radius:0 as string|number, which:null as null | WhereKeyType };
   br(borderParams:BorderParams = {}) {
-  //  let defaults:BorderParams = {color:"#888", style:"solid", width:"1px", radius:0};
     let {color, style, radius, width, which} = {...(this.Class.borderParamDefaults), ...borderParams};
-    let bpd = this.Class.borderParamDefaults;
-    let tClass = this.Class;
-    let toTC = typeOf(tClass);
-    console.log("In BR:",{color, style, radius, width, which, bpd, tClass, toTC,});
     let settings = `${style} ${width} ${color}`;
-    
     let ret: GenObj = {};
     if (which) {
       let sTypes = this.Class.whereKeys[which];
@@ -579,32 +468,34 @@ export class StyleBuilder {
     this.styleObj.backgroundColor = color;
     return this;
   }
-  // Display - come up with clever args
-  /**
-   * Set the display
-   * @param ...dispArgs - array of strings - keys to static:displays, or valid CSS display values
-   * Merged together sequentially
-   */
-  d(...dispArgs) {
-    let dispStyle: GenObj = {};
-    for (let dispArg of dispArgs) {
-      let toDA = typeof dispArg;
-      if (toDA === "string") {
-        if (dispArg in this.Class.displays) {
-          _.merge(dispStyle, camelKeys(this.Class.displays[dispArg]));
-        } else {
-          console.error(`String dispArg [${dispArg}] not in disp keys`);
-        }
-      } else if (toDA === "object") { // Merge object
-        _.merge(dispStyle, camelKeys(dispArg));
+   /**
+    * Set display 
+    * @param arg - string or StyleBuilderFlexArgs - see StyleBuilderFlexArgs
+    * if string, 'i' | 'inline' | 'b' | 'block', else flex
+    */
+  d(arg:string | StyleBuilderFlexArgs ) {
+    if (typeof arg === "string") {
+      if (arg === 'flex') { //default flex
+        return this.flex();
       } else {
-        console.error(`Unhandled dispArg:`, { dispArg });
+        let disps = {
+          i:'inline-block',
+          inline:'inline-block',
+          b:'block',
+          block:'block',
+        };
+        return this.merge({display:valFromObj(arg, disps)});
       }
+    } else if (isSimpleObject(arg)) { // Must be flexargs
+      return this.flex(arg);
+    } else { //??
+      throw new PkError(`Unhandled arg type:`, { arg });
     }
-    //console.log(`About to create display:`, { dispStyle });
-    return this.merge(dispStyle);
   }
 }
+
+
+/// END OF STYLEBUILDER CLASS !!!
 
 /**
  * Laziness again - SB is just a new StyleBuilder instance

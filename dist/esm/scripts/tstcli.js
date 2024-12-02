@@ -15,8 +15,11 @@ export let tstFncs = {
     tstFlex() {
         let fOpts = { fd: 'c', wr: 'n', ai: 'c', jc: 'b', };
         //let fOpts = {fd:'c', wr:'n', ai:'c', jc:'just-weird',};
-        let fs1 = StyleBuilder.builder.flex(fOpts);
+        //let fs1 = StyleBuilder.builder.flex(fOpts);
+        //let fs1 = StyleBuilder.builder.d(fOpts);
+        let fs1 = StyleBuilder.builder.d('b');
         fs1.fs('lg').c('blue').m(9).p(5).br({ color: 'red', radius: 5, width: 10, which: "v" });
+        fs1.fgbg(3).fs('large').fw('bold');
         let style = fs1.style;
         console.log(`style:`, { style });
     },
