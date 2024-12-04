@@ -24,6 +24,7 @@
  *     bg(color) - background color
  *     ta(align) - text align - 'c' 's' 'e'
  *     fw(weight) - font weight
+ *     ff(fontFamily) - font family - key of fontFamilies -'c', 'r', 's', etc
  *     d(arg:string|StyleBuilderFlexArgs) - set display - 'i' | 'inline' | 'b' | 'block' | StyleBuilderFlexArgs
  *     br(borderParams:BorderParams) - border - color, style, width, radius, which - all optional
  *     add(key, val) - add a style property/value pair
@@ -42,7 +43,7 @@
  *
  * let sb = StyleBuilder.builder.p(5).m(10).
  */
-import { GenObj } from 'pk-ts-common-lib';
+import { GenObj, Scalar } from 'pk-ts-common-lib';
 export interface StyleBuilderFlexArgs {
     fd?: 'r' | 'c';
     wr?: 'w' | 'n';
@@ -53,6 +54,7 @@ export type BmpKeys = 'm' | 'p' | 'b';
 export type BorderParams = Partial<typeof StyleBuilder.borderParamDefaults>;
 export type WhereKeyType = keyof typeof StyleBuilder.whereKeys;
 export type AlignType = keyof typeof StyleBuilder.aligns;
+export type FontFamily = keyof typeof StyleBuilder.fontFamilies;
 /** Utility - if val a key of obj, return the value
  * for the key, else return val itself.
  * Purpose: To allow some shortcut keys for CSS values, like
@@ -163,6 +165,22 @@ export declare class StyleBuilder {
         smaller: string;
         larger: string;
     };
+    static fontFamilies: {
+        v: string;
+        verdana: string;
+        c: string;
+        courier: string;
+        l: string;
+        lucidia: string;
+        t: string;
+        timtes: string;
+        r: string;
+        roboto: string;
+        a: string;
+        arial: string;
+        h: string;
+        helvetica: string;
+    };
     static whereKeys: {
         t: string;
         b: string;
@@ -205,6 +223,7 @@ export declare class StyleBuilder {
         r: string;
     };
     ta(align?: AlignType): this;
+    ff(fontFamily: FontFamily): this;
     /**
      * Make forground/background color pairs from the list
      * @param pair - primitive - key to ltDrkColorPairs obj,
@@ -220,15 +239,19 @@ export declare class StyleBuilder {
      * Inner Border
      */
     ib(color?: string, spread?: number): this;
-    fs(sz: any): this;
-    w(val: any): this;
-    maxw(val: any): this;
-    minw(val: any): this;
-    h(val: any): this;
-    maxh(val: any): this;
-    minh(val: any): this;
-    m(arg?: any, which?: WhereKeyType): this;
-    p(arg?: any, which?: WhereKeyType): this;
+    fs(sz: Scalar): this;
+    w(val: Scalar): this;
+    maxw(val: Scalar): this;
+    minw(val: Scalar): this;
+    h(val: Scalar): this;
+    maxh(val: Scalar): this;
+    minh(val: Scalar): this;
+    m(arg?: Scalar, which?: WhereKeyType): this;
+    mv(arg?: Scalar): this;
+    mh(arg?: Scalar): this;
+    p(arg?: Scalar, which?: WhereKeyType): this;
+    pv(arg?: Scalar): this;
+    ph(arg?: Scalar): this;
     static borderParamDefaults: {
         color: string;
         style: string;
@@ -236,7 +259,7 @@ export declare class StyleBuilder {
         radius: string | number;
         which: null | WhereKeyType;
     };
-    br(borderParams?: BorderParams): this;
+    br(borderParams?: BorderParams | string): this;
     fw(weight: any): this;
     c(color: any): this;
     bg(color: any): this;

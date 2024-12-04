@@ -24,6 +24,7 @@
  *     bg(color) - background color
  *     ta(align) - text align - 'c' 's' 'e'
  *     fw(weight) - font weight
+ *     ff(fontFamily) - font family - key of fontFamilies -'c', 'r', 's', etc
  *     d(arg:string|StyleBuilderFlexArgs) - set display - 'i' | 'inline' | 'b' | 'block' | StyleBuilderFlexArgs
  *     br(borderParams:BorderParams) - border - color, style, width, radius, which - all optional
  *     add(key, val) - add a style property/value pair
@@ -61,7 +62,7 @@ import { serializeStyles, } from '@emotion/serialize';
 
 // import pklib packages
 import {
-  getProps, getObjDets, subObj, typeOf, allProps, allPropsP, objInfo, PkError,
+  getProps, getObjDets, subObj, typeOf, allProps, allPropsP, objInfo, PkError, 
   GenObj, isNumeric, isSimpleObject, camelKeys, isPrimitive, isObject, Scalar, Scalars, mkScalarArr,
 
 } from 'pk-ts-common-lib';
@@ -79,6 +80,12 @@ export type BmpKeys = 'm'|'p'|'b'; // Base Margin/Padding/Border keys
 export type BorderParams = Partial<typeof StyleBuilder.borderParamDefaults>;
 export type WhereKeyType = keyof typeof StyleBuilder.whereKeys;
 export type AlignType = keyof typeof StyleBuilder.aligns;
+
+export type FontFamily = keyof typeof StyleBuilder.fontFamilies;
+
+
+
+
 //export type Scalar = string | number;
 
   /** Utility - if val a key of obj, return the value
@@ -205,6 +212,23 @@ export class StyleBuilder {
     smaller: "smaller",
     larger: "larger"
   };
+  static fontFamilies = {
+  v:'verdana',
+  verdana:'verdana,',
+  c:'Courier New, monospace',
+  courier:'Courier New, monospace',
+  l:"Lucidia Console",
+  lucidia:"Lucidia Console",
+  t:'times, serif',
+  timtes:'times, serif',
+  r:'roboto',
+  roboto:'roboto',
+  a:'arial',
+  arial:'arial',
+  h:'helvetica',
+  helvetica:'helvetica',
+};
+
 
   // For margin/padding/border locations
   static whereKeys = {
@@ -316,6 +340,11 @@ export class StyleBuilder {
     this.styleObj.textAlign = align;
     return this;
   }
+  ff(fontFamily:FontFamily) {
+    return this.merge({fontFamily:valFromObj(fontFamily, this.Class.fontFamilies)});
+    //this.styleObj.fontFamily = fontFamily;
+    //return this;
+  }
 
 
   // Start style builder methods
@@ -376,7 +405,7 @@ export class StyleBuilder {
 
 
 
-  fs(sz) { //font size
+  fs(sz:Scalar) { //font size
     if (sz in this.Class.fontSizeMap) {
       sz = this.Class.fontSizeMap[sz];
     }
@@ -388,13 +417,13 @@ export class StyleBuilder {
   }
 
   // Dimensions - w, maxw, minw, h, maxh, minh
-  w(val) { return this.merge({width:val}); }
-  maxw(val) { return this.merge({maxWidth:val}); }
-  minw(val) { return this.merge({minWidth:val}); }
+  w(val:Scalar) { return this.merge({width:val}); }
+  maxw(val:Scalar) { return this.merge({maxWidth:val}); }
+  minw(val:Scalar) { return this.merge({minWidth:val}); }
 
-  h(val) { return this.merge({height:val}); }
-  maxh(val) { return this.merge({maxHeight:val}); }
-  minh(val) { return this.merge({minHeight:val}); }
+  h(val:Scalar) { return this.merge({height:val}); }
+  maxh(val:Scalar) { return this.merge({maxHeight:val}); }
+  minh(val:Scalar) { return this.merge({minHeight:val}); }
 
 
   /*
@@ -404,7 +433,7 @@ export class StyleBuilder {
  * @param which string|empty - if empty, all margins, if string, one of t|b|l|r|v|h|x|y
  * 
   */
-  m(arg?:any, which?: WhereKeyType) {
+  m(arg?:Scalar, which?: WhereKeyType) {
     if (!arg) {
       arg = "1em";
     }
@@ -412,7 +441,13 @@ export class StyleBuilder {
     _.merge(this.styleObj, mg);
     return this;
   }
-  p(arg?:any, which?: WhereKeyType) {
+  mv(arg?:Scalar) {
+    return this.m(arg, "v");
+  }
+  mh(arg?:Scalar) {
+    return this.m(arg, "h");
+  }
+  p(arg?:Scalar, which?: WhereKeyType) {
     if (!arg) {
       arg = "1em";
     }
@@ -423,10 +458,19 @@ export class StyleBuilder {
     */
    return this.merge(mg);
   }
+  pv(arg?:Scalar) {
+    return this.p(arg, "v");
+  }
+  ph(arg?:Scalar) {
+    return this.p(arg, "h");
+  }
 
   // Border
   static borderParamDefaults = {color:"#888", style:"solid", width:"1px" as string|number, radius:0 as string|number, which:null as null | WhereKeyType };
-  br(borderParams:BorderParams = {}) {
+  br(borderParams:BorderParams|string = {}) {
+    if (typeof borderParams === 'string') {
+      return this.add('border', borderParams);
+    }
     let {color, style, radius, width, which} = {...(this.Class.borderParamDefaults), ...borderParams};
     let settings = `${style} ${width} ${color}`;
     let ret: GenObj = {};

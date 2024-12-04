@@ -8,3 +8,4 @@ export * from './styling.js';
 export * from './helpers.js';
 export * from '../libs/styleUtils.js';
 export * as muiUtils from './muiUtils.js';
+export * from './muiUtils.js';

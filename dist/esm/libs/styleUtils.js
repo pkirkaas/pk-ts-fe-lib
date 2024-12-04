@@ -24,6 +24,7 @@
  *     bg(color) - background color
  *     ta(align) - text align - 'c' 's' 'e'
  *     fw(weight) - font weight
+ *     ff(fontFamily) - font family - key of fontFamilies -'c', 'r', 's', etc
  *     d(arg:string|StyleBuilderFlexArgs) - set display - 'i' | 'inline' | 'b' | 'block' | StyleBuilderFlexArgs
  *     br(borderParams:BorderParams) - border - color, style, width, radius, which - all optional
  *     add(key, val) - add a style property/value pair
@@ -168,6 +169,22 @@ export class StyleBuilder {
         smaller: "smaller",
         larger: "larger"
     };
+    static fontFamilies = {
+        v: 'verdana',
+        verdana: 'verdana,',
+        c: 'Courier New, monospace',
+        courier: 'Courier New, monospace',
+        l: "Lucidia Console",
+        lucidia: "Lucidia Console",
+        t: 'times, serif',
+        timtes: 'times, serif',
+        r: 'roboto',
+        roboto: 'roboto',
+        a: 'arial',
+        arial: 'arial',
+        h: 'helvetica',
+        helvetica: 'helvetica',
+    };
     // For margin/padding/border locations
     static whereKeys = {
         t: "Top",
@@ -266,6 +283,11 @@ export class StyleBuilder {
         this.styleObj.textAlign = align;
         return this;
     }
+    ff(fontFamily) {
+        return this.merge({ fontFamily: valFromObj(fontFamily, this.Class.fontFamilies) });
+        //this.styleObj.fontFamily = fontFamily;
+        //return this;
+    }
     // Start style builder methods
     /**
      * Make forground/background color pairs from the list
@@ -355,6 +377,12 @@ export class StyleBuilder {
         _.merge(this.styleObj, mg);
         return this;
     }
+    mv(arg) {
+        return this.m(arg, "v");
+    }
+    mh(arg) {
+        return this.m(arg, "h");
+    }
     p(arg, which) {
         if (!arg) {
             arg = "1em";
@@ -366,9 +394,18 @@ export class StyleBuilder {
         */
         return this.merge(mg);
     }
+    pv(arg) {
+        return this.p(arg, "v");
+    }
+    ph(arg) {
+        return this.p(arg, "h");
+    }
     // Border
     static borderParamDefaults = { color: "#888", style: "solid", width: "1px", radius: 0, which: null };
     br(borderParams = {}) {
+        if (typeof borderParams === 'string') {
+            return this.add('border', borderParams);
+        }
         let { color, style, radius, width, which } = { ...(this.Class.borderParamDefaults), ...borderParams };
         let settings = `${style} ${width} ${color}`;
         let ret = {};

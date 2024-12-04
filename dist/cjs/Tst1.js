@@ -1,16 +1,14 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
+// NPM packages
 import { useState } from 'react';
 import { startAvailableChecks, getCssHrefs, getJsHrefs } from './libs/browserTweaks.js';
 //import styled  from 'styled-components';
 import { styled } from 'styled-components';
+import { Panel, } from "react-resizable-panels";
+// Local Imports
 import { PanelSeparator, VPanelGroup, } from './components/formComponents.js';
 import { SDiv, mkStyled, } from './components/formComponents.js';
-import { Panel, } from "react-resizable-panels";
-//import reactLogo from './assets/react.svg'
-//import viteLogo from '/vite.svg'
-//import './Reset-Css-2023.css'
-//import './App.css';
-//import './tst.scss';
+import { H1 } from './index.js';
 import '../scss/pk-default.scss';
 let OromStyled = mkStyled(SDiv, {
     border: "solid black 3px",
@@ -67,6 +65,16 @@ let ModStyled2 = styled(FromStyled).attrs(props => ({
 });
 /*
 */
+// Experiment w. building custom components w. StyleBuilder & withStyled
+/*
+export function H1() {
+  let h1Style={ fontWeight: "bold", border:"solid green 4px", color: "red", fontStyle: "italic" };
+  return withStyled(h1Style, "h1");
+   
+}
+
+export let H1 = withStyled({ fontWeight: "bold", margin:5, padding:5, border:"solid green 4px", color: "red", fontStyle: "italic" }, "h1");
+  */
 // `font-weight:bold; color:red; font-style:italic;`;
 //let ModStyled = styled.div.attrs({ color: "green", background: "orange" })`font-weight:bold;`;
 //export { default as appCss } from  './App.css';
@@ -79,7 +87,7 @@ export function Tst1() {
     /*
     return (<div>Empty App</div>);
     */
-    return (_jsxs("div", { className: "App fullw", children: [_jsx(SDiv, { children: "Who Knows" }), _jsx(FromStyled, { children: "I Know" }), _jsx(OromStyled, { children: "Abstracted" }), _jsx(ModStyled2, { "$background": "#aaf", "$color": "orange", style: { width: 400 }, children: "Super Abstracted" }), _jsx("h1", { className: "gb", children: "Vite + React" }), _jsx("div", { children: "Testing Func Params" }), _jsxs("div", { className: "brdr", children: [_jsx("p", { children: " Testing components" }), _jsxs(VPanelGroup, { children: [_jsx(Panel, { className: "brnm", minSize: 25, children: _jsx("h1", { children: "First Panel" }) }), _jsx(PanelSeparator, {}), _jsx(Panel, { className: "brnm", minSize: 25, children: _jsx("h1", { children: "Second Panel" }) })] })] }), _jsx("div", { children: "END Testing Func Params" }), _jsx("div", { className: "card", children: _jsxs("button", { onClick: () => setCount((count) => count + 1), children: ["count is ", count] }) })] }));
+    return (_jsxs("div", { className: "App fullw", children: [_jsx(H1, { children: "Tst1" }), _jsx(SDiv, { children: "Who Knows" }), _jsx(FromStyled, { children: "I Know" }), _jsx(OromStyled, { children: "Abstracted" }), _jsx(ModStyled2, { "$background": "#aaf", "$color": "orange", style: { width: 400 }, children: "Super Abstracted" }), _jsx("h1", { className: "gb", children: "Vite + React" }), _jsx("div", { children: "Testing Func Params" }), _jsxs("div", { className: "brdr", children: [_jsx("p", { children: " Testing components" }), _jsxs(VPanelGroup, { children: [_jsx(Panel, { className: "brnm", minSize: 25, children: _jsx("h1", { children: "First Panel" }) }), _jsx(PanelSeparator, {}), _jsx(Panel, { className: "brnm", minSize: 25, children: _jsx("h1", { children: "Second Panel" }) })] })] }), _jsx("div", { children: "END Testing Func Params" }), _jsx("div", { className: "card", children: _jsxs("button", { onClick: () => setCount((count) => count + 1), children: ["count is ", count] }) })] }));
 }
 export default Tst1;
 //# sourceMappingURL=Tst1.js.map

@@ -88,6 +88,8 @@ export function isActive(path:string, activeClass="active") : any {
   return false;
 } 
 
+let aCname = StyleBuilder.builder.fw('bold').c('red').className;
+
 export function BuildRoutes(navVals:NavVals) {
 //export function BuildRoutes({navVals:NavVals}) {
   return (
@@ -106,16 +108,18 @@ export function BuildRoutes(navVals:NavVals) {
  * Makes a responsive menu
  */
 export function RespNav(props:NavVals) {
+  let mbarStyle = StyleBuilder.builder.d('i').br().w('100%').c('red').bg('yellow');
+  let mitemStyle = StyleBuilder.builder.d('i').br().w('auto').c('blue').bg('#aaf').ph(8).mh(8);
 	let wrapClass = (spec) => {
 		//return `m-1 p-1 border-gray-800 inline-block nav-link-wrap ${spec.customClass || ''}`;
 		return `m-1 p-1 border-black border-solid border-1 inline-block nav-link-wrap ${spec.customClass || ''}`;
 	};
 	return (
-		<div className="block w-full bg-blue-100 px-2">
+		<div className="block w-full bg-blue-100 px-2" style={mbarStyle.style}>
 			{
 				Object.entries(props).map(([key, val]) => (
-					<div key={key} className={wrapClass(val)}>
-						<NavLink to={val.path}>{val.label}</NavLink>
+					<div key={key} className={wrapClass(val)} style={mitemStyle.style}>
+						<NavLink className={isActive(val.path,aCname)} to={val.path}>{val.label}</NavLink>
 					</div>
 				))
 			}

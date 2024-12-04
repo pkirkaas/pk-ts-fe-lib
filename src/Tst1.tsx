@@ -1,19 +1,18 @@
+// NPM packages
 import { useState } from 'react'
 import { startAvailableChecks, getLoadedCss, getCssHrefs, getJsHrefs } from './libs/browserTweaks.js'
 //import styled  from 'styled-components';
 import { styled }  from 'styled-components';
+
+import { Panel, PanelGroup, PanelResizeHandle, PanelGroupProps,  } from "react-resizable-panels";
+// PKLib Imports
+import { typeOf, GenObj, } from 'pk-ts-common-lib';
+
+// Local Imports
 import { PanelSeparator, TstSelect,  VPanelGroup, HPanelGroup, } from './components/formComponents.js';
 import { SDiv, mkStyled, } from './components/formComponents.js';
-import { Panel, PanelGroup, PanelResizeHandle, PanelGroupProps,  } from "react-resizable-panels";
-//import reactLogo from './assets/react.svg'
-//import viteLogo from '/vite.svg'
-//import './Reset-Css-2023.css'
-//import './App.css';
-//import './tst.scss';
+import { StyleBuilder, withStyled, H1 } from './index.js';
 import '../scss/pk-default.scss';
-import {
-  typeOf, GenObj,
-} from 'pk-ts-common-lib';
 
 let OromStyled = mkStyled(SDiv, {
   border: "solid black 3px",
@@ -78,6 +77,17 @@ let ModStyled2 = styled(FromStyled).attrs<GenObj>(props => ({
 /*
 */
 
+// Experiment w. building custom components w. StyleBuilder & withStyled
+
+/*
+export function H1() {
+  let h1Style={ fontWeight: "bold", border:"solid green 4px", color: "red", fontStyle: "italic" };
+  return withStyled(h1Style, "h1");
+   
+}
+
+export let H1 = withStyled({ fontWeight: "bold", margin:5, padding:5, border:"solid green 4px", color: "red", fontStyle: "italic" }, "h1");
+  */
 
   
  // `font-weight:bold; color:red; font-style:italic;`;
@@ -97,6 +107,7 @@ export function Tst1() {
 
   return (
     <div className="App fullw">
+      <H1>Tst1</H1>
       <SDiv>Who Knows</SDiv>
 <FromStyled>I Know</FromStyled>
 <OromStyled>Abstracted</OromStyled>

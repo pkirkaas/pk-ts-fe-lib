@@ -1,4 +1,6 @@
 import { jsx as _jsx } from "react/jsx-runtime";
+//import {StyleBuilder} from '../libs/styleUtils.js';
+import { StyleBuilder } from '../react-utils/index.js';
 import { Route, NavLink, Routes } from 'react-router-dom';
 /**
  * Example NavValues obj:
@@ -57,6 +59,7 @@ export function isActive(path, activeClass = "active") {
     }
     return false;
 }
+let aCname = StyleBuilder.builder.fw('bold').c('red').className;
 export function BuildRoutes(navVals) {
     //export function BuildRoutes({navVals:NavVals}) {
     return (_jsx(Routes, { children: Object.entries(navVals).map(([key, val]) => (_jsx(Route, { path: val.path, Component: val.component }, key))) }));
@@ -65,10 +68,12 @@ export function BuildRoutes(navVals) {
  * Makes a responsive menu
  */
 export function RespNav(props) {
+    let mbarStyle = StyleBuilder.builder.d('i').br().w('100%').c('red').bg('yellow');
+    let mitemStyle = StyleBuilder.builder.d('i').br().w('auto').c('blue').bg('#aaf').ph(8).mh(8);
     let wrapClass = (spec) => {
         //return `m-1 p-1 border-gray-800 inline-block nav-link-wrap ${spec.customClass || ''}`;
         return `m-1 p-1 border-black border-solid border-1 inline-block nav-link-wrap ${spec.customClass || ''}`;
     };
-    return (_jsx("div", { className: "block w-full bg-blue-100 px-2", children: Object.entries(props).map(([key, val]) => (_jsx("div", { className: wrapClass(val), children: _jsx(NavLink, { to: val.path, children: val.label }) }, key))) }));
+    return (_jsx("div", { className: "block w-full bg-blue-100 px-2", style: mbarStyle.style, children: Object.entries(props).map(([key, val]) => (_jsx("div", { className: wrapClass(val), style: mitemStyle.style, children: _jsx(NavLink, { className: isActive(val.path, aCname), to: val.path, children: val.label }) }, key))) }));
 }
 //# sourceMappingURL=nav-utils.js.map
