@@ -1,5 +1,6 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { SDiv, mkStyled, } from './components/formComponents.js';
+import { H1 } from './index.js';
 let FromStyled = mkStyled('div', {
     border: "solid green 3px",
     fontWeight: "bold",
@@ -8,6 +9,6 @@ let FromStyled = mkStyled('div', {
     fontFamily: "courier"
 });
 export function Tst2() {
-    return (_jsxs("div", { style: { backgroundColor: "red", border: "solid 1px green", width: "100%" }, children: [_jsx(SDiv, { children: "Who Knows" }), _jsx(FromStyled, { children: "I Know" })] }));
+    return (_jsxs("div", { style: { backgroundColor: "red", border: "solid 1px green", width: "100%" }, children: [_jsx(H1, { children: "Tst2" }), _jsx(SDiv, { children: "Who Knows" }), _jsx(FromStyled, { children: "I Know" })] }));
 }
 //# sourceMappingURL=Tst2.js.map

@@ -33,7 +33,5 @@
   },
  
   "include":["./src/**/*"],
-  "exclude": [
-        "./dist/esm"
-    ]
+  "exclude": [ "./dist/esm" ]
 }

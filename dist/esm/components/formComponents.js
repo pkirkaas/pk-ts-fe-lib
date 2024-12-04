@@ -7,6 +7,7 @@ import { addProps, replaceProps, } from '../libs/reactUtils.js';
 import Select from 'react-select';
 import { styled } from 'styled-components';
 import { PanelGroup, PanelResizeHandle, } from "react-resizable-panels";
+//import {  ResizeHandle,} from "react-resizable-panels/website";
 //////////// Testing styled components
 //export const SDiv = styled.div`border: solid red 2px; `
 // THIS STOPPED WORKING - something with interfaces, whatever...

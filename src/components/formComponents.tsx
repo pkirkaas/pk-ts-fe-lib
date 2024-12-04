@@ -8,7 +8,8 @@ import { signal } from "@preact/signals-react";
 import Select from 'react-select'
 import { styled } from 'styled-components';
 
-import { Panel, PanelGroup, PanelResizeHandle, PanelGroupProps, } from "react-resizable-panels";
+import { Panel, PanelGroup, PanelResizeHandle, PanelGroupProps,} from "react-resizable-panels";
+//import {  ResizeHandle,} from "react-resizable-panels/website";
 
 
 

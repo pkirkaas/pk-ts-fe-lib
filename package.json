@@ -42,7 +42,9 @@
     "devlink": "npm link && npm link pk-ts-common-lib",
     "dev": "vite --open",
     "build": "npm run build-lib && vite build",
-    "build-lib": "tsc -p ./tsconfig.json && tsc -p ./tsconfig.cjs.json",
+    "build-lib": "tsc -p ./tsconfig.json",
+    "build-lib-cjs": "tsc -p ./tsconfig.json && tsc -p ./tsconfig.cjs.json",
+    "build-cjs": "tsc -p ./tsconfig.cjs.json",
     "preview": "vite preview --open"
   },
   "dependencies": {

@@ -1,0 +1,1 @@
+Customized Resizable Panels Components based on react-resizable-panels

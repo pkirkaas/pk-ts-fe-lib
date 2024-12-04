@@ -5,14 +5,17 @@
     "outDir": "./dist/cjs",
     "jsx": "react-jsx",
     //"module": "commonjs"
+    "resolvePackageJsonImports": true,
+    "esModuleInterop":true,
   },
-  "include": [
-    "./src/**/*",
-    ],
+  "include": [ "./src/**/*", ],
+  "exclude": [ "./dist/esm" ]
+    /*
   "ts-node": {
     "require": [
       "tsconfig-paths/register"
     ],
     "esm": false,
   },
+  */
 }

@@ -21,6 +21,7 @@ import { startAvailableChecks, getLoadedCss, getCssHrefs, getJsHrefs } from './l
 import { StyleBuilder, } from './libs/styleUtils.js';
 import {Tst1} from './Tst1.js';
 import {Tst2} from './Tst2.js';
+import {Tst3} from './Tst3.js';
 import {NavVals, BuildRoutes, RespNav, isActive,} from './react-utils/index.js';
 import {MainNavbar} from './FeNavBar.js';
 //import styled  from 'styled-components';
@@ -29,6 +30,7 @@ import '../scss/pk-default.scss';
 export const rNavVals:NavVals = {
 	about: { path: '/', label: "Tst1", component: Tst1,  },
 	gallery: { path: '/tst2', label: "Tst2", component: Tst2 },
+	panels: { path: '/tst3', label: "Panels", component: Tst3 },
 };
   
 function App(props:any) {
