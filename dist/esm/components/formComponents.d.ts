@@ -1,18 +1,6 @@
-import { GenObj } from 'pk-ts-common-lib';
 export declare const SDiv: any;
 /** TODO: Can styles be a template literal? How?  */
 export declare function mkStyled(cmp: any, styles: any): any;
-/**
- * This section helps react-resizable-panels
- */
-/**
- * Simplify & give default style to PanelGroup
- * children ARE ONLY ARRAY OF PANELS - no need to include PanelSeparator between each
- */
-export declare function MetaPanelGroup(props: GenObj): import("react/jsx-runtime").JSX.Element;
-export declare function VPanelGroup(props: GenObj): import("react/jsx-runtime").JSX.Element;
-export declare function HPanelGroup(props: any): import("react/jsx-runtime").JSX.Element;
-export declare function PanelSeparator(props: any): import("react/jsx-runtime").JSX.Element;
 export declare function KeyFragment(...all: any[]): import("react/jsx-runtime").JSX.Element;
 /**
  *

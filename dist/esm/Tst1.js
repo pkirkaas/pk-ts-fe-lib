@@ -6,7 +6,7 @@ import { startAvailableChecks, getCssHrefs, getJsHrefs } from './libs/browserTwe
 import { styled } from 'styled-components';
 import { Panel, } from "react-resizable-panels";
 // Local Imports
-import { PanelSeparator, VPanelGroup, } from './components/formComponents.js';
+import { PanelSeparator, VPanelGroup, } from './components/index.js';
 import { SDiv, mkStyled, } from './components/formComponents.js';
 import { H1 } from './index.js';
 import '../scss/pk-default.scss';

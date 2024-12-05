@@ -1,3 +1,4 @@
+/*
 import { useState } from 'react'
 import { startAvailableChecks, getLoadedCss, getCssHrefs, getJsHrefs } from './libs/browserTweaks.js'
 //import styled  from 'styled-components';
@@ -33,8 +34,6 @@ let FromStyled = mkStyled('div', {
   fontFamily:"courier"
 });
 
-/*
-*/
 //@ts-ignore
 //let ModStyled = FromStyled().css({ color: "green", background: "orange" });
 //let ModStyled = styled(FromStyled).css({ color: "green", background: "orange" });
@@ -47,7 +46,6 @@ let FromStyled = mkStyled('div', {
   
 //let ModStyled = styled.div.attrs<{ $background?: string, $fontsize?:string, }>
 //let ModStyled = styled.div.attrs<GenObj>(props => ({
-  /*
 let ModStyled = styled(FromStyled).attrs<GenObj>(props => ({
     $background: props.$background || "yellow",
     $fontsize: props.$fontsize || "xx-large",
@@ -59,7 +57,6 @@ let ModStyled = styled(FromStyled).attrs<GenObj>(props => ({
     color: ${props => props.$color};
     font-weight: bold;
     `
-    */
 
 //let ModStyled = styled(FromStyled).attrs<GenObj>(props => ({
 
@@ -75,8 +72,6 @@ let ModStyled2 = styled(FromStyled).attrs<GenObj>(props => ({
   color: props => props.$color,
   fontWeight: "bold",
 });
-/*
-*/
 
 
   
@@ -91,9 +86,7 @@ function App() {
     let csshRef = getCssHrefs();
   let jsshRef = getJsHrefs();
   let intId = startAvailableChecks();
-  /*
-  return (<div>Empty App</div>);
-  */
+//  return (<div>Empty App</div>);
 
   return (
     <div className="App fullw">
@@ -131,3 +124,5 @@ function App() {
 }
 
 export default App
+
+*/

@@ -1,4 +1,5 @@
 {
+  /* Needs to be fixed suddenly - can't import Container, trying from dist/esm - maybe to do with new declarations.d.ts for css modules?*/
   "extends": "pk-ts-common-lib/tsconfig.cjs.json",
   "compilerOptions": {
     "baseUrl": "./",

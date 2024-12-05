@@ -26,48 +26,6 @@ export function mkStyled(cmp, styles): any {
 }
 
 
-/**
- * This section helps react-resizable-panels
- */
-
-/**
- * Simplify & give default style to PanelGroup
- * children ARE ONLY ARRAY OF PANELS - no need to include PanelSeparator between each 
- */
-export function MetaPanelGroup(props: GenObj) {
-  let mods = { className: 'brdr', style: { flexGrow: 1, width: "100%", height: "100%" } };
-  let cprops = addProps(props, mods);
-  /*
-  let kids = cprops.children;
-  let tok = typeOf(kids);
-  let kidTypes = kids.map((el) => typeOf(el));
-
-  console.log("In MetaPanelGroup; props:", { tok, cprops, kidTypes});
-  */
-  return (
-    /* @ts-ignore */
-    <PanelGroup  {...cprops} />
-  );
-}
-export function VPanelGroup(props: GenObj) {
-  let cprops = replaceProps(props, { direction: 'vertical' });
-  return MetaPanelGroup(cprops);
-}
-export function HPanelGroup(props) {
-  let cprops = replaceProps(props, { direction: 'vertical' });
-  return MetaPanelGroup(cprops);
-}
-
-export function PanelSeparator(props) {
-  let style = { minHeight: "2px", minWidth: "2px", border: "blue" };
-  let cprops = addProps(props, { style });
-  return (
-    <PanelResizeHandle {...cprops} />
-  );
-}
-
-
-
 
 //?? Not sure what's up?
 export function KeyFragment(...all) {
