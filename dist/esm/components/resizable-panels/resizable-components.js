@@ -56,7 +56,7 @@ export function PanelSeparator(props) {
 export function ResizeHandle({ className = "", id, }) {
     return (_jsx(PanelResizeHandle, { className: [styles.ResizeHandle, className].join(" "), id: id }));
 }
-export function MyResizeHandle({ className, ...props }) {
+export function MyResizeHandle({ className = "", ...props }) {
     return _jsx("div", { className: `${styles.resizeHandle} ${className}`, ...props });
 }
 //# sourceMappingURL=resizable-components.js.map

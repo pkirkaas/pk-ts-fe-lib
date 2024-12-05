@@ -81,7 +81,7 @@ export function ResizeHandle({
     />
   );
 }
-export function MyResizeHandle({ className, ...props }: any) {
+export function MyResizeHandle({ className="", ...props }: any) {
   return <div className={`${styles.resizeHandle} ${className}`} {...props} />;
 }
 
