@@ -102,6 +102,16 @@ export class StyleBuilder {
     get camelled() {
         return camelKeys(this.style);
     }
+    // Now some 'convenience' getters...
+    get fullw() {
+        return this.w('100%');
+    }
+    get fullh() {
+        return this.h('100%');
+    }
+    get full() {
+        return this.fullw.fullh;
+    }
     // Instance Methods
     /**
      * Convenience method for flex displays

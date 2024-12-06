@@ -18,7 +18,7 @@ import { Fragment } from 'react';
 import { arrayJoin, } from 'pk-ts-common-lib';
 // Local Packages
 import styles from "./resizable.module.css";
-import { replaceProps, } from '../../libs/reactUtils.js';
+import { addClassNames, replaceProps, } from '../../libs/reactUtils.js';
 export * from "react-resizable-panels";
 /**
  * This section helps react-resizable-panels
@@ -28,12 +28,11 @@ export * from "react-resizable-panels";
  * children ARE ONLY ARRAY OF PANELS - no need to include PanelSeparator between each
  */
 export function MetaPanelGroup(props) {
-    //export function MetaPanelGroup(props: any) {
-    let cprops = { ...props };
-    cprops.className = [props.className, styles.panelGroup].join(" ");
-    ;
+    let cprops = addClassNames(props, styles.PanelGroup);
     let LocalResizeHandle = props.ResizeHandle ?? ResizeHandle;
     let children = cprops.children;
+    // All children should be Panels
+    // How do we enforce that? How do we style that?
     if (Array.isArray(children)) {
         children = arrayJoin(children, LocalResizeHandle({}));
         children = children.map((el, i) => (_jsx(Fragment, { children: el }, i)));
@@ -45,16 +44,16 @@ export function MetaPanelGroup(props) {
 }
 export function VPanelGroup(props) {
     let cprops = replaceProps(props, { direction: 'vertical' });
+    cprops = addClassNames(cprops, styles.VPanelGroup);
     return MetaPanelGroup(cprops);
 }
 export function HPanelGroup(props) {
     let cprops = replaceProps(props, { direction: 'horizontal' });
+    cprops = addClassNames(cprops, styles.HPanelGroup);
     return MetaPanelGroup(cprops);
 }
-export function ResizeHandle({ className = "", id, }) {
-    return (_jsx(PanelResizeHandle, { className: [styles.ResizeHandle, className].join(" "), id: id }));
-}
-export function MyResizeHandle({ className = "", ...props }) {
-    return _jsx(PanelResizeHandle, { className: `${styles.resizeHandle} ${className}`, ...props });
+export function ResizeHandle(props) {
+    let cprops = addClassNames(props, styles.ResizeHandle);
+    return _jsx(PanelResizeHandle, { ...cprops });
 }
 //# sourceMappingURL=resizable-components.js.map

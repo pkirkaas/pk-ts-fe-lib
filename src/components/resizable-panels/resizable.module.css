@@ -1,11 +1,14 @@
 /* Default CSS For Resizable Panels Components*/
 
+/*
+  outline: none;
+*/
 .ResizeHandle {
   flex: 0 0 0.25rem;
   display: flex;
   justify-content: stretch;
   align-items: stretch;
-  outline: none;
+  outline: 3px solid black;
   transition: background-color 0.2s linear;
 }
 .ResizeHandle[data-resize-handle-active="keyboard"],
@@ -19,7 +22,8 @@
   }
 }
 
-.PanelGroup {
+.PanelGroup, .HPanelGroup, .VPanelGroup {
+  display: flex;
 }
 
 .HPanelGroup {

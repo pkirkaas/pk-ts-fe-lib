@@ -82,6 +82,9 @@ export declare class StyleBuilder {
     get className(): string;
     get clone(): any;
     get camelled(): GenObj;
+    get fullw(): this;
+    get fullh(): this;
+    get full(): this;
     /**
      * Convenience method for flex displays
      * @param flexOpts? GenObj - object w. flex opt keys and values

@@ -38,11 +38,11 @@ export * from "react-resizable-panels";
  * children ARE ONLY ARRAY OF PANELS - no need to include PanelSeparator between each 
  */
 export function MetaPanelGroup(props: PkPGProps) {
-//export function MetaPanelGroup(props: any) {
-  let cprops = {...props};
-  cprops.className = [props.className, styles.panelGroup].join(" ");;
+  let cprops = addClassNames(props, styles.PanelGroup);
   let LocalResizeHandle = props.ResizeHandle ?? ResizeHandle;
   let children = cprops.children;
+  // All children should be Panels
+  // How do we enforce that? How do we style that?
   if (Array.isArray(children)) {
     children = arrayJoin(children, LocalResizeHandle({}))
     children = children.map((el, i) => (<Fragment key={i}>{el}</Fragment>));
@@ -55,30 +55,19 @@ export function MetaPanelGroup(props: PkPGProps) {
 }
 export function VPanelGroup(props: PkPGProps) {
   let cprops = replaceProps(props, { direction: 'vertical' }) as PkPGProps;
+  cprops = addClassNames(cprops, styles.VPanelGroup);
   return MetaPanelGroup(cprops);
 }
 export function HPanelGroup(props) {
   let cprops = replaceProps(props, { direction: 'horizontal' }) as PkPGProps;
+  cprops = addClassNames(cprops, styles.HPanelGroup);
   return MetaPanelGroup(cprops);
 }
 
 
-export function ResizeHandle({
-  className = "",
-  id,
-}: {
-  className?: string;
-  id?: string;
-}) {
-  return (
-    <PanelResizeHandle
-      className={[styles.ResizeHandle, className].join(" ")}
-      id={id}
-    />
-  );
-}
-export function MyResizeHandle({ className="", ...props }: any) {
-  return <PanelResizeHandle className={`${styles.resizeHandle} ${className}`} {...props} />;
+export function ResizeHandle(props) {
+  let cprops = addClassNames(props, styles.ResizeHandle);
+  return <PanelResizeHandle {...cprops} />;
 }
 
 

@@ -26,9 +26,5 @@ export * from "react-resizable-panels";
 export declare function MetaPanelGroup(props: PkPGProps): import("react/jsx-runtime").JSX.Element;
 export declare function VPanelGroup(props: PkPGProps): import("react/jsx-runtime").JSX.Element;
 export declare function HPanelGroup(props: any): import("react/jsx-runtime").JSX.Element;
-export declare function ResizeHandle({ className, id, }: {
-    className?: string;
-    id?: string;
-}): import("react/jsx-runtime").JSX.Element;
-export declare function MyResizeHandle({ className, ...props }: any): import("react/jsx-runtime").JSX.Element;
+export declare function ResizeHandle(props: any): import("react/jsx-runtime").JSX.Element;
 //# sourceMappingURL=resizable-components.d.ts.map

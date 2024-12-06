@@ -1,8 +1,10 @@
 /* START OF PK-DEFAULT-SCSS */
+// If want bootstrap - import in the implementing app
 @use 'sass:math';
 @use 'sass:map';
 @use 'sass:color';
 @use 'sass:string';
+@import "the-new-css-reset/css/reset.css"; //import works - question is if it's the right one
 
 #root {
   width: 100%;
