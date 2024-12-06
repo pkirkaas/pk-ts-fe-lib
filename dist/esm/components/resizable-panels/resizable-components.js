@@ -12,14 +12,14 @@ import { jsx as _jsx } from "react/jsx-runtime";
  *
  */
 // NPM Packages
-import { PanelGroup, PanelResizeHandle, } from "react-resizable-panels";
+import { Panel as OrigPanel, PanelGroup, PanelResizeHandle, } from "react-resizable-panels";
 // PKLib Packages
 import { Fragment } from 'react';
 import { arrayJoin, } from 'pk-ts-common-lib';
 // Local Packages
 import styles from "./resizable.module.css";
 import { addClassNames, replaceProps, } from '../../libs/reactUtils.js';
-export * from "react-resizable-panels";
+//export * from "react-resizable-panels";
 /**
  * This section helps react-resizable-panels
  */
@@ -41,6 +41,13 @@ export function MetaPanelGroup(props) {
     return (
     /* @ts-ignore */
     _jsx(PanelGroup, { ...cprops }));
+}
+/**
+ * TODO: Seems like Panel displays should be 'flex', and 'flex-direction: column/row'
+ */
+export function Panel(props) {
+    let cprops = addClassNames(props, styles.Panel);
+    return _jsx(OrigPanel, { ...cprops });
 }
 export function VPanelGroup(props) {
     let cprops = replaceProps(props, { direction: 'vertical' });

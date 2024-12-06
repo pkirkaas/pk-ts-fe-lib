@@ -34,14 +34,21 @@
 
 .VPanelGroup > .Panel {
   display:flex;
+  background: orange;
+  margin: 15px;
+  padding: 8px;
   flex-direction: column;
 }
 .HPanelGroup > .Panel {
   display:flex;
+  background: yellow;
+  margin: 15px;
+  padding: 8px;
   flex-direction: row;
 }
 
 .Panel {
+  border: solid purple 3px;
 }
 /*
 .HPanelGroup {

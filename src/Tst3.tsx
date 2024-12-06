@@ -1,10 +1,10 @@
 // Testing resize comps
-import { Panel, PanelGroup, PanelResizeHandle, PanelGroupProps,} from "react-resizable-panels";
+//import { Panel, PanelGroup, PanelResizeHandle, PanelGroupProps,} from "react-resizable-panels";
 
 import { StyleBuilder, withStyled, H1 } from './index.js';
 
-import { SDiv, mkStyled,
-   TstSelect, MyResizeHandle,  VPanelGroup, HPanelGroup, ResizeHandle,
+import { SDiv, mkStyled, Panel,
+   TstSelect,   VPanelGroup, HPanelGroup, ResizeHandle,
 
 
  } from './components/index.js';
@@ -23,16 +23,16 @@ export function Tst3() {
         <div>Another HPanel Item</div>
         </Panel>
         <Panel>
-          <SDiv style={{background:"#EFE"}}>Third Panel Item</SDiv>
+          <div style={{background:"#EFE"}}>Third HPanel Item</div>
         </Panel>
       </HPanelGroup>
       <H1>Start of VPanel Group</H1>  
-      <VPanelGroup style={{minHeight:"400px", border: "solid 1px green", width:"100%"}}>
-        <Panel style={{  background: 'red', minHeight:"30px" }}>
-          <SDiv style={{background:"#EFE"}}>First V Panel Item</SDiv>
+      <VPanelGroup style={{minHeight:"200px", border: "solid 1px green", width:"100%"}}>
+        <Panel style={{   background: 'red',}}>
+          <div style={{background:"#EFE"}}>First V Panel Item</div>
         </Panel>
-        <Panel defaultSize={100} style={{  background: 'green', minHeight:"30px" }}>
-          <SDiv style={{background:"#EEF"}}>Second V Panel Item</SDiv>
+        <Panel defaultSize={100} style={{  minHeight:"100px",  background: 'green', }}>
+          <div style={{background:"#EEF"}}>Second V Panel Item</div>
         </Panel>
       </VPanelGroup>
       {/*
