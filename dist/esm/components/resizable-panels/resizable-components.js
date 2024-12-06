@@ -1,12 +1,25 @@
 import { jsx as _jsx } from "react/jsx-runtime";
 /**
- * Customization of react-resizable-panels - https://github.com/bvaughn/react-resizable-panels
+ * Customization/simplification of react-resizable-panels
+ *  https://github.com/bvaughn/react-resizable-panels
+ *
+ * H/VPanelGroup Children don't need ResizeHandles between Panels
+ * Default, customizable ResizeHandle provided
+ * Main Exports:
+ *   VPanelGroup
+ *   HPanelGroup
+ *   ResizeHandle
+ *
  */
 // NPM Packages
 import { PanelGroup, PanelResizeHandle, } from "react-resizable-panels";
+// PKLib Packages
+import { Fragment } from 'react';
+import { arrayJoin, } from 'pk-ts-common-lib';
 // Local Packages
 import styles from "./resizable.module.css";
-import { addProps, replaceProps, } from '../../libs/reactUtils.js';
+import { replaceProps, } from '../../libs/reactUtils.js';
+export * from "react-resizable-panels";
 /**
  * This section helps react-resizable-panels
  */
@@ -15,22 +28,17 @@ import { addProps, replaceProps, } from '../../libs/reactUtils.js';
  * children ARE ONLY ARRAY OF PANELS - no need to include PanelSeparator between each
  */
 export function MetaPanelGroup(props) {
-    /*
-    let mods = { className: 'brdr', style: {
-      // Debugging
-      border: "solid red 2px",
-      flexGrow: 1, width: "100%", height: "100%"
-    } };
-    let cprops = addProps(props, mods);
-    */
-    let cprops = props;
-    /*
-    let kids = cprops.children;
-    let tok = typeOf(kids);
-    let kidTypes = kids.map((el) => typeOf(el));
-  
-    console.log("In MetaPanelGroup; props:", { tok, cprops, kidTypes});
-    */
+    //export function MetaPanelGroup(props: any) {
+    let cprops = { ...props };
+    cprops.className = [props.className, styles.panelGroup].join(" ");
+    ;
+    let LocalResizeHandle = props.ResizeHandle ?? ResizeHandle;
+    let children = cprops.children;
+    if (Array.isArray(children)) {
+        children = arrayJoin(children, LocalResizeHandle({}));
+        children = children.map((el, i) => (_jsx(Fragment, { children: el }, i)));
+        cprops.children = children;
+    }
     return (
     /* @ts-ignore */
     _jsx(PanelGroup, { ...cprops }));
@@ -43,20 +51,10 @@ export function HPanelGroup(props) {
     let cprops = replaceProps(props, { direction: 'horizontal' });
     return MetaPanelGroup(cprops);
 }
-export function PanelSeparator(props) {
-    let style = { minHeight: "2px", minWidth: "2px", border: "blue" };
-    let cprops = addProps(props, { style });
-    /*
-    return (
-      <PanelResizeHandle {...cprops} />
-    );
-    */
-    return (_jsx(ResizeHandle, { ...cprops }));
-}
 export function ResizeHandle({ className = "", id, }) {
     return (_jsx(PanelResizeHandle, { className: [styles.ResizeHandle, className].join(" "), id: id }));
 }
 export function MyResizeHandle({ className = "", ...props }) {
-    return _jsx("div", { className: `${styles.resizeHandle} ${className}`, ...props });
+    return _jsx(PanelResizeHandle, { className: `${styles.resizeHandle} ${className}`, ...props });
 }
 //# sourceMappingURL=resizable-components.js.map

@@ -19,6 +19,26 @@
   }
 }
 
+.PanelGroup {
+}
+
+.HPanelGroup {
+}
+
+.VPanelGroup {
+}
+
+.VPanelGroup > .Panel {
+  display:flex;
+  flex-direction: column;
+}
+.HPanelGroup > .Panel {
+  display:flex;
+  flex-direction: row;
+}
+
+.Panel {
+}
 /*
 .HPanelGroup {
   display: flex;

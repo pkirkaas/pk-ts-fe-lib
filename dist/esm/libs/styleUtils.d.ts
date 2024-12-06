@@ -75,7 +75,79 @@ export declare function valFromObj(val: any, obj: GenObj): any;
  *
  */
 export declare class StyleBuilder {
+    styleObj: GenObj;
+    constructor(...sos: any[]);
     get Class(): any;
+    get style(): GenObj;
+    get className(): string;
+    get clone(): any;
+    get camelled(): GenObj;
+    /**
+     * Convenience method for flex displays
+     * @param flexOpts? GenObj - object w. flex opt keys and values
+     * opt keys: fd (flex-direction), wr (wrap), ai (alignItems), jc (justifyContent)
+     * opt key vals - shortcut key into vals, or string value
+     */
+    flex(flexOpts?: StyleBuilderFlexArgs): this;
+    toString(): string;
+    classNames(...args: any[]): string;
+    merge(...objs: any[]): this;
+    add(key: any, value: any): this;
+    nest(key: any, value: any): this;
+    ta(align?: AlignType): this;
+    ff(fontFamily: FontFamily): this;
+    /**
+     * TODO: TERRIBLE !! Improve with better understanding of color theory & theming - mui color utils or something
+     * Make forground/background color pairs from the list
+     * @param pair - primitive - key to ltDrkColorPairs obj,
+     *       (If numeric & negative, invert true)
+     *      OR array (of CSS Colors)
+     *     OR JSObject {fg,bg | lt,dk | light, dark}
+     *
+     * @param invert boolean - invert the light/dark?
+     *
+     */
+    fgbg(pair: string | string[] | number | GenObj, invert?: boolean): this;
+    /**
+     * Inner Border
+     */
+    ib(color?: string, spread?: number): this;
+    fs(sz: Scalar): this;
+    w(val: Scalar): this;
+    maxw(val: Scalar): this;
+    minw(val: Scalar): this;
+    h(val: Scalar): this;
+    maxh(val: Scalar): this;
+    minh(val: Scalar): this;
+    m(arg?: Scalar, which?: WhereKeyType): this;
+    mv(arg?: Scalar): this;
+    mh(arg?: Scalar): this;
+    p(arg?: Scalar, which?: WhereKeyType): this;
+    pv(arg?: Scalar): this;
+    ph(arg?: Scalar): this;
+    br(borderParams?: BorderParams | string): this;
+    fw(weight: any): this;
+    c(color: any): this;
+    bg(color: any): this;
+    /**
+     * Set display
+     * @param arg - string or StyleBuilderFlexArgs - see StyleBuilderFlexArgs
+     * if string, 'i' | 'inline' | 'b' | 'block', else flex
+     */
+    d(arg: string | StyleBuilderFlexArgs): this;
+    /**
+     * Makes a style object for margin/padding/border
+     * @propBase - m,b,p
+     * @val - the value
+     * @key opt - one of the keys for whereKeys 't','b','x','y', etc
+     * @return - basic object w. css style props/vals
+     */
+    static mkMPBWhereProps(propBase: BmpKeys, val?: string, key?: WhereKeyType): GenObj;
+    /**
+     * static builder & build(args) - to avoid `(new StyleBuilder(...args)).chain1(1)...etc`
+     */
+    static build(...args: any[]): StyleBuilder;
+    static get builder(): StyleBuilder;
     static flexDisplayOpts: {
         fd: {
             prop: string;
@@ -112,14 +184,6 @@ export declare class StyleBuilder {
             };
         };
     };
-    /**
-     * Convenience method for flex displays
-     * @param flexOpts? GenObj - object w. flex opt keys and values
-     * opt keys: fd (flex-direction), wr (wrap), ai (alignItems), jc (justifyContent)
-     * opt key vals - shortcut key into vals, or string value
-     */
-    flex(flexOpts?: StyleBuilderFlexArgs): this;
-    get camelled(): GenObj;
     static fgBgPairs: {
         1: {
             fg: string;
@@ -181,6 +245,18 @@ export declare class StyleBuilder {
         h: string;
         helvetica: string;
     };
+    static borderParamDefaults: {
+        color: string;
+        style: string;
+        width: string | number;
+        radius: string | number;
+        which: null | WhereKeyType;
+    };
+    static aligns: {
+        c: string;
+        l: string;
+        r: string;
+    };
     static whereKeys: {
         t: string;
         b: string;
@@ -196,79 +272,6 @@ export declare class StyleBuilder {
         p: string;
         b: string;
     };
-    /**
-     * Makes a style object for margin/padding/border
-     * @propBase - m,b,p
-     * @val - the value
-     * @key opt - one of the keys for whereKeys 't','b','x','y', etc
-     * @return - basic object w. css style props/vals
-     */
-    static mkMPBWhereProps(propBase: BmpKeys, val?: string, key?: WhereKeyType): GenObj;
-    /**
-     * static builder & build(args) - to avoid `(new StyleBuilder(...args)).chain1(1)...etc`
-     */
-    static get builder(): StyleBuilder;
-    static build(...args: any[]): StyleBuilder;
-    styleObj: GenObj;
-    constructor(...sos: any[]);
-    get style(): GenObj;
-    get className(): string;
-    get clone(): any;
-    merge(...objs: any[]): this;
-    add(key: any, value: any): this;
-    nest(key: any, value: any): this;
-    static aligns: {
-        c: string;
-        l: string;
-        r: string;
-    };
-    ta(align?: AlignType): this;
-    ff(fontFamily: FontFamily): this;
-    /**
-     * Make forground/background color pairs from the list
-     * @param pair - primitive - key to ltDrkColorPairs obj,
-     *       (If numeric & negative, invert true)
-     *      OR array (of CSS Colors)
-     *     OR JSObject {fg,bg | lt,dk | light, dark}
-     *
-     * @param invert boolean - invert the light/dark?
-     *
-     */
-    fgbg(pair: string | string[] | number | GenObj, invert?: boolean): this;
-    /**
-     * Inner Border
-     */
-    ib(color?: string, spread?: number): this;
-    fs(sz: Scalar): this;
-    w(val: Scalar): this;
-    maxw(val: Scalar): this;
-    minw(val: Scalar): this;
-    h(val: Scalar): this;
-    maxh(val: Scalar): this;
-    minh(val: Scalar): this;
-    m(arg?: Scalar, which?: WhereKeyType): this;
-    mv(arg?: Scalar): this;
-    mh(arg?: Scalar): this;
-    p(arg?: Scalar, which?: WhereKeyType): this;
-    pv(arg?: Scalar): this;
-    ph(arg?: Scalar): this;
-    static borderParamDefaults: {
-        color: string;
-        style: string;
-        width: string | number;
-        radius: string | number;
-        which: null | WhereKeyType;
-    };
-    br(borderParams?: BorderParams | string): this;
-    fw(weight: any): this;
-    c(color: any): this;
-    bg(color: any): this;
-    /**
-     * Set display
-     * @param arg - string or StyleBuilderFlexArgs - see StyleBuilderFlexArgs
-     * if string, 'i' | 'inline' | 'b' | 'block', else flex
-     */
-    d(arg: string | StyleBuilderFlexArgs): this;
 }
 /**
  * Laziness again - SB is just a new StyleBuilder instance
@@ -277,9 +280,14 @@ export declare class StyleBuilder {
  * Enhances Emotion CX by accepting StyleBuilder args
  * and created classNames from them to add.
  * TODO: Make more nested, and accept generic JS style objects
+ * The real/orig cx can accept args which are an array of args, which is better...
  *  - for now, just works for
  * top level args of type StyleBuilder
- * @param ...args - one or more StyleBuilder instances or style objects
+ * @param ...args - one or more:
+ *     StyleBuilder instances
+ *     style objects
+ *     string classNames
+ * @return string - space separated classNames - NOTE - classNames MAY BE COMPOSED - so output may have fewer & different classNames than input
  */
 export declare function cxsb(...args: any[]): string;
 /**

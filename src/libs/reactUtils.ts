@@ -1,13 +1,21 @@
 
 /** Not components, but tweaks to support react */
-import { isEmpty, isObject, GenObj, typeOf } from 'pk-ts-common-lib';
 
+// NPM Packages
+import axios from 'axios';
+import _ from 'lodash';
+
+// PKLib Imports
+import { isEmpty, isObject, GenObj, typeOf, mergeAndConcat, } from 'pk-ts-common-lib';
+
+// Local Imports
+
+import {StyleBuilder, cxsb, csssb, } from './styleUtils.js';
 //window.localStorage.setItem('JWTToken', 'MyTestToken');
 let jwtToken = window.localStorage.getItem('JWTToken',);
 
 console.log({ jwtToken });
 
-import axios from 'axios';
 
 export const origin = window.location.origin;
 export const apiUrl = `${origin}/api`;
@@ -51,17 +59,20 @@ export function mkUrl(rel) {
  * Combine original and additional props - only for object or
  * string properties - if mods[key] is object, merges them,
  * if mods[key] is string, concatenates w. space (like for className)
- * @deprecated - Not really - just verify this is useful and behaves as desired
+ * NOT deprecated - Not really - just verify this is useful and behaves as desired
  */
 export function addProps(props: object, mods?: object): GenObj {
-	let rProps = { ...props };
 	if (isEmpty(mods)) {
-		return rProps;
+		return props;
 	}
+	//let rProps = { ...props };
 	if (!isObject(mods)) {
 		throw new Error(`Invalid arg for mods in addProps - must be object`);
 	}
+	// Isn't this good enough? Except for concatenation of strings for classNames
+	return mergeAndConcat(props, mods);
 
+	/*
 
 	for (let key in mods) {
 		let prop = rProps[key];
@@ -82,9 +93,26 @@ export function addProps(props: object, mods?: object): GenObj {
 			rProps[key] = `${prop} ${mod}`;
 			continue;
 		}
+		if (isObject(mod) && isObject(prop)) {
+			rProps[key] = _.mergeWith(prop,mod );
+			continue;
+		}
 		console.error(`In addProps - what to do with prop & mod:`, { prop, mod });
 	}
 	return rProps;
+	*/
+}
+
+/** Takes a "props" object, adds additional CSS Classnames/styling 
+ *  TEST & VERIFY!
+ * @param props:GenObj - a react component's props object
+ * @param ...styleables:any - any number of CSS classnames, or style objects, or StyleBuilder instances, to be added to props.className
+ * @returns props with className updated
+ */
+export function addClassNames(props:GenObj,...styleables):GenObj {
+	let cprops = {...props};
+	cprops.className = cxsb(props.className, ...styleables);
+	return cprops;
 }
 
 /**
@@ -92,7 +120,7 @@ export function addProps(props: object, mods?: object): GenObj {
  * So, can override values passed in from props, BUT:
  * INTERESTINGLY! Can be used with arguments reversed to use defaults!
  * Like calling: replaceProps(defaults, props);
- * @deprecated - Not really - just verify this is useful and behaves as desired
+ * NOT deprecated - Not really - just verify this is useful and behaves as desired
  */
 export function replaceProps(props: object, mods?: any): GenObj {
 	if (!isObject(mods) || isEmpty(mods)) {

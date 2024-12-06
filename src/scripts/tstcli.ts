@@ -1,18 +1,75 @@
 /**
- * Not sure this should work...
+ * Some tests...
  */
 
-//import {styleUtils} from '../index.js';
-//import {styleUtils} from '../libs/styleUtils.js';
-import { StyleBuilder, } from '../libs/styleUtils.js';
-//import {buildFlexStyles,}  from '../libs/sbStyles.js';
+// NPM Imports
+import {
+  cx,
+  css as cssCss,
+  injectGlobal,
+} from '@emotion/css';
 
-//let {StyleBuilder,} = styleUtils;
+import {css,} from '@emotion/react';
+import { serializeStyles, } from '@emotion/serialize';
 
-import { GenObj } from 'pk-ts-common-lib';
-import { runCli } from 'pk-ts-node-lib';
+// PKTSLIB Imports
+
+
+import { GenObj, JSON5Stringify, typeOf, typeOfEach, dbgReport, } from 'pk-ts-common-lib';
+import { runCli, stdOut, } from 'pk-ts-node-lib';
+
+// Local Imports
+import { StyleBuilder, csssb, cxsb, } from '../libs/styleUtils.js';
+import { //tstJsdom, 
+  tstCss, mkClassNames, styleFromClassname, tstStylesFromCNames } from '../libs/emotionTests.js';
+
+// Some test data
+let sStyle = {
+  display:'block',
+  color:'red',
+};
+
+let sbStyle = StyleBuilder.builder.d('b').fs('lg').c('blue').m(9).p(5).br({color:'red', radius:5, width:10, which:"v"});
+
+let cnStr = 'test-class-name';
+
+let cxsbTstObj = {
+  sStyle,
+  sbStyle,
+  cnStr,
+};
 
 export let tstFncs = {
+  tstSFC() {
+    stdOut("\n\nIn tstSFC\n");
+    tstStylesFromCNames();
+    stdOut("\n\nDONE tstSFC\n\n");
+  },
+  /*
+  tstJsdom() {
+    tstJsdom();
+  },
+  */
+  tstMkClassNames() {
+   let cnames = mkClassNames();
+   console.log({cnames});
+  },
+  tstCxsb: () => {
+    let tstNames = Object.keys(cxsbTstObj);
+    let tstNamesStr = tstNames.join(', ');
+    let tstArgs = Object.values(cxsbTstObj);
+    console.log(`\nin tstCxsb tsting cxsb [${tstNamesStr}]\n`,{tstArgs});
+    let reses = {
+      resSpread:`\n[${cxsb(...tstArgs)}]\n`,
+  //     resArr:`\n[${cxsb(tstArgs)}]\n`,
+      };
+    stdOut('\n\n');
+    for (let res in reses) {
+      stdOut(`\n${res}: ${reses[res]}\n`);
+    }
+    stdOut('\n\n');
+    //console.log({resSpread, resArr}, '\n');
+  },
   tsta() {
     console.log("In tsta");
   },

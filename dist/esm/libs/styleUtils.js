@@ -52,7 +52,7 @@ import _ from 'lodash';
 import { cx, css as cssCss, } from '@emotion/css';
 import { serializeStyles, } from '@emotion/serialize';
 // import pklib packages
-import { PkError, isNumeric, isSimpleObject, camelKeys, isPrimitive, isObject, } from 'pk-ts-common-lib';
+import { PkError, isNumeric, isSimpleObject, camelKeys, isPrimitive, isObject, isEmpty, } from 'pk-ts-common-lib';
 //export type Scalar = string | number;
 /** Utility - if val a key of obj, return the value
  * for the key, else return val itself.
@@ -80,45 +80,29 @@ export function valFromObj(val, obj) {
  *
  */
 export class StyleBuilder {
+    // Instance Properties
+    styleObj; // A regular JS obj of the built style
+    constructor(...sos) {
+        this.styleObj = {};
+        this.merge(...sos);
+    }
+    // Instance Getters
     get Class() {
         return this.constructor;
     }
-    static flexDisplayOpts = {
-        fd: {
-            prop: 'flexDirection',
-            vals: {
-                r: 'row',
-                c: 'column',
-            },
-        },
-        wr: {
-            prop: 'wrap',
-            vals: {
-                w: 'wrap',
-                n: 'no-wrap',
-            },
-        },
-        ai: {
-            prop: 'alignItems',
-            vals: {
-                s: 'flex-start',
-                e: 'flex-end',
-                c: 'center',
-                g: 'stretch',
-                b: 'baseliine',
-            }
-        },
-        jc: {
-            prop: 'justifyContent',
-            vals: {
-                s: 'flex-start',
-                c: 'center',
-                e: 'flex-end',
-                b: 'space-between',
-                a: 'space-around',
-            }
-        },
-    };
+    get style() {
+        return camelKeys(structuredClone(this.styleObj));
+    }
+    get className() {
+        return cssCss(this.style);
+    }
+    get clone() {
+        return new this.Class(this);
+    }
+    get camelled() {
+        return camelKeys(this.style);
+    }
+    // Instance Methods
     /**
      * Convenience method for flex displays
      * @param flexOpts? GenObj - object w. flex opt keys and values
@@ -141,113 +125,24 @@ export class StyleBuilder {
         }
         return this.merge(dispStyle);
     }
-    get camelled() {
-        return camelKeys(this.style);
+    // Instance Getters
+    // Instance Methods
+    toString() {
+        return this.className;
     }
-    // Color pairs for fg/bg - fg dark, bg light, but can invert
-    static fgBgPairs = {
-        1: { fg: "#000", bg: "#fff" },
-        2: { fg: "#004", bg: "#eff" },
-        3: { fg: "#400", bg: "#ffe" },
-        4: { fg: "#040", bg: "#fef" },
-        5: { fg: "#404", bg: "#efe" },
-        blwh: { fg: "#004", bg: "#fff" },
-        rdwh: { fg: "#400", bg: "#fff" },
-    };
-    static fontSizeMap = {
-        xxs: "xx-small",
-        xs: "x-small",
-        s: "small",
-        sm: "small",
-        m: "medium",
-        md: "medium",
-        l: "large",
-        lg: "large",
-        xl: "x-large",
-        xxl: "xx-large",
-        xxxl: "xxx-large",
-        smaller: "smaller",
-        larger: "larger"
-    };
-    static fontFamilies = {
-        v: 'verdana',
-        verdana: 'verdana,',
-        c: 'Courier New, monospace',
-        courier: 'Courier New, monospace',
-        l: "Lucidia Console",
-        lucidia: "Lucidia Console",
-        t: 'times, serif',
-        timtes: 'times, serif',
-        r: 'roboto',
-        roboto: 'roboto',
-        a: 'arial',
-        arial: 'arial',
-        h: 'helvetica',
-        helvetica: 'helvetica',
-    };
-    // For margin/padding/border locations
-    static whereKeys = {
-        t: "Top",
-        b: "Bottom",
-        l: "Left",
-        r: "Right",
-        v: ["Top", "Bottom"],
-        y: ["Top", "Bottom"],
-        h: ["Left", "Right"],
-        x: ["Left", "Right"],
-    };
-    static bpmKeys = {
-        m: 'margin',
-        p: 'padding',
-        b: 'border',
-    };
-    /**
-     * Makes a style object for margin/padding/border
-     * @propBase - m,b,p
-     * @val - the value
-     * @key opt - one of the keys for whereKeys 't','b','x','y', etc
-     * @return - basic object w. css style props/vals
-     */
-    static mkMPBWhereProps(propBase, val = "1em", key) {
-        let propType = this.bpmKeys[propBase];
-        if (!propType) {
-            throw new Error(`invalid prop type [${propBase}]`);
+    classNames(...args) {
+        let classNames = [];
+        for (let arg of args) { // StyleBuilder instance or style object
+            if (isObject(arg)) {
+                arg = StyleBuilder.build(arg).className;
+            }
+            if (typeof arg !== "string") {
+                throw new Error(`Invalid arg type: ${typeof arg}`);
+            }
+            classNames.push(arg);
         }
-        let ret = {};
-        if (!key) {
-            ret[propType] = val;
-            return ret;
-        }
-        let sTypes = this.whereKeys[key];
-        if (!sTypes) {
-            throw new Error(`invalid sType type [${key}]`);
-        }
-        if (!Array.isArray(sTypes)) {
-            sTypes = [sTypes];
-        }
-        for (let sType of sTypes) {
-            ret[`${propType}${sType}`] = val;
-        }
-        return ret;
-    }
-    /**
-     * static builder & build(args) - to avoid `(new StyleBuilder(...args)).chain1(1)...etc`
-     */
-    static get builder() { return new this(); }
-    static build(...args) { return new this(...args); }
-    styleObj; // A regular JS obj of the built style
-    constructor(...sos) {
-        this.styleObj = {};
-        this.merge(...sos);
-    }
-    get style() {
-        return camelKeys(structuredClone(this.styleObj));
-    }
-    get className() {
-        return cssCss(this.style);
-    }
-    get clone() {
-        return new this.Class(this);
+        classNames.push(this.className);
+        return classNames.join(" ");
     }
     merge(...objs) {
         for (let obj of objs) {
@@ -269,11 +164,6 @@ export class StyleBuilder {
     nest(key, value) {
         return this.add(`& ${key}`, value);
     }
-    static aligns = {
-        c: "center",
-        l: "left",
-        r: "right",
-    };
     ta(align = 'c') {
         //let aligns = this.thisClass.aligns;
         let aligns = this.Class.aligns;
@@ -285,11 +175,9 @@ export class StyleBuilder {
     }
     ff(fontFamily) {
         return this.merge({ fontFamily: valFromObj(fontFamily, this.Class.fontFamilies) });
-        //this.styleObj.fontFamily = fontFamily;
-        //return this;
     }
-    // Start style builder methods
     /**
+     * TODO: TERRIBLE !! Improve with better understanding of color theory & theming - mui color utils or something
      * Make forground/background color pairs from the list
      * @param pair - primitive - key to ltDrkColorPairs obj,
      *       (If numeric & negative, invert true)
@@ -400,8 +288,6 @@ export class StyleBuilder {
     ph(arg) {
         return this.p(arg, "h");
     }
-    // Border
-    static borderParamDefaults = { color: "#888", style: "solid", width: "1px", radius: 0, which: null };
     br(borderParams = {}) {
         if (typeof borderParams === 'string') {
             return this.add('border', borderParams);
@@ -472,6 +358,143 @@ export class StyleBuilder {
             throw new PkError(`Unhandled arg type:`, { arg });
         }
     }
+    // Static Methods
+    /**
+     * Makes a style object for margin/padding/border
+     * @propBase - m,b,p
+     * @val - the value
+     * @key opt - one of the keys for whereKeys 't','b','x','y', etc
+     * @return - basic object w. css style props/vals
+     */
+    static mkMPBWhereProps(propBase, val = "1em", key) {
+        let propType = this.bpmKeys[propBase];
+        if (!propType) {
+            throw new Error(`invalid prop type [${propBase}]`);
+        }
+        let ret = {};
+        if (!key) {
+            ret[propType] = val;
+            return ret;
+        }
+        let sTypes = this.whereKeys[key];
+        if (!sTypes) {
+            throw new Error(`invalid sType type [${key}]`);
+        }
+        if (!Array.isArray(sTypes)) {
+            sTypes = [sTypes];
+        }
+        for (let sType of sTypes) {
+            ret[`${propType}${sType}`] = val;
+        }
+        return ret;
+    }
+    /**
+     * static builder & build(args) - to avoid `(new StyleBuilder(...args)).chain1(1)...etc`
+     */
+    static build(...args) { return new this(...args); }
+    // Static Getters
+    static get builder() { return new this(); }
+    // Static Props
+    static flexDisplayOpts = {
+        fd: {
+            prop: 'flexDirection',
+            vals: {
+                r: 'row',
+                c: 'column',
+            },
+        },
+        wr: {
+            prop: 'wrap',
+            vals: {
+                w: 'wrap',
+                n: 'no-wrap',
+            },
+        },
+        ai: {
+            prop: 'alignItems',
+            vals: {
+                s: 'flex-start',
+                e: 'flex-end',
+                c: 'center',
+                g: 'stretch',
+                b: 'baseliine',
+            }
+        },
+        jc: {
+            prop: 'justifyContent',
+            vals: {
+                s: 'flex-start',
+                c: 'center',
+                e: 'flex-end',
+                b: 'space-between',
+                a: 'space-around',
+            }
+        },
+    };
+    // Color pairs for fg/bg - fg dark, bg light, but can invert
+    static fgBgPairs = {
+        1: { fg: "#000", bg: "#fff" },
+        2: { fg: "#004", bg: "#eff" },
+        3: { fg: "#400", bg: "#ffe" },
+        4: { fg: "#040", bg: "#fef" },
+        5: { fg: "#404", bg: "#efe" },
+        blwh: { fg: "#004", bg: "#fff" },
+        rdwh: { fg: "#400", bg: "#fff" },
+    };
+    static fontSizeMap = {
+        xxs: "xx-small",
+        xs: "x-small",
+        s: "small",
+        sm: "small",
+        m: "medium",
+        md: "medium",
+        l: "large",
+        lg: "large",
+        xl: "x-large",
+        xxl: "xx-large",
+        xxxl: "xxx-large",
+        smaller: "smaller",
+        larger: "larger"
+    };
+    static fontFamilies = {
+        v: 'verdana',
+        verdana: 'verdana,',
+        c: 'Courier New, monospace',
+        courier: 'Courier New, monospace',
+        l: "Lucidia Console",
+        lucidia: "Lucidia Console",
+        t: 'times, serif',
+        timtes: 'times, serif',
+        r: 'roboto',
+        roboto: 'roboto',
+        a: 'arial',
+        arial: 'arial',
+        h: 'helvetica',
+        helvetica: 'helvetica',
+    };
+    // Border
+    static borderParamDefaults = { color: "#888", style: "solid", width: "1px", radius: 0, which: null };
+    static aligns = {
+        c: "center",
+        l: "left",
+        r: "right",
+    };
+    // For margin/padding/border locations
+    static whereKeys = {
+        t: "Top",
+        b: "Bottom",
+        l: "Left",
+        r: "Right",
+        v: ["Top", "Bottom"],
+        y: ["Top", "Bottom"],
+        h: ["Left", "Right"],
+        x: ["Left", "Right"],
+    };
+    static bpmKeys = {
+        m: 'margin',
+        p: 'padding',
+        b: 'border',
+    };
 }
 /// END OF STYLEBUILDER CLASS !!!
 /**
@@ -482,19 +505,43 @@ export class StyleBuilder {
  * Enhances Emotion CX by accepting StyleBuilder args
  * and created classNames from them to add.
  * TODO: Make more nested, and accept generic JS style objects
+ * The real/orig cx can accept args which are an array of args, which is better...
  *  - for now, just works for
  * top level args of type StyleBuilder
- * @param ...args - one or more StyleBuilder instances or style objects
+ * @param ...args - one or more:
+ *     StyleBuilder instances
+ *     style objects
+ *     string classNames
+ * @return string - space separated classNames - NOTE - classNames MAY BE COMPOSED - so output may have fewer & different classNames than input
  */
 export function cxsb(...args) {
     let ret = [];
+    //let idx = 0;
+    //stdOut(`cxsb args:`, args, dbgReport(...args));
     for (let arg of args) {
+        // idx++;
+        if (isEmpty(arg)) {
+            continue;
+        }
+        //let initToArg = typeOf(arg);
+        //console.log(`\ninitToArg[${idx}] - ${initToArg}]`);
+        if (isSimpleObject(arg)) {
+            arg = StyleBuilder.build(arg);
+        }
         if (arg instanceof StyleBuilder) {
-            arg = arg.className;
+            arg = arg.className; // Or maybe arg.style?
+        }
+        if (typeof arg !== "string") {
+            //  let toArg = typeOf(arg);
+            // console.log(`Non string arg TO: [${toArg}]`,{arg});
+        }
+        else {
+            //console.log(`Adding str arg: ${arg}`);
         }
         ret.push(arg);
     }
     return cx(...ret);
+    //return cx(ret);
 }
 /**
  * Try to emulate the @emotion/react/css function, which accepts styles, but extend to use

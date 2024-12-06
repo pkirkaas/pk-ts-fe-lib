@@ -48,6 +48,7 @@
     "preview": "vite preview --open"
   },
   "dependencies": {
+    "@emotion/cache": "^11.13.5",
     "@emotion/css": "*",
     "@emotion/react": "*",
     "@emotion/styled": "*",
@@ -64,6 +65,7 @@
     "immer": "^10.1.1",
     "jotai": "^2.9.0",
     "jotai-immer": "^0.4.1",
+    "jsdom": "^25.0.1",
     "pk-ts-common-lib": "github:pkirkaas/pk-ts-common-lib#working",
     "react": "19.0.0-rc.1",
     "react-bootstrap": "*",

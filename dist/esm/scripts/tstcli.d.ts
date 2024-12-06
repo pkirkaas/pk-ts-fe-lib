@@ -1,7 +1,10 @@
 /**
- * Not sure this should work...
+ * Some tests...
  */
 export declare let tstFncs: {
+    tstSFC(): void;
+    tstMkClassNames(): void;
+    tstCxsb: () => void;
     tsta(): void;
     tstb(): void;
     tstFlex(): void;

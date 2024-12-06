@@ -1,14 +1,10 @@
-import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
+import { jsx as _jsx } from "react/jsx-runtime";
 // NPM packages
 import { useState } from 'react';
 import { startAvailableChecks, getCssHrefs, getJsHrefs } from './libs/browserTweaks.js';
 //import styled  from 'styled-components';
 import { styled } from 'styled-components';
-import { Panel, } from "react-resizable-panels";
-// Local Imports
-import { PanelSeparator, VPanelGroup, } from './components/index.js';
 import { SDiv, mkStyled, } from './components/formComponents.js';
-import { H1 } from './index.js';
 import '../scss/pk-default.scss';
 let OromStyled = mkStyled(SDiv, {
     border: "solid black 3px",
@@ -84,10 +80,44 @@ export function Tst1() {
     let csshRef = getCssHrefs();
     let jsshRef = getJsHrefs();
     let intId = startAvailableChecks();
+    return (_jsx("div", { children: "Empty App" }));
     /*
-    return (<div>Empty App</div>);
+  
+    return (
+      <div className="App fullw">
+        <H1>Tst1</H1>
+        <SDiv>Who Knows</SDiv>
+  <FromStyled>I Know</FromStyled>
+  <OromStyled>Abstracted</OromStyled>
+        <ModStyled2 $background="#aaf" $color="orange" style={{ width: 400 }}>Super Abstracted</ModStyled2>
+        <h1 className="gb">Vite + React</h1>
+        <div>Testing Func Params</div>
+  
+        <div className="brdr">
+          <p> Testing components</p>
+          <VPanelGroup>
+            <Panel className="brnm" minSize={25}>
+              <h1>First Panel</h1>
+            </Panel>
+            <PanelSeparator />
+            <Panel className="brnm" minSize={25}>
+              <h1>Second Panel</h1>
+              </Panel>
+  
+          </VPanelGroup>
+          
+        </div>
+  
+        <div>END Testing Func Params</div>
+  
+        <div className="card">
+          <button onClick={() => setCount((count) => count + 1)}>
+            count is {count}
+          </button>
+        </div>
+      </div>
+    )
     */
-    return (_jsxs("div", { className: "App fullw", children: [_jsx(H1, { children: "Tst1" }), _jsx(SDiv, { children: "Who Knows" }), _jsx(FromStyled, { children: "I Know" }), _jsx(OromStyled, { children: "Abstracted" }), _jsx(ModStyled2, { "$background": "#aaf", "$color": "orange", style: { width: 400 }, children: "Super Abstracted" }), _jsx("h1", { className: "gb", children: "Vite + React" }), _jsx("div", { children: "Testing Func Params" }), _jsxs("div", { className: "brdr", children: [_jsx("p", { children: " Testing components" }), _jsxs(VPanelGroup, { children: [_jsx(Panel, { className: "brnm", minSize: 25, children: _jsx("h1", { children: "First Panel" }) }), _jsx(PanelSeparator, {}), _jsx(Panel, { className: "brnm", minSize: 25, children: _jsx("h1", { children: "Second Panel" }) })] })] }), _jsx("div", { children: "END Testing Func Params" }), _jsx("div", { className: "card", children: _jsxs("button", { onClick: () => setCount((count) => count + 1), children: ["count is ", count] }) })] }));
 }
 export default Tst1;
 //# sourceMappingURL=Tst1.js.map
