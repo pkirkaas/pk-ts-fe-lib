@@ -1,6 +1,7 @@
 import { jsx as _jsx, Fragment as _Fragment, jsxs as _jsxs } from "react/jsx-runtime";
 import Container from 'react-bootstrap/Container';
 import { BrowserRouter } from 'react-router-dom';
+import { Responsive } from './components/index.js';
 import { Tst1 } from './Tst1.js';
 import { Tst2 } from './Tst2.js';
 import { Tst3 } from './Tst3.js';
@@ -13,7 +14,9 @@ export const rNavVals = {
     panels: { path: '/tst3', label: "Panels", component: Tst3 },
 };
 function App(props) {
-    return (_jsx("div", { id: "app-id", ...props, children: _jsx(Container, { fluid: true, children: _jsx(BrowserRouter, { children: _jsxs(_Fragment, { children: [RespNav(rNavVals), _jsx("div", { className: " p-16 border border-blue-200 bg-red-100 ", children: BuildRoutes(rNavVals) })] }) }) }) }));
+    //<div className='tsttw'>Testing Tailwind</div> (check if tailwind.css is loaded)
+    // <h1 className="text-3xl font-bold underline text-center">
+    return (_jsx("div", { id: "app-id", ...props, children: _jsxs(Container, { fluid: true, children: [_jsx("h1", { className: "tsth1", children: "Hello world!" }), _jsx(Responsive, {}), _jsx(BrowserRouter, { children: _jsxs(_Fragment, { children: [RespNav(rNavVals), _jsx("div", { className: " p-16 border border-blue-200 bg-red-100 ", children: BuildRoutes(rNavVals) })] }) })] }) }));
 }
 export default App;
 //# sourceMappingURL=App.js.map

@@ -6,6 +6,7 @@
 import { useState } from 'react'
 import Container from 'react-bootstrap/Container';
 import { BrowserRouter, Route, Link, NavLink, Routes } from 'react-router-dom';
+import {Responsive} from './components/index.js';
 
 
 // PKLib Imports
@@ -35,9 +36,15 @@ export const rNavVals:NavVals = {
   
 function App(props:any) {
 
+        //<div className='tsttw'>Testing Tailwind</div> (check if tailwind.css is loaded)
+         // <h1 className="text-3xl font-bold underline text-center">
   return (
         <div id="app-id" {...props}>
       <Container fluid>
+          <h1 className="tsth1">
+    Hello world!
+  </h1>
+  <Responsive />
   <BrowserRouter>
   <>
 

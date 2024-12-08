@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.tsth1 {
+  text-align:center;
+  @apply text-3xl font-bold underline text-center;
+}
+
+.tsttw {
+  border: solid green 4px;
+  margin: 3em;
+  padding: 3em;
+  font-weight: bold;
+  font-size: xx-large;
+  text-align: center;
+  color: red;
+  background: yellow;
+}
