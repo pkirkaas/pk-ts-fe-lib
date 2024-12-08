@@ -28,6 +28,7 @@
       "require": "./dist/cjs/react-utils/index.js"
     },
     "./reset.css": "./src/Reset-Css-2023.css",
+    "./pk-tailwind.css": "./src/pk-tailwind.css",
     "./scss/pk-default": "./scss/pk-default.scss",
     "./tsconfig.json": "./tsconfig.json",
     "./tsconfig.cjs.json": "./tsconfig.cjs.json"
