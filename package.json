@@ -11,21 +11,21 @@
   "exports": {
     ".": {
       "types": "./dist/esm/index.d.ts",
-      "default": "./dist/esm/index.js",
       "import": "./dist/esm/index.js",
-      "require": "./dist/cjs/index.js"
+      "require": "./dist/cjs/index.js",
+      "default": "./dist/esm/index.js"
     },
     "./react-hook-form": {
       "types": "./dist/esm/react-hook-form/index.d.ts",
-      "default": "./dist/esm/react-hook-form/index.js",
       "import": "./dist/esm/react-hook-form/index.js",
-      "require": "./dist/cjs/react-hook-form/index.js"
+      "require": "./dist/cjs/react-hook-form/index.js",
+      "default": "./dist/esm/react-hook-form/index.js"
     },
     "./react-utils": {
       "types": "./dist/esm/react-utils/index.d.ts",
-      "default": "./dist/esm/react-utils/index.js",
       "import": "./dist/esm/react-utils/index.js",
-      "require": "./dist/cjs/react-utils/index.js"
+      "require": "./dist/cjs/react-utils/index.js",
+      "default": "./dist/esm/react-utils/index.js"
     },
     "./reset.css": "./src/Reset-Css-2023.css",
     "./pk-tailwind.css": "./src/pk-tailwind.css",

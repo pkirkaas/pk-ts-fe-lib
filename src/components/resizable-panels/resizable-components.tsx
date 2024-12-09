@@ -24,6 +24,7 @@ import { isEmpty, typeOfEach, getProps, typeOf, GenObj, insertBetween,
 } from 'pk-ts-common-lib';
 // Local Packages
 import styles from "./resizable.module.css";
+//import styles from "@/components/resizable-panels/resizable.module.css";
 
 import { addProps, addClassNames, replaceProps, getCnt, } from '../../libs/reactUtils.js';
 
