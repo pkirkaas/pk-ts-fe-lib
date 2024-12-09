@@ -11,8 +11,7 @@
     "resolvePackageJsonImports": false,
     "esModuleInterop":true,
 
-
-
+    "plugins": [{ "name": "typescript-plugin-css-modules" }]
 
 
     /*
