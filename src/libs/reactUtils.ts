@@ -12,9 +12,9 @@ import { isEmpty, isObject, GenObj, typeOf, mergeAndConcat, } from 'pk-ts-common
 
 import {StyleBuilder, cxsb, csssb, } from './styleUtils.js';
 //window.localStorage.setItem('JWTToken', 'MyTestToken');
-let jwtToken = window.localStorage.getItem('JWTToken',);
+//let jwtToken = window.localStorage.getItem('JWTToken',);
 
-console.log({ jwtToken });
+//console.log({ jwtToken });
 
 
 export const origin = window?.location?.origin || '';
@@ -36,7 +36,7 @@ export * from './styleUtils.js';
 axios.defaults.baseURL = apiUrl;
 
 export function getPage() {
-	let path = window.location.pathname;
+	let path = window?.location?.pathname || '';
 	return path;
 }
 

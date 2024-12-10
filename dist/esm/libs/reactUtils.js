@@ -6,8 +6,8 @@ import { isEmpty, isObject, mergeAndConcat, } from 'pk-ts-common-lib';
 // Local Imports
 import { cxsb, } from './styleUtils.js';
 //window.localStorage.setItem('JWTToken', 'MyTestToken');
-let jwtToken = window.localStorage.getItem('JWTToken');
-console.log({ jwtToken });
+//let jwtToken = window.localStorage.getItem('JWTToken',);
+//console.log({ jwtToken });
 export const origin = window?.location?.origin || '';
 export const apiUrl = `${origin}/api`;
 export let compCount = { cnt: 0 };
@@ -20,7 +20,7 @@ export * from './styleUtils.js';
 export * from './styleUtils.js';
 axios.defaults.baseURL = apiUrl;
 export function getPage() {
-    let path = window.location.pathname;
+    let path = window?.location?.pathname || '';
     return path;
 }
 export const page = getPage();
