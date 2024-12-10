@@ -44,7 +44,8 @@
     "devlink": "npm link && npm link pk-ts-common-lib",
     "dev": "vite --open",
     "build": "npm run build-lib && vite build",
-    "build-lib": "tsc -p ./tsconfig.json",
+    "copycss": "copyfiles -u 1 ./src/**/*.module.css ./dist/esm/",
+    "build-lib": "tsc -p ./tsconfig.json && npm run copycss",
     "build-lib-cjs": "tsc -p ./tsconfig.json && tsc -p ./tsconfig.cjs.json",
     "build-cjs": "tsc -p ./tsconfig.cjs.json",
     "preview": "vite preview --open"
@@ -65,6 +66,7 @@
     "autoprefixer": "*",
     "bootstrap": "*",
     "classnames": "*",
+    "copyfiles": "^2.4.1",
     "daisyui": "^4.12.14",
     "formik": "*",
     "immer": "*",
