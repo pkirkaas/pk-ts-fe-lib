@@ -1,3 +1,4 @@
+"use client";
 import { jsx as _jsx } from "react/jsx-runtime";
 //import {StyleBuilder} from '../libs/styleUtils.js';
 import { StyleBuilder } from '../react-utils/index.js';
