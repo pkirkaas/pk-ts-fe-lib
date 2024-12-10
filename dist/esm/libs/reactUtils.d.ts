@@ -5,8 +5,7 @@ export declare let compCount: {
     cnt: number;
 };
 export declare function getCnt(): number;
-export * from './styleUtils.js';
-export * from './styleUtils.js';
+export { StyleBuilder, cxsb, csssb, } from './styleUtils.js';
 export declare function getPage(): string;
 export declare const page: string;
 export declare function mkUrl(rel: any): string;

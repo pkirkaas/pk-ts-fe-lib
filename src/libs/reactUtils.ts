@@ -28,8 +28,9 @@ export function getCnt() {
 	return compCount.cnt;
 }
 
-export * from './styleUtils.js';
-export * from './styleUtils.js';
+export {
+	StyleBuilder, cxsb, csssb,
+ } from './styleUtils.js';
 
 
 
