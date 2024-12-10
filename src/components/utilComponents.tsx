@@ -1,3 +1,4 @@
+"use client";
 /**
  * Experiment with general utility components built with StyleBuilder, etc
  */

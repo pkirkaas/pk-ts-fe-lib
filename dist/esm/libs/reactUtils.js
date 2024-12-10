@@ -1,3 +1,4 @@
+"use client";
 /** Not components, but tweaks to support react */
 // NPM Packages
 import axios from 'axios';
@@ -8,7 +9,7 @@ import { cxsb, } from './styleUtils.js';
 //window.localStorage.setItem('JWTToken', 'MyTestToken');
 //let jwtToken = window.localStorage.getItem('JWTToken',);
 //console.log({ jwtToken });
-const window = global.window;
+//const window = global.window;
 export const origin = window?.location?.origin || '';
 export const apiUrl = `${origin}/api`;
 export let compCount = { cnt: 0 };

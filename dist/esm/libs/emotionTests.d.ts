@@ -1,6 +1,3 @@
-/**
- * Tests for emotion styling
- */
 import { StyleBuilder } from '../libs/styleUtils.js';
 /**
  * Test CSS building, class name generation, and resulting CSS

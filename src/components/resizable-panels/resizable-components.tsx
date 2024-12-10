@@ -1,3 +1,4 @@
+"use client";
 /**
  * Customization/simplification of react-resizable-panels 
  *  https://github.com/bvaughn/react-resizable-panels

@@ -1,3 +1,4 @@
+"use client";
 /**
  * Tests for emotion styling
  */

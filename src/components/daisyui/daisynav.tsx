@@ -1,3 +1,4 @@
+"use client";
 import  {Navbar, NavbarProps,  } from 'react-daisyui';
 //import Button from '../Button'
 //import  {Navbar, NavbarProps, Button, Menu, Dropdown } from 'react-daisyui';

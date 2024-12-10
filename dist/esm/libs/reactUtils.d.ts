@@ -1,4 +1,3 @@
-/** Not components, but tweaks to support react */
 import { GenObj } from 'pk-ts-common-lib';
 export declare const origin: string;
 export declare const apiUrl: string;
