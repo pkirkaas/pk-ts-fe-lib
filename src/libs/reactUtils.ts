@@ -17,7 +17,7 @@ let jwtToken = window.localStorage.getItem('JWTToken',);
 console.log({ jwtToken });
 
 
-export const origin = window.location.origin;
+export const origin = window?.location?.origin || '';
 export const apiUrl = `${origin}/api`;
 
 

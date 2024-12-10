@@ -74,6 +74,7 @@
     "pk-ts-common-lib": "github:pkirkaas/pk-ts-common-lib#working",
     "postcss": "*",
     "postcss-import": "^16.1.0",
+    "postcss-modules": "^6.0.1",
     "react": ">=19",
     "react-bootstrap": "*",
     "react-daisyui": "^5.0.5",
