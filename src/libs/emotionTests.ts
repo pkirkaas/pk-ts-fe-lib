@@ -59,8 +59,6 @@ import { StyleBuilder, cxsb, } from '../libs/styleUtils.js';
 /**
  * Test CSS building, class name generation, and resulting CSS
  */
-export function tstCss(...args) {
-}
 export function mkClassNames(...args) {
   if  (!args || !args.length) {
   }

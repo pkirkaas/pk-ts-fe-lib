@@ -1,19 +1,4 @@
-/**
- * Browser Manipulation utilities -
- *
- *
- * for now, just check if the loaded css & js files are still present
- * Why? To auto-reload the browser after a vite build, which changes the names of the css & js artifacts
- * 2023 Paul Kirkaas
- *
- * Vite build creates a css & js asset file in the build directory, with a unique cachebuster in the names,
- *  changes after each build. So set interval to check if the css/js files in index.html still exist,
- * if not, reload.
- *
- * I use nodemon to monitor the fe src files & rebuild if anything changes.
- *
- * Just import and run startAvailableChecks anywhere in the code, and page will reload after new build.
- */
+"use client";
 /**
  * Converts a JS Date to an HTML date string in format YYYY-MM-dd
  * @param dt - the date to convert, else null for now
@@ -100,5 +85,4 @@ export async function reloadIfUnavailable() {
         location.reload();
     }
 }
-/////// localStorage enhancements
 //# sourceMappingURL=browserTweaks.js.map

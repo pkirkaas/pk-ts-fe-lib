@@ -4,7 +4,7 @@
 import { StyleBuilder, withStyled, H1 } from './index.js';
 
 import { SDiv, mkStyled, Panel,
-   TstSelect,   VPanelGroup, HPanelGroup, ResizeHandle,
+      VPanelGroup, HPanelGroup, ResizeHandle,
 
 
  } from './components/index.js';

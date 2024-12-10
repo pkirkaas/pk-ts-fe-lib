@@ -21,7 +21,7 @@ import { runCli, stdOut, } from 'pk-ts-node-lib';
 // Local Imports
 import { StyleBuilder, csssb, cxsb, } from '../libs/styleUtils.js';
 import { //tstJsdom, 
-  tstCss, mkClassNames, styleFromClassname, tstStylesFromCNames } from '../libs/emotionTests.js';
+   mkClassNames, styleFromClassname, tstStylesFromCNames } from '../libs/emotionTests.js';
 
 // Some test data
 let sStyle = {

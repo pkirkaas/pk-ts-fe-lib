@@ -1,1 +1,3 @@
-export * from './daisynav.js';
+export {
+  Responsive,
+ } from './daisynav.js';

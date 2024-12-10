@@ -1,3 +1,4 @@
+"use client";
 /**
  * Browser Manipulation utilities -
  * 
