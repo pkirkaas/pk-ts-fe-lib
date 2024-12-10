@@ -8,6 +8,7 @@ import { cxsb, } from './styleUtils.js';
 //window.localStorage.setItem('JWTToken', 'MyTestToken');
 //let jwtToken = window.localStorage.getItem('JWTToken',);
 //console.log({ jwtToken });
+const window = global.window;
 export const origin = window?.location?.origin || '';
 export const apiUrl = `${origin}/api`;
 export let compCount = { cnt: 0 };
