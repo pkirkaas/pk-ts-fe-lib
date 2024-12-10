@@ -1,3 +1,5 @@
+/* @jsxImportSource @emotion/react */
+"use client";
 import { jsx as _jsx } from "@emotion/react/jsx-runtime";
 import { StyleBuilder, } from '../libs/styleUtils.js';
 import { css, } from '@emotion/react';

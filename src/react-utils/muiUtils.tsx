@@ -1,4 +1,5 @@
 /* @jsxImportSource @emotion/react */
+"use client";
 
 /**
  * Utils for emotion & mui & react - NOT NECESSARILLY mui/material
