@@ -1,18 +1,5 @@
 "use client";
 import { cache, } from '@emotion/css';
-/*
-export function tstJsdom(src?:string) {
-  if (!src) {
-    src = `<!DOCTYPE html><p>Hello world</p>`;
-  }
-  let dom = new JSDOM(src);
-  let html = dom.serialize();
-  let {window} = dom;
-  let {document} = window;
-  console.log({ html});
-  return {dom, window, document, html};
-}
-  */
 // Local Imports
 import { StyleBuilder, cxsb, } from '../libs/styleUtils.js';
 /**
@@ -43,21 +30,6 @@ export function tstStylesFromCNames() {
     let stKeys = Object.keys(tstStyles);
     let stStyles = Object.values(tstStyles);
     let cnames = cxsb('tiger-class', ...stStyles);
-    /*
-    for (let key of stKeys) {
-      let st = tstStyles[key];
-      let cnames = cxsb(st);
-      let cnArr = cnames.split(' ');
-      stdOut(`\n\nTesting extractors for style ${key} - ${cnames}`,{cnArr},`\n`);
-      //for (let se in styleExtractors) {
-       // let extractor = styleExtractors[se];
-       // let css = extractor(cnames);
-       // stdOut(`   extractor: [${se}]:`, {css},`\n`);
-      //}
-      //let css = styleFromClassname(cnames);
-      //console.log({key, cnames, css});
-    }
-        */
     let { inserted, registered, sheet } = cache;
     //console.log(`leaving tstStylesFromCNames`,{sheet, cache});
     console.log(`leaving tstStylesFromCNames`, { cnames, inserted, registered, });

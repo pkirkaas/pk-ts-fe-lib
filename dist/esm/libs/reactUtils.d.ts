@@ -1,10 +1,6 @@
 import { GenObj } from 'pk-ts-common-lib';
 export declare const origin: string;
 export declare const apiUrl: string;
-export declare let compCount: {
-    cnt: number;
-};
-export declare function getCnt(): number;
 export declare function getPage(): string;
 export declare const page: string;
 export declare function mkUrl(rel: any): string;

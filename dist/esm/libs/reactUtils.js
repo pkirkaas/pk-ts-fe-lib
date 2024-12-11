@@ -13,12 +13,6 @@ import { cxsb, } from './styleUtils.js';
 //const window = global.window;
 export const origin = window?.location?.origin || '';
 export const apiUrl = `${origin}/api`;
-export let compCount = { cnt: 0 };
-export function getCnt() {
-    compCount.cnt++;
-    //console.log(`NewCnt: [${compCount.cnt}]`);
-    return compCount.cnt;
-}
 axios.defaults.baseURL = apiUrl;
 export function getPage() {
     let path = window?.location?.pathname || '';

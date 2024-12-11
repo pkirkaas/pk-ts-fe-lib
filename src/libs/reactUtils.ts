@@ -21,17 +21,6 @@ import {StyleBuilder, cxsb, csssb, } from './styleUtils.js';
 export const origin = window?.location?.origin || '';
 export const apiUrl = `${origin}/api`;
 
-
-export let compCount = { cnt: 0 };
-export function getCnt() {
-	compCount.cnt++;
-	//console.log(`NewCnt: [${compCount.cnt}]`);
-	return compCount.cnt;
-}
-
-
-
-
 axios.defaults.baseURL = apiUrl;
 
 export function getPage() {
@@ -41,12 +30,9 @@ export function getPage() {
 
 export const page = getPage();
 
-
 export function mkUrl(rel) {
 	return `${apiUrl}/${rel}`;
 }
-
-
 
 /**
  *  For functional components to modify props to pass subcomponent

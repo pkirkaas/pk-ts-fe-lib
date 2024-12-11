@@ -11,4 +11,3 @@ export {
 export {
   Panel, VPanelGroup, HPanelGroup, ResizeHandle,
  } from './resizable-panels/resizable-components.js';
-//export * from './resizable-panels/resizable.module.css";
