@@ -2,9 +2,11 @@
 export {
   SDiv, mkStyled, RenderArr, KeyFragment,
  } from './formComponents.js';
+ /*
 export {
   H1,
  } from './utilComponents.js';
+  */
 export {
   Responsive,
  } from './daisyui/index.js';

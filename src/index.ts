@@ -14,7 +14,7 @@ export {
 } from './libs/styleUtils.js';
 export {
   Responsive, Panel, VPanelGroup, HPanelGroup,
-  ResizeHandle, H1, SDiv, mkStyled, RenderArr,
+  ResizeHandle,  SDiv, mkStyled, RenderArr,
   KeyFragment,
 
  } from './components/index.js';
