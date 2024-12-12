@@ -89,7 +89,7 @@
     "sass": "*",
     "styled-components": "*",
     "swr": "*",
-    "tailwind": "*",
+    "tailwindcss": "*",
     "tailwind-merge": "^2.5.5",
     "the-new-css-reset": "^1.11.3",
     "typescript-plugin-css-modules": "^5.1.0",
