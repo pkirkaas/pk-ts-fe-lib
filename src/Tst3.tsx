@@ -1,7 +1,7 @@
 // Testing resize comps
 //import { Panel, PanelGroup, PanelResizeHandle, PanelGroupProps,} from "react-resizable-panels";
 
-import { StyleBuilder, withStyled, H1 } from './index.js';
+import { StyleBuilder, withStyled, } from './index.js';
 
 import { SDiv, mkStyled, Panel,
       VPanelGroup, HPanelGroup, ResizeHandle,
@@ -11,10 +11,10 @@ import { SDiv, mkStyled, Panel,
 export function Tst3() {
   return (
     <div style={{backgroundColor: "#fee", border: "solid 1px green", width:"100%"}}>
-      <H1>Tst3</H1>
+      <h1>Tst3</h1>
 
       <SDiv>Who Knows</SDiv>
-      <H1>Start of HPanel Group</H1>
+      <h1>Start of HPanel Group</h1>
       <HPanelGroup style={{ border: "solid 1px green", width:"100%"}}>
         <Panel defaultSize={30} style={{  background: 'red', minHeight:"30px" }}>
         <div style={{border: "solid red 3px"}}>An HPanelItem</div>
@@ -26,7 +26,7 @@ export function Tst3() {
           <div style={{background:"#EFE"}}>Third HPanel Item</div>
         </Panel>
       </HPanelGroup>
-      <H1>Start of VPanel Group</H1>  
+      <h1>Start of VPanel Group</h1>  
       <VPanelGroup style={{minHeight:"200px", border: "solid 1px green", width:"100%"}}>
         <Panel style={{   background: 'red',}}>
           <div style={{background:"#EFE"}}>First V Panel Item</div>
@@ -36,7 +36,7 @@ export function Tst3() {
         </Panel>
       </VPanelGroup>
       {/*
-      <H1>Start of VPanel Group</H1>
+      <h1>Start of VPanel Group</H1>
       <VPanelGroup>
       </VPanelGroup>
       */}
