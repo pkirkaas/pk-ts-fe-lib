@@ -78,10 +78,10 @@ export declare class StyleBuilder {
     styleObj: GenObj;
     constructor(...sos: any[]);
     get Class(): any;
-    get style(): any;
+    get style(): GenObj;
     get className(): string;
     get clone(): any;
-    get camelled(): any;
+    get camelled(): GenObj;
     get fullw(): this;
     get fullh(): this;
     get full(): this;

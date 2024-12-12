@@ -4,7 +4,8 @@
 
 // NPM packages
 import { useState } from 'react'
-import Container from 'react-bootstrap/Container';
+//import Container from 'react-bootstrap/Container';
+import {Container} from 'react-bootstrap';
 import { BrowserRouter, Route, Link, NavLink, Routes } from 'react-router-dom';
 import {Responsive} from './components/index.js';
 

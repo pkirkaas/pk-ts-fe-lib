@@ -5,10 +5,9 @@
     "outDir": "./dist/esm",
     "jsx": "react-jsx",
 //EXPERIMENTS!
-    "target": "ESNext",
-    "module": "ESNext",
-    "moduleResolution": "node",
-    "resolvePackageJsonImports": false,
+  //  "target": "ESNext",
+    //"module": "ESNext",
+    "resolvePackageJsonImports": true,
     "esModuleInterop":true,
 
     "plugins": [{ "name": "typescript-plugin-css-modules" }]

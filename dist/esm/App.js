@@ -1,5 +1,6 @@
 import { jsx as _jsx, Fragment as _Fragment, jsxs as _jsxs } from "react/jsx-runtime";
-import Container from 'react-bootstrap/Container';
+//import Container from 'react-bootstrap/Container';
+import { Container } from 'react-bootstrap';
 import { BrowserRouter } from 'react-router-dom';
 import { Responsive } from './components/index.js';
 import { Tst1 } from './Tst1.js';
