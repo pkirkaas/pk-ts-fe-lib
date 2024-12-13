@@ -1,7 +1,8 @@
 /**
  * Experimental Tailwind Playground
  */
-import { PkNavbar } from './components/daisyui/anavbar.js';
+import { PkNavbar } from './components/daisyui/index.js';
+//} from './components/daisyui/anavbar.js';
 //} from '@/components/daisyui/index.js';
 //const navigationItems: NavItem[] = [
 const navigationItems = [

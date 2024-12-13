@@ -2,10 +2,8 @@ export {
   Responsive,
  } from './daisynav.js';
 
- /*
  export {
-  PkNavbarProps, 
+ type PkNavbarProps, 
   PkNavbar,
-   NavItem,
+  type NavItem,
  } from './anavbar.js';
-  */

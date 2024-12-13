@@ -9,6 +9,9 @@ export {
   */
 export {
   Responsive,
+  PkNavbar,
+  type NavItem,
+  type PkNavbarProps,
  } from './daisyui/index.js';
 export {
   Panel, VPanelGroup, HPanelGroup, ResizeHandle,

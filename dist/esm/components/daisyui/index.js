@@ -1,9 +1,3 @@
 export { Responsive, } from './daisynav.js';
-/*
-export {
- PkNavbarProps,
- PkNavbar,
-  NavItem,
-} from './anavbar.js';
- */ 
+export { PkNavbar, } from './anavbar.js';
 //# sourceMappingURL=index.js.map

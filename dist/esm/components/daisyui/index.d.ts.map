@@ -1,1 +1,1 @@
-{"version":3,"file":"index.d.ts","sourceRoot":"","sources":["../../../../src/components/daisyui/index.ts"],"names":[],"mappings":"AAAA,OAAO,EACL,UAAU,GACV,MAAM,eAAe,CAAC"}
+{"version":3,"file":"index.d.ts","sourceRoot":"","sources":["../../../../src/components/daisyui/index.ts"],"names":[],"mappings":"AAAA,OAAO,EACL,UAAU,GACV,MAAM,eAAe,CAAC;AAEvB,OAAO,EACP,KAAK,aAAa,EACjB,QAAQ,EACR,KAAK,OAAO,GACZ,MAAM,cAAc,CAAC"}

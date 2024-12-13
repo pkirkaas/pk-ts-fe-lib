@@ -3,11 +3,11 @@
  */
 
 import {
-  type NavItem, 
+   NavItem, 
   PkNavbar, 
   type PkNavbarProps
-//} from './components/daisyui/index.js';
-} from './components/daisyui/anavbar.js';
+} from './components/daisyui/index.js';
+//} from './components/daisyui/anavbar.js';
 //} from '@/components/daisyui/index.js';
 
 //const navigationItems: NavItem[] = [
