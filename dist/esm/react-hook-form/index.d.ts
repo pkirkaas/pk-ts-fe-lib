@@ -12,7 +12,7 @@ export declare function mkSelect({ register, name, selectedOption, options, all,
     options: any;
     all: any;
     onSelFncs: any;
-}): Promise<import("react/jsx-runtime").JSX.Element>;
+}): Promise<import("react").JSX.Element>;
 /**
  * Normalize optional array of "onSelect" functions passed to a select input.
  * Can be empty, or a single function, or array of functions -

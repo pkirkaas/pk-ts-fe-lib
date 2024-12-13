@@ -3,14 +3,25 @@
   "compilerOptions": {
     "baseUrl": "./",
     "outDir": "./dist/esm",
-    "jsx": "react-jsx",
-//EXPERIMENTS!
-  //  "target": "ESNext",
+    //"jsx": "react-jsx",
+    "jsx": "preserve",
+    //EXPERIMENTS!
+    //  "target": "ESNext",
     //"module": "ESNext",
     "resolvePackageJsonImports": true,
-    "esModuleInterop":true,
+    "esModuleInterop": true,
+    "plugins": [
+      {
+        "name": "typescript-plugin-css-modules"
+      }
+    ],
+    "paths": { "@/*": [ "./src/*" ], },
+  },
+    "include": [ "./src/**/*" ],
+    "exclude": [ "./dist/esm" ],
+  }
+    
 
-    "plugins": [{ "name": "typescript-plugin-css-modules" }]
 
 
     /*
@@ -28,8 +39,3 @@
     "isolatedModules": true,
     "noEmit": true,
     */
-  },
- 
-  "include":["./src/**/*"],
-  "exclude": [ "./dist/esm" ]
-}

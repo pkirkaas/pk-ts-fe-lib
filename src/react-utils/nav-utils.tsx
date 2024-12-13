@@ -77,12 +77,14 @@ export default App
 
 /**
  * ABSURD - now react-bootstrap nav links no longer indicate the active state?
+ * PLUS - the state isn't updated when clicking on link - have to refresh...
  * @param path - relative path for react route
  * @param activeClass  - default "active"
  * @return string|false - the active class, or null/false
  */
 export function isActive(path:string, activeClass="active") : any {
   let pathname = window.location.pathname;
+  console.log(`in isActive - pathname:[${pathname}], path:[${path}]`);
   if (pathname === path) {
     return activeClass;
   }

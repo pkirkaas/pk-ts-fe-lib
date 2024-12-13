@@ -58,14 +58,15 @@ export default App
  */
 /**
  * ABSURD - now react-bootstrap nav links no longer indicate the active state?
+ * PLUS - the state isn't updated when clicking on link - have to refresh...
  * @param path - relative path for react route
  * @param activeClass  - default "active"
  * @return string|false - the active class, or null/false
  */
 export declare function isActive(path: string, activeClass?: string): any;
-export declare function BuildRoutes(navVals: NavVals): import("react/jsx-runtime").JSX.Element;
+export declare function BuildRoutes(navVals: NavVals): import("react").JSX.Element;
 /**
  * Makes a responsive menu
  */
-export declare function RespNav(props: NavVals): import("react/jsx-runtime").JSX.Element;
+export declare function RespNav(props: NavVals): import("react").JSX.Element;
 //# sourceMappingURL=nav-utils.d.ts.map

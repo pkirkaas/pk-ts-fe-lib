@@ -2,9 +2,29 @@
 @tailwind components;
 @tailwind utilities;
 
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Verdana, Helvetica, sans-serif;
+  width: 100vw;
+}
+
 .tsth1 {
-  text-align:center;
-  @apply text-4xl font-bold underline text-center;
+  border: solid green 4px;
+  @apply text-4xl font-bold py-4 m-4 underline text-center;
 }
 
 .tsttw {

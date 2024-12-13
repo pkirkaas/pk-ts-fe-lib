@@ -4,7 +4,6 @@
 
 // NPM packages
 import { useState } from 'react'
-//import Container from 'react-bootstrap/Container';
 import {Container} from 'react-bootstrap';
 import { BrowserRouter, Route, Link, NavLink, Routes } from 'react-router-dom';
 import {Responsive} from './components/index.js';
@@ -24,6 +23,7 @@ import { StyleBuilder, } from './libs/styleUtils.js';
 import {Tst1} from './Tst1.js';
 import {Tst2} from './Tst2.js';
 import {Tst3} from './Tst3.js';
+import {TailwindPlay} from './TailwindPlay.js';
 import {NavVals, BuildRoutes, RespNav, isActive,} from './react-utils/index.js';
 import {MainNavbar} from './FeNavBar.js';
 //import styled  from 'styled-components';
@@ -32,7 +32,8 @@ import '../scss/pk-default.scss';
 export const rNavVals:NavVals = {
 	about: { path: '/', label: "Tst1", component: Tst1,  },
 	gallery: { path: '/tst2', label: "Tst2", component: Tst2 },
-	panels: { path: '/tst3', label: "Panels", component: Tst3 },
+	panels: { path: '/panels', label: "Panels", component: Tst3 },
+	tailplay: { path: '/tailwindplay', label: "Tailwind Play", component: TailwindPlay },
 };
   
 function App(props:any) {
