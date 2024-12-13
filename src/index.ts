@@ -18,6 +18,12 @@ export {
   KeyFragment,
 
  } from './components/index.js';
+
+ export {
+  PkNavbar,
+  type NavItem,
+  type PkNavbarProps,
+ } from './components/daisyui/index.js';
 export {
  type NavVals, isActive, BuildRoutes, RespNav,
   withStyled, withSBox, withMBox,
