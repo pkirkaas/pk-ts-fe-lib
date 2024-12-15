@@ -30,6 +30,7 @@
 }
 
 .VPanelGroup {
+  flex-direction: column;
 }
 
 .VPanelGroup > .Panel {
