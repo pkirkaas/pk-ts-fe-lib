@@ -17,7 +17,7 @@ import {StyleBuilder, cxsb, csssb, } from './styleUtils.js';
 
 //console.log({ jwtToken });
 
-//const window = global.window;
+const window = global.window;
 export const origin = window?.location?.origin || '';
 export const apiUrl = `${origin}/api`;
 
