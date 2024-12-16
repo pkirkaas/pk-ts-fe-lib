@@ -1,16 +1,12 @@
-/**
- * Utility Components for PkLib
- */
-import React from 'react';
 export declare const SDiv: any;
 /** TODO: Can styles be a template literal? How?  */
 export declare function mkStyled(cmp: any, styles: any): any;
-export declare function KeyFragment(...all: any[]): React.JSX.Element;
+export declare function KeyFragment(...all: any[]): import("react/jsx-runtime").JSX.Element;
 /**
  *
  */
-export declare function RenderArr(props: any): React.JSX.Element;
-export declare function TstSelect(): React.JSX.Element;
+export declare function RenderArr(props: any): import("react/jsx-runtime").JSX.Element;
+export declare function TstSelect(): import("react/jsx-runtime").JSX.Element;
 /**
  * // Any useful here?
 export function BaseComp(props: GenObj = {}) {

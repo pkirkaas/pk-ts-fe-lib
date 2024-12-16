@@ -15,7 +15,6 @@ export type PkPGProps = Partial<PanelGroupProps & {
     ResizeHandle?: any;
     children?: any;
 }>;
-import React from 'react';
 /**
  * This section helps react-resizable-panels
  */
@@ -23,12 +22,12 @@ import React from 'react';
  * Simplify & give default style to PanelGroup
  * children ARE ONLY ARRAY OF PANELS - no need to include PanelSeparator between each
  */
-export declare function MetaPanelGroup(props: PkPGProps): React.JSX.Element;
+export declare function MetaPanelGroup(props: PkPGProps): import("react/jsx-runtime").JSX.Element;
 /**
  * TODO: Seems like Panel displays should be 'flex', and 'flex-direction: column/row'
  */
-export declare function Panel(props: any): React.JSX.Element;
-export declare function VPanelGroup(props: PkPGProps): React.JSX.Element;
-export declare function HPanelGroup(props: any): React.JSX.Element;
-export declare function ResizeHandle(props: any): React.JSX.Element;
+export declare function Panel(props: any): import("react/jsx-runtime").JSX.Element;
+export declare function VPanelGroup(props: PkPGProps): import("react/jsx-runtime").JSX.Element;
+export declare function HPanelGroup(props: any): import("react/jsx-runtime").JSX.Element;
+export declare function ResizeHandle(props: any): import("react/jsx-runtime").JSX.Element;
 //# sourceMappingURL=resizable-components.d.ts.map

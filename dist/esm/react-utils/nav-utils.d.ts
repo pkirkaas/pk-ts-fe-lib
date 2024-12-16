@@ -64,9 +64,9 @@ export default App
  * @return string|false - the active class, or null/false
  */
 export declare function isActive(path: string, activeClass?: string): any;
-export declare function BuildRoutes(navVals: NavVals): import("react").JSX.Element;
+export declare function BuildRoutes(navVals: NavVals): import("react/jsx-runtime").JSX.Element;
 /**
  * Makes a responsive menu
  */
-export declare function RespNav(props: NavVals): import("react").JSX.Element;
+export declare function RespNav(props: NavVals): import("react/jsx-runtime").JSX.Element;
 //# sourceMappingURL=nav-utils.d.ts.map
