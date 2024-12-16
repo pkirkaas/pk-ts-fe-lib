@@ -295,6 +295,8 @@ export declare function pkStyles(...args: any[]): GenObj;
  *     style objects
  *     string classNames
  * @return string - space separated classNames - NOTE - classNames MAY BE COMPOSED - so output may have fewer & different classNames than input
+ * Usage in component:
+ * <div className={cxsb(sb1,{color:"red",fontSize:"2em"})}>...</div>
  */
 export declare function cxsb(...args: any[]): string;
 /**

@@ -9,7 +9,7 @@ import { PkNavbar } from './components/daisyui/index.js';
 const navigationItems = [
     {
         label: 'Home',
-        href: '/',
+        action: '/',
         // icon: <HomeIcon />, // Example icon component
     },
     {
@@ -17,17 +17,17 @@ const navigationItems = [
         children: [
             {
                 label: 'Hardware',
-                href: '/products/hardware',
+                action: '/products/hardware',
             },
             {
                 label: 'Software',
-                href: '/products/software',
+                action: '/products/software',
             },
         ],
     },
     {
         label: 'About',
-        href: '/about',
+        action: '/about',
     },
 ];
 export function TailwindPlay() {

@@ -1,3 +1,3 @@
 export { Responsive, } from './daisynav.js';
-export { type PkNavbarProps, PkNavbar, type NavItem, } from './anavbar.js';
+export { type PkNavbarProps, PkNavbar, type NavItem, } from './gemnav.js';
 //# sourceMappingURL=index.d.ts.map

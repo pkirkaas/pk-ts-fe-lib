@@ -6,4 +6,4 @@ export {
  type PkNavbarProps, 
   PkNavbar,
   type NavItem,
- } from './anavbar.js';
+ } from './gemnav.js';

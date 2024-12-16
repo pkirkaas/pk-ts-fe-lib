@@ -14,7 +14,7 @@ import {
 const navigationItems: NavItem[] = [
   {
     label: 'Home',
-    href: '/',
+    action: '/',
    // icon: <HomeIcon />, // Example icon component
   },
   {
@@ -22,17 +22,17 @@ const navigationItems: NavItem[] = [
     children: [
       {
         label: 'Hardware',
-        href: '/products/hardware',
+        action: '/products/hardware',
       },
       {
         label: 'Software',
-        href: '/products/software',
+        action: '/products/software',
       },
     ],
   },
   {
     label: 'About',
-    href: '/about',
+    action: '/about',
   },
 ];
 
