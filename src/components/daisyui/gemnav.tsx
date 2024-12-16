@@ -1,4 +1,5 @@
 /** Blended Gemini/OAI/Etc proposed NavBar for DaisyUI */
+"use client";
 
 import React from 'react';
 import { Navbar, Button, Dropdown, Menu } from 'react-daisyui';

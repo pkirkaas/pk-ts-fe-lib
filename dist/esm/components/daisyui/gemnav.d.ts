@@ -1,4 +1,3 @@
-/** Blended Gemini/OAI/Etc proposed NavBar for DaisyUI */
 import React from 'react';
 /**
  * @typedef NavItem
