@@ -11,7 +11,7 @@ export default defineConfig({
     babel: {
       plugins: ["@emotion/babel-plugin"],
     },
-  }
+  },
     // Didn't need the below yet, but just in case...
     /*{
     jsxRuntime: 'classic',
@@ -22,5 +22,8 @@ export default defineConfig({
     minify:false,
     outDir: 'build',
     sourcemap: true,
+  },
+  define: {
+    global: {},
   }
 })

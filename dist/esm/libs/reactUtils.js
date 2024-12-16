@@ -1,7 +1,4 @@
 "use client";
-/** Not components, but tweaks to support react */
-// NPM Packages
-import axios from 'axios';
 // PKLib Imports
 import { isEmpty, isObject, mergeAndConcat, } from 'pk-ts-common-lib';
 // Local Imports
@@ -10,18 +7,23 @@ import { cxsb, } from './styleUtils.js';
 //window.localStorage.setItem('JWTToken', 'MyTestToken');
 //let jwtToken = window.localStorage.getItem('JWTToken',);
 //console.log({ jwtToken });
-const window = global.window;
-export const origin = window?.location?.origin || '';
-export const apiUrl = `${origin}/api`;
-axios.defaults.baseURL = apiUrl;
+//const window = global.window;
+//const window = global ? .window || {};
+//export const origin = window?.location?.origin || '';
+//export const apiUrl = `${origin}/api`;
+//axios.defaults.baseURL = apiUrl;
+/*
 export function getPage() {
     let path = window?.location?.pathname || '';
     return path;
 }
+
 export const page = getPage();
+
 export function mkUrl(rel) {
     return `${apiUrl}/${rel}`;
 }
+    */
 /**
  *  For functional components to modify props to pass subcomponent
  */

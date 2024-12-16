@@ -17,12 +17,14 @@ import {StyleBuilder, cxsb, csssb, } from './styleUtils.js';
 
 //console.log({ jwtToken });
 
-const window = global.window;
-export const origin = window?.location?.origin || '';
-export const apiUrl = `${origin}/api`;
+//const window = global.window;
+//const window = global ? .window || {};
+//export const origin = window?.location?.origin || '';
+//export const apiUrl = `${origin}/api`;
 
-axios.defaults.baseURL = apiUrl;
+//axios.defaults.baseURL = apiUrl;
 
+/*
 export function getPage() {
 	let path = window?.location?.pathname || '';
 	return path;
@@ -33,6 +35,7 @@ export const page = getPage();
 export function mkUrl(rel) {
 	return `${apiUrl}/${rel}`;
 }
+	*/
 
 /**
  *  For functional components to modify props to pass subcomponent
