@@ -47,6 +47,7 @@ export function MetaPanelGroup(props) {
  */
 export function Panel(props) {
     let cprops = addClassNames(props, styles.Panel);
+    cprops.defaultSize = cprops.defaultSize ?? 100;
     return _jsx(OrigPanel, { ...cprops });
 }
 export function VPanelGroup(props) {

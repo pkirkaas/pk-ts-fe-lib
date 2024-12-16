@@ -59,6 +59,7 @@ export function MetaPanelGroup(props: PkPGProps) {
  */
 export function Panel(props) {
   let cprops = addClassNames(props, styles.Panel);
+  cprops.defaultSize = cprops.defaultSize ?? 100;
   return <OrigPanel {...cprops} />;
 }
 export function VPanelGroup(props: PkPGProps) {
