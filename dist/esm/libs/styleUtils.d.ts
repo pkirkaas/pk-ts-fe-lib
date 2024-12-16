@@ -277,6 +277,10 @@ export declare class StyleBuilder {
     };
 }
 /**
+ * Merge multiple style objects into one - also StyleBuilder instances and "props.style" if present
+ */
+export declare function pkStyles(...args: any[]): GenObj;
+/**
  * Laziness again - SB is just a new StyleBuilder instance
  */
 /**

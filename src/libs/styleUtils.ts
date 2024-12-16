@@ -68,7 +68,7 @@ import {
 
 } from 'pk-ts-common-lib';
 
-import {stdOut, } from 'pk-ts-node-lib';
+import { stdOut, } from 'pk-ts-node-lib';
 // import local packages
 
 
@@ -79,7 +79,7 @@ export interface StyleBuilderFlexArgs { // For building flex display styles
   ai?: 's' | 'e' | 'c' | 'g' | 'b',
   jc?: 's' | 'c' | 'e' | 'b' | 'a',
 }
-export type BmpKeys = 'm'|'p'|'b'; // Base Margin/Padding/Border keys
+export type BmpKeys = 'm' | 'p' | 'b'; // Base Margin/Padding/Border keys
 export type BorderParams = Partial<typeof StyleBuilder.borderParamDefaults>;
 export type WhereKeyType = keyof typeof StyleBuilder.whereKeys;
 export type AlignType = keyof typeof StyleBuilder.aligns;
@@ -91,18 +91,18 @@ export type FontFamily = keyof typeof StyleBuilder.fontFamilies;
 
 //export type Scalar = string | number;
 
-  /** Utility - if val a key of obj, return the value
-   * for the key, else return val itself.
-   * Purpose: To allow some shortcut keys for CSS values, like
-   * {ai:'s'} for "alignItems:'flex-start'" - but also allow setting CSS values NOT
-   * using the shortcut keys.
-  */
-  export function valFromObj(val:any, obj:GenObj):any {
-    if (isPrimitive(val) && (val in obj)) {
-      return obj[val];
-    }
-    return val;
+/** Utility - if val a key of obj, return the value
+ * for the key, else return val itself.
+ * Purpose: To allow some shortcut keys for CSS values, like
+ * {ai:'s'} for "alignItems:'flex-start'" - but also allow setting CSS values NOT
+ * using the shortcut keys.
+*/
+export function valFromObj(val: any, obj: GenObj): any {
+  if (isPrimitive(val) && (val in obj)) {
+    return obj[val];
   }
+  return val;
+}
 
 //** Build up CSS style property objects  */
 
@@ -128,9 +128,9 @@ export class StyleBuilder {
   }
 
   // Instance Getters
-  get Class():any { // The class of the instance, to access static props/methods from instance
+  get Class(): any { // The class of the instance, to access static props/methods from instance
     return this.constructor as any;
-   } 
+  }
   get style() { // Returns a dup of the GeneralStyle Object
     return camelKeys(structuredClone(this.styleObj));
   }
@@ -181,7 +181,7 @@ export class StyleBuilder {
       let prop = fDisps[propkey].prop;
       let valkey = rFlexOpts[propkey];
       let val = valFromObj(valkey, fDisps[propkey].vals);
-      _.merge(dispStyle, {[prop]:val});
+      _.merge(dispStyle, { [prop]: val });
     }
     return this.merge(dispStyle);
   }
@@ -194,7 +194,7 @@ export class StyleBuilder {
     return this.className;
   }
 
-  classNames(...args):string { // Returns a string of classNames from args & this.className
+  classNames(...args): string { // Returns a string of classNames from args & this.className
     let classNames = [];
     for (let arg of args) { // StyleBuilder instance or style object
       if (isObject(arg)) {
@@ -205,7 +205,7 @@ export class StyleBuilder {
       }
       classNames.push(arg);
     }
-    classNames.push( this.className);
+    classNames.push(this.className);
     return classNames.join(" ");
   }
 
@@ -232,17 +232,17 @@ export class StyleBuilder {
   nest(key, value) { // Just "add", but ensures '&'
     return this.add(`& ${key}`, value);
   }
-  ta(align:AlignType = 'c') {
-   //let aligns = this.thisClass.aligns;
-   let aligns = this.Class.aligns;
+  ta(align: AlignType = 'c') {
+    //let aligns = this.thisClass.aligns;
+    let aligns = this.Class.aligns;
     if (align in aligns) {
       align = aligns[align];
     }
     this.styleObj.textAlign = align;
     return this;
   }
-  ff(fontFamily:FontFamily) {
-    return this.merge({fontFamily:valFromObj(fontFamily, this.Class.fontFamilies)});
+  ff(fontFamily: FontFamily) {
+    return this.merge({ fontFamily: valFromObj(fontFamily, this.Class.fontFamilies) });
   }
 
 
@@ -258,8 +258,8 @@ export class StyleBuilder {
    * @param invert boolean - invert the light/dark?
    * 
    */
-  fgbg(pair: string|string[] | number | GenObj, invert = false) {
-    let objPair:GenObj = {};
+  fgbg(pair: string | string[] | number | GenObj, invert = false) {
+    let objPair: GenObj = {};
     if (isPrimitive(pair)) { // Should be key to fgBgPairs
       if (isNumeric(pair) && ((pair as number) < 0)) { // if negative, invert
         pair = -pair;
@@ -268,7 +268,7 @@ export class StyleBuilder {
       if (pair as Scalar in this.Class.fgBgPairs) {
         objPair = this.Class.fgBgPairs[pair as Scalar];
       } else { // TODO: Allow a CSS Color string, and invert/complement it for fg/bg
-        throw new PkError(`Invalid fgbg arg:`,{pair,invert});
+        throw new PkError(`Invalid fgbg arg:`, { pair, invert });
       }
     } else if (Array.isArray(pair)) { // Array of 2 CSS Colors
       objPair.fg = pair[0];
@@ -276,17 +276,17 @@ export class StyleBuilder {
     } else if (isObject(pair)) {
       objPair.fg = (pair as GenObj).fg;
       objPair.bg = (pair as GenObj).bg;
-    } 
-    if (!isObject(objPair) || !objPair.fg || !objPair.bg) {
-      throw new PkError(`Invalid arg to SB.fgbg:`,{pair,invert});
     }
-    let ret:GenObj = {};
+    if (!isObject(objPair) || !objPair.fg || !objPair.bg) {
+      throw new PkError(`Invalid arg to SB.fgbg:`, { pair, invert });
+    }
+    let ret: GenObj = {};
     if (invert) {
-      ret.color=(objPair.fg);
-      ret.background=(objPair.bg);
+      ret.color = (objPair.fg);
+      ret.background = (objPair.bg);
     } else {
-      ret.color=(objPair.bg);
-      ret.background=(objPair.fg);
+      ret.color = (objPair.bg);
+      ret.background = (objPair.fg);
     }
     return this.merge(ret);
   }
@@ -299,16 +299,16 @@ export class StyleBuilder {
     this.styleObj.boxShadow = `inset 0px 0px 0px ${spread} ${color}`;
     return this;
     */
-   return this.merge({boxShadow: `inset 0px 0px 0px ${spread} ${color}`});
+    return this.merge({ boxShadow: `inset 0px 0px 0px ${spread} ${color}` });
   }
 
 
 
-  fs(sz:Scalar) { //font size
+  fs(sz: Scalar) { //font size
     if (sz in this.Class.fontSizeMap) {
       sz = this.Class.fontSizeMap[sz];
     }
-    return this.merge({fontSize:sz});
+    return this.merge({ fontSize: sz });
     /*
     this.styleObj.fontSize = sz;
     return this;
@@ -316,13 +316,13 @@ export class StyleBuilder {
   }
 
   // Dimensions - w, maxw, minw, h, maxh, minh
-  w(val:Scalar) { return this.merge({width:val}); }
-  maxw(val:Scalar) { return this.merge({maxWidth:val}); }
-  minw(val:Scalar) { return this.merge({minWidth:val}); }
+  w(val: Scalar) { return this.merge({ width: val }); }
+  maxw(val: Scalar) { return this.merge({ maxWidth: val }); }
+  minw(val: Scalar) { return this.merge({ minWidth: val }); }
 
-  h(val:Scalar) { return this.merge({height:val}); }
-  maxh(val:Scalar) { return this.merge({maxHeight:val}); }
-  minh(val:Scalar) { return this.merge({minHeight:val}); }
+  h(val: Scalar) { return this.merge({ height: val }); }
+  maxh(val: Scalar) { return this.merge({ maxHeight: val }); }
+  minh(val: Scalar) { return this.merge({ minHeight: val }); }
 
 
   /*
@@ -332,7 +332,7 @@ export class StyleBuilder {
  * @param which string|empty - if empty, all margins, if string, one of t|b|l|r|v|h|x|y
  * 
   */
-  m(arg?:Scalar, which?: WhereKeyType) {
+  m(arg?: Scalar, which?: WhereKeyType) {
     if (!arg) {
       arg = "1em";
     }
@@ -340,13 +340,13 @@ export class StyleBuilder {
     _.merge(this.styleObj, mg);
     return this;
   }
-  mv(arg?:Scalar) { // Vertical Margins
+  mv(arg?: Scalar) { // Vertical Margins
     return this.m(arg, "v");
   }
-  mh(arg?:Scalar) {
+  mh(arg?: Scalar) {
     return this.m(arg, "h");
   }
-  p(arg?:Scalar, which?: WhereKeyType) {
+  p(arg?: Scalar, which?: WhereKeyType) {
     if (!arg) {
       arg = "1em";
     }
@@ -355,20 +355,20 @@ export class StyleBuilder {
     _.merge(this.styleObj, mg);
     return this;
     */
-   return this.merge(mg);
+    return this.merge(mg);
   }
-  pv(arg?:Scalar) {
+  pv(arg?: Scalar) {
     return this.p(arg, "v");
   }
-  ph(arg?:Scalar) {
+  ph(arg?: Scalar) {
     return this.p(arg, "h");
   }
 
-  br(borderParams:BorderParams|string = {}) { // Border param object, or literal string
+  br(borderParams: BorderParams | string = {}) { // Border param object, or literal string
     if (typeof borderParams === 'string') {
       return this.add('border', borderParams);
     }
-    let {color, style, radius, width, which} = {...(this.Class.borderParamDefaults), ...borderParams};
+    let { color, style, radius, width, which } = { ...(this.Class.borderParamDefaults), ...borderParams };
     let settings = `${style} ${width} ${color}`;
     let ret: GenObj = {};
     if (which) {
@@ -409,23 +409,23 @@ export class StyleBuilder {
     this.styleObj.backgroundColor = color;
     return this;
   }
-   /**
-    * Set display 
-    * @param arg - string or StyleBuilderFlexArgs - see StyleBuilderFlexArgs
-    * if string, 'i' | 'inline' | 'b' | 'block', else flex
-    */
-  d(arg:string | StyleBuilderFlexArgs ) {
+  /**
+   * Set display 
+   * @param arg - string or StyleBuilderFlexArgs - see StyleBuilderFlexArgs
+   * if string, 'i' | 'inline' | 'b' | 'block', else flex
+   */
+  d(arg: string | StyleBuilderFlexArgs) {
     if (typeof arg === "string") {
       if (arg === 'flex') { //default flex
         return this.flex();
       } else {
         let disps = {
-          i:'inline-block',
-          inline:'inline-block',
-          b:'block',
-          block:'block',
+          i: 'inline-block',
+          inline: 'inline-block',
+          b: 'block',
+          block: 'block',
         };
-        return this.merge({display:valFromObj(arg, disps)});
+        return this.merge({ display: valFromObj(arg, disps) });
       }
     } else if (isSimpleObject(arg)) { // Must be flexargs
       return this.flex(arg);
@@ -442,7 +442,7 @@ export class StyleBuilder {
    * @key opt - one of the keys for whereKeys 't','b','x','y', etc
    * @return - basic object w. css style props/vals
    */
-  static mkMPBWhereProps(propBase:BmpKeys, val="1em", key?:WhereKeyType) {
+  static mkMPBWhereProps(propBase: BmpKeys, val = "1em", key?: WhereKeyType) {
     let propType = this.bpmKeys[propBase];
     if (!propType) {
       throw new Error(`invalid prop type [${propBase}]`);
@@ -480,8 +480,8 @@ export class StyleBuilder {
     fd: { // Flex direction
       prop: 'flexDirection',
       vals: {
-        r:'row',
-        c:'column',
+        r: 'row',
+        c: 'column',
       },
     },
     wr: { // Wrap
@@ -541,30 +541,30 @@ export class StyleBuilder {
     larger: "larger"
   };
   static fontFamilies = {
-  v:'verdana',
-  verdana:'verdana,',
-  c:'Courier New, monospace',
-  courier:'Courier New, monospace',
-  l:"Lucidia Console",
-  lucidia:"Lucidia Console",
-  t:'times, serif',
-  timtes:'times, serif',
-  r:'roboto',
-  roboto:'roboto',
-  a:'arial',
-  arial:'arial',
-  h:'helvetica',
-  helvetica:'helvetica',
-};
+    v: 'verdana',
+    verdana: 'verdana,',
+    c: 'Courier New, monospace',
+    courier: 'Courier New, monospace',
+    l: "Lucidia Console",
+    lucidia: "Lucidia Console",
+    t: 'times, serif',
+    timtes: 'times, serif',
+    r: 'roboto',
+    roboto: 'roboto',
+    a: 'arial',
+    arial: 'arial',
+    h: 'helvetica',
+    helvetica: 'helvetica',
+  };
 
 
   // Border
-  static borderParamDefaults = {color:"#888", style:"solid", width:"1px" as string|number, radius:0 as string|number, which:null as null | WhereKeyType };
+  static borderParamDefaults = { color: "#888", style: "solid", width: "1px" as string | number, radius: 0 as string | number, which: null as null | WhereKeyType };
   static aligns = {
     c: "center",
     l: "left",
     r: "right",
-  }
+  };
 
   // For margin/padding/border locations
   static whereKeys = {
@@ -589,6 +589,26 @@ export class StyleBuilder {
 /// END OF STYLEBUILDER CLASS !!!
 
 /**
+ * Merge multiple style objects into one - also StyleBuilder instances and "props.style" if present
+ */
+export function pkStyles(...args) {
+  let retStyle: GenObj = {};
+  for (let arg of args) {
+    if (arg instanceof StyleBuilder) {
+      _.merge(retStyle, arg.style);
+    } else if (isSimpleObject(arg)) {
+      if ("style" in arg) { // It's props.style
+        arg = arg.style;
+      }
+      _.merge(retStyle, arg);
+    } else {
+      throw new PkError(`Unhandled arg type:`, { arg });
+    }
+  }
+  return retStyle;
+}
+
+/**
  * Laziness again - SB is just a new StyleBuilder instance
  */
 //export const SB=StyleBuilder.builder; 
@@ -611,7 +631,7 @@ export function cxsb(...args) {
   //let idx = 0;
   //stdOut(`cxsb args:`, args, dbgReport(...args));
   for (let arg of args) {
-   // idx++;
+    // idx++;
     if (isEmpty(arg)) {
       continue;
     }
@@ -624,8 +644,8 @@ export function cxsb(...args) {
       arg = arg.className; // Or maybe arg.style?
     }
     if (typeof arg !== "string") {
-    //  let toArg = typeOf(arg);
-     // console.log(`Non string arg TO: [${toArg}]`,{arg});
+      //  let toArg = typeOf(arg);
+      // console.log(`Non string arg TO: [${toArg}]`,{arg});
     } else {
       //console.log(`Adding str arg: ${arg}`);
     }

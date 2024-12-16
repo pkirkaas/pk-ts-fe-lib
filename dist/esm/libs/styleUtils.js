@@ -508,6 +508,27 @@ export class StyleBuilder {
 }
 /// END OF STYLEBUILDER CLASS !!!
 /**
+ * Merge multiple style objects into one - also StyleBuilder instances and "props.style" if present
+ */
+export function pkStyles(...args) {
+    let retStyle = {};
+    for (let arg of args) {
+        if (arg instanceof StyleBuilder) {
+            _.merge(retStyle, arg.style);
+        }
+        else if (isSimpleObject(arg)) {
+            if ("style" in arg) { // It's props.style
+                arg = arg.style;
+            }
+            _.merge(retStyle, arg);
+        }
+        else {
+            throw new PkError(`Unhandled arg type:`, { arg });
+        }
+    }
+    return retStyle;
+}
+/**
  * Laziness again - SB is just a new StyleBuilder instance
  */
 //export const SB=StyleBuilder.builder; 

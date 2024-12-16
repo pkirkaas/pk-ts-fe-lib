@@ -10,7 +10,7 @@ export {
   useAxiosBase, urlBase, useAxiosGet, useAxiosPost,useAsync, 
  } from './libs/apiUtils.js';
 export { 
-  StyleBuilder, cxsb, csssb,
+  StyleBuilder, cxsb, csssb, pkStyles,
 } from './libs/styleUtils.js';
 export {
   Responsive, Panel, VPanelGroup, HPanelGroup,

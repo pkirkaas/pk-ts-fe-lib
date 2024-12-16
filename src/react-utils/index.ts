@@ -7,7 +7,7 @@ export {
   type NavVals, isActive, BuildRoutes, RespNav,
  } from './nav-utils.js';
 export { 
-  StyleBuilder, cxsb, csssb,
+  StyleBuilder, cxsb, csssb, pkStyles,
 } from '../libs/styleUtils.js';
 export {
   mkClassNames, tstStyles, tstStylesFromCNames,
