@@ -29,10 +29,6 @@ export type PkNavbarProps = {
     breakpoint?: "sm" | "md" | "lg" | "xl";
     /** Theme for the navbar */
     theme?: string;
-    /** Optional custom class for dropdown menu */
-    dropdownMenuClass?: string;
-    /** Optional custom class for horizontal menu */
-    horizontalMenuClass?: string;
 };
 interface MenuItemProps {
     item: NavItem;
@@ -44,8 +40,7 @@ interface MenuItemProps {
 export declare const MenuItem: React.FC<MenuItemProps>;
 /**
  * A responsive navbar component using DaisyUI
- * Handles both mobile (dropdown) and desktop (horizontal menu) layouts
  */
 export declare const PkNavbar: React.FC<PkNavbarProps>;
 export {};
-//# sourceMappingURL=gemnav.d.ts.map
+//# sourceMappingURL=antnav.d.ts.map

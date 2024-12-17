@@ -1,7 +1,7 @@
 /** Blended Gemini/OAI/Etc proposed NavBar for DaisyUI */
 "use client";
 
-import React from 'react';
+import React, {useState, useRef} from 'react';
 import { Navbar, Button, Dropdown, Menu } from 'react-daisyui';
 
 
@@ -28,6 +28,7 @@ export type NavItem = {
   icon?: React.ReactNode;
   children?: NavItem[];
   className?: string;
+  disabled?: boolean;
 };
 
 export type PkNavbarProps = {
@@ -41,131 +42,173 @@ export type PkNavbarProps = {
   className?: string;
   /** Breakpoint for mobile/desktop switch - defaults to 'lg' */
   breakpoint?: "sm" | "md" | "lg" | "xl";
+    /** Theme for the navbar */
+  theme?: string;
+  /** Optional custom class for dropdown menu */
+  dropdownMenuClass?: string;
+  /** Optional custom class for horizontal menu */
+  horizontalMenuClass?: string;
     /** Custom render function for menu items */
-  renderMenuItem?: (item: NavItem, isDropdown: boolean) => React.ReactNode;
 };
 
 
+interface MenuItemProps {
+  item: NavItem;
+  isDropdown: boolean;
+}
+
 
 /**
- * Renders a single menu item
- * @param item - Navigation item to render
- * @param isDropdown - Whether rendering in dropdown mode
+ * Renders a single menu item, handling both dropdown and regular menu cases
  */
-const renderMenuItem = (
-  item: NavItem,
-  isDropdown: boolean
-): React.ReactNode => {
+export const MenuItem: React.FC<MenuItemProps> = ({ item, isDropdown }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const timeoutRef = useRef<NodeJS.Timeout | undefined>(undefined);
+
+  const handleMouseEnter = () => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+    setIsOpen(true);
+  };
+
+  const handleMouseLeave = () => {
+    timeoutRef.current = setTimeout(() => {
+      setIsOpen(false);
+    }, 100); // Small delay to prevent menu from closing during movement to submenu
+  };
+    // Clean up timeout on unmount
+  React.useEffect(() => {
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    };
+  }, []);
+
   const content = (
-    <>
-      {item.icon && <span className="mr-2">{item.icon}</span>}
-      {item.label}
-    </>
+    <span className="flex items-center gap-2">
+      {item.icon && <span className="menu-item-icon">{item.icon}</span>}
+      <span className="menu-item-label">{item.label}</span>
+    </span>
   );
 
+  const renderActionElement = () => {
+    const baseClassName = `menu-item ${item.className || ''} ${
+      item.disabled ? 'disabled' : ''
+    }`;
+
+    if (!item.action) {
+      return (
+        <span className={`${baseClassName} cursor-default`}>
+          {content}
+        </span>
+      );
+    }
+
+    if (typeof item.action === 'string') {
+      return (
+        <a
+          href={item.action}
+          className={baseClassName}
+          aria-disabled={item.disabled}
+        >
+          {content}
+        </a>
+      );
+    }
+
+    return (
+      <button
+        onClick={item.action}
+        className={baseClassName}
+        disabled={item.disabled}
+      >
+        {content}
+      </button>
+    );
+  };
+
+  // Handle items with children (submenus)
   if (item.children) {
     if (isDropdown) {
       return (
-        <li key={item.label}>
-          <button
-            className="btn btn-ghost btn-sm w-full justify-between"
-            onClick={(e) => {
-              e.preventDefault();
-              // Toggle the dropdown
-              const dropdown = e.currentTarget.nextElementSibling as HTMLElement;
-              if (dropdown) {
-                dropdown.classList.toggle('hidden');
-              }
-            }}
-          >
-            {content}
-            <svg
-              className="fill-current"
-              xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
+        <li 
+          className="menu-item-with-submenu"
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+        >
+          <div className="relative">
+            <button 
+              className={`btn btn-ghost w-full justify-between ${item.className || ''}`}
+              onClick={() => setIsOpen(!isOpen)}
             >
-              <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z" />
-            </svg>
-          </button>
-          <ul className="p-2 hidden">
-            {item.children.map((child) => renderMenuItem(child, isDropdown))}
-          </ul>
+              {content}
+              <svg
+                className={`fill-current transition-transform ${isOpen ? 'rotate-180' : ''}`}
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+              >
+                <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z" />
+              </svg>
+            </button>
+            {isOpen && (
+              <ul className="absolute left-full top-0 w-48 p-2 bg-base-100 rounded-box shadow-lg">
+                {item.children.map((child) => (
+                  <MenuItem
+                    key={child.label}
+                    item={child}
+                    isDropdown={true}
+                  />
+                ))}
+              </ul>
+            )}
+          </div>
         </li>
       );
     }
+
     return (
-      <Menu.Item key={item.label}>
-        <details>
-          <summary>{content}</summary>
-          <ul className="p-2">
-            {item.children.map((child) => renderMenuItem(child, isDropdown))}
-          </ul>
-        </details>
+      <Menu.Item
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+      >
+        <div className="relative">
+          <button 
+            className={`btn btn-ghost ${item.className || ''}`}
+            onClick={() => setIsOpen(!isOpen)}
+          >
+            {content}
+          </button>
+          {isOpen && (
+            <ul className="absolute left-0 top-full mt-2 w-48 p-2 bg-base-100 rounded-box shadow-lg">
+              {item.children.map((child) => (
+                <MenuItem
+                  key={child.label}
+                  item={child}
+                  isDropdown={false}
+                />
+              ))}
+            </ul>
+          )}
+        </div>
       </Menu.Item>
     );
   }
 
-  if (typeof item.action === 'string') {
-    // If action is a string, treat it as an href
-    if (isDropdown) {
-      return (
-        <Dropdown.Item key={item.label}>
-          <a href={item.action}>{content}</a>
-        </Dropdown.Item>
-      );
-    }
-    return (
-      <Menu.Item key={item.label}>
-        <a href={item.action}>{content}</a>
-      </Menu.Item>
-    );
-  } else if (typeof item.action === 'function') {
-    // If action is a function, use it as an onClick handler
-    if (isDropdown) {
-      return (
-        <Dropdown.Item key={item.label}>
-          <button onClick={item.action}>{content}</button>
-        </Dropdown.Item>
-      );
-    }
-    return (
-      <Menu.Item key={item.label}>
-        <button onClick={item.action}>{content}</button>
-      </Menu.Item>
-    );
-  }
-
-  // If no action is provided, render as a disabled item
+  // Handle items without children
   if (isDropdown) {
-    return (
-      <Dropdown.Item key={item.label} disabled>
-        {content}
-      </Dropdown.Item>
-    );
+    return <Dropdown.Item>{renderActionElement()}</Dropdown.Item>;
   }
-  return (
-    <Menu.Item key={item.label} disabled>
-      {content}
-    </Menu.Item>
-  );
+
+  return <Menu.Item>{renderActionElement()}</Menu.Item>;
 };
 
 /**
- * Renders the menu structure for both dropdown and full menu
- * @param items - Array of navigation items
- * @param isDropdown - Whether rendering in dropdown mode
- */
-const renderMenu = (
-  items: NavItem[],
-  isDropdown: boolean
-): React.ReactNode => {
-  return items.map((item) => renderMenuItem(item, isDropdown));
-};
-
-/**
- * PkNavbar - A responsive navbar component using DaisyUI
+ * A responsive navbar component using DaisyUI
+ * Handles both mobile (dropdown) and desktop (horizontal menu) layouts
  */
 export const PkNavbar: React.FC<PkNavbarProps> = ({
   brand,
@@ -173,12 +216,12 @@ export const PkNavbar: React.FC<PkNavbarProps> = ({
   endContent,
   className = '',
   breakpoint = 'lg',
-  renderMenuItem: customRenderMenuItem,
+  theme,
+  dropdownMenuClass = 'w-52 menu-sm mt-3 z-[1]',
+  horizontalMenuClass = 'px-1',
 }) => {
-  const renderItem = customRenderMenuItem || renderMenuItem;
-
   return (
-    <Navbar className={className}>
+    <Navbar className={className} data-theme={theme}>
       <Navbar.Start>
         <Dropdown>
           <Button
@@ -186,6 +229,7 @@ export const PkNavbar: React.FC<PkNavbarProps> = ({
             color="ghost"
             tabIndex={0}
             className={`${breakpoint}:hidden`}
+            aria-label="Menu"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -193,6 +237,7 @@ export const PkNavbar: React.FC<PkNavbarProps> = ({
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
+              aria-hidden="true"
             >
               <path
                 strokeLinecap="round"
@@ -202,40 +247,38 @@ export const PkNavbar: React.FC<PkNavbarProps> = ({
               />
             </svg>
           </Button>
-          <Dropdown.Menu tabIndex={0} className="w-52 menu-sm mt-3 z-[1]">
-            {renderMenu(items, true)}
+          <Dropdown.Menu 
+            tabIndex={0} 
+            className={dropdownMenuClass}
+          >
+            {items.map((item) => (
+              <MenuItem 
+                key={item.label} 
+                item={item} 
+                isDropdown={true} 
+              />
+            ))}
           </Dropdown.Menu>
         </Dropdown>
         {brand}
       </Navbar.Start>
+
       <Navbar.Center className={`hidden ${breakpoint}:flex`}>
-        <Menu horizontal className="px-1">
-          {renderMenu(items, false)}
+        <Menu 
+          horizontal 
+          className={horizontalMenuClass}
+        >
+          {items.map((item) => (
+            <MenuItem 
+              key={item.label} 
+              item={item} 
+              isDropdown={false} 
+            />
+          ))}
         </Menu>
       </Navbar.Center>
+
       {endContent && <Navbar.End>{endContent}</Navbar.End>}
     </Navbar>
   );
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
