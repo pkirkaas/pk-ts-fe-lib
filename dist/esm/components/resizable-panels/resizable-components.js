@@ -43,11 +43,12 @@ export function MetaPanelGroup(props) {
     _jsx(PanelGroup, { ...cprops }));
 }
 /**
+ * Panel `defaultSize`:optional percentage of group total. If all Panels have defaultSize, must add  * up to 100 - else, any panels w/o default size will share the remaining from those with.
  * TODO: Seems like Panel displays should be 'flex', and 'flex-direction: column/row'
  */
 export function Panel(props) {
     let cprops = addClassNames(props, styles.Panel);
-    cprops.defaultSize = cprops.defaultSize ?? 100;
+    //cprops.defaultSize = cprops.defaultSize ?? 50;
     return _jsx(OrigPanel, { ...cprops });
 }
 export function VPanelGroup(props) {

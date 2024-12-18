@@ -24,6 +24,7 @@ export type PkPGProps = Partial<PanelGroupProps & {
  */
 export declare function MetaPanelGroup(props: PkPGProps): import("react/jsx-runtime").JSX.Element;
 /**
+ * Panel `defaultSize`:optional percentage of group total. If all Panels have defaultSize, must add  * up to 100 - else, any panels w/o default size will share the remaining from those with.
  * TODO: Seems like Panel displays should be 'flex', and 'flex-direction: column/row'
  */
 export declare function Panel(props: any): import("react/jsx-runtime").JSX.Element;
