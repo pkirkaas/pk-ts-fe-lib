@@ -31,6 +31,6 @@ const navigationItems = [
     },
 ];
 export function TailwindPlay() {
-    return (_jsxs("div", { style: { background: "#faf", width: "100%", margin: 5, padding: 5, border: "solid red 1px", height: "100vh" }, children: [_jsx(PkNavbar, { items: navigationItems }), _jsx("h1", { className: "tsth1", children: "Tailwind Playground" })] }));
+    return (_jsxs("div", { style: { background: "#faf", width: "100%", margin: 5, padding: 5, border: "solid red 1px", height: "100vh" }, children: [_jsx(PkNavbar, { style: { border: "solid red 2px" }, items: navigationItems }), _jsx("h1", { className: "tsth1", children: "Tailwind Playground" })] }));
 }
 //# sourceMappingURL=TailwindPlay.js.map

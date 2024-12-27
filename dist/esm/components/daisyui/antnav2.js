@@ -52,7 +52,7 @@ export const MenuItem = ({ item, isDropdown = false }) => {
     }
     return (_jsx("button", { className: baseClassName, onClick: handleClick, disabled: item.disabled, children: renderContent() }));
 };
-export const PkNavbar = ({ brand, items, endContent, className = '', breakpoint = 'lg' }) => {
-    return (_jsxs(Navbar, { className: className, children: [_jsxs(Navbar.Start, { children: [_jsxs(Dropdown, { children: [_jsx(Button, { tag: "label", color: "ghost", tabIndex: 0, className: `${breakpoint}:hidden`, children: "\u2630" }), _jsx(Dropdown.Menu, { tabIndex: 0, className: "w-52 mt-3 z-[1] p-2 shadow bg-base-100 rounded-box", children: items.map((item) => (_jsx(MenuItem, { item: item, isDropdown: true }, item.label))) })] }), brand] }), _jsx(Navbar.Center, { className: `hidden ${breakpoint}:flex gap-2`, children: items.map((item) => (_jsx(MenuItem, { item: item, isDropdown: false }, item.label))) }), endContent && _jsx(Navbar.End, { children: endContent })] }));
+export const PkNavbar = ({ brand, items, endContent, style, className = '', breakpoint = 'lg' }) => {
+    return (_jsxs(Navbar, { className: className, style: style, children: [_jsxs(Navbar.Start, { children: [_jsxs(Dropdown, { children: [_jsx(Button, { tag: "label", color: "ghost", tabIndex: 0, className: `${breakpoint}:hidden`, children: "\u2630" }), _jsx(Dropdown.Menu, { tabIndex: 0, className: "w-52 mt-3 z-[1] p-2 shadow bg-base-100 rounded-box", children: items.map((item) => (_jsx(MenuItem, { item: item, isDropdown: true }, item.label))) })] }), brand] }), _jsx(Navbar.Center, { className: `hidden ${breakpoint}:flex gap-2`, children: items.map((item) => (_jsx(MenuItem, { item: item, isDropdown: false }, item.label))) }), endContent && _jsx(Navbar.End, { children: endContent })] }));
 };
 //# sourceMappingURL=antnav2.js.map

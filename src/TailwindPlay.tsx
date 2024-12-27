@@ -39,7 +39,7 @@ const navigationItems: NavItem[] = [
 export function TailwindPlay() {
   return (
     <div style={{background:"#faf", width:"100%", margin:5, padding:5, border:"solid red 1px", height:"100vh"}}>
-      <PkNavbar items={navigationItems} />
+      <PkNavbar style={{border:"solid red 2px"}} items={navigationItems} />
       <h1 className="tsth1">Tailwind Playground</h1>
       </div>
   );

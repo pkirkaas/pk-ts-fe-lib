@@ -1,4 +1,5 @@
 import React from 'react';
+import { GenObj } from 'pk-ts-common-lib';
 /**
  * @typedef NavItem
  * @description Represents a single navigation item.
@@ -17,6 +18,7 @@ export type NavItem = {
     disabled?: boolean;
 };
 export type PkNavbarProps = {
+    style?: GenObj;
     /** Brand/logo element displayed on the left */
     brand?: React.ReactNode;
     /** Navigation structure */

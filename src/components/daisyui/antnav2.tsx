@@ -28,6 +28,9 @@
 import React, {useState, useRef} from 'react';
 import { Navbar, Button, Dropdown, Menu } from 'react-daisyui';
 
+import {GenObj,
+} from 'pk-ts-common-lib';
+
 /**
  * @typedef NavItem
  * @description Represents a single navigation item.
@@ -47,6 +50,7 @@ export type NavItem = {
 };
 
 export type PkNavbarProps = {
+  style?:GenObj,
   /** Brand/logo element displayed on the left */
   brand?: React.ReactNode;
   /** Navigation structure */
@@ -139,11 +143,12 @@ export const PkNavbar: React.FC<PkNavbarProps> = ({
   brand,
   items,
   endContent,
+  style,
   className = '',
   breakpoint = 'lg'
 }) => {
   return (
-    <Navbar className={className}>
+    <Navbar className={className} style={style}>
       <Navbar.Start>
         <Dropdown>
           <Button
