@@ -2,8 +2,34 @@
  * Initially, just for exporting `safelist` for Tailwind config - to include & allow for dynamic classnames
  * 2024-Dec-27 19:59
  * Exports a `safelist` array for tailwind.config.ts
- * To use:
+ * To use in `tailwind.config.ts` of an implementing app - :
  *
+ *
+ *
+ * import type { Config } from "tailwindcss";
+//import {safelist} from 'pk-ts-fe-lib';
+import {safelist} from "./node_modules/pk-ts-fe-lib/dist/esm/libs/tailwind-utils.js";
+export default {
+  content: [
+    "./src/pages/ ** / *.{js,ts,jsx,tsx,mdx}",
+    "./src/components/ ** / *.{js,ts,jsx,tsx,mdx}",
+    "./src/app/ ** / *.{js,ts,jsx,tsx,mdx}",
+    'node_modules/daisyui/dist/ ** / *.js',
+    'node_modules/react-daisyui/dist/ ** / *.js',
+    'node_modules/pk-ts-fe-lib/dist/ ** / *.js',
+  ],
+  safelist,
+  daisyui: {
+    themes: ["light"],
+  },
+  plugins: [require('daisyui')],
+} satisfies Config;
+
+ * import type { Config } from "tailwindcss";
+//import {safelist} from 'pk-ts-fe-lib';
+import {safelist} from "./node_modules/pk-ts-fe-lib/dist/esm/libs/tailwind-utils.js";
+
+
  */
 export declare const cssColorNames: string[];
 export declare const twIntensities: string[];
