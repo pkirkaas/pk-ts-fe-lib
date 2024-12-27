@@ -82,6 +82,13 @@ export function ResizeHandle(props) {
 }
 
 
+export function TstTw(props) {
+  return (
+    <div className="text-red-600 text-xl p-2 m-2 border border-black bg-blue-200 font-extrabold">
+      This is Tailwind Styled!
+      </div>
+  );
+}
 
 
 

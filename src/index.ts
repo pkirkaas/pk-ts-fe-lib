@@ -17,7 +17,7 @@ export {
 export {
   Responsive, Panel, VPanelGroup, HPanelGroup,
   ResizeHandle,  SDiv, mkStyled, RenderArr,
-  KeyFragment,
+  KeyFragment, TstTw,
 
  } from './components/index.js';
 

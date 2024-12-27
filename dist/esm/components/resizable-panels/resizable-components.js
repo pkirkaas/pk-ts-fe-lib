@@ -65,4 +65,7 @@ export function ResizeHandle(props) {
     let cprops = addClassNames(props, styles.ResizeHandle);
     return _jsx(PanelResizeHandle, { ...cprops });
 }
+export function TstTw(props) {
+    return (_jsx("div", { className: "text-red-600 text-xl p-2 m-2 border border-black bg-blue-200 font-extrabold", children: "This is Tailwind Styled!" }));
+}
 //# sourceMappingURL=resizable-components.js.map

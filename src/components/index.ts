@@ -14,5 +14,5 @@ export {
   type PkNavbarProps,
  } from './daisyui/index.js';
 export {
-  Panel, VPanelGroup, HPanelGroup, ResizeHandle,
+  Panel, VPanelGroup, HPanelGroup, ResizeHandle, TstTw,
  } from './resizable-panels/resizable-components.js';

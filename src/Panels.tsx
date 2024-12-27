@@ -1,7 +1,7 @@
 // Testing resize comps
 //import { Panel, PanelGroup, PanelResizeHandle, PanelGroupProps,} from "react-resizable-panels";
 
-import { StyleBuilder, withStyled, } from './index.js';
+import { StyleBuilder, withStyled, TstTw,} from './index.js';
 
 import { SDiv, mkStyled, Panel,
       VPanelGroup, HPanelGroup, ResizeHandle,
@@ -12,6 +12,7 @@ export function Panels() {
   return (
     <div style={{backgroundColor: "#fee", border: "solid 1px green", }}>
       <h1>Tst3</h1>
+      <TstTw />
 
       <SDiv>Who Knows</SDiv>
       <h1>Start of HPanel Group</h1>

@@ -31,4 +31,5 @@ export declare function Panel(props: any): import("react/jsx-runtime").JSX.Eleme
 export declare function VPanelGroup(props: PkPGProps): import("react/jsx-runtime").JSX.Element;
 export declare function HPanelGroup(props: any): import("react/jsx-runtime").JSX.Element;
 export declare function ResizeHandle(props: any): import("react/jsx-runtime").JSX.Element;
+export declare function TstTw(props: any): import("react/jsx-runtime").JSX.Element;
 //# sourceMappingURL=resizable-components.d.ts.map

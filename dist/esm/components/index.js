@@ -6,5 +6,5 @@ export {
 } from './utilComponents.js';
  */
 export { Responsive, PkNavbar, } from './daisyui/index.js';
-export { Panel, VPanelGroup, HPanelGroup, ResizeHandle, } from './resizable-panels/resizable-components.js';
+export { Panel, VPanelGroup, HPanelGroup, ResizeHandle, TstTw, } from './resizable-panels/resizable-components.js';
 //# sourceMappingURL=index.js.map
