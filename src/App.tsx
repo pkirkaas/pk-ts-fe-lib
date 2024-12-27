@@ -6,7 +6,7 @@
 import { useState } from 'react'
 import {Container} from 'react-bootstrap';
 import { BrowserRouter, Route, Link, NavLink, Routes } from 'react-router-dom';
-import {Responsive} from './components/index.js';
+import {Responsive, PkNavbar,} from './components/index.js';
 
 
 // PKLib Imports
@@ -28,7 +28,12 @@ import {NavVals, BuildRoutes, RespNav, isActive,} from './react-utils/index.js';
 import {MainNavbar} from './FeNavBar.js';
 //import styled  from 'styled-components';
 import '../scss/pk-default.scss';
-
+let menuItems = [
+  { label: "Home", action: "/" },
+  { label: "Subpage", action: "/subpage" },
+  { label: "Async RSC", action: "/rscasync" },
+  { label: "Panels?", action: "/panels" },
+];
 export const rNavVals:NavVals = {
 	about: { path: '/', label: "Tst1", component: Tst1,  },
 	gallery: { path: '/tst2', label: "Tst2", component: Tst2 },
@@ -46,6 +51,10 @@ function App(props:any) {
           <h1 className="tsth1">
     Hello world!
   </h1>
+  <h2>PkNav Below</h2>
+  <hr />
+  <PkNavbar className="w-full border text-black  border-green-600" breakpoint="sm" items={menuItems} />
+  <hr />
   <Responsive />
   <BrowserRouter>
   <>

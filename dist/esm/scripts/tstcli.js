@@ -4,6 +4,7 @@
 import { runCli, stdOut, } from 'pk-ts-node-lib';
 // Local Imports
 import { StyleBuilder, cxsb, } from '../libs/styleUtils.js';
+import { safelist, } from '../libs/tailwind-utils.js';
 import { //tstJsdom, 
 mkClassNames, tstStylesFromCNames } from '../libs/emotionTests.js';
 // Some test data
@@ -19,6 +20,9 @@ let cxsbTstObj = {
     cnStr,
 };
 export let tstFncs = {
+    twConf() {
+        console.log("In twConf", { safelist });
+    },
     tstSFC() {
         stdOut("\n\nIn tstSFC\n");
         tstStylesFromCNames();

@@ -138,6 +138,8 @@ export const MenuItem: React.FC<MenuItemProps> = ({ item, isDropdown = false }) 
 };
 
 
+            //className={`${breakpoint}:hidden`}
+      //<Navbar.Center className={`hidden ${breakpoint}:flex gap-2`}>
 
 export const PkNavbar: React.FC<PkNavbarProps> = ({
   brand,
@@ -147,6 +149,10 @@ export const PkNavbar: React.FC<PkNavbarProps> = ({
   className = '',
   breakpoint = 'lg'
 }) => {
+
+  let cnButton = `${breakpoint}:hidden`;
+  let cnNav = `hidden ${breakpoint}:flex gap-2`;
+//  console.log({cnButton, cnNav});
   return (
     <Navbar className={className} style={style}>
       <Navbar.Start>
@@ -155,7 +161,7 @@ export const PkNavbar: React.FC<PkNavbarProps> = ({
             tag="label"
             color="ghost"
             tabIndex={0}
-            className={`${breakpoint}:hidden`}
+            className={cnButton}
           >
             ☰
           </Button>
@@ -171,7 +177,7 @@ export const PkNavbar: React.FC<PkNavbarProps> = ({
         {brand}
       </Navbar.Start>
 
-      <Navbar.Center className={`hidden ${breakpoint}:flex gap-2`}>
+      <Navbar.Center className={cnNav}>
         {items.map((item) => (
           <MenuItem key={item.label} item={item} isDropdown={false} />
         ))}

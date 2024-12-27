@@ -2,6 +2,7 @@
  * Some tests...
  */
 export declare let tstFncs: {
+    twConf(): void;
     tstSFC(): void;
     tstMkClassNames(): void;
     tstCxsb: () => void;
