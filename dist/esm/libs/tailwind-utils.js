@@ -1,10 +1,10 @@
 /**
+ * UPDATE 2024-Dec-27 19:59 - Clever but way too heavy. Commenting most out - keep
+ * breakpoints & display classes for now
  * Initially, just for exporting `safelist` for Tailwind config - to include & allow for dynamic classnames
  * 2024-Dec-27 19:59
  * Exports a `safelist` array for tailwind.config.ts
  * To use in `tailwind.config.ts` of an implementing app - :
- *
- *
  *
  * import type { Config } from "tailwindcss";
 //import {safelist} from 'pk-ts-fe-lib';
@@ -28,8 +28,6 @@ export default {
  * import type { Config } from "tailwindcss";
 //import {safelist} from 'pk-ts-fe-lib';
 import {safelist} from "./node_modules/pk-ts-fe-lib/dist/esm/libs/tailwind-utils.js";
-
-
  */
 export const cssColorNames = [
     "black", "silver", "gray", "white", "maroon", "red", "purple", "fuchsia",
@@ -51,10 +49,14 @@ export const twStates = [
     */
 ];
 export const twVariants = [
-    ...twBreakpoints, ...twStates,
+    ...twBreakpoints,
+    //...twStates,
 ];
 export const twDisplays = [
-    'block', 'inline-block', 'inline', 'flex', 'inline-flex', 'grid', 'inline-grid', 'table', 'inline-table', 'table-row', 'table-row-group', 'table-header-group', 'table-footer-group', 'table-cell', 'table-column', 'table-column-group', 'contents', 'hidden', 'visible',
+    'block', 'inline-block', 'inline', 'flex', 'inline-flex', 'hidden',
+    //'grid', 'inline-grid', 'table', 'inline-table', 'table-row', 'table-row-group',
+    //'table-header-group', 'table-footer-group', 'table-cell', 'table-column',
+    //'table-column-group',  'contents', 'visible',
 ];
 /**
  * Makes a regex for Tailwind config safelist 'pattern'
@@ -81,7 +83,7 @@ export function mkTwRegex(...args) {
     return new RegExp(retStr);
 }
 let patterns = [
-    mkTwRegex(twColorable, cssColorNames, twIntensities),
+    //  mkTwRegex(twColorable, cssColorNames, twIntensities),
     mkTwRegex(twDisplays),
 ];
 export const safelist = patterns.map(p => ({

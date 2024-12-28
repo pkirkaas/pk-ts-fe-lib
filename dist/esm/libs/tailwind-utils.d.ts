@@ -1,10 +1,10 @@
 /**
+ * UPDATE 2024-Dec-27 19:59 - Clever but way too heavy. Commenting most out - keep
+ * breakpoints & display classes for now
  * Initially, just for exporting `safelist` for Tailwind config - to include & allow for dynamic classnames
  * 2024-Dec-27 19:59
  * Exports a `safelist` array for tailwind.config.ts
  * To use in `tailwind.config.ts` of an implementing app - :
- *
- *
  *
  * import type { Config } from "tailwindcss";
 //import {safelist} from 'pk-ts-fe-lib';
@@ -28,8 +28,6 @@ export default {
  * import type { Config } from "tailwindcss";
 //import {safelist} from 'pk-ts-fe-lib';
 import {safelist} from "./node_modules/pk-ts-fe-lib/dist/esm/libs/tailwind-utils.js";
-
-
  */
 export declare const cssColorNames: string[];
 export declare const twIntensities: string[];
