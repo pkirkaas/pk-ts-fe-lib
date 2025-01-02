@@ -4,16 +4,20 @@
   outline: none;
 */
 .ResizeHandle {
-  flex: 0 0 0.25rem;
+  flex: 0 0 0.1rem;
   display: flex;
   justify-content: stretch;
   align-items: stretch;
+  background-color: blue;
   outline: 1px solid black;
   transition: background-color 0.2s linear;
 }
 .ResizeHandle[data-resize-handle-active="keyboard"],
 .ResizeHandle[data-resize-handle-active="pointer"] {
+  /*
   background-color: var(--color-resize-bar-drag);
+  */
+  background-color: red;
 }
 
 @media (pointer: coarse) {
@@ -35,16 +39,16 @@
 
 .Panel {
   display:flex;
-  border: solid purple 1px;
+  border: solid #888 1px;
+  /*
   margin: 1px;
   padding: 1px;
+  */
 }
 .VPanelGroup > .Panel {
-  background: orange;
   flex-direction: column;
 }
 .HPanelGroup > .Panel {
-  background: yellow;
   flex-direction: row;
 }
 

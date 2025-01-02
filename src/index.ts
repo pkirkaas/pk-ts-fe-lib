@@ -3,11 +3,10 @@ export {
   startAvailableChecks, getLoadedCss, getCssHrefs,
   getJsHrefs,isUrlReachable, unavailableHrefs, reloadIfUnavailable,
  } from './libs/browserTweaks.js';
-/*
 export {
-  origin, apiUrl,  getPage, mkUrl, page,
+//  origin, apiUrl,  getPage, mkUrl, page,
+  addProps, addClassNames, replaceProps, addDefaultStyle,
  } from './libs/reactUtils.js';
-  */
 export {
   useAxiosBase, urlBase, useAxiosGet, useAxiosPost,useAsync, 
  } from './libs/apiUtils.js';
