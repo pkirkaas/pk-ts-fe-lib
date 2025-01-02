@@ -8,7 +8,7 @@
   display: flex;
   justify-content: stretch;
   align-items: stretch;
-  outline: 3px solid black;
+  outline: 1px solid black;
   transition: background-color 0.2s linear;
 }
 .ResizeHandle[data-resize-handle-active="keyboard"],
@@ -33,24 +33,21 @@
   flex-direction: column;
 }
 
-.VPanelGroup > .Panel {
+.Panel {
   display:flex;
+  border: solid purple 1px;
+  margin: 1px;
+  padding: 1px;
+}
+.VPanelGroup > .Panel {
   background: orange;
-  margin: 15px;
-  padding: 8px;
   flex-direction: column;
 }
 .HPanelGroup > .Panel {
-  display:flex;
   background: yellow;
-  margin: 15px;
-  padding: 8px;
   flex-direction: row;
 }
 
-.Panel {
-  border: solid purple 3px;
-}
 /*
 .HPanelGroup {
   display: flex;

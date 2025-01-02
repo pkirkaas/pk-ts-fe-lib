@@ -333,9 +333,11 @@ export class StyleBuilder {
  * 
   */
   m(arg?: Scalar, which?: WhereKeyType) {
+    /*
     if (!arg) {
       arg = "1em";
     }
+      */
     let mg = this.Class.mkMPBWhereProps('m', arg, which);
     _.merge(this.styleObj, mg);
     return this;
@@ -347,9 +349,11 @@ export class StyleBuilder {
     return this.m(arg, "h");
   }
   p(arg?: Scalar, which?: WhereKeyType) {
+    /*
     if (!arg) {
       arg = "1em";
     }
+      */
     let mg = this.Class.mkMPBWhereProps('p', arg, which);
     /*
     _.merge(this.styleObj, mg);

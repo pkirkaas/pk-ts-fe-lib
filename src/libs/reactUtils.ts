@@ -118,4 +118,23 @@ export function replaceProps(props: object, mods?: any): GenObj {
 	return { ...props, ...mods };
 }
 
+/**
+ * Adds default styles to props.style - or rather, allow custom style to override default
+ * Returns props with style updated
+ */
+export function addDefaultStyle(props: GenObj, defaultStyle: GenObj): GenObj {
+	let cprops = { ...props };
+	if (isEmpty(defaultStyle)) {
+		return cprops;
+	}
+	if (defaultStyle instanceof StyleBuilder) {
+		defaultStyle = defaultStyle.style;
+	}
+	if (isEmpty(props.style)) {
+		cprops.style = defaultStyle;
+		return cprops;
+	}
+	cprops.style = _.merge({}, defaultStyle, props.style);
+	return cprops;
+}
 

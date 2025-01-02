@@ -268,9 +268,11 @@ export class StyleBuilder {
    *
     */
     m(arg, which) {
+        /*
         if (!arg) {
-            arg = "1em";
+          arg = "1em";
         }
+          */
         let mg = this.Class.mkMPBWhereProps('m', arg, which);
         _.merge(this.styleObj, mg);
         return this;
@@ -282,9 +284,11 @@ export class StyleBuilder {
         return this.m(arg, "h");
     }
     p(arg, which) {
+        /*
         if (!arg) {
-            arg = "1em";
+          arg = "1em";
         }
+          */
         let mg = this.Class.mkMPBWhereProps('p', arg, which);
         /*
         _.merge(this.styleObj, mg);

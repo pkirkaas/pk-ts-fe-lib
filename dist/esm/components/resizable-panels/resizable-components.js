@@ -19,7 +19,7 @@ import { Fragment } from 'react';
 import { arrayJoin, } from 'pk-ts-common-lib';
 // Local Packages
 import styles from "./resizable.module.css";
-import { addClassNames, replaceProps, } from '../../libs/reactUtils.js';
+import { addClassNames, replaceProps } from '../../libs/reactUtils.js';
 /**
  * This section helps react-resizable-panels
  */

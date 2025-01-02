@@ -1,8 +1,9 @@
 "use client";
+import _ from 'lodash';
 // PKLib Imports
 import { isEmpty, isObject, mergeAndConcat, } from 'pk-ts-common-lib';
 // Local Imports
-import { cxsb, } from './styleUtils.js';
+import { StyleBuilder, cxsb, } from './styleUtils.js';
 //export { StyleBuilder, cxsb, csssb, } from './styleUtils.js';
 //window.localStorage.setItem('JWTToken', 'MyTestToken');
 //let jwtToken = window.localStorage.getItem('JWTToken',);
@@ -97,5 +98,24 @@ export function replaceProps(props, mods) {
         return { ...props };
     }
     return { ...props, ...mods };
+}
+/**
+ * Adds default styles to props.style - or rather, allow custom style to override default
+ * Returns props with style updated
+ */
+export function addDefaultStyle(props, defaultStyle) {
+    let cprops = { ...props };
+    if (isEmpty(defaultStyle)) {
+        return cprops;
+    }
+    if (defaultStyle instanceof StyleBuilder) {
+        defaultStyle = defaultStyle.style;
+    }
+    if (isEmpty(props.style)) {
+        cprops.style = defaultStyle;
+        return cprops;
+    }
+    cprops.style = _.merge({}, defaultStyle, props.style);
+    return cprops;
 }
 //# sourceMappingURL=reactUtils.js.map

@@ -24,4 +24,9 @@ export declare function addClassNames(props: GenObj, ...styleables: any[]): GenO
  * NOT deprecated - Not really - just verify this is useful and behaves as desired
  */
 export declare function replaceProps(props: object, mods?: any): GenObj;
+/**
+ * Adds default styles to props.style - or rather, allow custom style to override default
+ * Returns props with style updated
+ */
+export declare function addDefaultStyle(props: GenObj, defaultStyle: GenObj): GenObj;
 //# sourceMappingURL=reactUtils.d.ts.map

@@ -26,7 +26,7 @@ import { isEmpty, typeOfEach, getProps, typeOf, GenObj, insertBetween,
 // Local Packages
 import styles from "./resizable.module.css";
 
-import { addProps, addClassNames, replaceProps,  } from '../../libs/reactUtils.js';
+import { addProps, addClassNames, replaceProps, addDefaultStyle } from '../../libs/reactUtils.js';
 
 
 /**
