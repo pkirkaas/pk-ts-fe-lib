@@ -14,13 +14,17 @@ import { PanelGroupProps } from "react-resizable-panels";
 export type PkPGProps = Partial<PanelGroupProps & {
     ResizeHandle?: any;
     children?: any;
+    RHClass?: string;
+    RHStyle?: GenObj;
 }>;
+import { GenObj } from 'pk-ts-common-lib';
 /**
  * This section helps react-resizable-panels
  */
 /**
  * Simplify & give default style to PanelGroup
  * children ARE ONLY ARRAY OF PANELS - no need to include PanelSeparator between each
+ * ADDITIONAL PROPS: RHClass, RHStyle - to customize ResizeHandle
  */
 export declare function MetaPanelGroup(props: PkPGProps): import("react/jsx-runtime").JSX.Element;
 /**

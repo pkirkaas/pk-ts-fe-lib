@@ -16,7 +16,7 @@ export function Panels() {
 
       <SDiv>Who Knows</SDiv>
       <h1>Start of HPanel Group</h1>
-      <HPanelGroup style={{ border: "solid 1px green"}}>
+      <HPanelGroup style={{ border: "solid 1px green"}} RHStyle={{border: "solid orange 3px"}}>
         <Panel  defaultSize={50} style={{  background: 'red', minHeight:"30px" }}>
         <div style={{border: "solid red 3px"}}>An HPanelItem</div>
         </Panel>
@@ -28,7 +28,7 @@ export function Panels() {
         </Panel>
       </HPanelGroup>
       <h1>Start of VPanel Group</h1>  
-      <VPanelGroup style={{minHeight:"300px", border: "solid 1px green", }}>
+      <VPanelGroup style={{minHeight:"300px", border: "solid 1px green", }} className="min-h-full">
         <Panel  style={{   background: 'red',}}>
           <div style={{background:"#EFE"}}>First V Panel Item</div>
         </Panel>

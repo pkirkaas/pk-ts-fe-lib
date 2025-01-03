@@ -26,15 +26,20 @@ import { addClassNames, replaceProps } from '../../libs/reactUtils.js';
 /**
  * Simplify & give default style to PanelGroup
  * children ARE ONLY ARRAY OF PANELS - no need to include PanelSeparator between each
+ * ADDITIONAL PROPS: RHClass, RHStyle - to customize ResizeHandle
  */
 export function MetaPanelGroup(props) {
     let cprops = addClassNames(props, styles.PanelGroup);
+    /*
+    let cname = cprops.className;
+    console.log('MetaPanelGroup className', cname);
+    */
     let LocalResizeHandle = props.ResizeHandle ?? ResizeHandle;
     let children = cprops.children;
     // All children should be Panels
     // How do we enforce that? How do we style that?
     if (Array.isArray(children)) {
-        children = arrayJoin(children, LocalResizeHandle({}));
+        children = arrayJoin(children, LocalResizeHandle({ className: props.RHClass, style: props.RHStyle }));
         children = children.map((el, i) => (_jsx(Fragment, { children: el }, i)));
         cprops.children = children;
     }
