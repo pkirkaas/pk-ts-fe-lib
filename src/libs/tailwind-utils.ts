@@ -1,4 +1,11 @@
 /**
+ * For use in tailwind.config.ts, and other Tailwind
+ * utilities.
+ * 
+ * Primary exports:
+ * `safelist` for use in tailwind.config.ts
+ * `cn` - classname merging function 
+ * 
  * UPDATE 2024-Dec-27 19:59 - Clever but way too heavy. Commenting most out - keep 
  * breakpoints & display classes for now
  * Initially, just for exporting `safelist` for Tailwind config - to include & allow for dynamic classnames
@@ -29,6 +36,18 @@ export default {
 //import {safelist} from 'pk-ts-fe-lib';
 import {safelist} from "./node_modules/pk-ts-fe-lib/dist/esm/libs/tailwind-utils.js";
  */
+
+import { type ClassValue, clsx } from 'clsx'
+import { twMerge } from 'tailwind-merge'
+
+/**
+ * Merges Tailwind CSS classes using clsx and tailwind-merge.
+ * Use with `cva` class-variance-authority
+ * className={cn(buttonVariants({ variant, size, className }))}
+ */
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs))
+}
 
 export const cssColorNames = [ //Just the basic colors
 "black", "silver", "gray", "white", "maroon", "red", "purple", "fuchsia",
