@@ -6,7 +6,7 @@
  */
 
 import {
-  getProps, getObjDets, subObj, typeOf, allProps, allPropsP, objInfo, PkError,
+  getProps, getObjDets, subObj, typeOf, allProps,  objInfo, PkError,
   GenObj, isNumeric, isSimpleObject, camelKeys, isPrimitive, isObject,
 
 } from 'pk-ts-common-lib';

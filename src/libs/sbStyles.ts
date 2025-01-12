@@ -9,7 +9,7 @@
  */
 
 import {
-  getProps, getObjDets, subObj, typeOf, allProps, allPropsP, objInfo, PkError,
+  getProps, getObjDets, subObj, typeOf, allProps,  objInfo, PkError,
   GenObj, isNumeric, isSimpleObject, dotPathVal, toCamel, camelKeys, cartesianProduct,
 
 } from 'pk-ts-common-lib';

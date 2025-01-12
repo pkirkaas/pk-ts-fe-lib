@@ -23,12 +23,12 @@ export function Tst2() {
       <h1>Tst2</h1>
       <SDiv>Who Knows</SDiv>
       <FromStyled>I Know</FromStyled>
-      <div className="outline min-h-10">
-        Here and there
+      <div className="outline min-h-10 divide-y flex flex-col">
+        <div>Here and there</div>
         <RButton>Test</RButton>
         <PopupDialog
           title="Test Popup"
-          trigger={<button>Open Popup</button>}
+          trigger={<RButton>Open Popup</RButton>}
           defaultText="Initial text"
           onSave={handleSave}
           onCancel={handleCancel}

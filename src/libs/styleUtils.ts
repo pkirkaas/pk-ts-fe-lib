@@ -62,7 +62,7 @@ import { serializeStyles, } from '@emotion/serialize';
 
 // import pklib packages
 import {
-  getProps, getObjDets, subObj, typeOf, allProps, allPropsP, objInfo, PkError, typeOfEach,
+  getProps, getObjDets, subObj, typeOf, allProps,  objInfo, PkError, typeOfEach,
   GenObj, isNumeric, isSimpleObject, camelKeys, isPrimitive, isObject, Scalar, Scalars, mkScalarArr,
   dbgReport, isEmpty,
 

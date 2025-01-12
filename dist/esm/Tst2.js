@@ -15,6 +15,6 @@ export function Tst2() {
     const handleCancel = () => {
         console.log('Dialog cancelled');
     };
-    return (_jsxs("div", { style: { backgroundColor: "red", border: "solid 1px green", width: "100%" }, children: [_jsx("h1", { children: "Tst2" }), _jsx(SDiv, { children: "Who Knows" }), _jsx(FromStyled, { children: "I Know" }), _jsxs("div", { className: "outline min-h-10", children: ["Here and there", _jsx(RButton, { children: "Test" }), _jsx(PopupDialog, { title: "Test Popup", trigger: _jsx("button", { children: "Open Popup" }), defaultText: "Initial text", onSave: handleSave, onCancel: handleCancel })] })] }));
+    return (_jsxs("div", { style: { backgroundColor: "red", border: "solid 1px green", width: "100%" }, children: [_jsx("h1", { children: "Tst2" }), _jsx(SDiv, { children: "Who Knows" }), _jsx(FromStyled, { children: "I Know" }), _jsxs("div", { className: "outline min-h-10 divide-y flex flex-col", children: [_jsx("div", { children: "Here and there" }), _jsx(RButton, { children: "Test" }), _jsx(PopupDialog, { title: "Test Popup", trigger: _jsx(RButton, { children: "Open Popup" }), defaultText: "Initial text", onSave: handleSave, onCancel: handleCancel })] })] }));
 }
 //# sourceMappingURL=Tst2.js.map
