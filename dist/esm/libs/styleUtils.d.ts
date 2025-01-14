@@ -78,10 +78,10 @@ export declare class StyleBuilder {
     styleObj: GenObj;
     constructor(...sos: any[]);
     get Class(): any;
-    get style(): GenObj;
+    get style(): import("pk-ts-common-lib").GenericObject;
     get className(): string;
     get clone(): any;
-    get camelled(): GenObj;
+    get camelled(): import("pk-ts-common-lib").GenericObject;
     get fullw(): this;
     get fullh(): this;
     get full(): this;
@@ -145,7 +145,7 @@ export declare class StyleBuilder {
      * @key opt - one of the keys for whereKeys 't','b','x','y', etc
      * @return - basic object w. css style props/vals
      */
-    static mkMPBWhereProps(propBase: BmpKeys, val?: string, key?: WhereKeyType): GenObj;
+    static mkMPBWhereProps(propBase: BmpKeys, val?: string, key?: WhereKeyType): import("pk-ts-common-lib").GenericObject;
     /**
      * static builder & build(args) - to avoid `(new StyleBuilder(...args)).chain1(1)...etc`
      */
@@ -279,7 +279,7 @@ export declare class StyleBuilder {
 /**
  * Merge multiple style objects into one - also StyleBuilder instances and "props.style" if present
  */
-export declare function pkStyles(...args: any[]): GenObj;
+export declare function pkStyles(...args: any[]): import("pk-ts-common-lib").GenericObject;
 /**
  * Laziness again - SB is just a new StyleBuilder instance
  */

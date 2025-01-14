@@ -64,7 +64,7 @@ import { serializeStyles, } from '@emotion/serialize';
 import {
   getProps, getObjDets, subObj, typeOf, allProps,  objInfo, PkError, typeOfEach,
   GenObj, isNumeric, isSimpleObject, camelKeys, isPrimitive, isObject, Scalar, Scalars, mkScalarArr,
-  dbgReport, isEmpty,
+  dbgReport, isEmpty, isPropertyKey, SimpleObject,
 
 } from 'pk-ts-common-lib';
 
@@ -98,7 +98,7 @@ export type FontFamily = keyof typeof StyleBuilder.fontFamilies;
  * using the shortcut keys.
 */
 export function valFromObj(val: any, obj: GenObj): any {
-  if (isPrimitive(val) && (val in obj)) {
+  if (isPropertyKey(val) && (val in obj)) {
     return obj[val];
   }
   return val;

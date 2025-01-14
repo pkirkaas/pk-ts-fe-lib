@@ -52,7 +52,7 @@ import _ from 'lodash';
 import { cx, css as cssCss, } from '@emotion/css';
 import { serializeStyles, } from '@emotion/serialize';
 // import pklib packages
-import { PkError, isNumeric, isSimpleObject, camelKeys, isPrimitive, isObject, isEmpty, } from 'pk-ts-common-lib';
+import { PkError, isNumeric, isSimpleObject, camelKeys, isPrimitive, isObject, isEmpty, isPropertyKey, } from 'pk-ts-common-lib';
 //export type Scalar = string | number;
 /** Utility - if val a key of obj, return the value
  * for the key, else return val itself.
@@ -61,7 +61,7 @@ import { PkError, isNumeric, isSimpleObject, camelKeys, isPrimitive, isObject, i
  * using the shortcut keys.
 */
 export function valFromObj(val, obj) {
-    if (isPrimitive(val) && (val in obj)) {
+    if (isPropertyKey(val) && (val in obj)) {
         return obj[val];
     }
     return val;
